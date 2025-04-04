@@ -1,0 +1,26 @@
+.boxContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px;
+  transition: width 280ms ease-in-out;
+  height: 100dvh;
+  z-index: 100;
+  padding: 12px 12px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-right: 1px solid var(--border-color);
+  background-color: white;
+}
+
+.expanded {
+  width: 280px;
+}
+
+.drawerBody {
+  padding: 16px 12px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

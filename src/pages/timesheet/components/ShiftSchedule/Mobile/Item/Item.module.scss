@@ -1,0 +1,13 @@
+.container {
+  height: 220px;
+  overflow: auto;
+}
+
+.shiftContainer {
+  gap: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  margin: 8px 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+}

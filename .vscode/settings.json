@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "cSpell.ignorePaths": [
+    "./src/configs/i18n/vi.ts"
+  ],
+  "cSpell.words": [
+    "fullcalendar",
+    "mantine",
+    "Qrcode",
+    "tabler",
+    "timesheet",
+    "VITE"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.addMissingImports": "explicit",
+    "source.removeUnusedImports": "explicit"
+  },
+}

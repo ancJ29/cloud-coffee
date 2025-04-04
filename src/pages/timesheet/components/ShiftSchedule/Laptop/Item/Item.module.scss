@@ -1,0 +1,63 @@
+.infoItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nameItem {
+  padding-left: 10px;
+}
+
+.shiftContainer {
+  border-top: 1px solid var(--border-color);
+}
+
+.dateItem {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--border-color);
+}
+
+.shiftItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 8px 14px 8px;
+  border-right: 1px solid var(--border-color);
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.timeItem {
+  padding: 0;
+}
+
+.venueText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  display: none;
+}
+
+.control {
+  padding-inline: 0;
+}
+
+.label {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.content {
+  padding: 0;
+}
+
+.item {
+  border-top: none;
+}
