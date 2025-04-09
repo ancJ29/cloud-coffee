@@ -29,10 +29,10 @@ export default function Picture({
       </Text>
 
       <Flex gap={20}>
-        <Button color="#ffab09" onClick={onRetry}>
+        <Button color="var(--mantine-color-xOrange-6)" onClick={onRetry}>
           {t('Retry')}
         </Button>
-        <Button color="#51b68c" onClick={onConfirm}>
+        <Button color="var(--mantine-color-xGreen-7)" onClick={onConfirm}>
           {t('Confirm')}
         </Button>
       </Flex>
