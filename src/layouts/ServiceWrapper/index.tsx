@@ -39,13 +39,18 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
   }, [navigate, removeToken])
 
   const goToProfilePage = useCallback(() => {
-    close()
+    isMobile && closeNavbar()
     navigate('/profile')
-  }, [navigate])
+  }, [closeNavbar, isMobile, navigate])
 
   const goToTimesheetPage = useCallback(() => {
     navigate('/timesheet')
   }, [navigate])
+
+  const goToSettingPage = useCallback(() => {
+    isMobile && closeNavbar()
+    navigate('/setting')
+  }, [closeNavbar, isMobile, navigate])
 
   return (
     <Box>
@@ -57,6 +62,7 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
         onLogout={logout}
         onGoToProfilePage={goToProfilePage}
         onGoToTimesheetPage={goToTimesheetPage}
+        onGoToSettingPage={goToSettingPage}
         toggleNavbar={toggleNavbar}
         closeNavbar={closeNavbar}
         openNavbar={openNavbar}

@@ -2,7 +2,6 @@ import Avatar from '@/components/common/Avatar'
 import useTranslation from '@/hooks/useTranslation'
 import useWindowResize from '@/hooks/useWindowResize'
 import useAuthStore from '@/stores/auth.store'
-import { showNotImplementedModal } from '@/utils'
 import { Button, Menu, UnstyledButton } from '@mantine/core'
 import { IconSettings } from '@tabler/icons-react'
 import { useCallback, useState } from 'react'
@@ -16,6 +15,7 @@ type ProfileProps = {
   onChangeLanguage: (language: string) => void
   onLogout: () => void
   onGoToProfilePage: () => void
+  onGoToSettingPage: () => void
 }
 
 export default function Profile({
@@ -24,6 +24,7 @@ export default function Profile({
   onChangeLanguage,
   onLogout,
   onGoToProfilePage,
+  onGoToSettingPage,
 }: ProfileProps) {
   const t = useTranslation()
   const isMobile = useWindowResize()
@@ -35,9 +36,9 @@ export default function Profile({
   }, [])
 
   const handleSettingClick = useCallback(() => {
-    showNotImplementedModal(t)
+    onGoToSettingPage()
     handleCloseMenu()
-  }, [handleCloseMenu, t])
+  }, [handleCloseMenu, onGoToSettingPage])
 
   return (
     <Menu

@@ -40,6 +40,11 @@ const routeConfigs: RouteConfig[] = [
     wrapper: ServiceWrapper,
   },
   {
+    path: '/setting',
+    element: lazy(() => import('@/pages/setting')),
+    wrapper: ServiceWrapper,
+  },
+  {
     path: '/work-entry',
     element: lazy(() => import('@/pages/work-entry')),
   },

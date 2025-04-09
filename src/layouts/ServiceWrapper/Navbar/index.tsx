@@ -13,10 +13,11 @@ type NavbarProps = {
   onChangeLanguage: (language: string) => void
   onLogout: () => void
   onGoToProfilePage: () => void
+  onGoToTimesheetPage: () => void
+  onGoToSettingPage: () => void
   toggleNavbar: () => void
   closeNavbar: () => void
   openNavbar: () => void
-  onGoToTimesheetPage: () => void
 }
 
 export default function Navbar({
@@ -26,10 +27,11 @@ export default function Navbar({
   onChangeLanguage,
   onLogout,
   onGoToProfilePage,
+  onGoToTimesheetPage,
+  onGoToSettingPage,
   toggleNavbar,
   closeNavbar,
   openNavbar,
-  onGoToTimesheetPage,
 }: NavbarProps) {
   const isMobile = useWindowResize()
 
@@ -59,6 +61,7 @@ export default function Navbar({
         onChangeLanguage={onChangeLanguage}
         onLogout={onLogout}
         onGoToProfilePage={onGoToProfilePage}
+        onGoToSettingPage={onGoToSettingPage}
       />
     </>
   )
