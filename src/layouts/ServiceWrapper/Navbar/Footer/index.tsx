@@ -9,7 +9,6 @@ type FooterProps = {
   onChangeLanguage: (language: string) => void
   onLogout: () => void
   onGoToProfilePage: () => void
-  onGoToSettingPage: () => void
 }
 
 export default function Footer({
@@ -18,7 +17,6 @@ export default function Footer({
   onChangeLanguage,
   onLogout,
   onGoToProfilePage,
-  onGoToSettingPage,
 }: FooterProps) {
   const t = useTranslation()
 
@@ -30,7 +28,6 @@ export default function Footer({
         onGoToProfilePage={onGoToProfilePage}
         onChangeLanguage={onChangeLanguage}
         onLogout={onLogout}
-        onGoToSettingPage={onGoToSettingPage}
       />
       {navbarOpened && (
         <Text fz={10} c="dimmed" ta="right">

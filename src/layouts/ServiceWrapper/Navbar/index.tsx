@@ -14,7 +14,6 @@ type NavbarProps = {
   onLogout: () => void
   onGoToProfilePage: () => void
   onGoToTimesheetPage: () => void
-  onGoToSettingPage: () => void
   toggleNavbar: () => void
   closeNavbar: () => void
   openNavbar: () => void
@@ -28,7 +27,6 @@ export default function Navbar({
   onLogout,
   onGoToProfilePage,
   onGoToTimesheetPage,
-  onGoToSettingPage,
   toggleNavbar,
   closeNavbar,
   openNavbar,
@@ -61,7 +59,6 @@ export default function Navbar({
         onChangeLanguage={onChangeLanguage}
         onLogout={onLogout}
         onGoToProfilePage={onGoToProfilePage}
-        onGoToSettingPage={onGoToSettingPage}
       />
     </>
   )

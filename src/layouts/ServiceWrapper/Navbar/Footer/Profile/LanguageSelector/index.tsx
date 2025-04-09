@@ -27,7 +27,7 @@ export default function LanguageSelector({
       radius={10}
       shadow="md"
       offset={10}
-      zIndex={1500}
+      zIndex={1200}
     >
       <Menu.Target>
         <UnstyledButton w="100%">

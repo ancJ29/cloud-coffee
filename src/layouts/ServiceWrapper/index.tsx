@@ -47,11 +47,6 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
     navigate('/timesheet')
   }, [navigate])
 
-  const goToSettingPage = useCallback(() => {
-    isMobile && closeNavbar()
-    navigate('/setting')
-  }, [closeNavbar, isMobile, navigate])
-
   return (
     <Box>
       <Navbar
@@ -62,7 +57,6 @@ export default function ServiceWrapper({ children }: ServiceWrapperProps) {
         onLogout={logout}
         onGoToProfilePage={goToProfilePage}
         onGoToTimesheetPage={goToTimesheetPage}
-        onGoToSettingPage={goToSettingPage}
         toggleNavbar={toggleNavbar}
         closeNavbar={closeNavbar}
         openNavbar={openNavbar}

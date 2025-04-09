@@ -2,11 +2,13 @@ import Avatar from '@/components/common/Avatar'
 import useTranslation from '@/hooks/useTranslation'
 import useWindowResize from '@/hooks/useWindowResize'
 import useAuthStore from '@/stores/auth.store'
+import { showNotImplementedModal } from '@/utils'
 import { Button, Menu, UnstyledButton } from '@mantine/core'
 import { IconSettings } from '@tabler/icons-react'
 import { useCallback, useState } from 'react'
 import LanguageSelector from './LanguageSelector'
 import MenuItem from './MenuItem'
+import ThemeSelector from './ThemeSelector'
 import UserInformation from './UserInformation'
 
 type ProfileProps = {
@@ -15,7 +17,6 @@ type ProfileProps = {
   onChangeLanguage: (language: string) => void
   onLogout: () => void
   onGoToProfilePage: () => void
-  onGoToSettingPage: () => void
 }
 
 export default function Profile({
@@ -24,7 +25,6 @@ export default function Profile({
   onChangeLanguage,
   onLogout,
   onGoToProfilePage,
-  onGoToSettingPage,
 }: ProfileProps) {
   const t = useTranslation()
   const isMobile = useWindowResize()
@@ -36,9 +36,8 @@ export default function Profile({
   }, [])
 
   const handleSettingClick = useCallback(() => {
-    onGoToSettingPage()
-    handleCloseMenu()
-  }, [handleCloseMenu, onGoToSettingPage])
+    showNotImplementedModal(t)
+  }, [t])
 
   return (
     <Menu
@@ -49,7 +48,7 @@ export default function Profile({
       offset={8}
       opened={opened}
       onChange={setOpened}
-      zIndex={1500}
+      zIndex={isMobile ? 1200 : 200}
     >
       <Menu.Target>
         <UnstyledButton>
@@ -71,6 +70,9 @@ export default function Profile({
           onChangeLanguage={onChangeLanguage}
           onCloseMenu={handleCloseMenu}
         />
+
+        <ThemeSelector />
+
         <MenuItem
           leftIcon={<IconSettings size={20} strokeWidth={1.5} />}
           label={t('Settings')}
