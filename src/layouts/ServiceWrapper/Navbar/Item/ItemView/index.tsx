@@ -38,7 +38,7 @@ export default function ItemView({
         onClick={onClick}
         py={8}
         pl={`${ml}rem`}
-        bg={isHighlighted || (!opened && isBold) ? 'primary.1' : 'transparent'}
+        bg={isHighlighted || (!opened && isBold) ? 'var(--select-item)' : 'transparent'}
         w={navbarOpened ? '-webkit-fill-available' : ''}
         className={classes.container}
       >

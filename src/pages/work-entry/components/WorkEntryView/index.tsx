@@ -12,7 +12,7 @@ export default function WorkEntryView({ onCheckIn, onCheckOut }: WorkEntryViewPr
   return (
     <Stack gap={30} h="100dvh" align="center" justify="center">
       <Button
-        color="var(--mantine-color-xGreen-7)"
+        color="var(--success)"
         h={150}
         fz={50}
         w={{ base: '95%', sm: '80%' }}
@@ -21,7 +21,7 @@ export default function WorkEntryView({ onCheckIn, onCheckOut }: WorkEntryViewPr
         {t('Check in')}
       </Button>
       <Button
-        color="var(--mantine-color-xRed-5)"
+        color="var(--error)"
         h={150}
         fz={50}
         w={{ base: '95%', sm: '80%' }}

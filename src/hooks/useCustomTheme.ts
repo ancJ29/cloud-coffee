@@ -31,7 +31,7 @@ export function useCustomTheme() {
 
     showNotification({
       success: true,
-      message: t('Theme changed'),
+      message: t('Primary color changed'),
     })
 
     setTimeout(() => {

@@ -13,6 +13,7 @@ import {
   Text,
   TextInput,
   UnstyledButton,
+  useMantineColorScheme,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { modals } from '@mantine/modals'
@@ -44,6 +45,7 @@ export default function AddUserForm({
   onConfirm,
   roleOptions,
 }: AddUserFormProps) {
+  const { colorScheme } = useMantineColorScheme()
   const t = useTranslation()
   const form = useForm<AddUserRequest>({
     initialValues: initValues ?? {
@@ -117,12 +119,15 @@ export default function AddUserForm({
               placeholder={t('Password')}
               {...form.getInputProps('password')}
             />
-            <UnstyledButton onClick={copyPassword}>
-              <IconCopy strokeWidth="1.5" color="black" />
+            <UnstyledButton
+              onClick={copyPassword}
+              color={colorScheme === 'light' ? 'black' : 'white'}
+            >
+              <IconCopy strokeWidth="1.5" />
             </UnstyledButton>
           </Flex>
           <Flex w={w} justify="end">
-            <Text ta="right" fz={12} c="red.5">
+            <Text ta="right" fz={12} c="var(--error)">
               {t('Please copy and keep password safe before create new user')}
             </Text>
           </Flex>

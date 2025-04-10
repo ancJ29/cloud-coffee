@@ -4,7 +4,7 @@ import { ActionIcon, Menu, SimpleGrid, UnstyledButton } from '@mantine/core'
 import { IconCheck, IconChevronRight, IconPalette } from '@tabler/icons-react'
 import MenuItem from '../MenuItem'
 
-export default function ThemeSelector() {
+export default function PrimaryColorSelector() {
   const t = useTranslation()
   const { primaryColor, changPrimaryColor } = useCustomTheme()
 
@@ -24,7 +24,7 @@ export default function ThemeSelector() {
         <UnstyledButton w="100%">
           <MenuItem
             leftIcon={<IconPalette size={20} strokeWidth={1.5} />}
-            label={t('Theme')}
+            label={t('Primary color')}
             rightIcon={<IconChevronRight size={20} strokeWidth={1.5} />}
           />
         </UnstyledButton>

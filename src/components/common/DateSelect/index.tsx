@@ -126,7 +126,7 @@ export default function DateSelect({
             onClick={() => combobox.toggleDropdown()}
             rightSectionPointerEvents="none"
           >
-            <Input.Placeholder c="black">
+            <Input.Placeholder c="var(--text-color)">
               {value === DateRangeOption.Custom
                 ? `${formatTime(dateValue[0], 'DD/MM/YYYY')} - ${formatTime(dateValue[1], 'DD/MM/YYYY')}`
                 : t(value)}

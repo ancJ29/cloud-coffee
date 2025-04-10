@@ -19,10 +19,10 @@ export function showNotification({ t, success, ...props }: NotificationProps) {
 
 function _color(success?: boolean): string {
   if (success === true) {
-    return 'var(--mantine-color-xGreen-7)'
+    return 'var(--success)'
   }
   if (success === false) {
-    return 'var(--mantine-color-xRed-5)'
+    return 'var(--error)'
   }
   return 'primary.5'
 }

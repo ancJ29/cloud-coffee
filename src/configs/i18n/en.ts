@@ -109,8 +109,7 @@ export default {
   'This month': 'This month',
   'Last month': 'Last month',
   'Custom': 'Custom',
-  'Theme': 'Theme',
-  'Apply': 'Apply',
-  'Invalid color format': 'Invalid color format',
-  'Theme changed': 'Theme changed',
+  'Primary color': 'Primary color',
+  'Primary color changed': 'Primary color changed',
+  'Theme mode': 'Theme mode',
 }

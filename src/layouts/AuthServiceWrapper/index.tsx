@@ -1,4 +1,4 @@
-import { BackgroundImage, Stack } from '@mantine/core'
+import { BackgroundImage, Stack, useMantineColorScheme } from '@mantine/core'
 import { ReactNode } from 'react'
 
 type AuthServiceWrapperProps = {
@@ -6,8 +6,10 @@ type AuthServiceWrapperProps = {
 }
 
 export default function AuthServiceWrapper({ children }: AuthServiceWrapperProps) {
+  const { colorScheme } = useMantineColorScheme()
+
   return (
-    <BackgroundImage src="/imgs/auth/background.png" h="100dvh">
+    <BackgroundImage src={`/imgs/auth/background-${colorScheme}.png`} h="100dvh">
       <Stack h="100dvh" align="center" justify="center">
         {children}
       </Stack>

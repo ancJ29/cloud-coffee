@@ -6,7 +6,7 @@
   align-items: center;
   width: 100%;
   border-radius: 6px 6px 0 0;
-  background-color: var(--mantine-color-primary-2);
+  background-color: var(--header);
 }
 
 .body {
@@ -25,11 +25,11 @@
   }
 
   &:nth-child(even) {
-    background-color: #f5f5f5;
+    background-color: var(--even-row-bg);
   }
 
   &:hover {
-    background: var(--hover-background-color);
+    background: var(--hover-background);
   }
 }
 

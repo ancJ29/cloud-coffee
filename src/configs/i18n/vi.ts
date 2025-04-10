@@ -109,8 +109,7 @@ export default {
   'This month': 'Tháng này',
   'Last month': 'Tháng trước',
   'Custom': 'Tùy chỉnh',
-  'Theme': 'Màu chủ đạo',
-  'Apply': 'Áp dụng',
-  'Invalid color format': 'Định dạng màu không hợp lệ',
-  'Theme changed': 'Chủ đề đã thay đổi',
+  'Primary color': 'Màu chủ đạo',
+  'Primary color changed': 'Màu chủ đạo đã thay đổi',
+  'Theme mode': 'Chế độ giao diện',
 }

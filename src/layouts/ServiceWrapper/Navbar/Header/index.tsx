@@ -1,5 +1,5 @@
 import useTranslation from '@/hooks/useTranslation'
-import { ActionIcon, Flex, Image, Text } from '@mantine/core'
+import { ActionIcon, Flex, Image, Text, useMantineColorScheme } from '@mantine/core'
 import { IconArrowsRightLeft } from '@tabler/icons-react'
 import { CSSProperties } from 'react'
 import classes from './Header.module.scss'
@@ -35,9 +35,14 @@ export default function Header({ onClick, navbarOpened, toggleNavbar }: HeaderPr
 }
 
 function SwitchButton({ onClick, style }: { onClick: () => void; style?: CSSProperties }) {
+  const { colorScheme } = useMantineColorScheme()
   return (
     <ActionIcon variant="transparent" onClick={onClick} size="md" radius="md" style={style}>
-      <IconArrowsRightLeft size={24} strokeWidth={1.5} color="black" />
+      <IconArrowsRightLeft
+        size={24}
+        strokeWidth={1.5}
+        color={colorScheme === 'light' ? 'black' : 'white'}
+      />
     </ActionIcon>
   )
 }

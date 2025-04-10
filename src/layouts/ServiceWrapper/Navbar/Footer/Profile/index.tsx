@@ -8,7 +8,8 @@ import { IconSettings } from '@tabler/icons-react'
 import { useCallback, useState } from 'react'
 import LanguageSelector from './LanguageSelector'
 import MenuItem from './MenuItem'
-import ThemeSelector from './ThemeSelector'
+import PrimaryColorSelector from './PrimaryColorSelector'
+import ThemeModeSwitch from './ThemeModeSwitch'
 import UserInformation from './UserInformation'
 
 type ProfileProps = {
@@ -71,7 +72,9 @@ export default function Profile({
           onCloseMenu={handleCloseMenu}
         />
 
-        <ThemeSelector />
+        <PrimaryColorSelector />
+
+        <ThemeModeSwitch />
 
         <MenuItem
           leftIcon={<IconSettings size={20} strokeWidth={1.5} />}

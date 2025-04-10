@@ -1,5 +1,5 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Anchor, Button, Image, Paper, Stack, Text } from '@mantine/core'
+import { Anchor, Button, Image, Paper, Stack, Text, useMantineColorScheme } from '@mantine/core'
 
 type CheckEmailViewProps = {
   email: string | null
@@ -8,24 +8,25 @@ type CheckEmailViewProps = {
 
 export default function CheckEmailView({ email, onReturnToLogin }: CheckEmailViewProps) {
   const t = useTranslation()
+  const { colorScheme } = useMantineColorScheme()
 
   return (
     <Paper shadow="xl" radius={12} px="xl" py={40} w={{ base: '95vw', sm: '450' }}>
       <Stack gap={20} align="center" justify="center">
-        <Image w={190} fit="contain" src="/imgs/auth/check-email.svg" />
+        <Image w={190} fit="contain" src={`/imgs/auth/check-email-${colorScheme}.svg`} />
 
         <Text fw={600}>{t('Check your email')}</Text>
 
         {email ? (
-          <Text fz={14} c="dimmed" ta="center">
+          <Text fz={14} ta="center">
             {t('Please check your email')}{' '}
-            <Text fw={600} span c="black" fz={14}>
+            <Text fw={600} span c="primary" fz={14}>
               {email}{' '}
             </Text>
             {t('to retrieve your new password. Thank you')}
           </Text>
         ) : (
-          <Text fw={600} c="red">
+          <Text fw={600} c="var(--error)">
             {t('No email provided')}{' '}
           </Text>
         )}
