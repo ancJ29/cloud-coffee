@@ -1,6 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { MenuItem } from '@/types'
-import { Collapse, Flex, Text, UnstyledButton } from '@mantine/core'
+import { Collapse, Flex, Text, UnstyledButton, useMantineColorScheme } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
 import Item from '..'
 import classes from './ItemView.module.scss'
@@ -30,7 +30,9 @@ export default function ItemView({
   closeNavbar,
   openNavbar,
 }: ItemViewProps) {
+  const { colorScheme } = useMantineColorScheme()
   const t = useTranslation()
+  const isChoose = isHighlighted || (!opened && isBold)
 
   return (
     <>
@@ -38,15 +40,32 @@ export default function ItemView({
         onClick={onClick}
         py={8}
         pl={`${ml}rem`}
-        bg={isHighlighted || (!opened && isBold) ? 'var(--select-item)' : 'transparent'}
+        bg={isChoose ? 'var(--select-item)' : 'transparent'}
         w={navbarOpened ? '-webkit-fill-available' : ''}
         className={classes.container}
+        color={isChoose ? 'var(--mantine-color-body)' : 'var(--text-color)'}
       >
         <Flex justify="space-between" align="center" px={10.5}>
           <Flex gap={8} align="end" className={classes.content}>
-            <menuItem.icon size={24} stroke={isBold ? 1.75 : 1.5} />
+            <menuItem.icon
+              size={24}
+              stroke={isBold ? 1.75 : 1.5}
+              color={
+                isChoose && colorScheme === 'dark'
+                  ? 'var(--mantine-color-body)'
+                  : 'var(--text-color)'
+              }
+            />
             {navbarOpened && (
-              <Text fz={14} fw={isBold ? 600 : 400}>
+              <Text
+                fz={14}
+                fw={isBold ? 600 : 400}
+                c={
+                  isChoose && colorScheme === 'dark'
+                    ? 'var(--mantine-color-body)'
+                    : 'var(--text-color)'
+                }
+              >
                 {t(menuItem.label)}
               </Text>
             )}
