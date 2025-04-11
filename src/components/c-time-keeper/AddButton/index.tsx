@@ -1,4 +1,4 @@
-import { ActionIcon, Affix, AffixProps, useMantineColorScheme } from '@mantine/core'
+import { ActionIcon, Affix, AffixProps } from '@mantine/core'
 import { IconPlus } from '@tabler/icons-react'
 
 type AddButtonProps = {
@@ -6,11 +6,10 @@ type AddButtonProps = {
 } & AffixProps
 
 export default function AddButton({ onClick, ...props }: AddButtonProps) {
-  const { colorScheme } = useMantineColorScheme()
   return (
     <Affix position={{ bottom: 16, right: 16 }} {...props}>
       <ActionIcon variant="filled" radius="xl" size={40} onClick={onClick}>
-        <IconPlus size={26} color={colorScheme === 'light' ? 'white' : 'black'} />
+        <IconPlus size={26} color="var(--mantine-color-body)" />
       </ActionIcon>
     </Affix>
   )
