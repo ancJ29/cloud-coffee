@@ -30,7 +30,7 @@ export default function PrimaryColorSelector() {
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown p={10}>
-        <SimpleGrid cols={4} spacing={2} verticalSpacing={2}>
+        <SimpleGrid cols={4} spacing={2} verticalSpacing={4}>
           {swatches.map((color, idx) => (
             <ActionIcon
               key={idx}

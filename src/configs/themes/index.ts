@@ -129,7 +129,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--hover-bg': theme.colors.primary[0],
     '--text-color': 'black',
     '--even-row-bg': theme.colors.dark[0],
-    '--header': theme.colors.primary[2],
+    '--header': theme.colors.primary[3],
     '--select-item': theme.colors.primary[1],
     '--shift-item-bg': theme.colors.xGray[0],
   },
