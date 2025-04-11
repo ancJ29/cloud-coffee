@@ -1,7 +1,7 @@
 import { showNotification } from '@/configs/notifications'
 import { theme } from '@/configs/themes'
-// import { generateColors } from '@mantine/colors-generator'
-import { colorsTuple, createTheme, MantineThemeOverride } from '@mantine/core'
+import { generateColors } from '@mantine/colors-generator'
+import { createTheme, MantineThemeOverride } from '@mantine/core'
 import { useState } from 'react'
 import useTranslation from './useTranslation'
 
@@ -12,7 +12,7 @@ function createDynamicTheme(primaryColor: string): MantineThemeOverride {
     ...theme,
     colors: {
       ...theme.colors,
-      primary: colorsTuple(primaryColor),
+      primary: generateColors(primaryColor),
     },
   })
 }
