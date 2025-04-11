@@ -497,11 +497,6 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@mantine/colors-generator@^7.17.4":
-  version "7.17.4"
-  resolved "https://registry.yarnpkg.com/@mantine/colors-generator/-/colors-generator-7.17.4.tgz#eb25976ac301310528cd0b84ae5418e3c67edaec"
-  integrity sha512-1KqfD0hnC76i43HnaAkSrT3szXC/0crfa450hx4cJqjBf5ZZ9pFWwB8qnoubtsmMpdRlHjDBhPRn/j22m1vpTg==
-
 "@mantine/core@^7.14.2":
   version "7.17.3"
   resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.17.3.tgz#78ee30bb4493c6117d6d381fbfc374d773eedf8b"
@@ -1315,11 +1310,6 @@ chalk@^4.0.0:
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
-
-chroma-js@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-3.1.2.tgz#cfb807045182228574eae5380587cdb830e985d6"
-  integrity sha512-IJnETTalXbsLx1eKEgx19d5L6SRM7cH4vINw/99p/M11HCuXGRWL+6YmCm7FWFGIo6dtWuQoQi1dc5yQ7ESIHg==
 
 clsx@^2.1.1:
   version "2.1.1"
