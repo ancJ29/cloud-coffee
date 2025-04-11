@@ -11,18 +11,7 @@ export default function CheckInQrView({ qrValue }: CheckInQrViewProps) {
 
   return (
     <Stack gap={30} align="center" justify="center" h="90dvh">
-      <QRCodeCanvas
-        value={qrValue}
-        size={350}
-        imageSettings={{
-          src: '/imgs/qr-code/clock.svg',
-          x: undefined,
-          y: undefined,
-          height: 120,
-          width: 120,
-          excavate: false,
-        }}
-      />
+      <QRCodeCanvas value={qrValue} size={350} />
       <Stack gap={10} align="center">
         <Text fz={20} ta="center">
           {t('Scan the QR code to go to the check-in/check-out page')}
