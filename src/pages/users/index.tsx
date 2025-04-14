@@ -65,6 +65,15 @@ export default function Users() {
     [roles, t],
   )
 
+  const salaryRuleOptions = useMemo(
+    () =>
+      Array.from(salaryRules.values()).map((el) => ({
+        label: t(el.name),
+        value: el.id,
+      })),
+    [salaryRules, t],
+  )
+
   const handleConfirmAddUser = useCallback(
     (values: AddUserRequest) => {
       addUser(values).then((res) => {
@@ -89,11 +98,12 @@ export default function Users() {
             reOpen={handleAddUser}
             onConfirm={handleConfirmAddUser}
             roleOptions={roleOptions}
+            salaryRuleOptions={salaryRuleOptions}
           />
         ),
       })
     },
-    [handleConfirmAddUser, roleOptions, t],
+    [handleConfirmAddUser, roleOptions, salaryRuleOptions, t],
   )
 
   const handleConfirmUpdateUser = useCallback(
@@ -121,11 +131,12 @@ export default function Users() {
             reOpen={handleEditUser}
             onConfirm={handleConfirmUpdateUser}
             roleOptions={roleOptions}
+            salaryRuleOptions={salaryRuleOptions}
           />
         ),
       })
     },
-    [handleConfirmUpdateUser, roleOptions, t],
+    [handleConfirmUpdateUser, roleOptions, salaryRuleOptions, t],
   )
 
   return (

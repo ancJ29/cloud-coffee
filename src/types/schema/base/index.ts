@@ -3,6 +3,7 @@ import { z } from 'zod'
 export const unknownSchema = z.unknown()
 export const numberSchema = z.number()
 export const nullishNumberSchema = numberSchema.nullish()
+export const optionalNumberSchema = numberSchema.optional()
 export const stringSchema = z.string()
 export const optionalStringSchema = stringSchema.optional()
 export const nullishStringSchema = stringSchema.nullish()

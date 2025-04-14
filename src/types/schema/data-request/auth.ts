@@ -1,5 +1,12 @@
 import { z } from 'zod'
-import { booleanSchema, nullishStringSchema, stringSchema } from '../base'
+import {
+  booleanSchema,
+  nullishBooleanSchema,
+  nullishStringSchema,
+  optionalBooleanSchema,
+  optionalNumberSchema,
+  stringSchema,
+} from '../base'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
@@ -28,6 +35,9 @@ export const getMeSchema = _typeBuilder({
     roleId: stringSchema,
     salaryRuleId: nullishStringSchema,
     clientId: stringSchema,
+    enabled: nullishBooleanSchema,
+    baseSalary: optionalNumberSchema,
+    canSendEmail: optionalBooleanSchema,
   }),
 })
 

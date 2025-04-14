@@ -26,7 +26,7 @@ export default function UserView({
 }: UserViewProps) {
   return (
     <Stack gap={15} pos="relative">
-      <AddButton onClick={onAddUser} />
+      <AddButton onClick={() => onAddUser()} />
       <Filter {...props} />
       <DataGrid
         hasOrderColumn

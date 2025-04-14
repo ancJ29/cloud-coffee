@@ -1,4 +1,3 @@
-import NumberInput from '@/components/common/NumberInput'
 import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import { AddUserRequest } from '@/services/domain'
@@ -29,7 +28,9 @@ const initialValues: AddUserRequest = {
   email: '',
   password: '',
   roleId: '',
+  salaryRuleId: '',
   baseSalary: 0,
+  canSendEmail: true,
 }
 
 type AddUserFormProps = {
@@ -37,6 +38,7 @@ type AddUserFormProps = {
   reOpen: (values: AddUserRequest) => void
   onConfirm: (values: AddUserRequest) => void
   roleOptions: OptionProps[]
+  salaryRuleOptions: OptionProps[]
 }
 
 export default function AddUserForm({
@@ -44,6 +46,7 @@ export default function AddUserForm({
   reOpen,
   onConfirm,
   roleOptions,
+  salaryRuleOptions,
 }: AddUserFormProps) {
   const { colorScheme } = useMantineColorScheme()
   const t = useTranslation()
@@ -102,12 +105,12 @@ export default function AddUserForm({
           withAsterisk
           {...form.getInputProps('roleId')}
         />
-        <NumberInput
+        <Select
           w={w}
-          label={t('Base salary')}
+          label={t('Salary rule')}
+          options={salaryRuleOptions}
           withAsterisk
-          min={0}
-          {...form.getInputProps('baseSalary')}
+          {...form.getInputProps('salaryRuleId')}
         />
         <Box w={w}>
           <Flex w={w} align="end" justify="between" gap={5}>
@@ -147,6 +150,8 @@ function _validate(t: (s: string) => string) {
     email: (value: string) =>
       value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
     password: (value: string) => (value === '' ? t('Field is required') : null),
+    salaryRuleId: (value?: string | null) =>
+      value === '' || !value ? t('Field is required') : null,
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
   }
 }

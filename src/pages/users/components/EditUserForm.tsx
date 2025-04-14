@@ -1,4 +1,3 @@
-import NumberInput from '@/components/common/NumberInput'
 import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import { UpdateUserRequest, User } from '@/services/domain'
@@ -19,6 +18,7 @@ const initialValues: UpdateUserRequest = {
   clientId: '',
   baseSalary: 0,
   enabled: true,
+  canSendEmail: true,
 }
 
 type EditUserFormProps = {
@@ -26,9 +26,16 @@ type EditUserFormProps = {
   reOpen: (user: UpdateUserRequest) => void
   onConfirm: (user: UpdateUserRequest) => void
   roleOptions: OptionProps[]
+  salaryRuleOptions: OptionProps[]
 }
 
-export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: EditUserFormProps) {
+export default function EditUserForm({
+  user,
+  reOpen,
+  onConfirm,
+  roleOptions,
+  salaryRuleOptions,
+}: EditUserFormProps) {
   const t = useTranslation()
   const form = useForm<UpdateUserRequest>({
     initialValues: { ...initialValues, ...user, enabled: user.enabled || false },
@@ -75,12 +82,12 @@ export default function EditUserForm({ user, reOpen, onConfirm, roleOptions }: E
           withAsterisk
           {...form.getInputProps('roleId')}
         />
-        <NumberInput
+        <Select
           w={w}
-          label={t('Base salary')}
+          label={t('Salary rule')}
+          options={salaryRuleOptions}
           withAsterisk
-          min={0}
-          {...form.getInputProps('baseSalary')}
+          {...form.getInputProps('salaryRuleId')}
         />
         <Switch
           checked={form.values.enabled}
@@ -105,5 +112,7 @@ function _validate(t: (s: string) => string) {
     email: (value: string) =>
       value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
+    salaryRuleId: (value?: string | null) =>
+      value === '' || !value ? t('Field is required') : null,
   }
 }
