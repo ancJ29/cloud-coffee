@@ -14,7 +14,7 @@ export default function WorkEntryForm({ users, onClick }: WorkEntryFormProps) {
         <Grid.Col key={user.id} span={{ base: 12, sm: 6, lg: 4 }} className={classes.item}>
           <Card shadow="md" withBorder className={classes.card} onClick={() => onClick(user.id)}>
             <Avatar size={70} src={user.avatar} />
-            <Text fz={50} fw={400}>
+            <Text fz={{ base: 36, sm: 50 }} fw={400}>
               {user.name}
             </Text>
           </Card>
