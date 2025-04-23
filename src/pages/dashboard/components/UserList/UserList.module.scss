@@ -1,0 +1,17 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 16px;
+  cursor: pointer;
+  padding: 8px;
+  border-bottom: 1px solid var(--border-color);
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

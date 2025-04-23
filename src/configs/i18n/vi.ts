@@ -112,4 +112,6 @@ export default {
   'Primary color': 'Màu chủ đạo',
   'Primary color changed': 'Màu chủ đạo đã thay đổi',
   'Theme mode': 'Chế độ giao diện',
+  'Dashboard': 'Bảng điều khiển',
+  'User shift status': 'Trạng thái làm việc',
 }

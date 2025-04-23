@@ -1,41 +1,34 @@
 import useTranslation from '@/hooks/useTranslation'
-import { User } from '@/services/domain'
-import { Button, Flex, Image, Stack, Text } from '@mantine/core'
+import { Button, Flex, Image } from '@mantine/core'
+import IconCorner from '../IconCorner'
 import classes from './Picture.module.scss'
 
 type PictureProps = {
-  userId: string
-  users: Record<string, User>
   imageSrc: string | null
-  onConfirm: () => void
   onRetry: () => void
+  onConfirm: () => void
 }
 
-export default function Picture({
-  userId,
-  users,
-  imageSrc = '',
-  onConfirm,
-  onRetry,
-}: PictureProps) {
+export default function Picture({ imageSrc, onRetry, onConfirm }: PictureProps) {
   const t = useTranslation()
 
   return (
-    <Stack gap={10} align="center">
-      <Image src={imageSrc} className={classes.image} />
-
-      <Text fw="bold" fz={24}>
-        {users[userId]?.name}
-      </Text>
-
-      <Flex gap={20}>
-        <Button color="var(--warning)" onClick={onRetry}>
+    <>
+      <div className={classes.container}>
+        <Image src={imageSrc} className={classes.image} />
+        <IconCorner position="top-left" top="0" left="0" />
+        <IconCorner position="top-right" top="0" right="0" />
+        <IconCorner position="bottom-left" bottom="0" left="0" />
+        <IconCorner position="bottom-right" bottom="0" right="0" />
+      </div>
+      <Flex gap={20} w="100%" align="center" justify="center" mt={40}>
+        <Button color="var(--warning)" onClick={onRetry} w={120}>
           {t('Retry')}
         </Button>
-        <Button color="var(--success)" onClick={onConfirm}>
+        <Button color="var(--success)" onClick={onConfirm} w={120}>
           {t('Confirm')}
         </Button>
       </Flex>
-    </Stack>
+    </>
   )
 }

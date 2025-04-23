@@ -1,12 +1,6 @@
 import { z } from 'zod'
-import {
-  booleanSchema,
-  nullishBooleanSchema,
-  nullishStringSchema,
-  optionalBooleanSchema,
-  optionalNumberSchema,
-  stringSchema,
-} from '../base'
+import { booleanSchema, nullishBooleanSchema, nullishStringSchema, stringSchema } from '../base'
+import { userMemoSchema } from '../configs'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
@@ -26,19 +20,19 @@ export const getMeSchema = _typeBuilder({
   authOnly: true,
   action: z.literal(RequestAction.GET_ME),
   payload: z.object({}),
-  response: z.object({
-    id: stringSchema,
-    name: stringSchema,
-    username: stringSchema,
-    email: stringSchema,
-    avatar: nullishStringSchema,
-    roleId: stringSchema,
-    salaryRuleId: nullishStringSchema,
-    clientId: stringSchema,
-    enabled: nullishBooleanSchema,
-    baseSalary: optionalNumberSchema,
-    canSendEmail: optionalBooleanSchema,
-  }),
+  response: z
+    .object({
+      id: stringSchema,
+      name: stringSchema,
+      username: stringSchema,
+      email: stringSchema,
+      avatar: nullishStringSchema,
+      roleId: stringSchema,
+      salaryRuleId: nullishStringSchema,
+      clientId: stringSchema,
+      enabled: nullishBooleanSchema,
+    })
+    .extend(userMemoSchema.shape),
 })
 
 export const changePasswordSchema = _typeBuilder({

@@ -1,14 +1,13 @@
-import Avatar from '@/components/common/Avatar'
 import { User } from '@/services/domain'
-import { Card, Grid, Text } from '@mantine/core'
+import { Avatar, Card, Grid, Text } from '@mantine/core'
 import classes from './WorkEntryForm.module.scss'
 
 type WorkEntryFormProps = {
-  onClick: (userId: string) => void
   users: Record<string, User>
+  onClick: (userId: string) => void
 }
 
-export default function WorkEntryForm({ onClick, users }: WorkEntryFormProps) {
+export default function WorkEntryForm({ users, onClick }: WorkEntryFormProps) {
   return (
     <Grid gutter="sm">
       {Object.values(users).map((user) => (

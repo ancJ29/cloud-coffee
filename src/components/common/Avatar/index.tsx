@@ -4,11 +4,11 @@ import { IconUserCircle } from '@tabler/icons-react'
 type AvatarProps = {
   src?: string | null
   radius?: string | MantineSize
-  size: number
+  size?: number
   onClick?: () => void
 }
 
-export default function Avatar({ src, radius = '100', size, onClick }: AvatarProps) {
+export default function Avatar({ src, radius = '100', size = 36, onClick }: AvatarProps) {
   if (src) {
     return <Image radius={radius} src={src} h={size} w={size} onClick={onClick} />
   }

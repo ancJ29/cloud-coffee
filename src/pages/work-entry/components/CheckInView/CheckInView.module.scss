@@ -1,0 +1,14 @@
+.container {
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--check-in-bg);
+}
+
+.webcamContainer {
+  position: relative;
+  margin-top: 10px;
+}

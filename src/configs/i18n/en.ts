@@ -112,4 +112,6 @@ export default {
   'Primary color': 'Primary color',
   'Primary color changed': 'Primary color changed',
   'Theme mode': 'Theme mode',
+  'Dashboard': 'Dashboard',
+  'User shift status': 'User shift status',
 }

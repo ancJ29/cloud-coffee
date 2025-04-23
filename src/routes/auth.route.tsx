@@ -7,7 +7,12 @@ const ServiceWrapper = lazy(() => import('@/layouts/ServiceWrapper'))
 const routeConfigs: RouteConfig[] = [
   {
     path: '/*',
-    element: () => <Navigate to="/timesheet" />,
+    element: () => <Navigate to="/dashboard" />,
+  },
+  {
+    path: '/dashboard',
+    element: lazy(() => import('@/pages/dashboard')),
+    wrapper: ServiceWrapper,
   },
   {
     path: '/users',

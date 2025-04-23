@@ -1,6 +1,13 @@
 import { z } from 'zod'
 import { changePasswordSchema, getMeSchema, loginSchema, resetPasswordSchema } from './auth'
 import { getClientsSchema } from './client'
+import {
+  clearDatabaseSchema,
+  initCloudCoffeeDataSchema,
+  initNovaWorkDataSchema,
+  initPhamTuanMotorcareDataSchema,
+  initTemplateDateSchema,
+} from './init-data'
 import { getVersionSchema } from './metadata'
 import { getSalarySchema } from './report'
 import { getRolesSchema } from './role'
@@ -17,6 +24,7 @@ import { getVenuesByAdminSchema, getVenuesSchema } from './venue'
 
 export * from './auth'
 export * from './client'
+export * from './init-data'
 export * from './metadata'
 export * from './report'
 export * from './role'
@@ -46,6 +54,11 @@ export const requestSchema = z.union([
   getSalarySchema.request,
   getSalaryRulesSchema.request,
   getVersionSchema.request,
+  clearDatabaseSchema.request,
+  initTemplateDateSchema.request,
+  initCloudCoffeeDataSchema.request,
+  initNovaWorkDataSchema.request,
+  initPhamTuanMotorcareDataSchema.request,
 ])
 
 export const responseSchema = z.union([
@@ -69,4 +82,9 @@ export const responseSchema = z.union([
   getSalarySchema.response,
   getSalaryRulesSchema.response,
   getVersionSchema.response,
+  clearDatabaseSchema.response,
+  initTemplateDateSchema.response,
+  initCloudCoffeeDataSchema.response,
+  initNovaWorkDataSchema.response,
+  initPhamTuanMotorcareDataSchema.response,
 ])

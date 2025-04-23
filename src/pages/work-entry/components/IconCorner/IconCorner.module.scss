@@ -1,0 +1,26 @@
+.corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 6px solid #00ff66;
+}
+
+.top-left {
+  border-right: none;
+  border-bottom: none;
+}
+
+.top-right {
+  border-left: none;
+  border-bottom: none;
+}
+
+.bottom-left {
+  border-right: none;
+  border-top: none;
+}
+
+.bottom-right {
+  border-left: none;
+  border-top: none;
+}
