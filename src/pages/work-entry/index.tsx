@@ -1,3 +1,4 @@
+import Message from '@/components/c-time-keeper/Message'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import { checkInByUser, checkOutByUser, getAllUsersByAdmin, User } from '@/services/domain'
@@ -5,7 +6,6 @@ import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import CheckInView from './components/CheckInView'
-import Message from './components/Message'
 import WorkEntryForm from './components/WorkEntryForm'
 import WorkEntryView from './components/WorkEntryView'
 

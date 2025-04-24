@@ -1,16 +1,17 @@
 import useCameraPermission from '@/hooks/useCameraPermission'
 import { User } from '@/services/domain'
+import { ONE_SECOND } from '@/utils'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import Camera from '../Camera'
+import Fireworks from '../Fireworks'
 import IconUser from '../IconUser'
 import Picture from '../Picture'
 import Title from '../Title'
 import classes from './CheckInView.module.scss'
-import Fireworks from '../Fireworks'
 
 const COUNTDOWN_TIME = 3
-const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * 1000
+const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
 
 type CheckInViewProps = {
   user: User
@@ -37,7 +38,7 @@ export default function CheckInView({ user, onSubmit }: CheckInViewProps) {
         }
         return prev - 1
       })
-    }, 1000)
+    }, ONE_SECOND)
 
     const timer = setTimeout(() => {
       if (webcamRef.current) {

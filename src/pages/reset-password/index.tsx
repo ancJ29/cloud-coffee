@@ -5,6 +5,7 @@ import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ResetPasswordView from './components/ResetPasswordView'
+import { ONE_SECOND } from '@/utils'
 
 export type FormProps = {
   email: string
@@ -27,7 +28,10 @@ export default function ResetPassword() {
       resetPassword(values).then((res) => {
         const success = res?.success
         if (success) {
-          setTimeout(() => navigate(`/reset-password/check-email?email=${values.email}`), 1000)
+          setTimeout(
+            () => navigate(`/reset-password/check-email?email=${values.email}`),
+            ONE_SECOND,
+          )
         } else {
           showNotification({
             t,

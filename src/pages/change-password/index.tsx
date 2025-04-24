@@ -1,6 +1,7 @@
 import { showNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { changePassword } from '@/services/domain'
+import { ONE_SECOND } from '@/utils'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -31,7 +32,7 @@ export default function ChangPassword() {
       changePassword(values).then((res) => {
         const success = res?.success
         showNotification({ t, success })
-        success && setTimeout(() => navigate('/profile'), 1000)
+        success && setTimeout(() => navigate('/profile'), ONE_SECOND)
       })
     },
     [navigate, t],

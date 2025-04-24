@@ -114,4 +114,12 @@ export default {
   'Theme mode': 'Theme mode',
   'Dashboard': 'Dashboard',
   'User shift status': 'User shift status',
+  'Please use mobile device to view this page': 'Please use mobile device to view this page',
+  'please select a function': 'please select a function',
+  'Start break': 'Start break',
+  'End break': 'End break',
+  'You have not checked in today': 'You have not checked in today',
+  'Check in at': 'Check in at',
+  'Hour this period': 'Hour this period',
+  'Check out at': 'Check out at',
 }

@@ -36,6 +36,7 @@ export const getUsersSchema = _typeBuilder({
 export const getUsersByAdminSchema = _typeBuilder({
   action: z.literal(RequestAction.GET_USERS_BY_ADMIN),
   payload: getSchema.extend({
+    id: optionalStringSchema,
     clientId: optionalStringSchema,
   }),
   response: listResponse(
