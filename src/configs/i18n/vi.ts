@@ -87,7 +87,7 @@ export default {
   'Worked': 'Đã làm',
   'Total': 'Tổng cộng',
   'Clock in': 'Vào ca',
-  'Clock out': 'Ra ra',
+  'Clock out': 'Ra ca',
   'Break': 'Nghỉ',
   'Are you sure to save changes?': 'Bạn có chắc chắn muốn cập nhật thông tin?',
   'Save changes': 'Lưu thay đổi',
