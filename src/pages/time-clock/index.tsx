@@ -9,12 +9,15 @@ import {
   Shift,
   User,
 } from '@/services/domain'
+import { startOfDay } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { Tabs } from './_configs'
 import TimeClockView from './components/TimeClockView'
 
 export default function TimeClock() {
+  const [selectedTab, setSelectedTab] = useState(Tabs.TIME_CLOCK)
   const t = useTranslation()
   const [searchParams] = useSearchParams()
   const userId = searchParams.get('userId') || ''
@@ -25,7 +28,7 @@ export default function TimeClock() {
   const [shift, setShift] = useState<Shift | undefined>(undefined)
 
   const getShiftData = useCallback(async () => {
-    const shift = await getShiftByAdmin({ clientId, userId })
+    const shift = await getShiftByAdmin({ clientId, userId, start: startOfDay(Date.now()) })
     if (shift) {
       setShift(shift)
     }
@@ -78,6 +81,8 @@ export default function TimeClock() {
 
   return (
     <TimeClockView
+      selectedTab={selectedTab}
+      onChangeSelectedTab={setSelectedTab}
       user={user}
       shift={shift}
       onCheckIn={handleCheckIn}

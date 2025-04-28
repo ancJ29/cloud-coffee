@@ -79,6 +79,7 @@ export const updateShiftSchema = _typeBuilder({
 export const getShiftByAdminSchema = _typeBuilder({
   action: z.literal(RequestAction.GET_SHIFT_BY_ADMIN),
   payload: z.object({
+    start: numberSchema,
     userId: stringSchema,
     clientId: stringSchema,
   }),

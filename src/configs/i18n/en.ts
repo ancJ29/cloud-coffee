@@ -122,4 +122,7 @@ export default {
   'Check in at': 'Check in at',
   'Hour this period': 'Hour this period',
   'Check out at': 'Check out at',
+  'Time clock': 'Time clock',
+  'Time and hours': 'Time and hours',
+  'Time off center': 'Time off center',
 }

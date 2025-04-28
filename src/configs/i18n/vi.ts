@@ -123,4 +123,7 @@ export default {
   'Check in at': 'Đã vào ca lúc',
   'Hour this period': 'Giờ trong kỳ này',
   'Check out at': 'Đã ra ca lúc',
+  'Time clock': 'Chấm công',
+  'Time and hours': 'Giờ làm việc',
+  'Time off center': 'Thời gian nghỉ',
 }

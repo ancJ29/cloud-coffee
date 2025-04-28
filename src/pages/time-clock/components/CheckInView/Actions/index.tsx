@@ -1,18 +1,18 @@
 import useTranslation from '@/hooks/useTranslation'
-import { SimpleGrid } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import { IconArrowBarLeft, IconArrowBarRight, IconClock } from '@tabler/icons-react'
 import CustomButton from '../CustomButton'
 
-type CheckInActionsProps = {
+type ActionsProps = {
   onCheckIn: () => void
   onCheckOut: () => void
 }
 
-export default function CheckInActions({ onCheckIn, onCheckOut }: CheckInActionsProps) {
+export default function Actions({ onCheckIn, onCheckOut }: ActionsProps) {
   const t = useTranslation()
 
   return (
-    <SimpleGrid cols={2} spacing={6} verticalSpacing={6} w="100%">
+    <Stack gap={12}>
       <CustomButton
         title={t('Clock in')}
         onClick={onCheckIn}
@@ -25,6 +25,6 @@ export default function CheckInActions({ onCheckIn, onCheckOut }: CheckInActions
         leftSection={IconClock}
         rightSection={IconArrowBarRight}
       />
-    </SimpleGrid>
+    </Stack>
   )
 }

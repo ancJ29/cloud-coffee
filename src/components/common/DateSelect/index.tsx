@@ -128,7 +128,11 @@ export default function DateSelect({
           >
             <Input.Placeholder c="var(--text-color)">
               {value === DateRangeOption.Custom
-                ? `${formatTime(dateValue[0], 'DD/MM/YYYY')} - ${formatTime(dateValue[1], 'DD/MM/YYYY')}`
+                ? `${
+                    isSameDate(dateValue[0], dateValue[1])
+                      ? formatTime(dateValue[0], 'DD/MM/YYYY')
+                      : `${formatTime(dateValue[0], 'DD/MM/YYYY')} - ${formatTime(dateValue[1], 'DD/MM/YYYY')}`
+                  }`
                 : t(value)}
             </Input.Placeholder>
           </InputBase>

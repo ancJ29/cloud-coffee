@@ -6,7 +6,6 @@ type CustomButtonProps = {
   leftSection: React.ElementType
   rightSection: React.ElementType
   onClick: () => void
-  disabled?: boolean
 }
 
 export default function CustomButton({
@@ -14,21 +13,15 @@ export default function CustomButton({
   leftSection: LeftSection,
   rightSection: RightSection,
   onClick,
-  disabled = false,
 }: CustomButtonProps) {
   return (
-    <Button
-      className={classes.button}
-      onClick={onClick}
-      color="var(--clock-in-btn-bg)"
-      disabled={disabled}
-    >
+    <Button className={classes.button} onClick={onClick} color="var(--clock-in-btn-bg)">
       <Stack gap={0}>
         <Flex gap={0} align="center" justify="center">
           <LeftSection size={50} />
           <RightSection size={50} />
         </Flex>
-        <Text fw="bold" c={disabled ? 'dimmed' : 'white'} fz={24}>
+        <Text fw="bold" c="white" fz={24}>
           {title}
         </Text>
       </Stack>

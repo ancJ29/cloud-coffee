@@ -1,26 +1,42 @@
-import { Shift, User } from '@/services/domain'
-import { Stack } from '@mantine/core'
-import CheckInActions from '../CheckInActions'
+import { Box, Text } from '@mantine/core'
+import { tabs, Tabs } from '../../_configs'
+import CheckInView, { CheckInViewProps } from '../CheckInView'
 import MobileOnlyWarning from '../MobileOnlyWarning'
-import ShiftInformation from '../ShiftInformation'
-import Title from '../Title'
+import TimeAndHoursView from '../TimeAndHoursView'
+import TimeOffCenterView from '../TimeOffCenterView'
+import classes from './TimeClockView.module.scss'
 
 type TimeClockViewProps = {
-  user?: User
-  shift?: Shift
-  onCheckIn: () => void
-  onCheckOut: () => void
-}
+  selectedTab: Tabs
+  onChangeSelectedTab: (tab: Tabs) => void
+} & CheckInViewProps
 
-export default function TimeClockView({ user, shift, onCheckIn, onCheckOut }: TimeClockViewProps) {
+export default function TimeClockView({
+  selectedTab,
+  onChangeSelectedTab,
+  ...props
+}: TimeClockViewProps) {
   return (
     <>
       <MobileOnlyWarning />
-      <Stack gap={20} align="center" hiddenFrom="sm" px={20}>
-        <Title user={user} />
-        <CheckInActions onCheckIn={onCheckIn} onCheckOut={onCheckOut} />
-        <ShiftInformation shift={shift} />
-      </Stack>
+      <Box className={classes.container}>
+        <div className={classes.tabBar}>
+          {tabs.map((tab, idx) => (
+            <Box key={idx} onClick={() => onChangeSelectedTab(tab.label)} className={classes.item}>
+              <tab.icon color="var(--check-in-bg)" size={24} />
+              <Text className={classes.label}>{tab.label}</Text>
+              <div
+                className={`${classes.line} ${selectedTab === tab.label ? classes.active : ''}`}
+              />
+            </Box>
+          ))}
+        </div>
+        <div className={classes.content}>
+          {selectedTab === Tabs.TIME_CLOCK && <CheckInView {...props} />}
+          {selectedTab === Tabs.TIME_AND_HOURS && <TimeAndHoursView />}
+          {selectedTab === Tabs.TIME_OFF_CENTER && <TimeOffCenterView />}
+        </div>
+      </Box>
     </>
   )
 }
