@@ -112,7 +112,6 @@ export default {
   'Primary color': 'Primary color',
   'Primary color changed': 'Primary color changed',
   'Theme mode': 'Theme mode',
-  'Dashboard': 'Dashboard',
   'User shift status': 'User shift status',
   'Please use mobile device to view this page': 'Please use mobile device to view this page',
   'please select a function': 'please select a function',
@@ -125,4 +124,5 @@ export default {
   'Time clock': 'Time clock',
   'Time and hours': 'Time and hours',
   'Time off center': 'Time off center',
+  'Manage': 'Manage',
 }

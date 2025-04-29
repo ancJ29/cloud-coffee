@@ -3,16 +3,12 @@ import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
 const ServiceWrapper = lazy(() => import('@/layouts/ServiceWrapper'))
+const WorkEntryWrapper = lazy(() => import('@/layouts/WorkEntryWrapper'))
 
 const routeConfigs: RouteConfig[] = [
   {
     path: '/*',
-    element: () => <Navigate to="/dashboard" />,
-  },
-  {
-    path: '/dashboard',
-    element: lazy(() => import('@/pages/dashboard')),
-    wrapper: ServiceWrapper,
+    element: () => <Navigate to="/timesheet" />,
   },
   {
     path: '/users',
@@ -47,6 +43,12 @@ const routeConfigs: RouteConfig[] = [
   {
     path: '/work-entry',
     element: lazy(() => import('@/pages/work-entry')),
+    wrapper: WorkEntryWrapper,
+  },
+  {
+    path: '/working-status',
+    element: lazy(() => import('@/pages/working-status')),
+    wrapper: WorkEntryWrapper,
   },
   {
     path: '/time-clock',

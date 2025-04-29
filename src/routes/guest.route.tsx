@@ -25,10 +25,6 @@ const routeConfigs: RouteConfig[] = [
     wrapper: ServiceWrapper,
   },
   {
-    path: '/work-entry',
-    element: lazy(() => import('@/pages/work-entry')),
-  },
-  {
     path: '/time-clock',
     element: lazy(() => import('@/pages/time-clock')),
   },

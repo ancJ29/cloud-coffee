@@ -1,20 +1,7 @@
 import { ClientRoles, MenuItem } from '@/types'
-import {
-  IconCalendar,
-  IconCash,
-  IconDashboard,
-  IconQrcode,
-  IconUserCircle,
-} from '@tabler/icons-react'
+import { IconCalendar, IconCash, IconQrcode, IconUserCircle } from '@tabler/icons-react'
 
 export const navMenu: MenuItem[] = [
-  {
-    key: 'dashboard',
-    label: 'Dashboard',
-    icon: IconDashboard,
-    url: '/dashboard',
-    roles: [ClientRoles.OWNER],
-  },
   {
     key: 'users',
     label: 'User management',

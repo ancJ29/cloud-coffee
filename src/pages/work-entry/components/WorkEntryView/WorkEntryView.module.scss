@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  gap: 30px
+}
+
+.button {
+  border-radius: 100px;
+  font-size: 50px;
+  width: 65%;
+  height: 150px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 40px;
+    width: 95%;
+    height: 110px;
+  }
+}

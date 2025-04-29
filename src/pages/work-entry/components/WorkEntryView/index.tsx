@@ -1,5 +1,7 @@
+import ManageButton from '@/components/c-time-keeper/ManageButton'
 import useTranslation from '@/hooks/useTranslation'
 import { Button, Stack } from '@mantine/core'
+import classes from './WorkEntryView.module.scss'
 
 type WorkEntryViewProps = {
   onCheckIn: () => void
@@ -10,25 +12,25 @@ export default function WorkEntryView({ onCheckIn, onCheckOut }: WorkEntryViewPr
   const t = useTranslation()
 
   return (
-    <Stack gap={30} h="100dvh" align="center" justify="center">
+    <Stack className={classes.container}>
       <Button
-        color="var(--check-in-fg)"
-        h={150}
-        fz={{ base: 40, sm: 50 }}
-        w={{ base: '95%', sm: '80%' }}
+        color="var(--check-in-btn)"
+        c="var(--check-in-text)"
         onClick={onCheckIn}
+        className={classes.button}
       >
         {t('Check in')}
       </Button>
       <Button
-        color="var(--check-out-fg)"
-        h={150}
-        fz={{ base: 40, sm: 50 }}
-        w={{ base: '95%', sm: '80%' }}
+        color="var(--check-out-btn)"
+        c="var(--check-out-text)"
         onClick={onCheckOut}
+        className={classes.button}
       >
         {t('Check out')}
       </Button>
+
+      <ManageButton />
     </Stack>
   )
 }

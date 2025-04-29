@@ -1,7 +1,7 @@
 .topLeft {
   position: fixed;
   top: 20%;
-  left: 25%;
+  left: 30%;
   width: 30px;
   height: 30px;
 
@@ -13,7 +13,7 @@
 .topRight {
   position: fixed;
   top: 35%;
-  right: 25%;
+  right: 22%;
   width: 20px;
   height: 20px;
 
@@ -23,10 +23,25 @@
   }
 }
 
+.bottomLeft {
+  position: fixed;
+  bottom: 35%;
+  left: 22%;
+  width: 100px;
+  height: 100px;
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
 .bottomRight {
   position: fixed;
-  bottom: 20px;
-  right: 40%;
-  width: 30px;
-  height: 30px;
+  bottom: 15%;
+  right: 27%;
+  width: 100px;
+  height: 100px;
+  @media only screen and (max-width: 768px) {
+    bottom: 10%;
+    right: 15%;
+  }
 }

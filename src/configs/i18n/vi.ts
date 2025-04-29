@@ -112,7 +112,6 @@ export default {
   'Primary color': 'Màu chủ đạo',
   'Primary color changed': 'Màu chủ đạo đã thay đổi',
   'Theme mode': 'Chế độ giao diện',
-  'Dashboard': 'Bảng điều khiển',
   'User shift status': 'Trạng thái làm việc',
   'Please use mobile device to view this page':
     'Vui lòng sử dụng thiết bị di động để xem trang này',
@@ -126,4 +125,5 @@ export default {
   'Time clock': 'Chấm công',
   'Time and hours': 'Giờ làm việc',
   'Time off center': 'Thời gian nghỉ',
+  'Manage': 'Quản lý',
 }

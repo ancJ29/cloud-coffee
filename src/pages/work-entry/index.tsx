@@ -10,13 +10,14 @@ import WorkEntryForm from './components/WorkEntryForm'
 import WorkEntryView from './components/WorkEntryView'
 
 const MODAL_CLOSE_DELAY = 1500
+const MAX_PAGE_INDEX = 3
 
 export default function WorkEntry() {
   const t = useTranslation()
   const [searchParams] = useSearchParams()
   const venueId = searchParams.get('venueId') || ''
   const clientId = searchParams.get('clientId') || ''
-  const [page, setPage] = useState(0)
+  const [pageIndex, setPageIndex] = useState(0)
   const [users, setUsers] = useState<Record<string, User>>({})
   const [selectedUserId, setSelectedUserId] = useState('')
   const [isCheckIn, setIsCheckIn] = useState(true)
@@ -27,28 +28,35 @@ export default function WorkEntry() {
   }, [clientId])
   useMount(getData)
 
-  const handleChoseUser = useCallback((userId: string) => {
-    setSelectedUserId(userId)
-    modals.closeAll()
-    setPage(1)
+  const goToNextPage = useCallback(() => {
+    setPageIndex((prev) => (prev < MAX_PAGE_INDEX ? prev + 1 : prev))
+  }, [])
+
+  const goToPreviousPage = useCallback(() => {
+    setPageIndex((prev) => (prev > 0 ? prev - 1 : prev))
   }, [])
 
   const handleCheckInCheckOut = useCallback(
     (isCheckIn = true) => {
       setIsCheckIn(isCheckIn)
-      modals.open({
-        title: isCheckIn ? t('Check in') : t('Check out'),
-        centered: true,
-        fullScreen: true,
-        children: <WorkEntryForm users={users} onClick={(userId) => handleChoseUser(userId)} />,
-      })
+      goToNextPage()
     },
-    [handleChoseUser, t, users],
+    [goToNextPage],
+  )
+
+  const handleChoseUser = useCallback(
+    (userId: string) => {
+      setSelectedUserId(userId)
+      modals.closeAll()
+      goToNextPage()
+      // setPage(2)
+    },
+    [goToNextPage],
   )
 
   const submit = useCallback(async () => {
     if (isCheckIn) {
-      const res = await checkInByUser({ clientId, userId: selectedUserId, venueId: venueId || '' })
+      const res = await checkInByUser({ clientId, userId: selectedUserId, venueId })
       const success = res?.success
       modals.open({
         withCloseButton: false,
@@ -81,27 +89,28 @@ export default function WorkEntry() {
       })
     }
     setTimeout(() => {
-      setPage(0)
+      setPageIndex(0)
       modals.closeAll()
     }, MODAL_CLOSE_DELAY)
   }, [clientId, isCheckIn, selectedUserId, t, venueId])
 
-  const renderPage = () => {
-    if (page === 0) {
-      return (
+  return (
+    <>
+      {pageIndex === 0 && (
         <WorkEntryView
           onCheckIn={handleCheckInCheckOut}
           onCheckOut={() => handleCheckInCheckOut(false)}
         />
-      )
-    }
-
-    if (page === 1) {
-      return <CheckInView user={users[selectedUserId]} onSubmit={submit} />
-    }
-
-    return <></>
-  }
-
-  return <>{renderPage()}</>
+      )}
+      {pageIndex === 1 && (
+        <WorkEntryForm
+          isCheckIn={isCheckIn}
+          users={users}
+          onClick={(userId) => handleChoseUser(userId)}
+          onReturn={goToPreviousPage}
+        />
+      )}
+      {pageIndex === 2 && <CheckInView user={users[selectedUserId]} onSubmit={submit} />}
+    </>
+  )
 }

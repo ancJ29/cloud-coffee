@@ -3,23 +3,26 @@ import { Card, Stack, Text } from '@mantine/core'
 import { UserShiftStatus } from '../../_configs'
 import Filter, { FilterProps } from '../Filter'
 import UserList from '../UserList'
+import classes from './Board.module.scss'
 
-type DashboardViewProps = {
+export type BoardProps = {
   userShiftStatusList: UserShiftStatus[]
 } & FilterProps
 
-export default function DashboardView({ userShiftStatusList, ...props }: DashboardViewProps) {
+export default function Board({ userShiftStatusList, ...props }: BoardProps) {
   const t = useTranslation()
 
   return (
-    <Stack gap={10} align="center">
-      <Card shadow="md" withBorder px={20} py={10} radius={8} w={{ base: '100%', sm: '40vw' }}>
+    <Card shadow="md" withBorder className={classes.container}>
+      <Stack gap={0} className={classes.header}>
         <Text fw="bold" fz={28} mb={10}>
           {t('User shift status')}
         </Text>
         <Filter {...props} />
+      </Stack>
+      <div className={classes.content}>
         <UserList userShiftStatusList={userShiftStatusList} />
-      </Card>
-    </Stack>
+      </div>
+    </Card>
   )
 }

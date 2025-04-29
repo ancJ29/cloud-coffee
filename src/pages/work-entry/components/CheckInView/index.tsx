@@ -1,3 +1,4 @@
+import ManageButton from '@/components/c-time-keeper/ManageButton'
 import useCameraPermission from '@/hooks/useCameraPermission'
 import { User } from '@/services/domain'
 import { ONE_SECOND } from '@/utils'
@@ -74,6 +75,7 @@ export default function CheckInView({ user, onSubmit }: CheckInViewProps) {
         <IconUser />
       )}
       <Fireworks />
+      <ManageButton />
     </div>
   )
 }

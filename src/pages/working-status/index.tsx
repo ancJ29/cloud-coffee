@@ -4,9 +4,9 @@ import useUserStore from '@/stores/user.store'
 import { startOfDay } from '@/utils'
 import { useCallback, useState } from 'react'
 import { ShiftStatus, UserShiftStatus } from './_configs'
-import DashboardView from './components/DashboardView'
+import WorkingStatusView from './components/WorkingStatusView'
 
-export default function Dashboard() {
+export default function WorkingStatus() {
   const { users } = useUserStore()
   const [currents, setCurrents] = useState<UserShiftStatus[]>([])
   const [updates, setUpdates] = useState<UserShiftStatus[]>([])
@@ -57,7 +57,7 @@ export default function Dashboard() {
   )
 
   return (
-    <DashboardView
+    <WorkingStatusView
       userShiftStatusList={updates}
       keyword={keyword}
       onChangeKeyword={handleChangeKeyword}

@@ -23,7 +23,7 @@ export default function TimeClockView({
         <div className={classes.tabBar}>
           {tabs.map((tab, idx) => (
             <Box key={idx} onClick={() => onChangeSelectedTab(tab.label)} className={classes.item}>
-              <tab.icon color="var(--check-in-bg)" size={24} />
+              <tab.icon color="var(--work-entry-bg)" size={24} />
               <Text className={classes.label}>{tab.label}</Text>
               <div
                 className={`${classes.line} ${selectedTab === tab.label ? classes.active : ''}`}
