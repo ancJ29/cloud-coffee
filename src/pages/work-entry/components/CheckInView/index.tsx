@@ -8,7 +8,7 @@ import { ONE_SECOND } from '@/utils'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import Fireworks from '../Fireworks'
-import Title from '../Title'
+import UserInformation from '../UserInformation'
 import classes from './CheckInView.module.scss'
 
 const COUNTDOWN_TIME = 3
@@ -16,10 +16,11 @@ const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
 
 type CheckInViewProps = {
   user: User
+  venueId: string
   onSubmit: () => void
 }
 
-export default function CheckInView({ user, onSubmit }: CheckInViewProps) {
+export default function CheckInView({ user, venueId, onSubmit }: CheckInViewProps) {
   const hasPermission = useCameraPermission()
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const webcamRef = useRef<Webcam | null>(null)
@@ -62,7 +63,6 @@ export default function CheckInView({ user, onSubmit }: CheckInViewProps) {
 
   return (
     <div className={classes.container}>
-      <Title user={user} />
       {hasPermission ? (
         <div className={classes.webcamContainer}>
           {imageSrc ? (
@@ -74,6 +74,7 @@ export default function CheckInView({ user, onSubmit }: CheckInViewProps) {
       ) : (
         <IconUserWithCorner />
       )}
+      <UserInformation user={user} venueId={venueId} />
       <Fireworks />
       <ManageButton />
     </div>

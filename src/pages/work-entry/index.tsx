@@ -109,7 +109,9 @@ export default function WorkEntry() {
           onReturn={goToPreviousPage}
         />
       )}
-      {pageIndex === 2 && <CheckInView user={users[selectedUserId]} onSubmit={submit} />}
+      {pageIndex === 2 && (
+        <CheckInView user={users[selectedUserId]} venueId={venueId} onSubmit={submit} />
+      )}
     </>
   )
 }
