@@ -49,7 +49,6 @@ export default function WorkEntry() {
       setSelectedUserId(userId)
       modals.closeAll()
       goToNextPage()
-      // setPage(2)
     },
     [goToNextPage],
   )

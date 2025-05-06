@@ -1,21 +1,15 @@
 import { Box, Text } from '@mantine/core'
 import { tabs, Tabs } from '../../_configs'
-import CheckInView, { CheckInViewProps } from '../CheckInView'
+import ClockInView from '../ClockInView'
 import MobileOnlyWarning from '../MobileOnlyWarning'
-import TimeAndHoursView from '../TimeAndHoursView'
-import TimeOffCenterView from '../TimeOffCenterView'
 import classes from './TimeClockView.module.scss'
 
 type TimeClockViewProps = {
   selectedTab: Tabs
   onChangeSelectedTab: (tab: Tabs) => void
-} & CheckInViewProps
+}
 
-export default function TimeClockView({
-  selectedTab,
-  onChangeSelectedTab,
-  ...props
-}: TimeClockViewProps) {
+export default function TimeClockView({ selectedTab, onChangeSelectedTab }: TimeClockViewProps) {
   return (
     <>
       <MobileOnlyWarning />
@@ -32,9 +26,9 @@ export default function TimeClockView({
           ))}
         </div>
         <div className={classes.content}>
-          {selectedTab === Tabs.TIME_CLOCK && <CheckInView {...props} />}
-          {selectedTab === Tabs.TIME_AND_HOURS && <TimeAndHoursView />}
-          {selectedTab === Tabs.TIME_OFF_CENTER && <TimeOffCenterView />}
+          {selectedTab === Tabs.TIME_CLOCK && <ClockInView />}
+          {selectedTab === Tabs.TIME_AND_HOURS && <></>}
+          {selectedTab === Tabs.TIME_OFF_CENTER && <></>}
         </div>
       </Box>
     </>

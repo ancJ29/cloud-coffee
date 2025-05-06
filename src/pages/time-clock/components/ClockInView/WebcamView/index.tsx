@@ -1,25 +1,22 @@
 import Camera from '@/components/c-time-keeper/Camera'
 import IconUserWithCorner from '@/components/c-time-keeper/IconUserWithCorner'
-import ManageButton from '@/components/c-time-keeper/ManageButton'
 import Picture from '@/components/c-time-keeper/Picture'
 import useCameraPermission from '@/hooks/useCameraPermission'
 import { User } from '@/services/domain'
 import { ONE_SECOND } from '@/utils'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
-import Fireworks from '../Fireworks'
-import Title from '../Title'
-import classes from './CheckInView.module.scss'
+import UserInformation from './UserInformation'
 
 const COUNTDOWN_TIME = 3
 const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
 
-type CheckInViewProps = {
-  user: User
+type WebcamViewProps = {
+  user?: User
   onSubmit: () => void
 }
 
-export default function CheckInView({ user, onSubmit }: CheckInViewProps) {
+export default function WebcamView({ user, onSubmit }: WebcamViewProps) {
   const hasPermission = useCameraPermission()
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const webcamRef = useRef<Webcam | null>(null)
@@ -61,21 +58,21 @@ export default function CheckInView({ user, onSubmit }: CheckInViewProps) {
   }, [])
 
   return (
-    <div className={classes.container}>
-      <Title user={user} />
+    <>
       {hasPermission ? (
-        <div className={classes.webcamContainer}>
+        <>
           {imageSrc ? (
             <Picture imageSrc={imageSrc} onConfirm={onSubmit} onRetry={handleRetry} />
           ) : (
-            <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
+            <div style={{ marginBottom: '74px' }}>
+              <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
+            </div>
           )}
-        </div>
+        </>
       ) : (
         <IconUserWithCorner />
       )}
-      <Fireworks />
-      <ManageButton />
-    </div>
+      <UserInformation user={user} />
+    </>
   )
 }

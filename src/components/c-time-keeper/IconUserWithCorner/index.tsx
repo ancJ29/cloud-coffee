@@ -1,7 +1,7 @@
+import IconCorner from '@/components/c-time-keeper/IconCorner'
 import { IconUserFilled } from '@tabler/icons-react'
-import IconCorner from '../IconCorner'
 
-export default function IconUser() {
+export default function IconUserWithCorner() {
   return (
     <div style={{ position: 'relative' }}>
       <IconUserFilled size={470} color="var(--user-icon-bg)" />

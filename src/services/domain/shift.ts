@@ -1,7 +1,7 @@
 import {
   checkInByUserSchema,
   checkOutByUserSchema,
-  getShiftByAdminSchema,
+  getShiftsByAdminSchema,
   getShiftsSchema,
   RequestAction,
   updateShiftSchema,
@@ -47,11 +47,11 @@ export async function updateShift(payload: UpdateShiftRequest) {
   })
 }
 
-type GetShiftByAdminRequest = z.infer<typeof getShiftByAdminSchema.request>['payload']
-export async function getShiftByAdmin(payload: GetShiftByAdminRequest) {
+type GetShiftsByAdminRequest = z.infer<typeof getShiftsByAdminSchema.request>['payload']
+export async function getShiftsByAdmin(payload: GetShiftsByAdminRequest) {
   return await callApi({
-    action: RequestAction.GET_SHIFT_BY_ADMIN,
+    action: RequestAction.GET_SHIFTS_BY_ADMIN,
     payload,
-    schema: getShiftByAdminSchema,
+    schema: getShiftsByAdminSchema,
   })
 }

@@ -1,5 +1,5 @@
+import IconCorner from '@/components/c-time-keeper/IconCorner'
 import Webcam from 'react-webcam'
-import IconCorner from '../IconCorner'
 import classes from './Camera.module.scss'
 
 type CameraProps = {
@@ -10,7 +10,7 @@ type CameraProps = {
 
 export default function Camera({ webcamRef, isCapturing, countdown }: CameraProps) {
   return (
-    <>
+    <div className={classes.container}>
       <Webcam ref={webcamRef} screenshotFormat="image/jpeg" mirrored className={classes.webcam} />
       <IconCorner position="top-left" top="0" left="0" />
       <IconCorner position="top-right" top="0" right="0" />
@@ -22,6 +22,6 @@ export default function Camera({ webcamRef, isCapturing, countdown }: CameraProp
           <div className={classes.countdown}>{countdown}</div>
         </div>
       )}
-    </>
+    </div>
   )
 }

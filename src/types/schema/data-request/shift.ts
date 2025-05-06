@@ -76,8 +76,8 @@ export const updateShiftSchema = _typeBuilder({
   }),
 })
 
-export const getShiftByAdminSchema = _typeBuilder({
-  action: z.literal(RequestAction.GET_SHIFT_BY_ADMIN),
+export const getShiftsByAdminSchema = _typeBuilder({
+  action: z.literal(RequestAction.GET_SHIFTS_BY_ADMIN),
   payload: z.object({
     start: numberSchema,
     userId: stringSchema,
@@ -91,5 +91,5 @@ export const getShiftByAdminSchema = _typeBuilder({
       start: numberSchema,
       end: nullishNumberSchema,
     })
-    .nullish(),
+    .array(),
 })
