@@ -3,6 +3,7 @@ import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
 const ServiceWrapper = lazy(() => import('@/layouts/AuthServiceWrapper'))
+const WorkEntryWrapper = lazy(() => import('@/layouts/WorkEntryWrapper'))
 
 const routeConfigs: RouteConfig[] = [
   {
@@ -23,6 +24,11 @@ const routeConfigs: RouteConfig[] = [
     path: '/reset-password/check-email',
     element: lazy(() => import('@/pages/check-email')),
     wrapper: ServiceWrapper,
+  },
+  {
+    path: '/work-entry',
+    element: lazy(() => import('@/pages/work-entry')),
+    wrapper: WorkEntryWrapper,
   },
   {
     path: '/time-clock',

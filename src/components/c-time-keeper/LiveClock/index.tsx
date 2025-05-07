@@ -13,7 +13,7 @@ export default function LiveClock(props: TextProps) {
   }, [])
 
   return (
-    <Text fz={28} fw="bold" style={{ letterSpacing: 3 }} {...props}>
+    <Text fz={28} fw="bold" style={{ letterSpacing: 2 }} {...props}>
       {formatTime(currentTime, 'hh:mm')}:
       <Text fz={20} fw={500} span c="inherit">
         {formatTime(currentTime, 'ss A')}

@@ -1,5 +1,5 @@
-import IconCorner from '@/components/c-time-keeper/IconCorner'
 import Webcam from 'react-webcam'
+import IconCorner from '../IconCorner'
 import classes from './Camera.module.scss'
 
 type CameraProps = {

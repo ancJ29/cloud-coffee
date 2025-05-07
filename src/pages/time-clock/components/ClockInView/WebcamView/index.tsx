@@ -1,9 +1,11 @@
+import ActionButtons from '@/components/c-time-keeper/ActionButtons'
 import Camera from '@/components/c-time-keeper/Camera'
 import IconUserWithCorner from '@/components/c-time-keeper/IconUserWithCorner'
 import Picture from '@/components/c-time-keeper/Picture'
 import useCameraPermission from '@/hooks/useCameraPermission'
 import { User } from '@/services/domain'
 import { ONE_SECOND } from '@/utils'
+import { Stack } from '@mantine/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import UserInformation from './UserInformation'
@@ -60,15 +62,14 @@ export default function WebcamView({ user, onSubmit }: WebcamViewProps) {
   return (
     <>
       {hasPermission ? (
-        <>
+        <Stack gap={10}>
           {imageSrc ? (
-            <Picture imageSrc={imageSrc} onConfirm={onSubmit} onRetry={handleRetry} />
+            <Picture imageSrc={imageSrc} />
           ) : (
-            <div style={{ marginBottom: '74px' }}>
-              <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
-            </div>
+            <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
           )}
-        </>
+          <ActionButtons isVisible={imageSrc !== null} onRetry={handleRetry} onSubmit={onSubmit} />
+        </Stack>
       ) : (
         <IconUserWithCorner />
       )}

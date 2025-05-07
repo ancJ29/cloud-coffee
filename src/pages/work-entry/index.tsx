@@ -2,14 +2,15 @@ import Message from '@/components/c-time-keeper/Message'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import { checkInByUser, checkOutByUser, getAllUsersByAdmin, User } from '@/services/domain'
+import { ONE_SECOND } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import CheckInView from './components/CheckInView'
-import WorkEntryForm from './components/WorkEntryForm'
+import UserSelector from './components/UserSelector'
 import WorkEntryView from './components/WorkEntryView'
 
-const MODAL_CLOSE_DELAY = 1500
+const MODAL_CLOSE_DELAY = 1.5 * ONE_SECOND
 const MAX_PAGE_INDEX = 3
 
 export default function WorkEntry() {
@@ -102,7 +103,7 @@ export default function WorkEntry() {
         />
       )}
       {pageIndex === 1 && (
-        <WorkEntryForm
+        <UserSelector
           isCheckIn={isCheckIn}
           users={users}
           onClick={(userId) => handleChoseUser(userId)}

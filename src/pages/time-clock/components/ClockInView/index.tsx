@@ -100,7 +100,7 @@ export default function ClockInView() {
   )
 
   return (
-    <Stack gap={40} align="center" justify="center" h="calc(100vh - 64px)">
+    <Stack gap={30} align="center" justify="center" h="calc(100vh - 64px)">
       {pageIndex === 0 && (
         <CheckInView
           user={user}

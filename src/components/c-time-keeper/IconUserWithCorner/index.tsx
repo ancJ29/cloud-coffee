@@ -1,14 +1,25 @@
-import IconCorner from '@/components/c-time-keeper/IconCorner'
+import useWindowResize from '@/hooks/useWindowResize'
 import { IconUserFilled } from '@tabler/icons-react'
+import IconCorner from '../IconCorner'
 
 export default function IconUserWithCorner() {
+  const isMobile = useWindowResize()
+
   return (
     <div style={{ position: 'relative' }}>
-      <IconUserFilled size={470} color="var(--user-icon-bg)" />
+      <IconUserFilled size={isMobile ? 390 : 470} color="var(--user-icon-bg)" />
       <IconCorner position="top-left" top="8%" left="28%" />
       <IconCorner position="top-right" top="8%" right="28%" />
-      <IconCorner position="bottom-left" bottom="calc(8% + 200px)" left="28%" />
-      <IconCorner position="bottom-right" bottom="calc(8% + 200px)" right="28%" />
+      <IconCorner
+        position="bottom-left"
+        bottom={`calc(8% + ${isMobile ? '170px' : '200px'})`}
+        left="28%"
+      />
+      <IconCorner
+        position="bottom-right"
+        bottom={`calc(8% + ${isMobile ? '170px' : '200px'})`}
+        right="28%"
+      />
     </div>
   )
 }

@@ -2,16 +2,16 @@ import useTranslation from '@/hooks/useTranslation'
 import { User } from '@/services/domain'
 import { ActionIcon, Avatar, Card, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconX } from '@tabler/icons-react'
-import classes from './WorkEntryForm.module.scss'
+import classes from './UserSelector.module.scss'
 
-type WorkEntryFormProps = {
+type UserSelectorProps = {
   isCheckIn: boolean
   users: Record<string, User>
   onClick: (userId: string) => void
   onReturn: () => void
 }
 
-export default function WorkEntryForm({ isCheckIn, users, onClick, onReturn }: WorkEntryFormProps) {
+export default function UserSelector({ isCheckIn, users, onClick, onReturn }: UserSelectorProps) {
   const t = useTranslation()
 
   return (
@@ -19,7 +19,7 @@ export default function WorkEntryForm({ isCheckIn, users, onClick, onReturn }: W
       <Flex justify="space-between" align="center">
         <Text className={classes.title}>{t(isCheckIn ? 'Check in' : 'Check out')}</Text>
         <ActionIcon variant="outline" color="white" mr={8} onClick={onReturn}>
-          <IconX style={{ width: '70%', height: '70%' }} stroke={1.5} />
+          <IconX size={50} stroke={1.5} />
         </ActionIcon>
       </Flex>
       <Grid gutter="sm">

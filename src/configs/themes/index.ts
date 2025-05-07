@@ -144,7 +144,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--check-out-indicator': theme.colors.xGray[3],
     '--clock-in-btn-bg': '#6A6A6A',
     '--tab-bar-item-selected': '#74A2CC',
-    '--btn-manage-bg': '#4CA8EC',
+    '--btn-manage-bg': '#4CA8EF',
   },
   light: {
     '--border-color': theme.colors.xGray[1],

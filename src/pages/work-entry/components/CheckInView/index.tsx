@@ -1,15 +1,18 @@
+import ActionButtons from '@/components/c-time-keeper/ActionButtons'
 import Camera from '@/components/c-time-keeper/Camera'
 import IconUserWithCorner from '@/components/c-time-keeper/IconUserWithCorner'
 import ManageButton from '@/components/c-time-keeper/ManageButton'
 import Picture from '@/components/c-time-keeper/Picture'
 import useCameraPermission from '@/hooks/useCameraPermission'
 import { User } from '@/services/domain'
+import useVenueStore from '@/stores/venue.store'
 import { ONE_SECOND } from '@/utils'
+import { Stack, Text } from '@mantine/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
-import Fireworks from '../Fireworks'
-import UserInformation from '../UserInformation'
 import classes from './CheckInView.module.scss'
+import Fireworks from './Fireworks'
+import UserInformation from './UserInformation'
 
 const COUNTDOWN_TIME = 3
 const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
@@ -26,6 +29,7 @@ export default function CheckInView({ user, venueId, onSubmit }: CheckInViewProp
   const webcamRef = useRef<Webcam | null>(null)
   const [countdown, setCountdown] = useState(COUNTDOWN_TIME)
   const [isCapturing, setIsCapturing] = useState(true)
+  const { venues } = useVenueStore()
 
   useEffect(() => {
     if (imageSrc) {
@@ -62,21 +66,23 @@ export default function CheckInView({ user, venueId, onSubmit }: CheckInViewProp
   }, [])
 
   return (
-    <div className={classes.container}>
+    <Stack gap={20} align="center" justify="center" h="100dvh">
       {hasPermission ? (
-        <div className={classes.webcamContainer}>
+        <Stack gap={10}>
           {imageSrc ? (
-            <Picture imageSrc={imageSrc} onConfirm={onSubmit} onRetry={handleRetry} />
+            <Picture imageSrc={imageSrc} />
           ) : (
             <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
           )}
-        </div>
+          <ActionButtons isVisible={imageSrc !== null} onRetry={handleRetry} onSubmit={onSubmit} />
+        </Stack>
       ) : (
         <IconUserWithCorner />
       )}
-      <UserInformation user={user} venueId={venueId} />
+      <Text className={classes.venue}>{venues.get(venueId)?.name}</Text>
+      <UserInformation user={user} />
       <Fireworks />
       <ManageButton />
-    </div>
+    </Stack>
   )
 }
