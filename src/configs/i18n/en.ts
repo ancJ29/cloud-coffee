@@ -125,4 +125,8 @@ export default {
   'Time and hours': 'Time and hours',
   'Time off center': 'Time off center',
   'Manage': 'Manage',
+  'Location permission has not been granted to the browser':
+    'Location permission has not been granted to the browser',
+  'Address not found': 'Address not found',
+  'Failed to fetch address from coordinates': 'Failed to fetch address from coordinates',
 }

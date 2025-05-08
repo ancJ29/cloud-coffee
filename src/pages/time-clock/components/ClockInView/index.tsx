@@ -1,4 +1,5 @@
 import Message from '@/components/c-time-keeper/Message'
+import { useGeoLocation } from '@/hooks/useGeoLocation'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import {
@@ -9,8 +10,7 @@ import {
   Shift,
   User,
 } from '@/services/domain'
-import { startOfDay } from '@/utils'
-import { Stack } from '@mantine/core'
+import { ONE_SECOND, startOfDay } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
@@ -18,19 +18,18 @@ import CheckInView from './CheckInView'
 import WebcamView from './WebcamView'
 
 const MAX_PAGE_INDEX = 1
-const MODAL_CLOSE_DELAY = 1500
+const MODAL_CLOSE_DELAY = 1.5 * ONE_SECOND
 
 export default function ClockInView() {
   const t = useTranslation()
   const [searchParams] = useSearchParams()
   const userId = searchParams.get('userId') || ''
   const clientId = searchParams.get('clientId') || ''
-  // TODO: get location instead of hardcode
-  const venueId = searchParams.get('venueId') || ''
   const [user, setUser] = useState<User | undefined>(undefined)
   const [shifts, setShifts] = useState<Shift[]>([])
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
+  const { location } = useGeoLocation()
 
   const getShiftData = useCallback(async () => {
     const shifts = await getShiftsByAdmin({ clientId, userId, start: startOfDay(Date.now()) })
@@ -56,7 +55,11 @@ export default function ClockInView() {
 
   const submit = useCallback(async () => {
     if (isCheckIn) {
-      const res = await checkInByUser({ clientId, userId, venueId })
+      const res = await checkInByUser({
+        clientId,
+        userId,
+        ...location,
+      })
       const success = res?.success
       modals.open({
         withCloseButton: false,
@@ -89,7 +92,7 @@ export default function ClockInView() {
       setPageIndex(0)
       modals.closeAll()
     }, MODAL_CLOSE_DELAY)
-  }, [clientId, getShiftData, isCheckIn, t, userId, venueId])
+  }, [clientId, getShiftData, isCheckIn, location, t, userId])
 
   const handleCheckInCheckOut = useCallback(
     (isCheckIn = true) => {
@@ -100,7 +103,7 @@ export default function ClockInView() {
   )
 
   return (
-    <Stack gap={30} align="center" justify="center" h="calc(100vh - 64px)">
+    <>
       {pageIndex === 0 && (
         <CheckInView
           user={user}
@@ -110,6 +113,6 @@ export default function ClockInView() {
         />
       )}
       {pageIndex === 1 && <WebcamView user={user} onSubmit={submit} />}
-    </Stack>
+    </>
   )
 }

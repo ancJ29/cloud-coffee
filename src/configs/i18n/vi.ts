@@ -126,4 +126,8 @@ export default {
   'Time and hours': 'Giờ làm việc',
   'Time off center': 'Thời gian nghỉ',
   'Manage': 'Quản lý',
+  'Location permission has not been granted to the browser':
+    'Trình duyệt chưa được cấp quyền truy cập vị trí',
+  'Address not found': 'Không tìm thấy địa chỉ',
+  'Failed to fetch address from coordinates': 'Không thể lấy địa chỉ từ toạ độ',
 }

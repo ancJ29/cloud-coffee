@@ -60,7 +60,7 @@ export default function WebcamView({ user, onSubmit }: WebcamViewProps) {
   }, [])
 
   return (
-    <>
+    <Stack gap={10} align="center" justify="center" h="100%">
       {hasPermission ? (
         <Stack gap={10}>
           {imageSrc ? (
@@ -74,6 +74,6 @@ export default function WebcamView({ user, onSubmit }: WebcamViewProps) {
         <IconUserWithCorner />
       )}
       <UserInformation user={user} />
-    </>
+    </Stack>
   )
 }

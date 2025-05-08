@@ -5,6 +5,8 @@ import {
   listResponse,
   nullishNumberSchema,
   numberSchema,
+  optionalNumberSchema,
+  optionalStringSchema,
   stringSchema,
 } from '../base'
 import { RequestAction } from '../request'
@@ -27,7 +29,9 @@ export const checkInByUserSchema = _typeBuilder({
   payload: z.object({
     clientId: stringSchema,
     userId: stringSchema,
-    venueId: stringSchema,
+    venueId: optionalStringSchema,
+    longitude: optionalNumberSchema,
+    latitude: optionalNumberSchema,
   }),
   response: z.object({
     success: booleanSchema,
