@@ -1,25 +1,19 @@
 import { useGeoLocation } from '@/hooks/useGeoLocation'
-import { Text } from '@mantine/core'
+import useTranslation from '@/hooks/useTranslation'
+import { Flex, Text } from '@mantine/core'
+import { IconUserPin } from '@tabler/icons-react'
 import classes from './Address.module.scss'
 
 export default function Address() {
-  const { address, error, loading } = useGeoLocation()
+  const t = useTranslation()
+  const { address, loading } = useGeoLocation()
 
-  if (loading) {
-    return (
-      <Text c="dimmed" className={classes.text}>
-        Đang lấy vị trí của bạn...
+  return (
+    <Flex gap={10} className={classes.container}>
+      <IconUserPin stroke={1.5} size={20} />
+      <Text className={classes.text} c={loading ? 'dimmed' : 'black'}>
+        {loading ? t('Taking your position') : address}
       </Text>
-    )
-  }
-
-  if (error) {
-    return (
-      <Text c="red" className={classes.text}>
-        {error}
-      </Text>
-    )
-  }
-
-  return <Text className={classes.text}>{address}</Text>
+    </Flex>
+  )
 }

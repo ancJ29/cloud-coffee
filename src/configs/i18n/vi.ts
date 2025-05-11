@@ -129,5 +129,10 @@ export default {
   'Location permission has not been granted to the browser':
     'Trình duyệt chưa được cấp quyền truy cập vị trí',
   'Address not found': 'Không tìm thấy địa chỉ',
-  'Failed to fetch address from coordinates': 'Không thể lấy địa chỉ từ toạ độ',
+  'Taking your position': 'Đang lấy vị trí của bạn',
+  'You have not granted location access to the browser on your device':
+    'Bạn chưa cấp quyền truy cập vị trí cho trình duyệt trên thiết bị',
+  'See permission instructions': 'Xem hướng dẫn cấp quyền',
+  'We could not access your location. Please make sure you have granted location access in your browser settings':
+    'Chúng tôi không thể truy cập vị trí của bạn. Vui lòng đảm bảo bạn đã cấp quyền truy cập vị trí trong cài đặt trình duyệt của mình',
 }

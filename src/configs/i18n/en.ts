@@ -128,5 +128,10 @@ export default {
   'Location permission has not been granted to the browser':
     'Location permission has not been granted to the browser',
   'Address not found': 'Address not found',
-  'Failed to fetch address from coordinates': 'Failed to fetch address from coordinates',
+  'Taking your position': 'Taking your position',
+  'You have not granted location access to the browser on your device':
+    'You have not granted location access to the browser on your device',
+  'See permission instructions': 'See permission instructions',
+  'We could not access your location. Please make sure you have granted location access in your browser settings':
+    'We could not access your location. Please make sure you have granted location access in your browser settings',
 }

@@ -31,8 +31,17 @@ const routeConfigs: RouteConfig[] = [
     wrapper: WorkEntryWrapper,
   },
   {
+    path: '/working-status',
+    element: lazy(() => import('@/pages/working-status')),
+    wrapper: WorkEntryWrapper,
+  },
+  {
     path: '/time-clock',
     element: lazy(() => import('@/pages/time-clock')),
+  },
+  {
+    path: '/location-permission-guide',
+    element: lazy(() => import('@/pages/location-permission-guide')),
   },
 ]
 

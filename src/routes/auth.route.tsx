@@ -54,6 +54,10 @@ const routeConfigs: RouteConfig[] = [
     path: '/time-clock',
     element: lazy(() => import('@/pages/time-clock')),
   },
+  {
+    path: '/location-permission-guide',
+    element: lazy(() => import('@/pages/location-permission-guide')),
+  },
 ]
 
 const authRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrapper }) => {

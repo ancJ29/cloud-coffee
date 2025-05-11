@@ -15,6 +15,7 @@ import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import CheckInView from './CheckInView'
+import LocationDeniedNotice from './LocationDeniedNotice'
 import WebcamView from './WebcamView'
 
 const MAX_PAGE_INDEX = 1
@@ -29,7 +30,7 @@ export default function ClockInView() {
   const [shifts, setShifts] = useState<Shift[]>([])
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
-  const { location } = useGeoLocation()
+  const { location, denied } = useGeoLocation()
 
   const getShiftData = useCallback(async () => {
     const shifts = await getShiftsByAdmin({ clientId, userId, start: startOfDay(Date.now()) })
@@ -54,6 +55,21 @@ export default function ClockInView() {
   }, [])
 
   const submit = useCallback(async () => {
+    if (!location) {
+      modals.open({
+        centered: true,
+        size: 'lg',
+        children: (
+          <Message
+            success={false}
+            message={t(
+              'We could not access your location. Please make sure you have granted location access in your browser settings',
+            )}
+          />
+        ),
+      })
+      return
+    }
     if (isCheckIn) {
       const res = await checkInByUser({
         clientId,
@@ -101,6 +117,10 @@ export default function ClockInView() {
     },
     [goToNextPage],
   )
+
+  if (denied) {
+    return <LocationDeniedNotice />
+  }
 
   return (
     <>
