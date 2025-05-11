@@ -6,7 +6,7 @@ export default function IOSGuide() {
 
   const steps = [
     <>
-      {t('Open the')} <strong>{t('Settings')}</strong> {t('app on your iPhone')}
+      {t('Open the')} <strong>{t('Settings')}</strong> {t('app on your phone')}
     </>,
     <>
       {t('Scroll down and select')} <strong>{t('App')}</strong>

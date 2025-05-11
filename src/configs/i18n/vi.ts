@@ -135,4 +135,25 @@ export default {
   'See permission instructions': 'Xem hướng dẫn cấp quyền',
   'We could not access your location. Please make sure you have granted location access in your browser settings':
     'Chúng tôi không thể truy cập vị trí của bạn. Vui lòng đảm bảo bạn đã cấp quyền truy cập vị trí trong cài đặt trình duyệt của mình',
+  'Open the': 'Mở ứng dụng',
+  'app on your phone': 'trên điện thoại của bạn',
+  'Scroll down and select': 'Cuộn xuống và chọn',
+  'App': 'Ứng dụng',
+  'or the browser you are using': 'hoặc trình duyệt bạn đang sử dụng',
+  'Select': 'Chọn',
+  'Permissions': 'Quyền',
+  'Location': 'Vị trí',
+  'While Using the App': 'Khi dùng Ứng dụng',
+  'or': 'hoặc',
+  'Ask Next Time or When I Share': 'Hỏi lần sau hoặc khi tôi chia sẻ',
+  'Return to your browser to continue using the app':
+    'Quay lại trình duyệt của bạn để tiếp tục sử dụng ứng dụng',
+  'On the home screen of your device, find the icon of the browser app you are using':
+    'Trên màn hình chính của thiết bị, hãy tìm biểu tượng ứng dụng trình duyệt bạn đang sử dụng',
+  'Tap and hold the app icon': 'Chạm và giữ biểu tượng ứng dụng',
+  'Tap on': 'Nhấn vào',
+  'App Info': 'Thông tin ứng dụng',
+  'Always allow': 'Luôn cho phép',
+  'Allow only while using the app': 'Chỉ cho phép khi dùng ứng dụng',
+  'Always ask': 'Luôn hỏi',
 }

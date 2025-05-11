@@ -134,4 +134,25 @@ export default {
   'See permission instructions': 'See permission instructions',
   'We could not access your location. Please make sure you have granted location access in your browser settings':
     'We could not access your location. Please make sure you have granted location access in your browser settings',
+  'Open the': 'Open the',
+  'app on your phone': 'app on your phone',
+  'Scroll down and select': 'Scroll down and select',
+  'App': 'App',
+  'or the browser you are using': 'or the browser you are using',
+  'Select': 'Select',
+  'Permissions': 'Permissions',
+  'Location': 'Location',
+  'While Using the App': 'While Using the App',
+  'or': 'or',
+  'Ask Next Time or When I Share': 'Ask Next Time or When I Share',
+  'Return to your browser to continue using the app':
+    'Return to your browser to continue using the app',
+  'On the home screen of your device, find the icon of the browser app you are using':
+    'On the home screen of your device, find the icon of the browser app you are using',
+  'Tap and hold the app icon': 'Tap and hold the app icon',
+  'Tap on': 'Tap on',
+  'App Info': 'App Info',
+  'Always allow': 'Always allow',
+  'Allow only while using the app': 'Allow only while using the app',
+  'Always ask': 'Always ask',
 }
