@@ -1,7 +1,14 @@
 import Message from '@/components/c-time-keeper/Message'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
-import { checkInByUser, checkOutByUser, getAllUsersByAdmin, User } from '@/services/domain'
+import {
+  checkInByUser,
+  checkOutByUser,
+  getAllUsersByAdmin,
+  getAllVenuesByAdmin,
+  User,
+  Venue,
+} from '@/services/domain'
 import { ONE_SECOND } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
@@ -19,12 +26,17 @@ export default function WorkEntry() {
   const venueId = searchParams.get('venueId') || ''
   const clientId = searchParams.get('clientId') || ''
   const [pageIndex, setPageIndex] = useState(0)
+  const [venues, setVenues] = useState<Record<string, Venue>>({})
   const [users, setUsers] = useState<Record<string, User>>({})
   const [selectedUserId, setSelectedUserId] = useState('')
   const [isCheckIn, setIsCheckIn] = useState(true)
 
   const getData = useCallback(async () => {
-    const users = await getAllUsersByAdmin({ clientId })
+    const [venues, users] = await Promise.all([
+      getAllVenuesByAdmin({ clientId }),
+      getAllUsersByAdmin({ clientId }),
+    ])
+    setVenues(Object.fromEntries(venues.map((venue) => [venue.id, venue])))
     setUsers(Object.fromEntries(users.map((user) => [user.id, user])))
   }, [clientId])
   useMount(getData)
@@ -111,7 +123,12 @@ export default function WorkEntry() {
         />
       )}
       {pageIndex === 2 && (
-        <CheckInView user={users[selectedUserId]} venueId={venueId} onSubmit={submit} />
+        <CheckInView
+          venues={venues}
+          user={users[selectedUserId]}
+          venueId={venueId}
+          onSubmit={submit}
+        />
       )}
     </>
   )

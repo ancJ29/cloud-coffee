@@ -4,8 +4,7 @@ import IconUserWithCorner from '@/components/c-time-keeper/IconUserWithCorner'
 import ManageButton from '@/components/c-time-keeper/ManageButton'
 import Picture from '@/components/c-time-keeper/Picture'
 import useCameraPermission from '@/hooks/useCameraPermission'
-import { User } from '@/services/domain'
-import useVenueStore from '@/stores/venue.store'
+import { User, Venue } from '@/services/domain'
 import { ONE_SECOND } from '@/utils'
 import { Stack, Text } from '@mantine/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -18,18 +17,18 @@ const COUNTDOWN_TIME = 3
 const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
 
 type CheckInViewProps = {
+  venues: Record<string, Venue>
   user: User
   venueId: string
   onSubmit: () => void
 }
 
-export default function CheckInView({ user, venueId, onSubmit }: CheckInViewProps) {
+export default function CheckInView({ venues, user, venueId, onSubmit }: CheckInViewProps) {
   const hasPermission = useCameraPermission()
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const webcamRef = useRef<Webcam | null>(null)
   const [countdown, setCountdown] = useState(COUNTDOWN_TIME)
   const [isCapturing, setIsCapturing] = useState(true)
-  const { venues } = useVenueStore()
 
   useEffect(() => {
     if (imageSrc) {
@@ -79,7 +78,7 @@ export default function CheckInView({ user, venueId, onSubmit }: CheckInViewProp
       ) : (
         <IconUserWithCorner />
       )}
-      <Text className={classes.venue}>{venues.get(venueId)?.name}</Text>
+      <Text className={classes.venue}>{venues[venueId]?.name}</Text>
       <UserInformation user={user} />
       <Fireworks />
       <ManageButton />

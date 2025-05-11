@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getSchema, listResponse, stringSchema } from '../base'
+import { getSchema, listResponse, optionalStringSchema, stringSchema } from '../base'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
@@ -19,7 +19,7 @@ export const getVenuesSchema = _typeBuilder({
 export const getVenuesByAdminSchema = _typeBuilder({
   authOnly: true,
   action: z.literal(RequestAction.GET_VENUES_BY_ADMIN),
-  payload: getSchema,
+  payload: getSchema.extend({ clientId: optionalStringSchema }),
   response: listResponse(
     z.object({
       id: stringSchema,
