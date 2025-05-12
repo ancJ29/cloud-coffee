@@ -18,11 +18,13 @@ export default function ShiftInformation({ shifts }: ShiftInformationProps) {
     )
   }
 
-  return shifts.map((shift, idx) => (
-    <Stack gap={0} key={idx}>
-      <Text ta="center" fw={500}>
-        {`${t('Check in at')} ${formatTime(shift.start, 'HH:mm A')} ${shift?.end ? `- ${t('Check out at')} ${formatTime(shift.end, 'HH:mm A')}` : ''}`}
-      </Text>
+  return (
+    <Stack gap={10}>
+      {shifts.map((shift, idx) => (
+        <Text ta="center" fw={500} key={idx}>
+          {`${t('Check in at')} ${formatTime(shift.start, 'HH:mm A')} ${shift?.end ? `- ${t('Check out at')} ${formatTime(shift.end, 'HH:mm A')}` : ''}`}
+        </Text>
+      ))}
     </Stack>
-  ))
+  )
 }
