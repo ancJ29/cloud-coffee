@@ -89,7 +89,7 @@ export default function ClockInView() {
         ),
       })
     } else {
-      const res = await checkOutByUser({ clientId, userId })
+      const res = await checkOutByUser({ clientId, userId, ...location })
       const success = res?.success
       modals.open({
         withCloseButton: false,

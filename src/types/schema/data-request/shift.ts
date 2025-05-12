@@ -43,6 +43,8 @@ export const checkOutByUserSchema = _typeBuilder({
   payload: z.object({
     clientId: stringSchema,
     userId: stringSchema,
+    longitude: optionalNumberSchema,
+    latitude: optionalNumberSchema,
   }),
   response: z.object({
     success: booleanSchema,
