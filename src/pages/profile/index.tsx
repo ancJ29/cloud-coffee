@@ -12,7 +12,12 @@ export default function Profile() {
   const { user } = useAuthStore()
   const { roles } = useRoleStore()
   const form = useForm<User>({
-    initialValues: user || undefined,
+    initialValues: user
+      ? {
+          ...user,
+          clientId: user?.client.id || '',
+        }
+      : undefined,
     validate: _validate(t),
   })
 
