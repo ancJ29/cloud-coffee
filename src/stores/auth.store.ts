@@ -1,16 +1,18 @@
+import { IS_DEV } from '@/configs/constant'
 import { Language } from '@/configs/i18n'
-import { getMe, User } from '@/services/domain'
+import { showNotification } from '@/configs/notifications'
+import { getMe, GetMeResponse } from '@/services/domain'
 import { HandlerContext } from '@/types'
 import { ONE_DAY } from '@/utils'
 import { jwtDecode } from 'jwt-decode'
 import { create } from 'zustand'
 
 type AuthStore = {
-  user: User | null
+  user: GetMeResponse | null
   token: string | null
   setToken: (token: string, remember?: boolean) => void
   removeToken: () => void
-  getMe: () => Promise<void>
+  getMe: (t: (key: string) => string) => Promise<void>
 }
 
 export default create<AuthStore>((set, get) => ({
@@ -35,9 +37,17 @@ export default create<AuthStore>((set, get) => ({
     set(() => ({ userId: null, token: null, user: null }))
     clearStorage()
   },
-  getMe: async () => {
+  getMe: async (t: (key: string) => string) => {
     const user = await getMe()
     if (user) {
+      if (!isValidDomain(user.client?.domain)) {
+        get().removeToken()
+        showNotification({
+          success: false,
+          message: t('The domain you are trying to access is invalid'),
+        })
+        return
+      }
       set(() => ({ user }))
     } else {
       get().removeToken()
@@ -75,4 +85,12 @@ function clearStorage() {
   localStorage.__REMEMBER__ = remember
   localStorage.__VERSION__ = version
   localStorage.__LANGUAGE__ = language
+}
+
+function isValidDomain(userDomain: string) {
+  if (IS_DEV) {
+    return true
+  }
+  const currentDomain = window.location.hostname
+  return userDomain === currentDomain
 }

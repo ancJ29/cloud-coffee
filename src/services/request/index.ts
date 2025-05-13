@@ -1,3 +1,4 @@
+import { IS_DEV } from '@/configs/constant'
 import { GenericObject } from '@/types'
 import axios from 'axios'
 import logger from '../logger'
@@ -11,12 +12,11 @@ export default async function request(
   loadingStore.startLoading()
 
   const baseUrl = import.meta.env.VITE_BASE_URL
-  const isDev = import.meta.env.VITE_ENV === 'development'
 
   try {
     const res = await axios.request({
       method: 'POST',
-      url: `${baseUrl}${isDev ? `?action=${data.action}` : ''}`,
+      url: `${baseUrl}${IS_DEV ? `?action=${data.action}` : ''}`,
       data,
       headers: {
         'Authorization': token ? `Bearer ${token}` : undefined,

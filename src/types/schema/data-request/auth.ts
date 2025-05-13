@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { booleanSchema, nullishBooleanSchema, nullishStringSchema, stringSchema } from '../base'
-import { userMemoSchema } from '../configs'
+import { clientMemoSchema, userMemoSchema } from '../configs'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
@@ -29,8 +29,14 @@ export const getMeSchema = _typeBuilder({
       avatar: nullishStringSchema,
       roleId: stringSchema,
       salaryRuleId: nullishStringSchema,
-      clientId: stringSchema,
       enabled: nullishBooleanSchema,
+      client: z
+        .object({
+          id: stringSchema,
+          name: stringSchema,
+          enabled: booleanSchema,
+        })
+        .extend(clientMemoSchema.shape),
     })
     .extend(userMemoSchema.shape),
 })

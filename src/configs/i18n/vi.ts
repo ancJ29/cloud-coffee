@@ -156,4 +156,5 @@ export default {
   'Always allow': 'Luôn cho phép',
   'Allow only while using the app': 'Chỉ cho phép khi dùng ứng dụng',
   'Always ask': 'Luôn hỏi',
+  'The domain you are trying to access is invalid': 'Tên miền bạn đang truy cập không hợp lệ',
 }

@@ -1,4 +1,5 @@
 import Message from '@/components/c-time-keeper/Message'
+import { IS_DEV } from '@/configs/constant'
 import { useGeoLocation } from '@/hooks/useGeoLocation'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
@@ -6,6 +7,7 @@ import {
   checkInByUser,
   checkOutByUser,
   getAllUsersByAdmin,
+  getClientByDomain,
   getShiftsByAdmin,
   Shift,
   User,
@@ -23,31 +25,40 @@ const MODAL_CLOSE_DELAY = 1.5 * ONE_SECOND
 
 export default function ClockInView() {
   const t = useTranslation()
+  const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
   const [searchParams] = useSearchParams()
   const userId = searchParams.get('userId') || ''
-  const clientId = searchParams.get('clientId') || ''
+  // const clientId = searchParams.get('clientId') || ''
   const [user, setUser] = useState<User | undefined>(undefined)
   const [shifts, setShifts] = useState<Shift[]>([])
+  const [clientId, setClientId] = useState('')
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
   const { location, denied } = useGeoLocation()
 
-  const getShiftData = useCallback(async () => {
-    const shifts = await getShiftsByAdmin({ clientId, userId, start: startOfDay(Date.now()) })
-    if (shifts) {
-      setShifts(shifts)
-    }
-  }, [clientId, userId])
+  const getShiftData = useCallback(
+    async (clientId: string) => {
+      const shifts = await getShiftsByAdmin({ clientId, userId, start: startOfDay(Date.now()) })
+      if (shifts) {
+        setShifts(shifts)
+      }
+    },
+    [userId],
+  )
 
   const getData = useCallback(async () => {
-    const [users] = await Promise.all([
-      getAllUsersByAdmin({ id: userId, clientId }),
-      getShiftData(),
-    ])
-    if (users.length > 0) {
-      setUser(users[0])
+    const clientId = await getClientByDomain({ domain }).then((res) => res?.id)
+    if (clientId) {
+      setClientId(clientId)
+      const [users] = await Promise.all([
+        getAllUsersByAdmin({ id: userId, clientId }),
+        getShiftData(clientId),
+      ])
+      if (users.length > 0) {
+        setUser(users[0])
+      }
     }
-  }, [clientId, getShiftData, userId])
+  }, [domain, getShiftData, userId])
   useMount(getData)
 
   const goToNextPage = useCallback(() => {
@@ -103,7 +114,7 @@ export default function ClockInView() {
         ),
       })
     }
-    await getShiftData()
+    await getShiftData(clientId)
     setTimeout(() => {
       setPageIndex(0)
       modals.closeAll()

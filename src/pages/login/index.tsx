@@ -4,7 +4,6 @@ import { login } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import { useForm } from '@mantine/form'
 import { useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
 import LoginView from './components/LoginView'
 
 export type FormProps = {
@@ -20,7 +19,6 @@ const initialValues: FormProps = {
 }
 
 export default function Login() {
-  const navigate = useNavigate()
   const t = useTranslation()
   const { setToken } = useAuthStore()
 
@@ -36,14 +34,13 @@ export default function Login() {
       const res = await login(values)
       if (res?.token) {
         setToken(res.token, form.values.remember)
-        navigate('/timesheet')
       } else {
         form.setErrors({
           password: 'Username or password is incorrect',
         })
       }
     },
-    [setToken, form, navigate],
+    [setToken, form],
   )
 
   return <LoginView form={form} onSubmit={submit} />

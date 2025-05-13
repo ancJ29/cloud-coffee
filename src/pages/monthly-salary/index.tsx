@@ -26,10 +26,10 @@ export default function MonthlySalary() {
   const getData = useCallback(
     async (_date?: Date) => {
       const formattedDate = formatTime(_date || date, 'MM-YYYY')
-      const salaries = await getSalaries({ key: `${formattedDate}-${user?.clientId}` })
+      const salaries = await getSalaries({ key: `${formattedDate}-${user?.client.id}` })
       salaries && setSalaries(salaries)
     },
-    [date, user?.clientId],
+    [date, user?.client],
   )
   useMount(getData)
 

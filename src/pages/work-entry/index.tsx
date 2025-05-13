@@ -1,4 +1,5 @@
 import Message from '@/components/c-time-keeper/Message'
+import { IS_DEV } from '@/configs/constant'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import {
@@ -6,6 +7,7 @@ import {
   checkOutByUser,
   getAllUsersByAdmin,
   getAllVenuesByAdmin,
+  getClientByDomain,
   User,
   Venue,
 } from '@/services/domain'
@@ -22,23 +24,29 @@ const MAX_PAGE_INDEX = 3
 
 export default function WorkEntry() {
   const t = useTranslation()
+  const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
   const [searchParams] = useSearchParams()
   const venueId = searchParams.get('venueId') || ''
-  const clientId = searchParams.get('clientId') || ''
   const [pageIndex, setPageIndex] = useState(0)
   const [venues, setVenues] = useState<Record<string, Venue>>({})
   const [users, setUsers] = useState<Record<string, User>>({})
+  const [clientId, setClientId] = useState('')
   const [selectedUserId, setSelectedUserId] = useState('')
   const [isCheckIn, setIsCheckIn] = useState(true)
 
   const getData = useCallback(async () => {
-    const [venues, users] = await Promise.all([
-      getAllVenuesByAdmin({ clientId }),
-      getAllUsersByAdmin({ clientId }),
-    ])
-    setVenues(Object.fromEntries(venues.map((venue) => [venue.id, venue])))
-    setUsers(Object.fromEntries(users.map((user) => [user.id, user])))
-  }, [clientId])
+    const clientId = await getClientByDomain({ domain }).then((res) => res?.id)
+
+    if (clientId) {
+      const [venues, users] = await Promise.all([
+        getAllVenuesByAdmin({ clientId }),
+        getAllUsersByAdmin({ clientId }),
+      ])
+      setVenues(Object.fromEntries(venues.map((venue) => [venue.id, venue])))
+      setUsers(Object.fromEntries(users.map((user) => [user.id, user])))
+      setClientId(clientId)
+    }
+  }, [domain])
   useMount(getData)
 
   const goToNextPage = useCallback(() => {

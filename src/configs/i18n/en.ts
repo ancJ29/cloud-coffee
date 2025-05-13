@@ -155,4 +155,6 @@ export default {
   'Always allow': 'Always allow',
   'Allow only while using the app': 'Allow only while using the app',
   'Always ask': 'Always ask',
+  'The domain you are trying to access is invalid':
+    'The domain you are trying to access is invalid',
 }

@@ -1,11 +1,13 @@
-import { getClientsSchema, RequestAction } from '@/types'
+import { getClientByDomainSchema, RequestAction } from '@/types'
 import { z } from 'zod'
-import { loadAll } from '../data-loader'
+import callApi from '../api'
 
-export type Client = z.infer<typeof getClientsSchema.response>['data'][0]
-export async function getAllClients() {
-  return await loadAll({
-    action: RequestAction.GET_CLIENTS,
-    schema: getClientsSchema,
+export type Client = z.infer<typeof getClientByDomainSchema.response>
+type GetClientByDomainRequest = z.infer<typeof getClientByDomainSchema.request>['payload']
+export async function getClientByDomain(payload: GetClientByDomainRequest) {
+  return await callApi({
+    action: RequestAction.GET_CLIENT_BY_DOMAIN,
+    payload,
+    schema: getClientByDomainSchema,
   })
 }

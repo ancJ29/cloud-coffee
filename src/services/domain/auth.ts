@@ -17,6 +17,7 @@ export async function login(payload: LoginRequest) {
   })
 }
 
+export type GetMeResponse = z.infer<typeof getMeSchema.response>
 export async function getMe() {
   return await callApi({
     action: RequestAction.GET_ME,

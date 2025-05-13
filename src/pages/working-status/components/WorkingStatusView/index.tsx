@@ -1,12 +1,10 @@
 import ManageButton from '@/components/c-time-keeper/ManageButton'
-import useAuthStore from '@/stores/auth.store'
 import useVenueStore from '@/stores/venue.store'
 import { Flex, Stack } from '@mantine/core'
 import Board, { BoardProps } from '../Board'
 import Information from '../Information'
 
 export default function WorkingStatusView({ ...props }: BoardProps) {
-  const { user } = useAuthStore()
   const { venues } = useVenueStore()
 
   return (
@@ -16,9 +14,7 @@ export default function WorkingStatusView({ ...props }: BoardProps) {
         <Board {...props} />
       </Flex>
 
-      <ManageButton
-        navigateUrl={`/work-entry?clientId=${user?.clientId}&venueId=${Array.from(venues.keys())?.[0]}`}
-      />
+      <ManageButton navigateUrl={`/work-entry?venueId=${Array.from(venues.keys())?.[0]}`} />
     </Stack>
   )
 }

@@ -1,6 +1,7 @@
+import { IS_DEV } from '@/configs/constant'
+
 export function debug(...args: unknown[]) {
-  const isDev = window.location.hostname.includes('localhost')
-  if (!isDev) {
+  if (!IS_DEV) {
     return
   }
   // eslint-disable-next-line no-console

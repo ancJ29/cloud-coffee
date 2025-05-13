@@ -16,18 +16,20 @@ import { Notifications } from '@mantine/notifications'
 import { Suspense, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import { useRoutes } from 'react-router-dom'
 import { useCustomTheme } from './hooks/useCustomTheme'
+import useTranslation from './hooks/useTranslation'
 
 export default function App() {
+  const t = useTranslation()
   const { theme } = useCustomTheme()
   const loadingGlobal = useSyncExternalStore(loadingStore.subscribe, loadingStore.getSnapshot)
   const { token, user } = useAuthStore()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    loadData(token).then(() => {
+    loadData(token, t).then(() => {
       setLoading(false)
     })
-  }, [token])
+  }, [t, token])
 
   const routes = useMemo(() => {
     return _buildRoutes(loading, !!user)
@@ -58,12 +60,12 @@ function _buildRoutes(loading: boolean, login: boolean) {
   return login ? authRoutes : guestRoutes
 }
 
-async function loadData(token: string | null) {
+async function loadData(token: string | null, t: (key: string) => string) {
   await useMetadataStore.getState().checkVersion()
   if (!token) {
     return
   }
-  await useAuthStore.getState().getMe()
+  await useAuthStore.getState().getMe(t)
   if (useAuthStore.getState().token) {
     await Promise.all([
       useRoleStore.getState().load(),

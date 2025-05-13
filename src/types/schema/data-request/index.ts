@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { changePasswordSchema, getMeSchema, loginSchema, resetPasswordSchema } from './auth'
-import { getClientsSchema } from './client'
+import { getClientByDomainSchema } from './client'
 import {
   clearDatabaseSchema,
   initCloudCoffeeDataSchema,
@@ -39,11 +39,11 @@ export const requestSchema = z.union([
   getMeSchema.request,
   changePasswordSchema.request,
   resetPasswordSchema.request,
+  getClientByDomainSchema.request,
   getUsersSchema.request,
   getUsersByAdminSchema.request,
   updateUserSchema.request,
   addUserSchema.request,
-  getClientsSchema.request,
   getRolesSchema.request,
   checkInBySystemSchema.request,
   checkInByUserSchema.request,
@@ -68,11 +68,11 @@ export const responseSchema = z.union([
   getMeSchema.response,
   changePasswordSchema.response,
   resetPasswordSchema.response,
+  getClientByDomainSchema.response,
   getUsersSchema.response,
   getUsersByAdminSchema.response,
   updateUserSchema.response,
   addUserSchema.response,
-  getClientsSchema.response,
   getRolesSchema.response,
   checkInBySystemSchema.response,
   checkInByUserSchema.response,
