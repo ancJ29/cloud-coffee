@@ -84,7 +84,6 @@ export default {
   'Checked out successfully': 'Checked out successfully',
   'Failed to check in': 'Failed to check in',
   'Failed to check out': 'Failed to check out',
-  'Worked': 'Worked',
   'Total': 'Total',
   'Clock in': 'Clock in',
   'Clock out': 'Clock out',
@@ -157,4 +156,5 @@ export default {
   'Always ask': 'Always ask',
   'The domain you are trying to access is invalid':
     'The domain you are trying to access is invalid',
+  'Expected salary': 'Expected salary',
 }

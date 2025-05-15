@@ -17,7 +17,7 @@ export default function Filter({ date, onChangeDate, onExportExcel }: FilterProp
     <Flex gap={10} align="end" justify="end">
       <MonthPickerInput
         label={t('Month')}
-        w={{ base: '30%', sm: '15vw' }}
+        w={{ base: '35%', sm: '15vw' }}
         value={date}
         onChange={onChangeDate}
         valueFormat="MM/YYYY"

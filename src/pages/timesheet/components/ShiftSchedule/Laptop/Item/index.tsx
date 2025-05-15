@@ -1,9 +1,17 @@
 import Avatar from '@/components/common/Avatar'
 import useTranslation from '@/hooks/useTranslation'
-import { Shift, User } from '@/services/domain'
+import { SalaryRule, Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
+import useSalaryRuleStore from '@/stores/salaryRule.store'
 import useVenueStore from '@/stores/venue.store'
-import { formatDuration, formatTime, ONE_HOUR, unique } from '@/utils'
+import {
+  calculateSalary,
+  formatDuration,
+  formatNumber,
+  formatTime,
+  ONE_HOUR,
+  unique,
+} from '@/utils'
 import { Accordion, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconChevronRight } from '@tabler/icons-react'
 import { useMemo, useState } from 'react'
@@ -18,6 +26,8 @@ type ItemProps = {
 
 export default function Item({ user, shifts }: ItemProps) {
   const [opened, setOpened] = useState(true)
+  const { salaryRules } = useSalaryRuleStore()
+  const salaryRule = salaryRules.get(user?.salaryRuleId || '')
 
   const total = useMemo(() => {
     const totalMilliseconds = shifts.some((shift) => shift.end != null)
@@ -34,8 +44,7 @@ export default function Item({ user, shifts }: ItemProps) {
           return acc + duration
         }, 0)
       : null
-
-    return formatDuration(totalMilliseconds)
+    return totalMilliseconds
   }, [shifts])
 
   if (!user) {
@@ -53,12 +62,18 @@ export default function Item({ user, shifts }: ItemProps) {
       defaultValue={user.id}
     >
       <Accordion.Item value={user.id}>
-        <Accordion.Control onClick={() => setOpened(!opened)}>
-          <UserInformation user={user} total={total} opened={opened} shifts={shifts} />
+        <Accordion.Control onClick={() => setOpened(!opened)} bg="var(--shift-accordion-bg)">
+          <UserInformation
+            user={user}
+            total={total}
+            opened={opened}
+            shifts={shifts}
+            salaryRule={salaryRule}
+          />
         </Accordion.Control>
         <Accordion.Panel>
           {shifts.map((shift) => (
-            <ShiftInformation key={shift.id} shift={shift} />
+            <ShiftInformation key={shift.id} shift={shift} salaryRule={salaryRule} />
           ))}
         </Accordion.Panel>
       </Accordion.Item>
@@ -71,14 +86,16 @@ function UserInformation({
   total,
   opened,
   shifts,
+  salaryRule,
 }: {
   user: User
-  total?: string
+  total: number | null
   opened: boolean
   shifts: Shift[]
+  salaryRule?: SalaryRule
 }) {
-  const { roles } = useRoleStore()
   const t = useTranslation()
+  const { roles } = useRoleStore()
   const { venues } = useVenueStore()
 
   const _venues = useMemo(() => {
@@ -86,6 +103,8 @@ function UserInformation({
       .filter(Boolean)
       .join(', ')
   }, [shifts, venues])
+
+  const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
 
   return (
     <Grid>
@@ -108,19 +127,16 @@ function UserInformation({
           </Stack>
         </Flex>
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.infoItem}>
-        {total}
+      <Grid.Col span={1.75} className={classes.infoItem}>
+        {formatDuration(total)}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.infoItem}>
-        {total}
+      <Grid.Col span={1.75} className={classes.infoItem}>
+        {expectedSalary}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.infoItem}>
+      <Grid.Col span={1.75} className={classes.infoItem}>
         -
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.infoItem}>
-        -
-      </Grid.Col>
-      <Grid.Col span={1.4} className={classes.infoItem}>
+      <Grid.Col span={1.75} className={classes.infoItem}>
         -
       </Grid.Col>
       <Grid.Col span={2.5} className={classes.infoItem}>
@@ -130,21 +146,21 @@ function UserInformation({
   )
 }
 
-function ShiftInformation({ shift }: { shift: Shift }) {
+function ShiftInformation({ salaryRule, shift }: { shift: Shift; salaryRule?: SalaryRule }) {
   const { venues } = useVenueStore()
 
   const total = useMemo(() => {
     if (!shift.end) {
       return
     }
-
     let totalMilliseconds = shift.end - shift.start
     if (shift.end < shift.start) {
       totalMilliseconds += 24 * ONE_HOUR
     }
-
-    return formatDuration(totalMilliseconds)
+    return totalMilliseconds
   }, [shift])
+
+  const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
 
   return (
     <Grid className={classes.shiftContainer}>
@@ -154,26 +170,23 @@ function ShiftInformation({ shift }: { shift: Shift }) {
         </Text>
         {formatTime(shift.start, 'DD/MM')}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftItem}>
-        {total ?? '-'}
+      <Grid.Col span={1.75} className={classes.shiftItem}>
+        {formatDuration(total || 0) ?? '-'}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftItem}>
-        {total ?? '-'}
+      <Grid.Col span={1.75} className={classes.shiftItem}>
+        {expectedSalary}
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.timeItem}>
+      <Grid.Col span={1.75} className={classes.timeItem}>
         <TimeSelect
           value={shift.start}
           onChangeValue={(value) => store.changeCheckInTime(shift.userId, shift.id, value)}
         />
       </Grid.Col>
-      <Grid.Col span={1.4} className={classes.timeItem}>
+      <Grid.Col span={1.75} className={classes.timeItem}>
         <TimeSelect
           value={shift.end}
           onChangeValue={(value) => store.changeCheckOutTime(shift.userId, shift.id, value)}
         />
-      </Grid.Col>
-      <Grid.Col span={1.4} className={classes.shiftItem}>
-        -
       </Grid.Col>
       <Grid.Col span={2.5} className={classes.shiftItem}>
         <Text className={classes.venueText}>{venues.get(shift.venueId)?.name || '-'}</Text>

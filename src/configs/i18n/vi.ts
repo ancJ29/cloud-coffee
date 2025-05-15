@@ -84,7 +84,6 @@ export default {
   'Checked out successfully': 'Check-out thành công',
   'Failed to check in': 'Check-in thất bại',
   'Failed to check out': 'Check-out thất bại',
-  'Worked': 'Đã làm',
   'Total': 'Tổng cộng',
   'Clock in': 'Vào ca',
   'Clock out': 'Ra ca',
@@ -157,4 +156,5 @@ export default {
   'Allow only while using the app': 'Chỉ cho phép khi dùng ứng dụng',
   'Always ask': 'Luôn hỏi',
   'The domain you are trying to access is invalid': 'Tên miền bạn đang truy cập không hợp lệ',
+  'Expected salary': 'Lương dự kiến',
 }

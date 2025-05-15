@@ -1,9 +1,10 @@
 import Avatar from '@/components/common/Avatar'
 import useTranslation from '@/hooks/useTranslation'
-import { Shift, User } from '@/services/domain'
+import { SalaryRule, Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
+import useSalaryRuleStore from '@/stores/salaryRule.store'
 import useVenueStore from '@/stores/venue.store'
-import { formatDuration, formatTime, ONE_HOUR } from '@/utils'
+import { calculateSalary, formatDuration, formatNumber, formatTime, ONE_HOUR } from '@/utils'
 import { Box, Card, Collapse, Flex, Group, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown } from '@tabler/icons-react'
@@ -17,6 +18,8 @@ type ItemProps = {
 
 export default function Item({ user, shifts }: ItemProps) {
   const [opened, { toggle }] = useDisclosure(false)
+  const { salaryRules } = useSalaryRuleStore()
+  const salaryRule = salaryRules.get(user?.salaryRuleId || '')
 
   const handleClick = useCallback(
     (event: React.MouseEvent) => {
@@ -42,7 +45,7 @@ export default function Item({ user, shifts }: ItemProps) {
         }, 0)
       : null
 
-    return formatDuration(totalMilliseconds)
+    return totalMilliseconds
   }, [shifts])
 
   if (!user) {
@@ -51,19 +54,29 @@ export default function Item({ user, shifts }: ItemProps) {
 
   return (
     <Card shadow="md" withBorder p={12} radius={8} onClick={handleClick}>
-      <UserInformation user={user} total={total} />
+      <UserInformation user={user} total={total} salaryRule={salaryRule} />
       <Wrapper isShown={shifts.length > 0} opened={opened}>
         {shifts.map((shift) => (
-          <ShiftInformation key={shift.id} shift={shift} />
+          <ShiftInformation key={shift.id} shift={shift} salaryRule={salaryRule} />
         ))}
       </Wrapper>
     </Card>
   )
 }
 
-function UserInformation({ user, total }: { user: User; total: string }) {
+function UserInformation({
+  user,
+  total,
+  salaryRule,
+}: {
+  user: User
+  total: number | null
+  salaryRule?: SalaryRule
+}) {
   const { roles } = useRoleStore()
   const t = useTranslation()
+
+  const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
 
   return (
     <Stack gap={0}>
@@ -76,8 +89,8 @@ function UserInformation({ user, total }: { user: User; total: string }) {
           </Text>
         </Stack>
       </Flex>
-      <DataRow title={t('Worked')} content={total} />
-      <DataRow title={t('Total')} content={total} />
+      <DataRow title={t('Total')} content={formatDuration(total)} />
+      <DataRow title={`${t('Expected salary')} (VNĐ)`} content={expectedSalary} />
     </Stack>
   )
 }
@@ -125,7 +138,7 @@ function Wrapper({
   )
 }
 
-function ShiftInformation({ shift }: { shift: Shift }) {
+function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: SalaryRule }) {
   const { venues } = useVenueStore()
   const t = useTranslation()
 
@@ -133,23 +146,22 @@ function ShiftInformation({ shift }: { shift: Shift }) {
     if (!shift.end) {
       return
     }
-
     let totalMilliseconds = shift.end - shift.start
     if (shift.end < shift.start) {
       totalMilliseconds += 24 * ONE_HOUR
     }
-
-    return formatDuration(totalMilliseconds)
+    return totalMilliseconds
   }, [shift])
+
+  const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
 
   return (
     <Stack className={classes.shiftContainer}>
       <DataRow title={t('Date')} content={formatTime(shift.start, 'ddd DD/MM/YYYY')} />
-      <DataRow title={t('Worked')} content={total ?? '-'} />
-      <DataRow title={t('Total')} content={total ?? '-'} />
+      <DataRow title={t('Total')} content={formatDuration(total || 0) ?? '-'} />
+      <DataRow title={`${t('Expected salary')} (VNĐ)`} content={expectedSalary} />
       <DataRow title={t('Clock in')} content={formatTime(shift.start, 'HH:mm')} />
       <DataRow title={t('Clock out')} content={formatTime(shift.end, 'HH:mm')} />
-      <DataRow title={t('Break')} content={''} />
       <DataRow title={t('Venue')} content={venues.get(shift.venueId)?.name} />
     </Stack>
   )

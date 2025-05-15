@@ -154,6 +154,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--header': theme.colors.primary[3],
     '--select-item': theme.colors.primary[1],
     '--shift-item-bg': theme.colors.xGray[0],
+    '--shift-accordion-bg': '#EFEFEF',
   },
   dark: {
     '--border-color': theme.colors.dark[8],
@@ -162,7 +163,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--even-row-bg': theme.colors.dark[8],
     '--header': theme.colors.primary[5],
     '--select-item': theme.colors.primary[5],
-    '--shift-item-bg': theme.colors.dark[5],
+    '--shift-item-bg': theme.colors.dark[6],
+    '--shift-accordion-bg': theme.colors.dark[6],
 
     '--mantine-color-body': theme.colors.dark[6],
   },
