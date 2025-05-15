@@ -22,7 +22,7 @@ export default function Filter({ date, onChangeDate, onExportExcel }: FilterProp
         onChange={onChangeDate}
         valueFormat="MM/YYYY"
       />
-      <Button rightSection={<IconDownload size={14} />} onClick={onExportExcel}>
+      <Button rightSection={<IconDownload size={14} />} onClick={onExportExcel} visibleFrom="sm">
         {t('Export excel')}
       </Button>
     </Flex>

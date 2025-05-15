@@ -16,10 +16,10 @@ export default function ActionButtons({ isVisible, onRetry, onSubmit }: ActionBu
 
   return (
     <Flex gap={20} w="100%" align="center" justify="center" mt={30}>
-      <Button color="var(--warning)" onClick={onRetry} w={120}>
+      <Button color="var(--check-out-btn)" c="var(--check-out-text)" onClick={onRetry} w={120}>
         {t('Retry')}
       </Button>
-      <Button color="var(--success)" onClick={onSubmit} w={120}>
+      <Button color="var(--check-in-btn)" c="var(--check-in-text)" onClick={onSubmit} w={120}>
         {t('Confirm')}
       </Button>
     </Flex>

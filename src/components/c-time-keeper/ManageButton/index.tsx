@@ -1,4 +1,5 @@
 import useTranslation from '@/hooks/useTranslation'
+import useWindowResize from '@/hooks/useWindowResize'
 import { Button } from '@mantine/core'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -11,13 +12,19 @@ type ManageButtonProps = {
 export default function ManageButton({ navigateUrl = '/working-status' }: ManageButtonProps) {
   const t = useTranslation()
   const navigate = useNavigate()
+  const isMobile = useWindowResize()
 
   const onClick = useCallback(() => {
     navigate(navigateUrl)
   }, [navigate, navigateUrl])
 
   return (
-    <Button className={classes.button} color="var(--btn-manage-bg)" onClick={onClick} size="lg">
+    <Button
+      className={classes.button}
+      color="var(--btn-manage-bg)"
+      onClick={onClick}
+      size={isMobile ? 'sm' : 'lg'}
+    >
       {t('Manager')}
     </Button>
   )
