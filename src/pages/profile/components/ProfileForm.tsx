@@ -29,7 +29,7 @@ export default function ProfileForm({ form, onSubmit, roleOptions }: ProfileForm
             data-autofocus
             {...form.getInputProps('name')}
           />
-          <TextInput w={w} withAsterisk label={t('Email')} {...form.getInputProps('email')} />
+          <TextInput w={w} label={t('Email')} {...form.getInputProps('email')} />
           <TextInput w={w} withAsterisk label={t('Username')} {...form.getInputProps('username')} />
           <Select
             w={w}

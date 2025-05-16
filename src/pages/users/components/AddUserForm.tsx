@@ -72,7 +72,7 @@ export default function AddUserForm({
         onConfirm({
           ...values,
           name: values.name.trim(),
-          email: values.email.trim(),
+          email: values.email?.trim(),
           username: values.username.trim(),
         })
       },
@@ -97,7 +97,7 @@ export default function AddUserForm({
           withAsterisk
         />
         <TextInput w={w} label={t('Username')} {...form.getInputProps('username')} withAsterisk />
-        <TextInput w={w} label={t('Email')} {...form.getInputProps('email')} withAsterisk />
+        <TextInput w={w} label={t('Email')} {...form.getInputProps('email')} />
         <Select
           w={w}
           label={t('Role')}
@@ -147,8 +147,12 @@ function _validate(t: (s: string) => string) {
   return {
     name: (value: string) => (value === '' ? t('Field is required') : null),
     username: (value: string) => (value === '' ? t('Field is required') : null),
-    email: (value: string) =>
-      value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
+    email: (value?: string | null) => {
+      if (!value || value.trim() === '') {
+        return null
+      }
+      return /^\S+@\S+$/.test(value) ? null : t('Invalid email')
+    },
     password: (value: string) => (value === '' ? t('Field is required') : null),
     salaryRuleId: (value?: string | null) =>
       value === '' || !value ? t('Field is required') : null,

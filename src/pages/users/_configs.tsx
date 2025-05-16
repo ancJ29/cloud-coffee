@@ -23,6 +23,9 @@ export const configs = (
       key: 'email',
       header: t('Email'),
       width: '25%',
+      renderCell: (_, user: User) => {
+        return user.email || '-'
+      },
     },
     {
       key: 'role',
