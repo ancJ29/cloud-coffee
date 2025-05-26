@@ -62,7 +62,7 @@ export default function Item({ user, shifts }: ItemProps) {
       defaultValue={user.id}
     >
       <Accordion.Item value={user.id}>
-        <Accordion.Control onClick={() => setOpened(!opened)}>
+        <Accordion.Control onClick={() => setOpened(!opened)} bg="var(--shift-accordion-bg)">
           <UserInformation
             user={user}
             total={total}
@@ -71,7 +71,7 @@ export default function Item({ user, shifts }: ItemProps) {
             salaryRule={salaryRule}
           />
         </Accordion.Control>
-        <Accordion.Panel bg="var(--shift-accordion-bg)">
+        <Accordion.Panel>
           {shifts.map((shift) => (
             <ShiftInformation key={shift.id} shift={shift} salaryRule={salaryRule} />
           ))}
