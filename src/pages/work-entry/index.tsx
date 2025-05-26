@@ -8,12 +8,11 @@ import {
   getAllUsersByAdmin,
   getAllVenuesByAdmin,
   getClientByDomain,
-  getPreSignedUrl,
   uploadImageToS3,
   User,
   Venue,
 } from '@/services/domain'
-import { ONE_SECOND } from '@/utils'
+import { getImageUrl, getObjectKey, ONE_SECOND } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
@@ -78,24 +77,15 @@ export default function WorkEntry() {
 
   const submit = useCallback(
     async (file: File) => {
-      const objectKey = `${clientId}/${selectedUserId}/${isCheckIn ? 'checkin' : 'checkout'}/${file.name}`
-      const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-1.amazonaws.com/${objectKey}`
-      const preSignedUrl = await getPreSignedUrl({
+      let success: boolean | undefined
+      const objectKey = getObjectKey(clientId, selectedUserId, file, isCheckIn)
+      const imageUrl = getImageUrl(objectKey)
+      const uploadResult = await uploadImageToS3({
         bucketName: BUCKET_NAME,
         objectKey,
         clientId,
-      })
-
-      if (!preSignedUrl) {
-        return
-      }
-
-      const uploadResult = await uploadImageToS3({
-        ...preSignedUrl,
         file,
       })
-
-      let success: boolean | undefined
 
       if (isCheckIn) {
         const res = await checkInByUser({

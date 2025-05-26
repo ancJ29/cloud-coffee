@@ -8,13 +8,12 @@ import {
   checkOutByUser,
   getAllUsersByAdmin,
   getClientByDomain,
-  getPreSignedUrl,
   getShiftsByAdmin,
   Shift,
   uploadImageToS3,
   User,
 } from '@/services/domain'
-import { ONE_SECOND, startOfDay } from '@/utils'
+import { getImageUrl, getObjectKey, ONE_SECOND, startOfDay } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
@@ -84,24 +83,15 @@ export default function ClockInView() {
         return
       }
 
-      const objectKey = `${clientId}/${userId}/${isCheckIn ? 'checkin' : 'checkout'}/${file.name}`
-      const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-1.amazonaws.com/${objectKey}`
-      const preSignedUrl = await getPreSignedUrl({
+      let success: boolean | undefined
+      const objectKey = getObjectKey(clientId, userId, file, isCheckIn)
+      const imageUrl = getImageUrl(objectKey)
+      const uploadResult = await uploadImageToS3({
         bucketName: BUCKET_NAME,
         objectKey,
         clientId,
-      })
-
-      if (!preSignedUrl) {
-        return
-      }
-
-      const uploadResult = await uploadImageToS3({
-        ...preSignedUrl,
         file,
       })
-
-      let success: boolean | undefined
 
       if (isCheckIn) {
         const res = await checkInByUser({
