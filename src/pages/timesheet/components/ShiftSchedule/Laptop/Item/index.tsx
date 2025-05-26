@@ -168,7 +168,7 @@ function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: Sa
     modals.open({
       title: t('Shift image'),
       centered: true,
-      size: 'lg',
+      size: 'xl',
       children: <ShiftImage shift={shift} />,
     })
   }, [shift, t])

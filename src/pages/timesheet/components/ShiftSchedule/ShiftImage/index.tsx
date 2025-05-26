@@ -1,6 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Shift } from '@/services/domain'
-import { Flex, Image, Stack, Text } from '@mantine/core'
+import { Image, SimpleGrid, Stack, Text } from '@mantine/core'
 
 type ShiftImageProps = {
   shift: Shift
@@ -10,10 +10,10 @@ export default function ShiftImage({ shift }: ShiftImageProps) {
   const t = useTranslation()
 
   return (
-    <Flex gap={10} direction={{ base: 'column', sm: 'row' }}>
-      <Item title={t('Check in')} content={shift.startImageUrl} />
-      <Item title={t('Check out')} content={shift.endImageUrl} />
-    </Flex>
+    <SimpleGrid cols={2}>
+      <Item title={t('Clock in')} content={shift.startImageUrl} />
+      <Item title={t('Clock out')} content={shift.endImageUrl} />
+    </SimpleGrid>
   )
 }
 
@@ -23,9 +23,9 @@ type ItemProps = {
 }
 function Item({ title, content }: ItemProps) {
   return (
-    <Stack gap={10}>
-      <Text fw="bold">{title}</Text>
-      <Image src={content} />
+    <Stack gap={2}>
+      <Text fz={16}>{title}</Text>
+      <Image src={content} fallbackSrc="/imgs/timesheet/no-image.jpg" radius="md" />
     </Stack>
   )
 }
