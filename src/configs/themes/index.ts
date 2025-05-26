@@ -154,7 +154,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--header': theme.colors.primary[3],
     '--select-item': theme.colors.primary[1],
     '--shift-item-bg': theme.colors.xGray[0],
-    '--shift-accordion-bg': '#EFEFEF',
+    '--shift-accordion-bg': '#F5F5F5',
   },
   dark: {
     '--border-color': theme.colors.dark[8],

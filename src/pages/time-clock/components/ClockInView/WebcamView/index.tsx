@@ -4,7 +4,7 @@ import IconUserWithCorner from '@/components/c-time-keeper/IconUserWithCorner'
 import Picture from '@/components/c-time-keeper/Picture'
 import useCameraPermission from '@/hooks/useCameraPermission'
 import { User } from '@/services/domain'
-import { ONE_SECOND } from '@/utils'
+import { dataUrlToFile, formatTime, ONE_SECOND } from '@/utils'
 import { Stack } from '@mantine/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
@@ -15,7 +15,7 @@ const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
 
 type WebcamViewProps = {
   user?: User
-  onSubmit: () => void
+  onSubmit: (file: File) => void
 }
 
 export default function WebcamView({ user, onSubmit }: WebcamViewProps) {
@@ -59,6 +59,15 @@ export default function WebcamView({ user, onSubmit }: WebcamViewProps) {
     setIsCapturing(true)
   }, [])
 
+  const handleSubmit = useCallback(() => {
+    if (!imageSrc) {
+      return
+    }
+
+    const file = dataUrlToFile(imageSrc, `${formatTime(Date.now(), 'YYYY-MM-DD-HH-mm-ss')}.jpg`)
+    onSubmit(file)
+  }, [imageSrc, onSubmit])
+
   return (
     <Stack gap={10} align="center" justify="center" h="100%">
       {hasPermission ? (
@@ -68,7 +77,11 @@ export default function WebcamView({ user, onSubmit }: WebcamViewProps) {
           ) : (
             <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
           )}
-          <ActionButtons isVisible={imageSrc !== null} onRetry={handleRetry} onSubmit={onSubmit} />
+          <ActionButtons
+            isVisible={imageSrc !== null}
+            onRetry={handleRetry}
+            onSubmit={handleSubmit}
+          />
         </Stack>
       ) : (
         <IconUserWithCorner />

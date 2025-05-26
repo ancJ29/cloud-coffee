@@ -1,5 +1,7 @@
 import LoadingOverlay from '@/components/common/LoadingOverlay'
 import { resolver } from '@/configs/themes'
+import { useCustomTheme } from '@/hooks/useCustomTheme'
+import useTranslation from '@/hooks/useTranslation'
 import authRoutes from '@/routes/auth.route'
 import guestRoutes from '@/routes/guest.route'
 import loadingStore from '@/services/request/store/loading'
@@ -15,8 +17,6 @@ import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
 import { Suspense, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import { useRoutes } from 'react-router-dom'
-import { useCustomTheme } from './hooks/useCustomTheme'
-import useTranslation from './hooks/useTranslation'
 
 export default function App() {
   const t = useTranslation()

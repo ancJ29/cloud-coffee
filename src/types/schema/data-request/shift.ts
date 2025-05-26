@@ -4,6 +4,7 @@ import {
   getSchema,
   listResponse,
   nullishNumberSchema,
+  nullishStringSchema,
   numberSchema,
   optionalNumberSchema,
   optionalStringSchema,
@@ -12,24 +13,13 @@ import {
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
-export const checkInBySystemSchema = _typeBuilder({
-  action: z.literal(RequestAction.CHECK_IN_BY_SYSTEM),
-  payload: z.object({
-    clientId: stringSchema,
-    userId: stringSchema,
-    venueId: stringSchema,
-  }),
-  response: z.object({
-    success: booleanSchema,
-  }),
-})
-
 export const checkInByUserSchema = _typeBuilder({
   action: z.literal(RequestAction.CHECK_IN_BY_USER),
   payload: z.object({
     clientId: stringSchema,
     userId: stringSchema,
     venueId: optionalStringSchema,
+    startImageUrl: optionalStringSchema,
     longitude: optionalNumberSchema,
     latitude: optionalNumberSchema,
   }),
@@ -43,6 +33,7 @@ export const checkOutByUserSchema = _typeBuilder({
   payload: z.object({
     clientId: stringSchema,
     userId: stringSchema,
+    endImageUrl: optionalStringSchema,
     longitude: optionalNumberSchema,
     latitude: optionalNumberSchema,
   }),
@@ -65,6 +56,8 @@ export const getShiftsSchema = _typeBuilder({
       venueId: stringSchema,
       start: numberSchema,
       end: nullishNumberSchema,
+      startImageUrl: nullishStringSchema,
+      endImageUrl: nullishStringSchema,
     }),
   ),
 })
@@ -96,6 +89,8 @@ export const getShiftsByAdminSchema = _typeBuilder({
       venueId: stringSchema,
       start: numberSchema,
       end: nullishNumberSchema,
+      startImageUrl: nullishStringSchema,
+      endImageUrl: nullishStringSchema,
     })
     .array(),
 })

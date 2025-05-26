@@ -5,7 +5,7 @@ import ManageButton from '@/components/c-time-keeper/ManageButton'
 import Picture from '@/components/c-time-keeper/Picture'
 import useCameraPermission from '@/hooks/useCameraPermission'
 import { User, Venue } from '@/services/domain'
-import { ONE_SECOND } from '@/utils'
+import { dataUrlToFile, formatTime, ONE_SECOND } from '@/utils'
 import { Stack, Text } from '@mantine/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
@@ -20,7 +20,7 @@ type CheckInViewProps = {
   venues: Record<string, Venue>
   user: User
   venueId: string
-  onSubmit: () => void
+  onSubmit: (file: File) => void
 }
 
 export default function CheckInView({ venues, user, venueId, onSubmit }: CheckInViewProps) {
@@ -48,7 +48,9 @@ export default function CheckInView({ venues, user, venueId, onSubmit }: CheckIn
     const timer = setTimeout(() => {
       if (webcamRef.current) {
         const imageSrc = webcamRef.current.getScreenshot()
-        setImageSrc(imageSrc)
+        if (imageSrc) {
+          setImageSrc(imageSrc)
+        }
       }
     }, CAPTURE_DELAY)
 
@@ -64,6 +66,15 @@ export default function CheckInView({ venues, user, venueId, onSubmit }: CheckIn
     setIsCapturing(true)
   }, [])
 
+  const handleSubmit = useCallback(() => {
+    if (!imageSrc) {
+      return
+    }
+
+    const file = dataUrlToFile(imageSrc, `${formatTime(Date.now(), 'YYYY-MM-DD-HH-mm-ss')}.jpg`)
+    onSubmit(file)
+  }, [imageSrc, onSubmit])
+
   return (
     <Stack gap={20} align="center" justify="center" h="100dvh">
       {hasPermission ? (
@@ -73,7 +84,11 @@ export default function CheckInView({ venues, user, venueId, onSubmit }: CheckIn
           ) : (
             <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
           )}
-          <ActionButtons isVisible={imageSrc !== null} onRetry={handleRetry} onSubmit={onSubmit} />
+          <ActionButtons
+            isVisible={imageSrc !== null}
+            onRetry={handleRetry}
+            onSubmit={handleSubmit}
+          />
         </Stack>
       ) : (
         <IconUserWithCorner />

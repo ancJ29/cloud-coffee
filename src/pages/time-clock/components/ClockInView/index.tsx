@@ -1,5 +1,6 @@
 import Message from '@/components/c-time-keeper/Message'
-import { IS_DEV } from '@/configs/constant'
+import { BUCKET_NAME, IS_DEV } from '@/configs/constant'
+import { showNotification } from '@/configs/notifications'
 import { useGeoLocation } from '@/hooks/useGeoLocation'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
@@ -8,8 +9,10 @@ import {
   checkOutByUser,
   getAllUsersByAdmin,
   getClientByDomain,
+  getPreSignedUrl,
   getShiftsByAdmin,
   Shift,
+  uploadImageToS3,
   User,
 } from '@/services/domain'
 import { ONE_SECOND, startOfDay } from '@/utils'
@@ -28,7 +31,6 @@ export default function ClockInView() {
   const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
   const [searchParams] = useSearchParams()
   const userId = searchParams.get('userId') || ''
-  // const clientId = searchParams.get('clientId') || ''
   const [user, setUser] = useState<User | undefined>(undefined)
   const [shifts, setShifts] = useState<Shift[]>([])
   const [clientId, setClientId] = useState('')
@@ -65,29 +67,64 @@ export default function ClockInView() {
     setPageIndex((prev) => (prev < MAX_PAGE_INDEX ? prev + 1 : prev))
   }, [])
 
-  const submit = useCallback(async () => {
-    if (!location) {
-      modals.open({
-        centered: true,
-        size: 'lg',
-        children: (
-          <Message
-            success={false}
-            message={t(
-              'We could not access your location. Please make sure you have granted location access in your browser settings',
-            )}
-          />
-        ),
-      })
-      return
-    }
-    if (isCheckIn) {
-      const res = await checkInByUser({
+  const submit = useCallback(
+    async (file: File) => {
+      if (!location) {
+        modals.open({
+          centered: true,
+          size: 'lg',
+          children: (
+            <Message
+              success={false}
+              message={t(
+                'We could not access your location. Please make sure you have granted location access in your browser settings',
+              )}
+            />
+          ),
+        })
+        return
+      }
+
+      const objectKey = `${clientId}/${userId}/${isCheckIn ? 'checkin' : 'checkout'}/${file.name}`
+      const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-1.amazonaws.com/${objectKey}`
+      const preSignedUrl = await getPreSignedUrl({
+        bucketName: BUCKET_NAME,
+        objectKey,
         clientId,
-        userId,
-        ...location,
       })
-      const success = res?.success
+
+      if (!preSignedUrl) {
+        return
+      }
+
+      const uploadResult = await uploadImageToS3({
+        ...preSignedUrl,
+        file,
+      })
+
+      if (!uploadResult.success) {
+        showNotification({ message: t('Failed to upload image'), success: false })
+      }
+
+      let success: boolean | undefined
+
+      if (isCheckIn) {
+        const res = await checkInByUser({
+          clientId,
+          userId,
+          startImageUrl: uploadResult.success ? imageUrl : undefined,
+          ...location,
+        })
+        success = res?.success
+      } else {
+        const res = await checkOutByUser({
+          clientId,
+          userId,
+          endImageUrl: uploadResult.success ? imageUrl : undefined,
+          ...location,
+        })
+        success = res?.success
+      }
       modals.open({
         withCloseButton: false,
         centered: true,
@@ -95,31 +132,22 @@ export default function ClockInView() {
         children: (
           <Message
             success={success}
-            message={success ? t('Checked in successfully') : t('Failed to check in')}
+            message={
+              success
+                ? t(`Checked ${isCheckIn ? 'in' : 'out'} successfully`)
+                : t(`Failed to check ${isCheckIn ? 'in' : 'out'}`)
+            }
           />
         ),
       })
-    } else {
-      const res = await checkOutByUser({ clientId, userId, ...location })
-      const success = res?.success
-      modals.open({
-        withCloseButton: false,
-        centered: true,
-        size: 'lg',
-        children: (
-          <Message
-            success={success}
-            message={success ? t('Checked out successfully') : t('Failed to check out')}
-          />
-        ),
-      })
-    }
-    await getShiftData(clientId)
-    setTimeout(() => {
-      setPageIndex(0)
-      modals.closeAll()
-    }, MODAL_CLOSE_DELAY)
-  }, [clientId, getShiftData, isCheckIn, location, t, userId])
+      await getShiftData(clientId)
+      setTimeout(() => {
+        setPageIndex(0)
+        modals.closeAll()
+      }, MODAL_CLOSE_DELAY)
+    },
+    [clientId, getShiftData, isCheckIn, location, t, userId],
+  )
 
   const handleCheckInCheckOut = useCallback(
     (isCheckIn = true) => {

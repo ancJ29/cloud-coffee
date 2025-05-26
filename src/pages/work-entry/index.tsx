@@ -1,5 +1,5 @@
 import Message from '@/components/c-time-keeper/Message'
-import { IS_DEV } from '@/configs/constant'
+import { BUCKET_NAME, IS_DEV } from '@/configs/constant'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import {
@@ -8,6 +8,8 @@ import {
   getAllUsersByAdmin,
   getAllVenuesByAdmin,
   getClientByDomain,
+  getPreSignedUrl,
+  uploadImageToS3,
   User,
   Venue,
 } from '@/services/domain'
@@ -74,10 +76,43 @@ export default function WorkEntry() {
     [goToNextPage],
   )
 
-  const submit = useCallback(async () => {
-    if (isCheckIn) {
-      const res = await checkInByUser({ clientId, userId: selectedUserId, venueId })
-      const success = res?.success
+  const submit = useCallback(
+    async (file: File) => {
+      const objectKey = `${clientId}/${selectedUserId}/${isCheckIn ? 'checkin' : 'checkout'}/${file.name}`
+      const imageUrl = `https://${BUCKET_NAME}.s3.ap-southeast-1.amazonaws.com/${objectKey}`
+      const preSignedUrl = await getPreSignedUrl({
+        bucketName: BUCKET_NAME,
+        objectKey,
+        clientId,
+      })
+
+      if (!preSignedUrl) {
+        return
+      }
+
+      const uploadResult = await uploadImageToS3({
+        ...preSignedUrl,
+        file,
+      })
+
+      let success: boolean | undefined
+
+      if (isCheckIn) {
+        const res = await checkInByUser({
+          clientId,
+          userId: selectedUserId,
+          venueId,
+          startImageUrl: uploadResult.success ? imageUrl : undefined,
+        })
+        success = res?.success
+      } else {
+        const res = await checkOutByUser({
+          clientId,
+          userId: selectedUserId,
+          endImageUrl: uploadResult.success ? imageUrl : undefined,
+        })
+        success = res?.success
+      }
       modals.open({
         withCloseButton: false,
         centered: true,
@@ -87,32 +122,21 @@ export default function WorkEntry() {
         children: (
           <Message
             success={success}
-            message={success ? t('Checked in successfully') : t('Failed to check in')}
+            message={
+              success
+                ? t(`Checked ${isCheckIn ? 'in' : 'out'} successfully`)
+                : t(`Failed to check ${isCheckIn ? 'in' : 'out'}`)
+            }
           />
         ),
       })
-    } else {
-      const res = await checkOutByUser({ clientId, userId: selectedUserId })
-      const success = res?.success
-      modals.open({
-        withCloseButton: false,
-        centered: true,
-        size: 'lg',
-        closeOnEscape: false,
-        closeOnClickOutside: false,
-        children: (
-          <Message
-            success={success}
-            message={success ? t('Checked out successfully') : t('Failed to check out')}
-          />
-        ),
-      })
-    }
-    setTimeout(() => {
-      setPageIndex(0)
-      modals.closeAll()
-    }, MODAL_CLOSE_DELAY)
-  }, [clientId, isCheckIn, selectedUserId, t, venueId])
+      setTimeout(() => {
+        setPageIndex(0)
+        modals.closeAll()
+      }, MODAL_CLOSE_DELAY)
+    },
+    [clientId, isCheckIn, selectedUserId, t, venueId],
+  )
 
   return (
     <>

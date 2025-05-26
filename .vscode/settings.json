@@ -6,6 +6,7 @@
     "./src/configs/i18n/vi.ts"
   ],
   "cSpell.words": [
+    "checkin",
     "fullcalendar",
     "mantine",
     "Qrcode",

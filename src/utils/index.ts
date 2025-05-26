@@ -1,5 +1,6 @@
 export * from './array'
 export * from './excel'
+export * from './file'
 export * from './log'
 export * from './modal'
 export * from './number'

@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { changePasswordSchema, getMeSchema, loginSchema, resetPasswordSchema } from './auth'
-import { getClientByDomainSchema } from './client'
+import { getClientByDomainSchema, getClientsByAdminSchema } from './client'
+import { getPreSignedUrlSchema } from './image'
 import {
   clearDatabaseSchema,
   initCloudCoffeeDataSchema,
@@ -13,7 +14,6 @@ import { getSalarySchema } from './report'
 import { getRolesSchema } from './role'
 import { getSalaryRulesSchema } from './salary-rule'
 import {
-  checkInBySystemSchema,
   checkInByUserSchema,
   checkOutByUserSchema,
   getShiftsByAdminSchema,
@@ -25,6 +25,7 @@ import { getVenuesByAdminSchema, getVenuesSchema } from './venue'
 
 export * from './auth'
 export * from './client'
+export * from './image'
 export * from './init-data'
 export * from './metadata'
 export * from './report'
@@ -39,13 +40,13 @@ export const requestSchema = z.union([
   getMeSchema.request,
   changePasswordSchema.request,
   resetPasswordSchema.request,
+  getClientsByAdminSchema.request,
   getClientByDomainSchema.request,
   getUsersSchema.request,
   getUsersByAdminSchema.request,
   updateUserSchema.request,
   addUserSchema.request,
   getRolesSchema.request,
-  checkInBySystemSchema.request,
   checkInByUserSchema.request,
   checkOutByUserSchema.request,
   getShiftsSchema.request,
@@ -61,6 +62,7 @@ export const requestSchema = z.union([
   initCloudCoffeeDataSchema.request,
   initNovaWorkDataSchema.request,
   initPhamTuanMotorcareDataSchema.request,
+  getPreSignedUrlSchema.request,
 ])
 
 export const responseSchema = z.union([
@@ -68,13 +70,13 @@ export const responseSchema = z.union([
   getMeSchema.response,
   changePasswordSchema.response,
   resetPasswordSchema.response,
+  getClientsByAdminSchema.response,
   getClientByDomainSchema.response,
   getUsersSchema.response,
   getUsersByAdminSchema.response,
   updateUserSchema.response,
   addUserSchema.response,
   getRolesSchema.response,
-  checkInBySystemSchema.response,
   checkInByUserSchema.response,
   checkOutByUserSchema.response,
   getShiftsSchema.response,
@@ -90,4 +92,5 @@ export const responseSchema = z.union([
   initCloudCoffeeDataSchema.response,
   initNovaWorkDataSchema.response,
   initPhamTuanMotorcareDataSchema.response,
+  getPreSignedUrlSchema.response,
 ])

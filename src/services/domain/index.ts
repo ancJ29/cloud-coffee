@@ -1,5 +1,6 @@
 export * from './auth'
 export * from './client'
+export * from './image'
 export * from './metadata'
 export * from './report'
 export * from './role'
