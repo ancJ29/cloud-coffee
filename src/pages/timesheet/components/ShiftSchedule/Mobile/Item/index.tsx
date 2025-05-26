@@ -5,10 +5,12 @@ import useRoleStore from '@/stores/role.store'
 import useSalaryRuleStore from '@/stores/salaryRule.store'
 import useVenueStore from '@/stores/venue.store'
 import { calculateSalary, formatDuration, formatNumber, formatTime, ONE_HOUR } from '@/utils'
-import { Box, Card, Collapse, Flex, Group, Stack, Text } from '@mantine/core'
+import { ActionIcon, Box, Card, Collapse, Flex, Group, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconChevronDown } from '@tabler/icons-react'
+import { modals } from '@mantine/modals'
+import { IconCameraPin, IconChevronDown } from '@tabler/icons-react'
 import { ReactNode, useCallback, useMemo } from 'react'
+import ShiftImage from '../../ShiftImage'
 import classes from './Item.module.scss'
 
 type ItemProps = {
@@ -53,9 +55,9 @@ export default function Item({ user, shifts }: ItemProps) {
   }
 
   return (
-    <Card shadow="md" withBorder p={12} radius={8} onClick={handleClick}>
-      <UserInformation user={user} total={total} salaryRule={salaryRule} />
-      <Wrapper isShown={shifts.length > 0} opened={opened}>
+    <Card shadow="md" withBorder p={12} radius={8}>
+      <UserInformation user={user} total={total} salaryRule={salaryRule} onClick={handleClick} />
+      <Wrapper isShown={shifts.length > 0} opened={opened} onClick={handleClick}>
         {shifts.map((shift) => (
           <ShiftInformation key={shift.id} shift={shift} salaryRule={salaryRule} />
         ))}
@@ -68,10 +70,12 @@ function UserInformation({
   user,
   total,
   salaryRule,
+  onClick,
 }: {
   user: User
   total: number | null
   salaryRule?: SalaryRule
+  onClick: (event: React.MouseEvent) => void
 }) {
   const { roles } = useRoleStore()
   const t = useTranslation()
@@ -79,7 +83,7 @@ function UserInformation({
   const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
 
   return (
-    <Stack gap={0}>
+    <Stack gap={0} onClick={onClick}>
       <Flex gap={5} w="fit-content" align="center" mb={10}>
         <Avatar size={44} src={user?.avatar} />
         <Stack gap={0}>
@@ -110,10 +114,12 @@ function Wrapper({
   children,
   isShown,
   opened,
+  onClick,
 }: {
   children: ReactNode
   isShown: boolean
   opened: boolean
+  onClick: (event: React.MouseEvent) => void
 }) {
   if (!isShown) {
     return <></>
@@ -121,7 +127,7 @@ function Wrapper({
 
   return (
     <Flex w="100%" direction={opened ? 'column-reverse' : 'column'}>
-      <Group justify="center" w="100%">
+      <Group justify="center" w="100%" onClick={onClick}>
         <IconChevronDown
           size={18}
           stroke={2}
@@ -152,8 +158,16 @@ function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: Sa
     }
     return totalMilliseconds
   }, [shift])
-
   const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
+
+  const onClick = useCallback(() => {
+    modals.open({
+      withCloseButton: false,
+      centered: true,
+      size: 'xl',
+      children: <ShiftImage shift={shift} />,
+    })
+  }, [shift])
 
   return (
     <Stack className={classes.shiftContainer}>
@@ -163,6 +177,14 @@ function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: Sa
       <DataRow title={t('Clock in')} content={formatTime(shift.start, 'HH:mm')} />
       <DataRow title={t('Clock out')} content={formatTime(shift.end, 'HH:mm')} />
       <DataRow title={t('Venue')} content={venues.get(shift.venueId)?.name} />
+      <DataRow
+        title={t('Shift image')}
+        content={
+          <ActionIcon variant="transparent" onClick={onClick} size="sm">
+            <IconCameraPin stroke={1.5} />
+          </ActionIcon>
+        }
+      />
     </Stack>
   )
 }

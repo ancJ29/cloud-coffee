@@ -10,7 +10,7 @@ export default function ShiftImage({ shift }: ShiftImageProps) {
   const t = useTranslation()
 
   return (
-    <SimpleGrid cols={2}>
+    <SimpleGrid cols={{ base: 1, sm: 2 }}>
       <Item title={t('Clock in')} content={shift.startImageUrl} />
       <Item title={t('Clock out')} content={shift.endImageUrl} />
     </SimpleGrid>
@@ -24,7 +24,9 @@ type ItemProps = {
 function Item({ title, content }: ItemProps) {
   return (
     <Stack gap={2}>
-      <Text fz={16}>{title}</Text>
+      <Text fz={16} fw={500} ml={6}>
+        {title}
+      </Text>
       <Image src={content} fallbackSrc="/imgs/timesheet/no-image.jpg" radius="md" />
     </Stack>
   )

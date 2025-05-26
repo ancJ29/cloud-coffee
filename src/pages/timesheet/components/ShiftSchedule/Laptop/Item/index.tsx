@@ -14,7 +14,7 @@ import {
 } from '@/utils'
 import { Accordion, ActionIcon, Flex, Grid, Stack, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import { IconCaptureFilled, IconChevronRight } from '@tabler/icons-react'
+import { IconCameraPin, IconChevronRight } from '@tabler/icons-react'
 import { useCallback, useMemo, useState } from 'react'
 import store from '../../../../_shift.store'
 import ShiftImage from '../../ShiftImage'
@@ -150,7 +150,6 @@ function UserInformation({
 
 function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: SalaryRule }) {
   const { venues } = useVenueStore()
-  const t = useTranslation()
 
   const total = useMemo(() => {
     if (!shift.end) {
@@ -166,12 +165,12 @@ function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: Sa
 
   const onClick = useCallback(() => {
     modals.open({
-      title: t('Shift image'),
+      withCloseButton: false,
       centered: true,
       size: 'xl',
       children: <ShiftImage shift={shift} />,
     })
-  }, [shift, t])
+  }, [shift])
 
   return (
     <Grid className={classes.shiftContainer}>
@@ -204,7 +203,7 @@ function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: Sa
       </Grid.Col>
       <Grid.Col span={0.5} className={classes.shiftItem}>
         <ActionIcon variant="transparent" onClick={onClick}>
-          <IconCaptureFilled stroke={1} />
+          <IconCameraPin stroke={1.5} />
         </ActionIcon>
       </Grid.Col>
     </Grid>
