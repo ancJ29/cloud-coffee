@@ -1,6 +1,5 @@
 import Message from '@/components/c-time-keeper/Message'
 import { BUCKET_NAME, IS_DEV } from '@/configs/constant'
-import { showNotification } from '@/configs/notifications'
 import { useGeoLocation } from '@/hooks/useGeoLocation'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
@@ -101,10 +100,6 @@ export default function ClockInView() {
         ...preSignedUrl,
         file,
       })
-
-      if (!uploadResult.success) {
-        showNotification({ message: t('Failed to upload image'), success: false })
-      }
 
       let success: boolean | undefined
 
