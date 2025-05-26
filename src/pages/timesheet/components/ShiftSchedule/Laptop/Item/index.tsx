@@ -12,10 +12,12 @@ import {
   ONE_HOUR,
   unique,
 } from '@/utils'
-import { Accordion, Flex, Grid, Stack, Text } from '@mantine/core'
-import { IconChevronRight } from '@tabler/icons-react'
-import { useMemo, useState } from 'react'
+import { Accordion, ActionIcon, Flex, Grid, Stack, Text } from '@mantine/core'
+import { modals } from '@mantine/modals'
+import { IconCaptureFilled, IconChevronRight } from '@tabler/icons-react'
+import { useCallback, useMemo, useState } from 'react'
 import store from '../../../../_shift.store'
+import ShiftImage from '../../ShiftImage'
 import TimeSelect from '../TimeSelect'
 import classes from './Item.module.scss'
 
@@ -108,7 +110,7 @@ function UserInformation({
 
   return (
     <Grid>
-      <Grid.Col span={2.5} className={classes.nameItem}>
+      <Grid.Col span={2.25} className={classes.nameItem}>
         <Flex gap={5} w="fit-content" align="center">
           <IconChevronRight
             size={18}
@@ -139,15 +141,16 @@ function UserInformation({
       <Grid.Col span={1.75} className={classes.infoItem}>
         -
       </Grid.Col>
-      <Grid.Col span={2.5} className={classes.infoItem}>
+      <Grid.Col span={2.25} className={classes.infoItem}>
         <Text className={classes.venueText}>{_venues}</Text>
       </Grid.Col>
     </Grid>
   )
 }
 
-function ShiftInformation({ salaryRule, shift }: { shift: Shift; salaryRule?: SalaryRule }) {
+function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: SalaryRule }) {
   const { venues } = useVenueStore()
+  const t = useTranslation()
 
   const total = useMemo(() => {
     if (!shift.end) {
@@ -159,12 +162,20 @@ function ShiftInformation({ salaryRule, shift }: { shift: Shift; salaryRule?: Sa
     }
     return totalMilliseconds
   }, [shift])
-
   const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
+
+  const onClick = useCallback(() => {
+    modals.open({
+      title: t('Shift image'),
+      centered: true,
+      size: 'lg',
+      children: <ShiftImage shift={shift} />,
+    })
+  }, [shift, t])
 
   return (
     <Grid className={classes.shiftContainer}>
-      <Grid.Col span={2.5} className={classes.dateItem}>
+      <Grid.Col span={2.25} className={classes.dateItem}>
         <Text w={32} c="dimmed">
           {formatTime(shift.start, 'ddd')}
         </Text>
@@ -188,8 +199,13 @@ function ShiftInformation({ salaryRule, shift }: { shift: Shift; salaryRule?: Sa
           onChangeValue={(value) => store.changeCheckOutTime(shift.userId, shift.id, value)}
         />
       </Grid.Col>
-      <Grid.Col span={2.5} className={classes.shiftItem}>
+      <Grid.Col span={2.25} className={classes.shiftItem}>
         <Text className={classes.venueText}>{venues.get(shift.venueId)?.name || '-'}</Text>
+      </Grid.Col>
+      <Grid.Col span={0.5} className={classes.shiftItem}>
+        <ActionIcon variant="transparent" onClick={onClick}>
+          <IconCaptureFilled stroke={1} />
+        </ActionIcon>
       </Grid.Col>
     </Grid>
   )

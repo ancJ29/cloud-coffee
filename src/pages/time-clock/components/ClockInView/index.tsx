@@ -1,5 +1,5 @@
 import Message from '@/components/c-time-keeper/Message'
-import { BUCKET_NAME, IS_DEV } from '@/configs/constant'
+import { BUCKET_NAME, IS_DEV, PLACEHOLDER_IMAGE_URL } from '@/configs/constant'
 import { useGeoLocation } from '@/hooks/useGeoLocation'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
@@ -97,7 +97,7 @@ export default function ClockInView() {
         const res = await checkInByUser({
           clientId,
           userId,
-          startImageUrl: uploadResult.success ? imageUrl : undefined,
+          startImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
           ...location,
         })
         success = res?.success
@@ -105,7 +105,7 @@ export default function ClockInView() {
         const res = await checkOutByUser({
           clientId,
           userId,
-          endImageUrl: uploadResult.success ? imageUrl : undefined,
+          endImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
           ...location,
         })
         success = res?.success

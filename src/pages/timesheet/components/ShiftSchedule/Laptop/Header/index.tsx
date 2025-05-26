@@ -7,7 +7,7 @@ export default function Header() {
 
   return (
     <Grid className={classes.container}>
-      <Grid.Col span={2.5} className={classes.nameItem}>
+      <Grid.Col span={2.25} className={classes.nameItem}>
         {t('Name')}
       </Grid.Col>
       <Grid.Col span={1.75} className={classes.centerItem}>
@@ -22,9 +22,10 @@ export default function Header() {
       <Grid.Col span={1.75} className={classes.centerItem}>
         {t('Clock out')}
       </Grid.Col>
-      <Grid.Col span={2.5} className={classes.centerItem}>
+      <Grid.Col span={2.25} className={classes.centerItem}>
         {t('Venue')}
       </Grid.Col>
+      <Grid.Col span={0.5} className={classes.centerItem} />
     </Grid>
   )
 }

@@ -1,5 +1,5 @@
 import Message from '@/components/c-time-keeper/Message'
-import { BUCKET_NAME, IS_DEV } from '@/configs/constant'
+import { BUCKET_NAME, IS_DEV, PLACEHOLDER_IMAGE_URL } from '@/configs/constant'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import {
@@ -92,14 +92,14 @@ export default function WorkEntry() {
           clientId,
           userId: selectedUserId,
           venueId,
-          startImageUrl: uploadResult.success ? imageUrl : undefined,
+          startImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
         })
         success = res?.success
       } else {
         const res = await checkOutByUser({
           clientId,
           userId: selectedUserId,
-          endImageUrl: uploadResult.success ? imageUrl : undefined,
+          endImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
         })
         success = res?.success
       }

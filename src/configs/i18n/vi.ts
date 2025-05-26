@@ -157,4 +157,5 @@ export default {
   'Always ask': 'Luôn hỏi',
   'The domain you are trying to access is invalid': 'Tên miền bạn đang truy cập không hợp lệ',
   'Expected salary': 'Lương dự kiến',
+  'Shift image': 'Ảnh chấm công',
 }

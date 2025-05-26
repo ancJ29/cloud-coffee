@@ -16,7 +16,7 @@ export function dataUrlToFile(dataUrl: string, filename: string): File {
 }
 
 export function getObjectKey(clientId: string, userId: string, file: File, isCheckIn: boolean) {
-  return `${clientId}/${userId}/${isCheckIn ? 'checkin' : 'checkout'}/${file.name}`
+  return `c-time-keeper/${clientId}/${userId}/${isCheckIn ? 'checkin' : 'checkout'}/${file.name}`
 }
 
 export function getImageUrl(objectKey: string) {
