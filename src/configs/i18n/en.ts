@@ -158,4 +158,5 @@ export default {
     'The domain you are trying to access is invalid',
   'Expected salary': 'Expected salary',
   'Shift image': 'Shift image',
+  'Back to Sign in': 'Back to Sign in',
 }

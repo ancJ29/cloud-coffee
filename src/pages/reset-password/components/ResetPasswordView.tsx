@@ -1,5 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Paper, Text } from '@mantine/core'
+import BackToSignIn from './BackToSignIn'
 import ResetPasswordForm, { ResetPasswordFormProps } from './ResetPasswordForm'
 
 export default function ResetPasswordView({ ...props }: ResetPasswordFormProps) {
@@ -14,6 +15,7 @@ export default function ResetPasswordView({ ...props }: ResetPasswordFormProps) 
         {t('Enter your email to reset password')}
       </Text>
       <ResetPasswordForm {...props} />
+      <BackToSignIn />
     </Paper>
   )
 }

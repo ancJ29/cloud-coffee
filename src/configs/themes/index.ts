@@ -13,7 +13,7 @@ import classes from './themes.module.scss'
 export const theme: MantineThemeOverride = createTheme({
   primaryColor: 'primary',
   defaultRadius: 'sm',
-  fontFamily: 'IBM Plex Sans,-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif',
+  fontFamily: 'Roboto,sans-serif',
   fontSizes: { md: '14px' },
   components: {
     InputWrapper: Input.Wrapper.extend({
