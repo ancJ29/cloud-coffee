@@ -4,21 +4,20 @@ import { AddUserRequest } from '@/services/domain'
 import { OptionProps } from '@/types'
 import { randomPassword } from '@/utils'
 import {
+  ActionIcon,
   Box,
   Button,
+  CopyButton,
   Flex,
   PasswordInput,
   Stack,
   Text,
   TextInput,
-  UnstyledButton,
-  useMantineColorScheme,
+  Tooltip,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { modals } from '@mantine/modals'
-import { notifications } from '@mantine/notifications'
-import { IconCopy } from '@tabler/icons-react'
-import { useCallback } from 'react'
+import { IconCheck, IconCopy } from '@tabler/icons-react'
 
 const w = '100%'
 
@@ -48,7 +47,6 @@ export default function AddUserForm({
   roleOptions,
   salaryRuleOptions,
 }: AddUserFormProps) {
-  const { colorScheme } = useMantineColorScheme()
   const t = useTranslation()
   const form = useForm<AddUserRequest>({
     initialValues: initValues ?? {
@@ -79,13 +77,6 @@ export default function AddUserForm({
     })
   }
 
-  const copyPassword = useCallback(() => {
-    navigator.clipboard.writeText(form.values.password)
-    notifications.show({
-      message: t('Password copied to clipboard'),
-    })
-  }, [form.values.password, t])
-
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
       <Stack gap={10} px={10} align="center">
@@ -93,11 +84,23 @@ export default function AddUserForm({
           data-autofocus
           w={w}
           label={t('Name')}
-          {...form.getInputProps('name')}
+          placeholder={t('Enter your fullname')}
           withAsterisk
+          {...form.getInputProps('name')}
         />
-        <TextInput w={w} label={t('Username')} {...form.getInputProps('username')} withAsterisk />
-        <TextInput w={w} label={t('Email')} {...form.getInputProps('email')} />
+        <TextInput
+          w={w}
+          label={t('Username')}
+          placeholder={t('Username')}
+          withAsterisk
+          {...form.getInputProps('username')}
+        />
+        <TextInput
+          w={w}
+          label={t('Email')}
+          placeholder="example@email.com"
+          {...form.getInputProps('email')}
+        />
         <Select
           w={w}
           label={t('Role')}
@@ -122,18 +125,24 @@ export default function AddUserForm({
               placeholder={t('Password')}
               {...form.getInputProps('password')}
             />
-            <UnstyledButton
-              onClick={copyPassword}
-              color={colorScheme === 'light' ? 'black' : 'white'}
-            >
-              <IconCopy strokeWidth="1.5" />
-            </UnstyledButton>
+            <CopyButton value={form.values.password} timeout={2000}>
+              {({ copied, copy }) => (
+                <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="right">
+                  <ActionIcon
+                    color={copied ? 'teal' : 'gray'}
+                    variant="subtle"
+                    onClick={copy}
+                    mb={4}
+                  >
+                    {copied ? <IconCheck size={20} /> : <IconCopy size={20} />}
+                  </ActionIcon>
+                </Tooltip>
+              )}
+            </CopyButton>
           </Flex>
-          <Flex w={w} justify="end">
-            <Text ta="right" fz={12} c="var(--error)">
-              {t('Please copy and keep password safe before create new user')}
-            </Text>
-          </Flex>
+          <Text ta="left" fz={12} c="var(--error)" mt={2}>
+            {t('Please copy and keep password safe before create new user')}
+          </Text>
         </Box>
         <Button type="submit" mt={10}>
           {t('Add')}

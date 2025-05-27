@@ -66,15 +66,35 @@ export default function EditUserForm({
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
       <Stack gap={10} px={10} align="center">
+        <Switch
+          checked={form.values.enabled}
+          w={w}
+          labelPosition="left"
+          label={t('Status')}
+          mt={4}
+          {...form.getInputProps('enabled')}
+        />
         <TextInput
           data-autofocus
           w={w}
           label={t('Name')}
-          {...form.getInputProps('name')}
+          placeholder={t('Enter your fullname')}
           withAsterisk
+          {...form.getInputProps('name')}
         />
-        <TextInput w={w} label={t('Username')} {...form.getInputProps('username')} withAsterisk />
-        <TextInput w={w} label={t('Email')} {...form.getInputProps('email')} />
+        <TextInput
+          w={w}
+          label={t('Username')}
+          placeholder={t('Username')}
+          withAsterisk
+          {...form.getInputProps('username')}
+        />
+        <TextInput
+          w={w}
+          label={t('Email')}
+          placeholder="example@email.com"
+          {...form.getInputProps('email')}
+        />
         <Select
           w={w}
           label={t('Role')}
@@ -88,14 +108,6 @@ export default function EditUserForm({
           options={salaryRuleOptions}
           withAsterisk
           {...form.getInputProps('salaryRuleId')}
-        />
-        <Switch
-          checked={form.values.enabled}
-          w={w}
-          labelPosition="left"
-          label={t('Status')}
-          mt={4}
-          {...form.getInputProps('enabled')}
         />
         <Button type="submit" mt={10}>
           {t('Update')}

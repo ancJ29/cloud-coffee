@@ -54,7 +54,7 @@ export default {
   'Select all': 'Chọn tất cả',
   'No results found. Please try another search.': 'Không tìm thấy kết quả. Vui lòng thử lại.',
   'Item per page': 'Số dòng',
-  'Enter your email to reset password': 'Vui lòng nhập email đặt lại mật khẩu',
+  'Please enter your email to reset password': 'Vui lòng nhập email đặt lại mật khẩu',
   'Continue': 'Tiếp tục',
   'Sign in again': 'Đăng nhập lại',
   'Please check your email': 'Vui lòng kiểm tra email',
@@ -160,4 +160,5 @@ export default {
   'Shift image': 'Ảnh chấm công',
   'Back to Sign in': 'Quay lại đăng nhập',
   'QR Code for attendance': 'Mã QR điểm danh',
+  'Enter your fullname': 'Nhập họ tên của bạn',
 }

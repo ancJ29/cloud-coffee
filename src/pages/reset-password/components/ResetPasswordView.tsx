@@ -12,7 +12,7 @@ export default function ResetPasswordView({ ...props }: ResetPasswordFormProps) 
         {t('Your email')}
       </Text>
       <Text fz={12} mb={10} c="dimmed" ta="center">
-        {t('Enter your email to reset password')}
+        {t('Please enter your email to reset password')}
       </Text>
       <ResetPasswordForm {...props} />
       <BackToSignIn />

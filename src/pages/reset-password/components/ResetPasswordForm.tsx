@@ -18,7 +18,7 @@ export default function ResetPasswordForm({ form, onSubmit }: ResetPasswordFormP
         <TextInput
           data-autofocus
           label={t('Email')}
-          placeholder="email@example.com"
+          placeholder="example@email.com"
           {...form.getInputProps('email')}
         />
         <Button fullWidth type="submit" mt={10} rightSection={<IconArrowRight size={16} />}>

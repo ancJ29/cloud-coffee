@@ -54,7 +54,7 @@ export default {
   'Select all': 'Select all',
   'No results found. Please try another search.': 'No results found. Please try another search.',
   'Item per page': 'Item per page',
-  'Enter your email to reset password': 'Enter your email to reset password',
+  'Please enter your email to reset password': 'Please enter your email to reset password',
   'Continue': 'Continue',
   'Sign in again': 'Sign in again',
   'Please check your email': 'Please check your email',
@@ -160,4 +160,5 @@ export default {
   'Shift image': 'Shift image',
   'Back to Sign in': 'Back to Sign in',
   'QR Code for attendance': 'QR Code for attendance',
+  'Enter your fullname': 'Enter your fullname',
 }
