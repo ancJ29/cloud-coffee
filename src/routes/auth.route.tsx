@@ -2,8 +2,8 @@ import { RouteConfig } from '@/types'
 import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
-const ServiceWrapper = lazy(() => import('@/layouts/ServiceWrapper'))
-const WorkEntryWrapper = lazy(() => import('@/layouts/WorkEntryWrapper'))
+const AdminWrapper = lazy(() => import('@/layouts/Admin'))
+const WorkEntryWrapper = lazy(() => import('@/layouts/WorkEntry'))
 
 const routeConfigs: RouteConfig[] = [
   {
@@ -13,32 +13,32 @@ const routeConfigs: RouteConfig[] = [
   {
     path: '/users',
     element: lazy(() => import('@/pages/users')),
-    wrapper: ServiceWrapper,
+    wrapper: AdminWrapper,
   },
   {
     path: '/timesheet',
     element: lazy(() => import('@/pages/timesheet')),
-    wrapper: ServiceWrapper,
+    wrapper: AdminWrapper,
   },
   {
     path: '/profile',
     element: lazy(() => import('@/pages/profile')),
-    wrapper: ServiceWrapper,
+    wrapper: AdminWrapper,
   },
   {
     path: '/change-password',
     element: lazy(() => import('@/pages/change-password')),
-    wrapper: ServiceWrapper,
+    wrapper: AdminWrapper,
   },
   {
     path: '/monthly-salary',
     element: lazy(() => import('@/pages/monthly-salary')),
-    wrapper: ServiceWrapper,
+    wrapper: AdminWrapper,
   },
   {
-    path: '/check-in-qr',
-    element: lazy(() => import('@/pages/check-in-qr')),
-    wrapper: ServiceWrapper,
+    path: '/qr-code-for-attendance',
+    element: lazy(() => import('@/pages/qr-code-for-attendance')),
+    wrapper: AdminWrapper,
   },
   {
     path: '/work-entry',

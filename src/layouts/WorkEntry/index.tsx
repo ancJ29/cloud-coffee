@@ -1,10 +1,10 @@
 import { BackgroundImage } from '@mantine/core'
 
-type ServiceWrapperProps = {
+type WorkEntryLayoutProps = {
   children: React.ReactNode
 }
 
-export default function ServiceWrapper({ children }: ServiceWrapperProps) {
+export default function WorkEntryLayout({ children }: WorkEntryLayoutProps) {
   return (
     <BackgroundImage
       src="/imgs/work-entry/bg.png"

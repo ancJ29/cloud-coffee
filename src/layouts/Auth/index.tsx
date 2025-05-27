@@ -1,11 +1,11 @@
 import { BackgroundImage, Stack, useMantineColorScheme } from '@mantine/core'
 import { ReactNode } from 'react'
 
-type AuthServiceWrapperProps = {
+type AuthLayoutProps = {
   children: ReactNode
 }
 
-export default function AuthServiceWrapper({ children }: AuthServiceWrapperProps) {
+export default function AuthLayout({ children }: AuthLayoutProps) {
   const { colorScheme } = useMantineColorScheme()
 
   return (

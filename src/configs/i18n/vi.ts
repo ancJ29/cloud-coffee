@@ -159,4 +159,5 @@ export default {
   'Expected salary': 'Lương dự kiến',
   'Shift image': 'Ảnh chấm công',
   'Back to Sign in': 'Quay lại đăng nhập',
+  'QR Code for attendance': 'Mã QR điểm danh',
 }

@@ -1,11 +1,11 @@
 import useVenueStore from '@/stores/venue.store'
-import CheckInQrView from './components/CheckInQRView'
+import QRCodeForAttendanceView from './components/QRCodeForAttendanceView'
 
-export default function CheckInQr() {
+export default function QRCodeForAttendance() {
   const { venues } = useVenueStore()
 
   const baseUrl = window.location.origin
   const qrValue = `${baseUrl}/work-entry?venueId=${Array.from(venues.keys())?.[0]}`
 
-  return <CheckInQrView qrValue={qrValue} />
+  return <QRCodeForAttendanceView qrValue={qrValue} />
 }

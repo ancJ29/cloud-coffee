@@ -159,4 +159,5 @@ export default {
   'Expected salary': 'Expected salary',
   'Shift image': 'Shift image',
   'Back to Sign in': 'Back to Sign in',
+  'QR Code for attendance': 'QR Code for attendance',
 }

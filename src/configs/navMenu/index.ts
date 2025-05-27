@@ -24,10 +24,10 @@ export const navMenu: MenuItem[] = [
     roles: [ClientRoles.OWNER],
   },
   {
-    key: 'check-in-qr',
-    label: 'Check in QR',
+    key: 'qr-code-for-attendance',
+    label: 'QR Code for attendance',
     icon: IconQrcode,
-    url: '/check-in-qr',
+    url: '/qr-code-for-attendance',
     roles: [ClientRoles.OWNER],
   },
 ]

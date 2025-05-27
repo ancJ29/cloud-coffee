@@ -11,11 +11,11 @@ import { useNavigate } from 'react-router-dom'
 import ContentLayout from './ContentLayout'
 import Navbar from './Navbar'
 
-type ServiceWrapperProps = {
+type AdminLayoutProps = {
   children: React.ReactNode
 }
 
-export default function ServiceWrapper({ children }: ServiceWrapperProps) {
+export default function AdminLayout({ children }: AdminLayoutProps) {
   const isMobile = useWindowResize()
   const navigate = useNavigate()
   const { removeToken, user } = useAuthStore()

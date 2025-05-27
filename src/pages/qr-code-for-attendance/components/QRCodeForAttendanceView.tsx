@@ -2,11 +2,11 @@ import useTranslation from '@/hooks/useTranslation'
 import { Anchor, Stack, Text } from '@mantine/core'
 import { QRCodeCanvas } from 'qrcode.react'
 
-type CheckInQrViewProps = {
+type QRCodeForAttendanceViewProps = {
   qrValue: string
 }
 
-export default function CheckInQrView({ qrValue }: CheckInQrViewProps) {
+export default function QRCodeForAttendanceView({ qrValue }: QRCodeForAttendanceViewProps) {
   const t = useTranslation()
 
   return (
