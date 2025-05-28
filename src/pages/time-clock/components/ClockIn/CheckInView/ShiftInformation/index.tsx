@@ -11,7 +11,7 @@ export default function ShiftInformation({ shifts }: ShiftInformationProps) {
   const t = useTranslation()
 
   return (
-    <Stack gap={10}>
+    <Stack gap={6}>
       {shifts.map((shift, idx) => (
         <Text ta="center" fw={500} key={idx}>
           {`${t('Checked in at')} ${formatTime(shift.start, 'HH:mm A')} ${shift?.end ? `- ${t('Checked out at')} ${formatTime(shift.end, 'HH:mm A')}` : ''}`}
