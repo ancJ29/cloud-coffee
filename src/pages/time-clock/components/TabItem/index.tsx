@@ -22,7 +22,7 @@ export default function TabItem({ tab, isSelected, onClick }: TabItemProps) {
         fit="fill"
         src={`/imgs/time-clock/${tab.icon}${isSelected ? '-active' : ''}.svg`}
       />
-      <Text className={classes.label} c={isSelected ? 'var(--time-clock-primary-color)' : 'black'}>
+      <Text className={classes.label} c={isSelected ? 'var(--time-clock-primary-color)' : 'dimmed'}>
         {t(tab.label)}
       </Text>
     </Box>
