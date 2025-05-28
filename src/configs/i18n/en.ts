@@ -52,7 +52,7 @@ export default {
   'Check your email': 'Check your email',
   'Invalid user': 'Invalid user',
   'Select all': 'Select all',
-  'No results found. Please try another search.': 'No results found. Please try another search.',
+  'No results found': 'No results found',
   'Item per page': 'Item per page',
   'Please enter your email to reset password': 'Please enter your email to reset password',
   'Continue': 'Continue',

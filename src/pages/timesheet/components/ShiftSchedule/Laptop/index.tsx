@@ -1,3 +1,4 @@
+import EmptyBox from '@/components/common/DataGrid/EmptyBox'
 import useUserStore from '@/stores/user.store'
 import { Stack } from '@mantine/core'
 import { useSyncExternalStore } from 'react'
@@ -15,6 +16,7 @@ export default function Laptop() {
       {Object.keys(updates).map((userId) => (
         <Item key={userId} user={users.get(userId)} shifts={updates[userId]} />
       ))}
+      {Object.keys(updates).length === 0 && <EmptyBox />}
     </Stack>
   )
 }

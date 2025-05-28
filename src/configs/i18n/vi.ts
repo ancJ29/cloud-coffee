@@ -52,7 +52,7 @@ export default {
   'Check your email': 'Kiểm tra email',
   'Invalid user': 'nhân viên không hợp lệ',
   'Select all': 'Chọn tất cả',
-  'No results found. Please try another search.': 'Không tìm thấy kết quả. Vui lòng thử lại.',
+  'No results found': 'Không tìm thấy kết quả',
   'Item per page': 'Số dòng',
   'Please enter your email to reset password': 'Vui lòng nhập email đặt lại mật khẩu',
   'Continue': 'Tiếp tục',

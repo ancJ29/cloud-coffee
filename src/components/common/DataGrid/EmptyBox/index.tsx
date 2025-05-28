@@ -37,7 +37,7 @@ export default function EmptyBox({ noResultText }: EmptyBoxProps) {
           </g>
         </g>
       </svg>
-      <Box mt={5}>{noResultText || t('No results found. Please try another search.')}</Box>
+      <Box mt={5}>{noResultText || t('No results found')}</Box>
     </Box>
   )
 }
