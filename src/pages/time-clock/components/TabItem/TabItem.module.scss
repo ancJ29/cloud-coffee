@@ -1,0 +1,23 @@
+.item {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding-top: 12px;
+}
+
+.label {
+  font-size: 12px;
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  width: 24%;
+  height: 1px;
+  background-color: var(--time-clock-primary-color);
+  margin-top: 7px;
+}

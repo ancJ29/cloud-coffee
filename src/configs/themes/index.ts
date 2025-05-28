@@ -145,6 +145,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--clock-in-btn-bg': '#6A6A6A',
     '--tab-bar-item-selected': '#74A2CC',
     '--btn-manage-bg': '#4CA8EF',
+    '--time-clock-bg': theme.colors.dark[0],
+    '--time-clock-primary-color': '#3F60A0',
   },
   light: {
     '--border-color': theme.colors.xGray[1],
@@ -154,7 +156,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--header': theme.colors.primary[3],
     '--select-item': theme.colors.primary[1],
     '--shift-item-bg': theme.colors.xGray[0],
-    '--shift-accordion-bg': '#F5F5F5',
+    '--shift-accordion-bg': theme.colors.dark[0],
   },
   dark: {
     '--border-color': theme.colors.dark[8],

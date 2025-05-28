@@ -24,7 +24,7 @@ import WebcamView from './WebcamView'
 const MAX_PAGE_INDEX = 1
 const MODAL_CLOSE_DELAY = 1.5 * ONE_SECOND
 
-export default function ClockInView() {
+export default function ClockIn() {
   const t = useTranslation()
   const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
   const [searchParams] = useSearchParams()

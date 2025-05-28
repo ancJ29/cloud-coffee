@@ -117,11 +117,10 @@ export default {
   'Start break': 'Start break',
   'End break': 'End break',
   'You have not checked in today': 'You have not checked in today',
-  'Check in at': 'Check in at',
+  'Checked in at': 'Check in at',
   'Hour this period': 'Hour this period',
-  'Check out at': 'Check out at',
+  'Checked out at': 'Check out at',
   'Time clock': 'Time clock',
-  'Time and hours': 'Time and hours',
   'Time off center': 'Time off center',
   'Manage': 'Manage',
   'Location permission has not been granted to the browser':
@@ -161,4 +160,8 @@ export default {
   'Back to Sign in': 'Back to Sign in',
   'QR Code for attendance': 'QR Code for attendance',
   'Enter your fullname': 'Enter your fullname',
+  'My timesheet': 'My timesheet',
+  'Good morning': 'Good morning',
+  'Good afternoon': 'Good afternoon',
+  'Good evening': 'Good evening',
 }

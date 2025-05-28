@@ -1,3 +1,5 @@
+import LiveClock from '@/components/c-time-keeper/LiveClock'
+import Avatar from '@/components/common/Avatar'
 import { Shift, User } from '@/services/domain'
 import { Stack } from '@mantine/core'
 import Actions from './Actions'
@@ -14,10 +16,12 @@ type CheckInViewProps = {
 
 export default function CheckInView({ user, shifts, onCheckIn, onCheckOut }: CheckInViewProps) {
   return (
-    <Stack gap={30} align="center" justify="center" h="100%">
-      <Address />
+    <Stack h="100%" align="center" justify="center" gap={20}>
       <Header user={user} />
-      <Actions onCheckIn={onCheckIn} onCheckOut={onCheckOut} />
+      <Avatar size={200} src={user?.avatar} />
+      <LiveClock c="var(--time-clock-primary-color)" />
+      <Address />
+      <Actions shifts={shifts} onCheckIn={onCheckIn} onCheckOut={onCheckOut} />
       <ShiftInformation shifts={shifts} />
     </Stack>
   )
