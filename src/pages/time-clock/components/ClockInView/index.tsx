@@ -6,14 +6,14 @@ import useTranslation from '@/hooks/useTranslation'
 import {
   checkInByUser,
   checkOutByUser,
+  getAllShiftsByAdmin,
   getAllUsersByAdmin,
   getClientByDomain,
-  getShiftsByAdmin,
   Shift,
   uploadImageToS3,
   User,
 } from '@/services/domain'
-import { getImageUrl, getObjectKey, ONE_SECOND, startOfDay } from '@/utils'
+import { endOfDay, getImageUrl, getObjectKey, ONE_SECOND, startOfDay } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
@@ -38,7 +38,12 @@ export default function ClockInView() {
 
   const getShiftData = useCallback(
     async (clientId: string) => {
-      const shifts = await getShiftsByAdmin({ clientId, userId, start: startOfDay(Date.now()) })
+      const shifts = await getAllShiftsByAdmin({
+        clientId,
+        userId,
+        start: startOfDay(Date.now()),
+        end: endOfDay(Date.now()),
+      })
       if (shifts) {
         setShifts(shifts)
       }

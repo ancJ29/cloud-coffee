@@ -17,13 +17,12 @@ const COUNTDOWN_TIME = 3
 const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
 
 type CheckInViewProps = {
-  venues: Record<string, Venue>
+  venue?: Venue
   user: User
-  venueId: string
   onSubmit: (file: File) => void
 }
 
-export default function CheckInView({ venues, user, venueId, onSubmit }: CheckInViewProps) {
+export default function CheckInView({ venue, user, onSubmit }: CheckInViewProps) {
   const hasPermission = useCameraPermission()
   const [imageSrc, setImageSrc] = useState<string | null>(null)
   const webcamRef = useRef<Webcam | null>(null)
@@ -93,7 +92,7 @@ export default function CheckInView({ venues, user, venueId, onSubmit }: CheckIn
       ) : (
         <IconUserWithCorner />
       )}
-      <Text className={classes.venue}>{venues[venueId]?.name}</Text>
+      <Text className={classes.venue}>{venue?.name}</Text>
       <UserInformation user={user} />
       <Fireworks />
       <ManageButton />

@@ -1,47 +1,66 @@
+import { IS_DEV } from '@/configs/constant'
 import useMount from '@/hooks/useMount'
-import { getAllShifts, Shift } from '@/services/domain'
-import useUserStore from '@/stores/user.store'
+import {
+  getAllShiftsByAdmin,
+  getAllUsersByAdmin,
+  getAllVenuesByAdmin,
+  getClientByDomain,
+  Shift,
+  Venue,
+} from '@/services/domain'
 import { startOfDay } from '@/utils'
 import { useCallback, useState } from 'react'
 import { ShiftStatus, UserShiftStatus } from './_configs'
 import WorkingStatusView from './components/WorkingStatusView'
 
 export default function WorkingStatus() {
-  const { users } = useUserStore()
+  const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
   const [currents, setCurrents] = useState<UserShiftStatus[]>([])
   const [updates, setUpdates] = useState<UserShiftStatus[]>([])
   const [keyword, setKeyword] = useState<string | undefined>('')
+  const [venues, setVenues] = useState<Venue[]>([])
 
   const getData = useCallback(async () => {
-    const now = Date.now()
-    const shifts = await getAllShifts({
-      start: startOfDay(now),
-      end: now,
-    })
+    const clientId = await getClientByDomain({ domain }).then((res) => res?.id)
 
-    const shiftsByUserId = shifts.reduce<Record<string, Shift[]>>((acc, shift) => {
-      if (!acc[shift.userId]) {
-        acc[shift.userId] = []
-      }
-      acc[shift.userId].push(shift)
-      return acc
-    }, {})
+    if (clientId) {
+      const now = Date.now()
+      const [users, venues, shifts] = await Promise.all([
+        getAllUsersByAdmin({ clientId }),
+        getAllVenuesByAdmin({ clientId }),
+        getAllShiftsByAdmin({
+          clientId,
+          start: startOfDay(now),
+          end: now,
+        }),
+      ])
 
-    const userShiftStatusList: UserShiftStatus[] = Array.from(users.values()).map((user) => {
-      const userShifts = shiftsByUserId[user.id] || []
+      setVenues(venues)
 
-      let shiftStatus = ShiftStatus.NOT_WORKING
-      if (userShifts.length > 0) {
-        const isWorking = userShifts.some((shift) => !shift.end)
-        shiftStatus = isWorking ? ShiftStatus.WORKING : ShiftStatus.DONE
-      }
+      const shiftsByUserId = shifts.reduce<Record<string, Shift[]>>((acc, shift) => {
+        if (!acc[shift.userId]) {
+          acc[shift.userId] = []
+        }
+        acc[shift.userId].push(shift)
+        return acc
+      }, {})
 
-      return { ...user, shiftStatus }
-    })
+      const userShiftStatusList: UserShiftStatus[] = users.map((user) => {
+        const userShifts = shiftsByUserId[user.id] || []
 
-    setCurrents(userShiftStatusList)
-    setUpdates(userShiftStatusList)
-  }, [users])
+        let shiftStatus = ShiftStatus.NOT_WORKING
+        if (userShifts.length > 0) {
+          const isWorking = userShifts.some((shift) => !shift.end)
+          shiftStatus = isWorking ? ShiftStatus.WORKING : ShiftStatus.DONE
+        }
+
+        return { ...user, shiftStatus }
+      })
+
+      setCurrents(userShiftStatusList)
+      setUpdates(userShiftStatusList)
+    }
+  }, [domain])
   useMount(getData)
 
   const handleChangeKeyword = useCallback(
@@ -58,6 +77,7 @@ export default function WorkingStatus() {
 
   return (
     <WorkingStatusView
+      venues={venues}
       userShiftStatusList={updates}
       keyword={keyword}
       onChangeKeyword={handleChangeKeyword}

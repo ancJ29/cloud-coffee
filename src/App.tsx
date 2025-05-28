@@ -2,8 +2,8 @@ import LoadingOverlay from '@/components/common/LoadingOverlay'
 import { resolver } from '@/configs/themes'
 import { useCustomTheme } from '@/hooks/useCustomTheme'
 import useTranslation from '@/hooks/useTranslation'
-import authRoutes from '@/routes/auth.route'
-import guestRoutes from '@/routes/guest.route'
+import privateRoutes from '@/routes/private.route'
+import publicRoutes from '@/routes/public.route'
 import loadingStore from '@/services/request/store/loading'
 import useAuthStore from '@/stores/auth.store'
 import useMetadataStore from '@/stores/metadata'
@@ -57,7 +57,7 @@ function _buildRoutes(loading: boolean, login: boolean) {
       },
     ]
   }
-  return login ? authRoutes : guestRoutes
+  return login ? privateRoutes : publicRoutes
 }
 
 async function loadData(token: string | null, t: (key: string) => string) {

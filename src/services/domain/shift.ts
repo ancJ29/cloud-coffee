@@ -48,8 +48,8 @@ export async function updateShift(payload: UpdateShiftRequest) {
 }
 
 type GetShiftsByAdminRequest = z.infer<typeof getShiftsByAdminSchema.request>['payload']
-export async function getShiftsByAdmin(payload: GetShiftsByAdminRequest) {
-  return await callApi({
+export async function getAllShiftsByAdmin(payload: GetShiftsByAdminRequest) {
+  return await loadAll({
     action: RequestAction.GET_SHIFTS_BY_ADMIN,
     payload,
     schema: getShiftsByAdminSchema,

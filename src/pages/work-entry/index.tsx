@@ -29,7 +29,7 @@ export default function WorkEntry() {
   const [searchParams] = useSearchParams()
   const venueId = searchParams.get('venueId') || ''
   const [pageIndex, setPageIndex] = useState(0)
-  const [venues, setVenues] = useState<Record<string, Venue>>({})
+  const [venue, setVenue] = useState<Venue | undefined>(undefined)
   const [users, setUsers] = useState<Record<string, User>>({})
   const [clientId, setClientId] = useState('')
   const [selectedUserId, setSelectedUserId] = useState('')
@@ -43,11 +43,11 @@ export default function WorkEntry() {
         getAllVenuesByAdmin({ clientId }),
         getAllUsersByAdmin({ clientId }),
       ])
-      setVenues(Object.fromEntries(venues.map((venue) => [venue.id, venue])))
+      setVenue(venues.find((venue) => venue.id === venueId))
       setUsers(Object.fromEntries(users.map((user) => [user.id, user])))
       setClientId(clientId)
     }
-  }, [domain])
+  }, [domain, venueId])
   useMount(getData)
 
   const goToNextPage = useCallback(() => {
@@ -145,12 +145,7 @@ export default function WorkEntry() {
         />
       )}
       {pageIndex === 2 && (
-        <CheckInView
-          venues={venues}
-          user={users[selectedUserId]}
-          venueId={venueId}
-          onSubmit={submit}
-        />
+        <CheckInView venue={venue} user={users[selectedUserId]} onSubmit={submit} />
       )}
     </>
   )
