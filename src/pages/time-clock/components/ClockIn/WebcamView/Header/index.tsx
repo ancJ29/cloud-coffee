@@ -14,12 +14,11 @@ export default function Header({ isCapturing, onFlash, onRotateCamera, onReCaptu
 
   return (
     <SimpleGrid cols={3} w="100%" h={50} pr={20} pl={10}>
-      <Flex gap={2} align="center">
+      <Flex gap={2} align="center" onClick={onReCapture}>
         {isCapturing && (
           <>
             <IconChevronLeft
               color="var(--time-clock-secondary-color)"
-              onClick={onReCapture}
               style={{ cursor: 'pointer' }}
             />
             <Text c="var(--time-clock-secondary-color)">{t('Re capture')}</Text>

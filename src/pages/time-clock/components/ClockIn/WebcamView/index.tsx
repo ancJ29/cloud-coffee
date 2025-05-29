@@ -1,6 +1,6 @@
 import LiveClock from '@/components/c-time-keeper/LiveClock'
 import { dataUrlToFile, formatTime } from '@/utils'
-import { Stack } from '@mantine/core'
+import { Image, Stack } from '@mantine/core'
 import { useCallback, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 import Address from '../CheckInView/Address'
@@ -49,14 +49,18 @@ export default function WebcamView({ onSubmit, onReturn }: WebcamViewProps) {
         onRotateCamera={() => {}}
         onReCapture={reCapture}
       />
-      <Webcam
-        ref={webcamRef}
-        mirrored
-        screenshotFormat="image/jpeg"
-        width="100%"
-        videoConstraints={{ facingMode: 'user' }}
-        className={classes.webcam}
-      />
+      {imageSrc ? (
+        <Image src={imageSrc} className={classes.image} />
+      ) : (
+        <Webcam
+          ref={webcamRef}
+          mirrored
+          screenshotFormat="image/jpeg"
+          width="100%"
+          videoConstraints={{ facingMode: 'user' }}
+          className={classes.webcam}
+        />
+      )}
       <Stack align="center" px={20} gap={0} mt={10}>
         <LiveClock c="var(--time-clock-primary-color)" />
         <Address />
