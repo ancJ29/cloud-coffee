@@ -69,7 +69,6 @@ export default function CheckInView({ venue, user, onSubmit }: CheckInViewProps)
     if (!imageSrc) {
       return
     }
-
     const file = dataUrlToFile(imageSrc, `${formatTime(Date.now(), 'YYYY-MM-DD-HH-mm-ss')}.jpg`)
     onSubmit(file)
   }, [imageSrc, onSubmit])

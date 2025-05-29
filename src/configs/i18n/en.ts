@@ -164,4 +164,5 @@ export default {
   'Good morning': 'Good morning',
   'Good afternoon': 'Good afternoon',
   'Good evening': 'Good evening',
+  'Re capture': 'Re capture',
 }

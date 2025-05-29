@@ -70,6 +70,10 @@ export default function ClockIn() {
     setPageIndex((prev) => (prev < MAX_PAGE_INDEX ? prev + 1 : prev))
   }, [])
 
+  const goToPreviousPage = useCallback(() => {
+    setPageIndex((prev) => (prev > 0 ? prev - 1 : prev))
+  }, [])
+
   const submit = useCallback(
     async (file: File) => {
       if (!location) {
@@ -161,7 +165,7 @@ export default function ClockIn() {
           onCheckOut={() => handleCheckInCheckOut(false)}
         />
       )}
-      {pageIndex === 1 && <WebcamView user={user} onSubmit={submit} />}
+      {pageIndex === 1 && <WebcamView onSubmit={submit} onReturn={goToPreviousPage} />}
     </>
   )
 }

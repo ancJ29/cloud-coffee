@@ -14,7 +14,7 @@ export default {
   'Name': 'Tên',
   'Role': 'Vai trò',
   'Confirm': 'Xác nhận',
-  'Cancel': 'Hủy bỏ',
+  'Cancel': 'Hủy',
   'Category management': 'Quản lý danh mục',
   'User management': 'Quản lý nhân viên',
   'Timesheet': 'Bảng chấm công',
@@ -164,4 +164,5 @@ export default {
   'Good morning': 'Chào buổi sáng',
   'Good afternoon': 'Chào buổi trưa',
   'Good evening': 'Chào buổi tối',
+  'Re capture': 'Chụp lại',
 }

@@ -16,7 +16,7 @@ type CheckInViewProps = {
 
 export default function CheckInView({ user, shifts, onCheckIn, onCheckOut }: CheckInViewProps) {
   return (
-    <Stack h="100%" align="center" justify="center" gap={20}>
+    <Stack h="100%" align="center" justify="center" gap={20} px={20}>
       <Header user={user} />
       <Avatar size={200} src={user?.avatar} />
       <LiveClock c="var(--time-clock-primary-color)" />

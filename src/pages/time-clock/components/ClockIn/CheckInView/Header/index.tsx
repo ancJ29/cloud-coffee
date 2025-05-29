@@ -25,7 +25,7 @@ export default function Header({ user }: HeaderProps) {
     <Text fz={16}>
       {t(getGreeting())},
       <Text inherit span fw="bold">
-        {` ${user?.name}`}
+        {` ${user?.name || ''}`}
       </Text>
     </Text>
   )

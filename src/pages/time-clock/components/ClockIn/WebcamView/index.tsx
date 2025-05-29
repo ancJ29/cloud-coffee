@@ -1,92 +1,72 @@
-import ActionButtons from '@/components/c-time-keeper/ActionButtons'
-import Camera from '@/components/c-time-keeper/Camera'
-import IconUserWithCorner from '@/components/c-time-keeper/IconUserWithCorner'
-import Picture from '@/components/c-time-keeper/Picture'
-import useCameraPermission from '@/hooks/useCameraPermission'
-import { User } from '@/services/domain'
-import { dataUrlToFile, formatTime, ONE_SECOND } from '@/utils'
+import LiveClock from '@/components/c-time-keeper/LiveClock'
+import { dataUrlToFile, formatTime } from '@/utils'
 import { Stack } from '@mantine/core'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
-import UserInformation from './UserInformation'
-
-const COUNTDOWN_TIME = 3
-const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
+import Address from '../CheckInView/Address'
+import CaptureContainer from './CaptureContainer'
+import Header from './Header'
+import classes from './WebcamView.module.scss'
 
 type WebcamViewProps = {
-  user?: User
   onSubmit: (file: File) => void
+  onReturn: () => void
 }
 
-export default function WebcamView({ user, onSubmit }: WebcamViewProps) {
-  const hasPermission = useCameraPermission()
+export default function WebcamView({ onSubmit, onReturn }: WebcamViewProps) {
+  const webcamRef = useRef<Webcam>(null)
+  const [isCapturing, setIsCapturing] = useState(false)
   const [imageSrc, setImageSrc] = useState<string | null>(null)
-  const webcamRef = useRef<Webcam | null>(null)
-  const [countdown, setCountdown] = useState(COUNTDOWN_TIME)
-  const [isCapturing, setIsCapturing] = useState(true)
 
-  useEffect(() => {
-    if (imageSrc) {
-      return
-    }
-
-    const countdownInterval = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev === 1) {
-          clearInterval(countdownInterval)
-          setIsCapturing(false)
-        }
-        return prev - 1
-      })
-    }, ONE_SECOND)
-
-    const timer = setTimeout(() => {
-      if (webcamRef.current) {
-        const imageSrc = webcamRef.current.getScreenshot()
+  const capture = useCallback(() => {
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot()
+      if (imageSrc) {
         setImageSrc(imageSrc)
+        setIsCapturing(true)
       }
-    }, CAPTURE_DELAY)
-
-    return () => {
-      clearInterval(countdownInterval)
-      clearTimeout(timer)
     }
-  }, [imageSrc])
-
-  const handleRetry = useCallback(() => {
-    setImageSrc(null)
-    setCountdown(COUNTDOWN_TIME)
-    setIsCapturing(true)
   }, [])
 
-  const handleSubmit = useCallback(() => {
+  const submit = useCallback(() => {
     if (!imageSrc) {
       return
     }
-
     const file = dataUrlToFile(imageSrc, `${formatTime(Date.now(), 'YYYY-MM-DD-HH-mm-ss')}.jpg`)
     onSubmit(file)
   }, [imageSrc, onSubmit])
 
+  const reCapture = useCallback(() => {
+    setImageSrc(null)
+    setIsCapturing(false)
+  }, [])
+
   return (
-    <Stack gap={10} align="center" justify="center" h="100%">
-      {hasPermission ? (
-        <Stack gap={10}>
-          {imageSrc ? (
-            <Picture imageSrc={imageSrc} />
-          ) : (
-            <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
-          )}
-          <ActionButtons
-            isVisible={imageSrc !== null}
-            onRetry={handleRetry}
-            onSubmit={handleSubmit}
-          />
-        </Stack>
-      ) : (
-        <IconUserWithCorner />
-      )}
-      <UserInformation user={user} />
+    <Stack h="100%" align="center" gap={0}>
+      <Header
+        isCapturing={isCapturing}
+        onFlash={() => {}}
+        onRotateCamera={() => {}}
+        onReCapture={reCapture}
+      />
+      <Webcam
+        ref={webcamRef}
+        mirrored
+        screenshotFormat="image/jpeg"
+        width="100%"
+        videoConstraints={{ facingMode: 'user' }}
+        className={classes.webcam}
+      />
+      <Stack align="center" px={20} gap={0} mt={10}>
+        <LiveClock c="var(--time-clock-primary-color)" />
+        <Address />
+      </Stack>
+      <CaptureContainer
+        isCapturing={isCapturing}
+        onCapture={capture}
+        onReturn={onReturn}
+        onSubmit={submit}
+      />
     </Stack>
   )
 }
