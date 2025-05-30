@@ -147,7 +147,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--btn-manage-bg': '#4CA8EF',
     '--time-clock-bg': theme.colors.dark[0],
     '--time-clock-primary-color': '#3F60A0',
-    '--time-clock-secondary-color': '#888888',
+    '--time-clock-accent-color': '#888888',
   },
   light: {
     '--border-color': theme.colors.xGray[1],

@@ -1,17 +1,17 @@
 .webcam {
   object-fit: cover;
-  height: 56vh;
+  height: 56dvh;
 }
 
 .image {
   object-fit: cover;
-  height: 56vh;
+  height: 56dvh;
 }
 
 .captureButton {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  border: 3px solid var(--time-clock-secondary-color);
+  border: 3px solid var(--time-clock-accent-color);
   padding: 0;
 }

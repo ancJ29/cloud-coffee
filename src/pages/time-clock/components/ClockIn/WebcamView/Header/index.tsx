@@ -17,11 +17,8 @@ export default function Header({ isCapturing, onFlash, onRotateCamera, onReCaptu
       <Flex gap={2} align="center" onClick={onReCapture}>
         {isCapturing && (
           <>
-            <IconChevronLeft
-              color="var(--time-clock-secondary-color)"
-              style={{ cursor: 'pointer' }}
-            />
-            <Text c="var(--time-clock-secondary-color)">{t('Re capture')}</Text>
+            <IconChevronLeft color="var(--time-clock-accent-color)" style={{ cursor: 'pointer' }} />
+            <Text c="var(--time-clock-accent-color)">{t('Re capture')}</Text>
           </>
         )}
       </Flex>
@@ -29,7 +26,7 @@ export default function Header({ isCapturing, onFlash, onRotateCamera, onReCaptu
       <Flex justify="center" align="center">
         {!isCapturing && (
           <IconBoltFilled
-            color="var(--time-clock-secondary-color)"
+            color="var(--time-clock-accent-color)"
             onClick={onFlash}
             style={{ cursor: 'pointer' }}
           />
@@ -39,7 +36,7 @@ export default function Header({ isCapturing, onFlash, onRotateCamera, onReCaptu
       <Flex justify="flex-end" align="center">
         {!isCapturing && (
           <IconRotate
-            color="var(--time-clock-secondary-color)"
+            color="var(--time-clock-accent-color)"
             onClick={onRotateCamera}
             style={{ cursor: 'pointer' }}
           />
