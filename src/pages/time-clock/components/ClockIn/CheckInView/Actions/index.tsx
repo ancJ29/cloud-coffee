@@ -16,7 +16,7 @@ export default function Actions({ isCheckedIn, onCheckIn, onCheckOut }: ActionsP
       className={classes.button}
       w="80dvw"
     >
-      {isCheckedIn ? 'CLOCK IN' : 'CLOCK OUT'}
+      {isCheckedIn ? 'CLOCK OUT' : 'CLOCK IN'}
     </Button>
   )
 }
