@@ -15,9 +15,9 @@ export default function Actions({ isCheckedIn, onCheckIn, onCheckOut }: ActionsP
     <Button
       color={`${isCheckedIn ? 'var(--time-clock-secondary-color)' : 'var(--time-clock-primary-color)'}`}
       c="white"
-      fullWidth
       onClick={isCheckedIn ? onCheckOut : onCheckIn}
       className={classes.button}
+      w="80dvw"
     >
       {isCheckedIn ? t('Check out') : t('Check in')}
     </Button>

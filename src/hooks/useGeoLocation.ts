@@ -17,10 +17,14 @@ export function useGeoLocation() {
   const [loading, setLoading] = useState(true)
 
   const shortenAddress = useCallback((fullAddress: string) => {
-    return fullAddress
-      .replace(/Phường\s*(\d+)/gi, 'P.$1')
-      .replace(/Quận\s*(\d+)/gi, 'Q.$1')
-      .replace(/Thành phố Hồ Chí Minh.*/gi, 'TP.HCM')
+    return (
+      fullAddress
+        /* cspell:disable */
+        .replace(/Phường\s*(\d+)/gi, 'P.$1')
+        .replace(/Quận\s*(\d+)/gi, 'Q.$1')
+        .replace(/Thành phố Hồ Chí Minh.*/gi, 'TP.HCM')
+      /* cspell:enable */
+    )
   }, [])
 
   useEffect(() => {
