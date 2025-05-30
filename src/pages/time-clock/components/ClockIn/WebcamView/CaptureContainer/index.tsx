@@ -1,5 +1,5 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Button, Stack } from '@mantine/core'
+import { Button, Image, Stack } from '@mantine/core'
 import classes from './CaptureContainer.module.scss'
 
 type CaptureContainerProps = {
@@ -18,7 +18,7 @@ export default function CaptureContainer({
   const t = useTranslation()
 
   return (
-    <Stack align="center" justify="center" pos="relative" w="100%" mt={30}>
+    <Stack className={classes.container}>
       {isCapturing ? (
         <Button
           color="var(--time-clock-primary-color)"
@@ -29,7 +29,7 @@ export default function CaptureContainer({
         </Button>
       ) : (
         <>
-          <Button variant="default" className={classes.captureButton} onClick={onCapture} />
+          <Image src="/imgs/time-clock/button.svg" w={60} h={60} onClick={onCapture} />
           <Button variant="subtle" color="gray" pos="absolute" left={0} onClick={onReturn}>
             {t('Cancel')}
           </Button>

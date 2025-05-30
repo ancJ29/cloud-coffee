@@ -1,6 +1,5 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Flex, SimpleGrid, Text } from '@mantine/core'
-import { IconBoltFilled, IconChevronLeft, IconRotate } from '@tabler/icons-react'
+import { Flex, Image, SimpleGrid, Text } from '@mantine/core'
 
 type HeaderProps = {
   isCapturing: boolean
@@ -13,11 +12,11 @@ export default function Header({ isCapturing, onFlash, onRotateCamera, onReCaptu
   const t = useTranslation()
 
   return (
-    <SimpleGrid cols={3} w="100%" h={50} pr={20} pl={10}>
-      <Flex gap={2} align="center" onClick={onReCapture}>
+    <SimpleGrid cols={3} w="100%" h={50}>
+      <Flex gap={5} align="center" onClick={onReCapture} pl={10}>
         {isCapturing && (
           <>
-            <IconChevronLeft color="var(--time-clock-accent-color)" style={{ cursor: 'pointer' }} />
+            <Image src="/imgs/time-clock/chevron-left.svg" width={20} height={20} />
             <Text c="var(--time-clock-accent-color)">{t('Re capture')}</Text>
           </>
         )}
@@ -25,20 +24,17 @@ export default function Header({ isCapturing, onFlash, onRotateCamera, onReCaptu
 
       <Flex justify="center" align="center">
         {!isCapturing && (
-          <IconBoltFilled
-            color="var(--time-clock-accent-color)"
-            onClick={onFlash}
-            style={{ cursor: 'pointer' }}
-          />
+          <Image src="/imgs/time-clock/bolt.svg" width={20} height={20} onClick={onFlash} />
         )}
       </Flex>
 
-      <Flex justify="flex-end" align="center">
+      <Flex justify="flex-end" align="center" pr={20}>
         {!isCapturing && (
-          <IconRotate
-            color="var(--time-clock-accent-color)"
+          <Image
+            src="/imgs/time-clock/rotate.svg"
+            width={20}
+            height={20}
             onClick={onRotateCamera}
-            style={{ cursor: 'pointer' }}
           />
         )}
       </Flex>

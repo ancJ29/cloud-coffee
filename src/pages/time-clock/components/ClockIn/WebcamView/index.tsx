@@ -61,7 +61,7 @@ export default function WebcamView({ onSubmit, onReturn }: WebcamViewProps) {
           className={classes.webcam}
         />
       )}
-      <Stack align="center" px={20} gap={0} mt={10}>
+      <Stack align="center" px={20} gap={0} mt={10} h={100}>
         <LiveClock c="var(--time-clock-primary-color)" />
         <Address />
       </Stack>

@@ -1,11 +1,12 @@
 .webcam {
   object-fit: cover;
-  height: 56dvh;
+  height: 50dvh;
 }
 
 .image {
+  width: 100dvw;
+  height: 50dvh;
   object-fit: cover;
-  height: 56dvh;
 }
 
 .captureButton {

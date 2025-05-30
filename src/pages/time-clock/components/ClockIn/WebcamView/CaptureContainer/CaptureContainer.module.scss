@@ -1,8 +1,9 @@
-.captureButton {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2.5px solid var(--time-clock-accent-color);
+.container {
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: calc(100dvh - 100px - 50px - 50dvh - 68px);
 }
 
 .confirmButton {
