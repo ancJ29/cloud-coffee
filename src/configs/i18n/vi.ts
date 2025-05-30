@@ -165,4 +165,8 @@ export default {
   'Good afternoon': 'Chào buổi trưa',
   'Good evening': 'Chào buổi tối',
   'Re capture': 'Chụp lại',
+  'Success': 'Thành công',
+  'Failure': 'Thất bại',
+  'on': 'vào ngày',
+  'The attendance was not recorded': 'Chấm công không được ghi nhận',
 }

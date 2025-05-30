@@ -149,6 +149,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--time-clock-primary-color': '#3F60A0',
     '--time-clock-accent-color': '#888888',
     '--time-clock-secondary-color': '#e38e49',
+    '--time-clock-error-color': '#FF5757',
   },
   light: {
     '--border-color': theme.colors.xGray[1],

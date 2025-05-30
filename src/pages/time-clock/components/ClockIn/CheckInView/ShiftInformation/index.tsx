@@ -13,8 +13,15 @@ export default function ShiftInformation({ shifts }: ShiftInformationProps) {
   return (
     <Stack gap={6}>
       {shifts.map((shift, idx) => (
-        <Text ta="center" fw={500} key={idx}>
-          {`${t('Checked in at')} ${formatTime(shift.start, 'HH:mm A')} ${shift?.end ? `- ${t('Checked out at')} ${formatTime(shift.end, 'HH:mm A')}` : ''}`}
+        <Text fw={500} key={idx}>
+          {t('Checked in at')}{' '}
+          <Text fw="bold" span>
+            {formatTime(shift.start, 'HH:mm A')}
+          </Text>
+          {shift?.end && ` - ${t('Checked out at')} `}
+          <Text fw="bold" span>
+            {shift?.end && formatTime(shift.end, 'HH:mm A')}
+          </Text>
         </Text>
       ))}
     </Stack>

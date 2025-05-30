@@ -165,4 +165,8 @@ export default {
   'Good afternoon': 'Good afternoon',
   'Good evening': 'Good evening',
   'Re capture': 'Re capture',
+  'Success': 'Success',
+  'Failure': 'Failure',
+  'on': 'on',
+  'The attendance was not recorded': 'The attendance was not recorded',
 }

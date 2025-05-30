@@ -13,16 +13,16 @@ import {
   uploadImageToS3,
   User,
 } from '@/services/domain'
-import { endOfDay, getImageUrl, getObjectKey, ONE_SECOND, startOfDay } from '@/utils'
+import { endOfDay, getImageUrl, getObjectKey, startOfDay } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import CheckInView from './CheckInView'
 import LocationDeniedNotice from './LocationDeniedNotice'
+import StatusMessage from './StatusMessage'
 import WebcamView from './WebcamView'
 
 const MAX_PAGE_INDEX = 1
-const MODAL_CLOSE_DELAY = 1.5 * ONE_SECOND
 
 export default function ClockIn() {
   const t = useTranslation()
@@ -34,7 +34,7 @@ export default function ClockIn() {
   const [clientId, setClientId] = useState('')
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
-  const { location, denied } = useGeoLocation()
+  const { address, location, denied } = useGeoLocation()
 
   const getShiftData = useCallback(
     async (clientId: string) => {
@@ -123,24 +123,15 @@ export default function ClockIn() {
         withCloseButton: false,
         centered: true,
         size: 'lg',
-        children: (
-          <Message
-            success={success}
-            message={
-              success
-                ? t(`Checked ${isCheckIn ? 'in' : 'out'} successfully`)
-                : t(`Failed to check ${isCheckIn ? 'in' : 'out'}`)
-            }
-          />
-        ),
+        overlayProps: {
+          backgroundOpacity: 0.55,
+          blur: 3,
+        },
+        children: <StatusMessage success={success} timestamp={new Date()} address={address} />,
       })
       await getShiftData(clientId)
-      setTimeout(() => {
-        setPageIndex(0)
-        modals.closeAll()
-      }, MODAL_CLOSE_DELAY)
     },
-    [clientId, getShiftData, isCheckIn, location, t, userId],
+    [address, clientId, getShiftData, isCheckIn, location, t, userId],
   )
 
   const handleCheckInCheckOut = useCallback(

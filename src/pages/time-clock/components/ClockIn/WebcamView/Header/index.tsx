@@ -16,26 +16,19 @@ export default function Header({ isCapturing, onFlash, onRotateCamera, onReCaptu
       <Flex gap={5} align="center" onClick={onReCapture} pl={10}>
         {isCapturing && (
           <>
-            <Image src="/imgs/time-clock/chevron-left.svg" width={20} height={20} />
+            <Image src="/imgs/time-clock/chevron-left.svg" w={20} h={20} />
             <Text c="var(--time-clock-accent-color)">{t('Re capture')}</Text>
           </>
         )}
       </Flex>
 
       <Flex justify="center" align="center">
-        {!isCapturing && (
-          <Image src="/imgs/time-clock/bolt.svg" width={20} height={20} onClick={onFlash} />
-        )}
+        {!isCapturing && <Image src="/imgs/time-clock/bolt.svg" w={20} h={20} onClick={onFlash} />}
       </Flex>
 
       <Flex justify="flex-end" align="center" pr={20}>
         {!isCapturing && (
-          <Image
-            src="/imgs/time-clock/rotate.svg"
-            width={20}
-            height={20}
-            onClick={onRotateCamera}
-          />
+          <Image src="/imgs/time-clock/rotate.svg" w={20} h={20} onClick={onRotateCamera} />
         )}
       </Flex>
     </SimpleGrid>

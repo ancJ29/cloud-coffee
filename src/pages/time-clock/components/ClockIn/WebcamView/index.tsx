@@ -17,6 +17,7 @@ export default function WebcamView({ onSubmit, onReturn }: WebcamViewProps) {
   const webcamRef = useRef<Webcam>(null)
   const [isCapturing, setIsCapturing] = useState(false)
   const [imageSrc, setImageSrc] = useState<string | null>(null)
+  const [facingMode, setFacingMode] = useState<MediaTrackConstraints['facingMode']>('user')
 
   const capture = useCallback(() => {
     if (webcamRef.current) {
@@ -41,12 +42,16 @@ export default function WebcamView({ onSubmit, onReturn }: WebcamViewProps) {
     setIsCapturing(false)
   }, [])
 
+  const rotateCamera = useCallback(() => {
+    setFacingMode((prev) => (prev === 'user' ? 'environment' : 'user'))
+  }, [])
+
   return (
-    <Stack h="100%" align="center" gap={0}>
+    <Stack className={classes.container}>
       <Header
         isCapturing={isCapturing}
         onFlash={() => {}}
-        onRotateCamera={() => {}}
+        onRotateCamera={rotateCamera}
         onReCapture={reCapture}
       />
       {imageSrc ? (
@@ -54,14 +59,14 @@ export default function WebcamView({ onSubmit, onReturn }: WebcamViewProps) {
       ) : (
         <Webcam
           ref={webcamRef}
-          mirrored
+          mirrored={facingMode === 'user'}
           screenshotFormat="image/jpeg"
           width="100%"
-          videoConstraints={{ facingMode: 'user' }}
+          videoConstraints={{ facingMode }}
           className={classes.webcam}
         />
       )}
-      <Stack align="center" px={20} gap={0} mt={10} h={100}>
+      <Stack align="center" px={20} gap={8} mt={10} h={100}>
         <LiveClock c="var(--time-clock-primary-color)" />
         <Address />
       </Stack>
