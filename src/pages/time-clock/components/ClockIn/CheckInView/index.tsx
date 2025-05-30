@@ -7,15 +7,20 @@ import Header from './Header'
 import ShiftInformation from './ShiftInformation'
 
 type CheckInViewProps = {
+  isCheckedIn: boolean
   user?: User
   shifts: Shift[]
   onCheckIn: () => void
   onCheckOut: () => void
 }
 
-export default function CheckInView({ user, shifts, onCheckIn, onCheckOut }: CheckInViewProps) {
-  const isCheckedIn = shifts.length > 0 ? !(shifts[shifts.length - 1]?.end !== undefined) : false
-
+export default function CheckInView({
+  isCheckedIn,
+  user,
+  shifts,
+  onCheckIn,
+  onCheckOut,
+}: CheckInViewProps) {
   return (
     <Stack h="100%" align="center" justify="center" gap={30} px={20}>
       <Header user={user} />

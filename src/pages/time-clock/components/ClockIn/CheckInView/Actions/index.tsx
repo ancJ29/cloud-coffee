@@ -1,4 +1,3 @@
-import useTranslation from '@/hooks/useTranslation'
 import { Button } from '@mantine/core'
 import classes from './Actions.module.scss'
 
@@ -9,8 +8,6 @@ type ActionsProps = {
 }
 
 export default function Actions({ isCheckedIn, onCheckIn, onCheckOut }: ActionsProps) {
-  const t = useTranslation()
-
   return (
     <Button
       color={`${isCheckedIn ? 'var(--time-clock-secondary-color)' : 'var(--time-clock-primary-color)'}`}
@@ -19,7 +16,7 @@ export default function Actions({ isCheckedIn, onCheckIn, onCheckOut }: ActionsP
       className={classes.button}
       w="80dvw"
     >
-      {isCheckedIn ? t('Check out') : t('Check in')}
+      {isCheckedIn ? 'CLOCK IN' : 'CLOCK OUT'}
     </Button>
   )
 }

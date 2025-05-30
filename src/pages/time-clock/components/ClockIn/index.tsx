@@ -35,6 +35,7 @@ export default function ClockIn() {
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
   const { address, location, denied } = useGeoLocation()
+  const [isCheckedIn, setIsCheckedIn] = useState(false)
 
   const getShiftData = useCallback(
     async (clientId: string) => {
@@ -46,6 +47,7 @@ export default function ClockIn() {
       })
       if (shifts) {
         setShifts(shifts)
+        setIsCheckedIn(shifts.length > 0 ? !(shifts[shifts.length - 1]?.end !== undefined) : false)
       }
     },
     [userId],
@@ -150,13 +152,16 @@ export default function ClockIn() {
     <>
       {pageIndex === 0 && (
         <CheckInView
+          isCheckedIn={isCheckedIn}
           user={user}
           shifts={shifts}
           onCheckIn={handleCheckInCheckOut}
           onCheckOut={() => handleCheckInCheckOut(false)}
         />
       )}
-      {pageIndex === 1 && <WebcamView onSubmit={submit} onReturn={goToPreviousPage} />}
+      {pageIndex === 1 && (
+        <WebcamView isCheckedIn={isCheckedIn} onSubmit={submit} onReturn={goToPreviousPage} />
+      )}
     </>
   )
 }
