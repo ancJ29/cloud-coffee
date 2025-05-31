@@ -132,8 +132,8 @@ export default function ClockIn() {
         centered: true,
         size: 'lg',
         overlayProps: {
-          backgroundOpacity: 0.55,
-          blur: 3,
+          backgroundOpacity: 1,
+          blur: 5,
         },
         closeOnClickOutside: false,
         children: <StatusMessage success={success} timestamp={new Date()} address={address} />,

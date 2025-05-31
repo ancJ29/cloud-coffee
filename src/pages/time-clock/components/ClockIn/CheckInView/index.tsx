@@ -34,7 +34,7 @@ export default function CheckInView({
         }
         radius="50%"
       />
-      <Stack gap={5} align="center">
+      <Stack gap={8} align="center">
         <LiveClock
           c={
             isCheckedOut ? 'var(--time-clock-primary-color)' : 'var(--time-clock-live-clock-color)'
