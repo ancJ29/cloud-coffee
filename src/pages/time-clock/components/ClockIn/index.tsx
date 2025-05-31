@@ -132,7 +132,7 @@ export default function ClockIn() {
         centered: true,
         size: 'lg',
         overlayProps: {
-          backgroundOpacity: 1,
+          backgroundOpacity: 0.6,
           blur: 5,
         },
         closeOnClickOutside: false,
