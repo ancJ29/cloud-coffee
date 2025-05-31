@@ -36,7 +36,7 @@ export default function ClockIn() {
   const [clientId, setClientId] = useState('')
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
-  const [isCheckedOut, setIsCheckedOut] = useState(false)
+  const [isCheckedOut, setIsCheckedOut] = useState(true)
   const [zIndex, setZIndex] = useState(-1)
   const [success, setSuccess] = useState<boolean | undefined>(undefined)
 
