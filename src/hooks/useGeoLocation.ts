@@ -21,8 +21,10 @@ export function useGeoLocation() {
       fullAddress
         /* cspell:disable */
         .replace(/Phường\s*(\d+)/gi, 'P.$1')
-        .replace(/Quận\s*(\d+)/gi, 'Q.$1')
-        .replace(/Thành phố Hồ Chí Minh.*/gi, 'TP.HCM')
+        .replace(/Quận\s*/gi, 'Q.')
+        .replace(/Huyện\s*/gi, 'H.')
+        .replace(/Thành phố\s*/gi, 'TP.')
+        .replace(/Hồ Chí Minh.*/gi, 'HCM')
       /* cspell:enable */
     )
   }, [])

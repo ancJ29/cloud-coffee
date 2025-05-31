@@ -1,4 +1,5 @@
 import LiveClock from '@/components/c-time-keeper/LiveClock'
+import { PLACEHOLDER_IMAGE_URL } from '@/configs/constant'
 import { Shift, User } from '@/services/domain'
 import { Image, Stack } from '@mantine/core'
 import Actions from './Actions'
@@ -7,7 +8,7 @@ import Header from './Header'
 import ShiftInformation from './ShiftInformation'
 
 type CheckInViewProps = {
-  isCheckedIn: boolean
+  isCheckedOut: boolean
   user?: User
   shifts: Shift[]
   onCheckIn: () => void
@@ -15,7 +16,7 @@ type CheckInViewProps = {
 }
 
 export default function CheckInView({
-  isCheckedIn,
+  isCheckedOut,
   user,
   shifts,
   onCheckIn,
@@ -27,17 +28,21 @@ export default function CheckInView({
       <Image
         w={200}
         src={
-          isCheckedIn ? shifts[shifts.length - 1]?.startImageUrl : '/imgs/time-clock/default.svg'
+          isCheckedOut
+            ? '/imgs/time-clock/default.svg'
+            : (shifts[shifts.length - 1]?.startImageUrl ?? PLACEHOLDER_IMAGE_URL)
         }
         radius="50%"
       />
       <Stack gap={5} align="center">
         <LiveClock
-          c={`${isCheckedIn ? 'var(--time-clock-secondary-color)' : 'var(--time-clock-primary-color)'}`}
+          c={
+            isCheckedOut ? 'var(--time-clock-primary-color)' : 'var(--time-clock-live-clock-color)'
+          }
         />
         <Address />
       </Stack>
-      <Actions isCheckedIn={isCheckedIn} onCheckIn={onCheckIn} onCheckOut={onCheckOut} />
+      <Actions isCheckedOut={isCheckedOut} onCheckIn={onCheckIn} onCheckOut={onCheckOut} />
       <ShiftInformation shifts={shifts} />
     </Stack>
   )

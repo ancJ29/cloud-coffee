@@ -2,21 +2,21 @@ import { Button } from '@mantine/core'
 import classes from './Actions.module.scss'
 
 type ActionsProps = {
-  isCheckedIn: boolean
+  isCheckedOut: boolean
   onCheckIn: () => void
   onCheckOut: () => void
 }
 
-export default function Actions({ isCheckedIn, onCheckIn, onCheckOut }: ActionsProps) {
+export default function Actions({ isCheckedOut, onCheckIn, onCheckOut }: ActionsProps) {
   return (
     <Button
-      color={`${isCheckedIn ? 'var(--time-clock-secondary-color)' : 'var(--time-clock-primary-color)'}`}
+      color={`${isCheckedOut ? 'var(--time-clock-primary-color)' : 'var(--time-clock-secondary-color)'}`}
       c="white"
-      onClick={isCheckedIn ? onCheckOut : onCheckIn}
+      onClick={isCheckedOut ? onCheckIn : onCheckOut}
       className={classes.button}
       w="80dvw"
     >
-      {isCheckedIn ? 'CLOCK OUT' : 'CLOCK IN'}
+      {isCheckedOut ? 'CLOCK IN' : 'CLOCK OUT'}
     </Button>
   )
 }

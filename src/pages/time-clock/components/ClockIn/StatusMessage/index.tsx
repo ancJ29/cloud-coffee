@@ -23,7 +23,7 @@ export default function StatusMessage({ success, timestamp, address }: StatusMes
           <Text c="dimmed">{`${t('Location')}: ${address}`}</Text>
         </Stack>
       ) : (
-        <Stack gap={2} w="100%">
+        <Stack gap={2} w="100%" align="center">
           <Text c="dimmed">{t('The attendance was not recorded')}</Text>
           <Text c="dimmed">{t('Please try again')}</Text>
         </Stack>

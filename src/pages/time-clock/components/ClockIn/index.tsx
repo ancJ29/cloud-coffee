@@ -18,6 +18,7 @@ import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import CheckInView from './CheckInView'
+import ClosePopup from './ClosePopup'
 import LocationDeniedNotice from './LocationDeniedNotice'
 import StatusMessage from './StatusMessage'
 import WebcamView from './WebcamView'
@@ -26,6 +27,7 @@ const MAX_PAGE_INDEX = 1
 
 export default function ClockIn() {
   const t = useTranslation()
+  const { address, location, denied } = useGeoLocation()
   const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
   const [searchParams] = useSearchParams()
   const userId = searchParams.get('userId') || ''
@@ -34,8 +36,9 @@ export default function ClockIn() {
   const [clientId, setClientId] = useState('')
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
-  const { address, location, denied } = useGeoLocation()
-  const [isCheckedIn, setIsCheckedIn] = useState(false)
+  const [isCheckedOut, setIsCheckedOut] = useState(false)
+  const [zIndex, setZIndex] = useState(-1)
+  const [success, setSuccess] = useState<boolean | undefined>(undefined)
 
   const getShiftData = useCallback(
     async (clientId: string) => {
@@ -47,7 +50,8 @@ export default function ClockIn() {
       })
       if (shifts) {
         setShifts(shifts)
-        setIsCheckedIn(shifts.length > 0 ? !(shifts[shifts.length - 1]?.end !== undefined) : false)
+        const lastShift = shifts[shifts.length - 1]
+        setIsCheckedOut(!!lastShift?.end)
       }
     },
     [userId],
@@ -121,6 +125,8 @@ export default function ClockIn() {
         })
         success = res?.success
       }
+      setZIndex(9999)
+      setSuccess(success)
       modals.open({
         withCloseButton: false,
         centered: true,
@@ -129,11 +135,11 @@ export default function ClockIn() {
           backgroundOpacity: 0.55,
           blur: 3,
         },
+        closeOnClickOutside: false,
         children: <StatusMessage success={success} timestamp={new Date()} address={address} />,
       })
-      await getShiftData(clientId)
     },
-    [address, clientId, getShiftData, isCheckIn, location, t, userId],
+    [address, clientId, isCheckIn, location, t, userId],
   )
 
   const handleCheckInCheckOut = useCallback(
@@ -144,6 +150,15 @@ export default function ClockIn() {
     [goToNextPage],
   )
 
+  const closePopup = useCallback(async () => {
+    setZIndex(-1)
+    modals.closeAll()
+    if (success) {
+      setPageIndex(0)
+    }
+    await getShiftData(clientId)
+  }, [clientId, getShiftData, success])
+
   if (denied) {
     return <LocationDeniedNotice />
   }
@@ -152,7 +167,7 @@ export default function ClockIn() {
     <>
       {pageIndex === 0 && (
         <CheckInView
-          isCheckedIn={isCheckedIn}
+          isCheckedOut={isCheckedOut}
           user={user}
           shifts={shifts}
           onCheckIn={handleCheckInCheckOut}
@@ -160,8 +175,9 @@ export default function ClockIn() {
         />
       )}
       {pageIndex === 1 && (
-        <WebcamView isCheckedIn={isCheckedIn} onSubmit={submit} onReturn={goToPreviousPage} />
+        <WebcamView isCheckedOut={isCheckedOut} onSubmit={submit} onReturn={goToPreviousPage} />
       )}
+      <ClosePopup zIndex={zIndex} onClick={closePopup} />
     </>
   )
 }

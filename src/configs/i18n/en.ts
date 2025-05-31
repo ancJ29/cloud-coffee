@@ -169,4 +169,5 @@ export default {
   'Failure': 'Failure',
   'on': 'on',
   'The attendance was not recorded': 'The attendance was not recorded',
+  'Please try again': 'Please try again',
 }

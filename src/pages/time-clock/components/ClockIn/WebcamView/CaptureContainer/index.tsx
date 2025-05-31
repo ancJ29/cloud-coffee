@@ -3,7 +3,7 @@ import { Button, Image, Stack } from '@mantine/core'
 import classes from './CaptureContainer.module.scss'
 
 type CaptureContainerProps = {
-  isCheckedIn: boolean
+  isCheckedOut: boolean
   isCapturing: boolean
   onCapture: () => void
   onReturn: () => void
@@ -11,7 +11,7 @@ type CaptureContainerProps = {
 }
 
 export default function CaptureContainer({
-  isCheckedIn,
+  isCheckedOut,
   isCapturing,
   onCapture,
   onReturn,
@@ -24,7 +24,7 @@ export default function CaptureContainer({
       {isCapturing ? (
         <Button
           color={
-            isCheckedIn ? 'var(--time-clock-secondary-color)' : 'var(--time-clock-primary-color)'
+            isCheckedOut ? 'var(--time-clock-primary-color)' : 'var(--time-clock-secondary-color)'
           }
           className={classes.confirmButton}
           onClick={onSubmit}

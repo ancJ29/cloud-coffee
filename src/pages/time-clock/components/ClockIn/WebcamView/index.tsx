@@ -9,12 +9,12 @@ import Header from './Header'
 import classes from './WebcamView.module.scss'
 
 type WebcamViewProps = {
-  isCheckedIn: boolean
+  isCheckedOut: boolean
   onSubmit: (file: File) => void
   onReturn: () => void
 }
 
-export default function WebcamView({ isCheckedIn, onSubmit, onReturn }: WebcamViewProps) {
+export default function WebcamView({ isCheckedOut, onSubmit, onReturn }: WebcamViewProps) {
   const webcamRef = useRef<Webcam>(null)
   const [isCapturing, setIsCapturing] = useState(false)
   const [imageSrc, setImageSrc] = useState<string | null>(null)
@@ -69,12 +69,14 @@ export default function WebcamView({ isCheckedIn, onSubmit, onReturn }: WebcamVi
       )}
       <Stack align="center" px={20} gap={8} mt={10} h={100}>
         <LiveClock
-          c={`${isCheckedIn ? 'var(--time-clock-secondary-color)' : 'var(--time-clock-primary-color)'}`}
+          c={
+            isCheckedOut ? 'var(--time-clock-primary-color)' : 'var(--time-clock-live-clock-color)'
+          }
         />
         <Address />
       </Stack>
       <CaptureContainer
-        isCheckedIn={isCheckedIn}
+        isCheckedOut={isCheckedOut}
         isCapturing={isCapturing}
         onCapture={capture}
         onReturn={onReturn}

@@ -169,4 +169,5 @@ export default {
   'Failure': 'Thất bại',
   'on': 'vào ngày',
   'The attendance was not recorded': 'Chấm công không được ghi nhận',
+  'Please try again': 'Vui lòng thử lại',
 }
