@@ -16,7 +16,6 @@ import {
 import { endOfDay, getImageUrl, getObjectKey, startOfDay } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import CheckInView from './CheckInView'
 import ClosePopup from './ClosePopup'
 import LocationDeniedNotice from './LocationDeniedNotice'
@@ -25,12 +24,14 @@ import WebcamView from './WebcamView'
 
 const MAX_PAGE_INDEX = 1
 
-export default function ClockIn() {
+type ClockInProps = {
+  userId: string
+}
+
+export default function ClockIn({ userId }: ClockInProps) {
   const t = useTranslation()
   const { address, location, denied } = useGeoLocation()
   const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
-  const [searchParams] = useSearchParams()
-  const userId = searchParams.get('userId') || ''
   const [user, setUser] = useState<User | undefined>(undefined)
   const [shifts, setShifts] = useState<Shift[]>([])
   const [clientId, setClientId] = useState('')
@@ -38,7 +39,8 @@ export default function ClockIn() {
   const [isCheckIn, setIsCheckIn] = useState(true)
   const [isCheckedOut, setIsCheckedOut] = useState(true)
   const [zIndex, setZIndex] = useState(-1)
-  const [success, setSuccess] = useState<boolean | undefined>(undefined)
+  const [isCheckSuccessful, setIsCheckSuccessful] = useState<boolean | undefined>(undefined)
+  const [key, setKey] = useState(0)
 
   const getShiftData = useCallback(
     async (clientId: string) => {
@@ -99,6 +101,7 @@ export default function ClockIn() {
       }
 
       let success: boolean | undefined
+      let message: string | undefined
       const objectKey = getObjectKey(clientId, userId, file, isCheckIn)
       const imageUrl = getImageUrl(objectKey)
       const uploadResult = await uploadImageToS3({
@@ -116,6 +119,7 @@ export default function ClockIn() {
           ...location,
         })
         success = res?.success
+        message = res?.message
       } else {
         const res = await checkOutByUser({
           clientId,
@@ -124,9 +128,10 @@ export default function ClockIn() {
           ...location,
         })
         success = res?.success
+        message = res?.message
       }
       setZIndex(9999)
-      setSuccess(success)
+      setIsCheckSuccessful(success)
       modals.open({
         withCloseButton: false,
         centered: true,
@@ -136,7 +141,14 @@ export default function ClockIn() {
           blur: 5,
         },
         closeOnClickOutside: false,
-        children: <StatusMessage success={success} timestamp={new Date()} address={address} />,
+        children: (
+          <StatusMessage
+            success={success}
+            message={message}
+            timestamp={new Date()}
+            address={address}
+          />
+        ),
       })
     },
     [address, clientId, isCheckIn, location, t, userId],
@@ -153,11 +165,13 @@ export default function ClockIn() {
   const closePopup = useCallback(async () => {
     setZIndex(-1)
     modals.closeAll()
-    if (success) {
+    if (isCheckSuccessful) {
       setPageIndex(0)
+    } else {
+      setKey((prev) => prev + 1)
     }
     await getShiftData(clientId)
-  }, [clientId, getShiftData, success])
+  }, [clientId, getShiftData, isCheckSuccessful])
 
   if (denied) {
     return <LocationDeniedNotice />
@@ -175,7 +189,12 @@ export default function ClockIn() {
         />
       )}
       {pageIndex === 1 && (
-        <WebcamView isCheckedOut={isCheckedOut} onSubmit={submit} onReturn={goToPreviousPage} />
+        <WebcamView
+          key={key}
+          isCheckedOut={isCheckedOut}
+          onSubmit={submit}
+          onReturn={goToPreviousPage}
+        />
       )}
       <ClosePopup zIndex={zIndex} onClick={closePopup} />
     </>

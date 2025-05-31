@@ -168,6 +168,14 @@ export default {
   'Success': 'Success',
   'Failure': 'Failure',
   'on': 'on',
-  'The attendance was not recorded': 'The attendance was not recorded',
   'Please try again': 'Please try again',
+  'The user ID is missing': 'The user ID is missing',
+  'Please check the URL or contact support if you believe this is a mistake':
+    'Please check the URL or contact support if you believe this is a mistake',
+  'You are too far from the location (over 100 meters) to check in':
+    'You are too far from the location (over 100 meters) to check in',
+  'You are too far from the location (over 100 meters) to check out':
+    'You are too far from the location (over 100 meters) to check out',
+  'You have already checked in': 'You have already checked in',
+  'You have not checked in yet': 'You have not checked in yet',
 }

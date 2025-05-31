@@ -25,6 +25,7 @@ export const checkInByUserSchema = _typeBuilder({
   }),
   response: z.object({
     success: booleanSchema,
+    message: optionalStringSchema,
   }),
 })
 
@@ -39,6 +40,7 @@ export const checkOutByUserSchema = _typeBuilder({
   }),
   response: z.object({
     success: booleanSchema,
+    message: optionalStringSchema,
   }),
 })
 

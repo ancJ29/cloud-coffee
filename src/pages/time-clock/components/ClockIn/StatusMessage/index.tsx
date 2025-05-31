@@ -4,11 +4,17 @@ import { Image, Stack, Text } from '@mantine/core'
 
 type StatusMessageProps = {
   success?: boolean
+  message?: string
   timestamp: Date
   address: string
 }
 
-export default function StatusMessage({ success, timestamp, address }: StatusMessageProps) {
+export default function StatusMessage({
+  success,
+  message,
+  timestamp,
+  address,
+}: StatusMessageProps) {
   const t = useTranslation()
 
   return (
@@ -24,7 +30,9 @@ export default function StatusMessage({ success, timestamp, address }: StatusMes
         </Stack>
       ) : (
         <Stack gap={2} w="100%" align="center">
-          <Text c="dimmed">{t('The attendance was not recorded')}</Text>
+          <Text c="dimmed" ta="center">
+            {t(message)}
+          </Text>
           <Text c="dimmed">{t('Please try again')}</Text>
         </Stack>
       )}

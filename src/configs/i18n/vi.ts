@@ -168,6 +168,14 @@ export default {
   'Success': 'Thành công',
   'Failure': 'Thất bại',
   'on': 'vào ngày',
-  'The attendance was not recorded': 'Chấm công không được ghi nhận',
   'Please try again': 'Vui lòng thử lại',
+  'The user ID is missing': 'ID người dùng bị thiếu',
+  'Please check the URL or contact support if you believe this is a mistake':
+    'Vui lòng kiểm tra lại đường dẫn hoặc liên hệ hỗ trợ nếu bạn cho rằng đây là lỗi',
+  'You are too far from the location (over 100 meters) to clock in':
+    'Bạn đang ở quá xa địa điểm (hơn 100 mét) nên không thể clock in',
+  'You are too far from the location (over 100 meters) to clock out':
+    'Bạn đang ở quá xa địa điểm (hơn 100 mét) nên không thể clock out',
+  'You have already clock in': 'Bạn đã clock in rồi',
+  'You have not clock in yet': 'Bạn chưa thực hiện clock in',
 }

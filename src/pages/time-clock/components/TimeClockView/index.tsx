@@ -8,17 +8,22 @@ import TimeOffCenter from '../TimeOffCenter'
 import classes from './TimeClockView.module.scss'
 
 type TimeClockViewProps = {
+  userId: string
   selectedTab: Tabs
   onChangeSelectedTab: (tab: Tabs) => void
 }
 
-export default function TimeClockView({ selectedTab, onChangeSelectedTab }: TimeClockViewProps) {
+export default function TimeClockView({
+  userId,
+  selectedTab,
+  onChangeSelectedTab,
+}: TimeClockViewProps) {
   return (
     <>
       <MobileOnlyWarning />
       <Stack className={classes.container} hiddenFrom="md">
         <div className={classes.content}>
-          {selectedTab === Tabs.TIME_CLOCK && <ClockIn />}
+          {selectedTab === Tabs.TIME_CLOCK && <ClockIn userId={userId} />}
           {selectedTab === Tabs.MY_TIMESHEET && <MyTimesheet />}
           {selectedTab === Tabs.TIME_OFF_CENTER && <TimeOffCenter />}
         </div>
