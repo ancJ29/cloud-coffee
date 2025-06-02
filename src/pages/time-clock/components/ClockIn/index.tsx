@@ -37,7 +37,7 @@ export default function ClockIn({ userId }: ClockInProps) {
   const [clientId, setClientId] = useState('')
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
-  const [isCheckedOut, setIsCheckedOut] = useState(true)
+  const [isCheckedIn, setIsCheckedIn] = useState(false)
   const [zIndex, setZIndex] = useState(-1)
   const [isCheckSuccessful, setIsCheckSuccessful] = useState<boolean | undefined>(undefined)
   const [key, setKey] = useState(0)
@@ -52,8 +52,7 @@ export default function ClockIn({ userId }: ClockInProps) {
       })
       if (shifts) {
         setShifts(shifts)
-        const lastShift = shifts[shifts.length - 1]
-        setIsCheckedOut(!!lastShift?.end)
+        setIsCheckedIn(shifts.length > 0 && shifts[shifts.length - 1].end === undefined)
       }
     },
     [userId],
@@ -181,7 +180,7 @@ export default function ClockIn({ userId }: ClockInProps) {
     <>
       {pageIndex === 0 && (
         <CheckInView
-          isCheckedOut={isCheckedOut}
+          isCheckedIn={isCheckedIn}
           user={user}
           shifts={shifts}
           onCheckIn={handleCheckInCheckOut}
@@ -191,7 +190,7 @@ export default function ClockIn({ userId }: ClockInProps) {
       {pageIndex === 1 && (
         <WebcamView
           key={key}
-          isCheckedOut={isCheckedOut}
+          isCheckedIn={isCheckedIn}
           onSubmit={submit}
           onReturn={goToPreviousPage}
         />

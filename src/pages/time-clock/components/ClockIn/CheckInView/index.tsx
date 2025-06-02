@@ -8,7 +8,7 @@ import Header from './Header'
 import ShiftInformation from './ShiftInformation'
 
 type CheckInViewProps = {
-  isCheckedOut: boolean
+  isCheckedIn: boolean
   user?: User
   shifts: Shift[]
   onCheckIn: () => void
@@ -16,7 +16,7 @@ type CheckInViewProps = {
 }
 
 export default function CheckInView({
-  isCheckedOut,
+  isCheckedIn,
   user,
   shifts,
   onCheckIn,
@@ -28,7 +28,7 @@ export default function CheckInView({
       <Image
         w={200}
         src={
-          isCheckedOut
+          isCheckedIn
             ? (shifts[shifts.length - 1]?.startImageUrl ?? PLACEHOLDER_IMAGE_URL)
             : '/imgs/time-clock/default.svg'
         }
@@ -36,13 +36,11 @@ export default function CheckInView({
       />
       <Stack gap={8} align="center">
         <LiveClock
-          c={
-            isCheckedOut ? 'var(--time-clock-live-clock-color)' : 'var(--time-clock-primary-color)'
-          }
+          c={isCheckedIn ? 'var(--time-clock-live-clock-color)' : 'var(--time-clock-primary-color)'}
         />
         <Address />
       </Stack>
-      <Actions isCheckedOut={isCheckedOut} onCheckIn={onCheckIn} onCheckOut={onCheckOut} />
+      <Actions isCheckedIn={isCheckedIn} onCheckIn={onCheckIn} onCheckOut={onCheckOut} />
       <ShiftInformation shifts={shifts} />
     </Stack>
   )
