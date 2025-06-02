@@ -78,6 +78,7 @@ export default function WorkingStatus() {
   return (
     <WorkingStatusView
       venues={venues}
+      users={currents}
       userShiftStatusList={updates}
       keyword={keyword}
       onChangeKeyword={handleChangeKeyword}

@@ -15,7 +15,6 @@
 }
 
 .header {
-  position: fixed;
   width: 38.5vw;
 
   @media only screen and (max-width: 768px) {
@@ -24,6 +23,5 @@
 }
 
 .content {
-  margin-top: 130px;
   overflow: auto;
 }
