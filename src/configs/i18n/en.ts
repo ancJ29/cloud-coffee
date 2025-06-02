@@ -123,25 +123,6 @@ export default {
   'Time clock': 'Time clock',
   'Time off center': 'Time off center',
   'Manage': 'Manage',
-  'Location permission has not been granted to the browser':
-    'Location permission has not been granted to the browser',
-  'Address not found': 'Address not found',
-  'Taking your position': 'Taking your position',
-  'You have not granted location access to the browser on your device':
-    'You have not granted location access to the browser on your device',
-  'See permission instructions': 'See permission instructions',
-  'We could not access your location. Please make sure you have granted location access in your browser settings':
-    'We could not access your location. Please make sure you have granted location access in your browser settings',
-  'Return to your browser and refresh the page to continue':
-    'Return to your browser and refresh the page to continue',
-  'On the home screen of your device, find the icon of the browser app you are using':
-    'On the home screen of your device, find the icon of the browser app you are using',
-  'Tap and hold the app icon': 'Tap and hold the app icon',
-  'Tap on': 'Tap on',
-  'App Info': 'App Info',
-  'Always allow': 'Always allow',
-  'Allow only while using the app': 'Allow only while using the app',
-  'Always ask': 'Always ask',
   'The domain you are trying to access is invalid':
     'The domain you are trying to access is invalid',
   'Expected salary': 'Expected salary',
@@ -167,4 +148,50 @@ export default {
     'You are too far from the location (over 100 meters) to check out',
   'You have already checked in': 'You have already checked in',
   'You have not checked in yet': 'You have not checked in yet',
+  'Location permission has not been granted to the browser':
+    'Location permission has not been granted to the browser',
+  'Address not found': 'Address not found',
+  'Taking your position': 'Taking your position',
+  'You have not granted location access to the browser on your device':
+    'You have not granted location access to the browser on your device',
+  'See permission instructions': 'See permission instructions',
+  'We could not access your location. Please make sure you have granted location access in your browser settings':
+    'We could not access your location. Please make sure you have granted location access in your browser settings',
+  'On the home screen of your device, find the icon of the browser app you are using':
+    'On the home screen of your device, find the icon of the browser app you are using',
+  'Tap and hold the app icon': 'Tap and hold the app icon',
+  'Tap': 'Tap on',
+  'App Info': 'App Info',
+  'Always allow': 'Always allow',
+  'Allow only while using the app': 'Allow only while using the app',
+  'Always ask': 'Always ask',
+  'Permissions': 'Permissions',
+  'Location': 'Location',
+  'Select': 'Select',
+  'or': 'or',
+  'Open': 'Open',
+  'app on your phone': 'app on your phone',
+  'Scroll down and tap': 'Scroll down and tap',
+  'Privacy & Security': 'Privacy & Security',
+  'Location Services': 'Location Services',
+  'Make sure': 'Make sure',
+  'is turned': 'is turned',
+  'ON': 'ON',
+  'Scroll down and tap your browser (e.g.,': 'Scroll down and tap your browser (e.g.,',
+  'Safari Websites': 'Safari Websites',
+  'Chrome': 'Chrome',
+  'Ask Next Time Or When I Share': 'Ask Next Time Or When I Share',
+  'While Using the App': 'While Using the App',
+  'Go back to the main': 'Go back to the main',
+  'screen and tap': 'screen and tap',
+  'Apps': 'Apps',
+  'Safari': 'Safari',
+  'Ask': 'Ask',
+  'Allow': 'Allow',
+  'If you are using Safari, please follow these additional steps':
+    'If you are using Safari, please follow these additional steps',
+  'Return to your browser, switch to the previous tab, and':
+    'Return to your browser, switch to the previous tab, and',
+  'refresh the page': 'refresh the page',
+  'Location access permission instructions': 'Location access permission instructions',
 }

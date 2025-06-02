@@ -35,9 +35,7 @@ export default function CheckInView({
         radius="50%"
       />
       <Stack gap={8} align="center">
-        <LiveClock
-          c={isCheckedIn ? 'var(--time-clock-live-clock-color)' : 'var(--time-clock-primary-color)'}
-        />
+        <LiveClock c={isCheckedIn ? 'var(--time-clock-live-clock)' : 'var(--time-clock-primary)'} />
         <Address />
       </Stack>
       <Actions isCheckedIn={isCheckedIn} onCheckIn={onCheckIn} onCheckOut={onCheckOut} />

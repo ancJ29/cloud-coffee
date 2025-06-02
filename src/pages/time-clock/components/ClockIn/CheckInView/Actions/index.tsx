@@ -10,7 +10,7 @@ type ActionsProps = {
 export default function Actions({ isCheckedIn, onCheckIn, onCheckOut }: ActionsProps) {
   return (
     <Button
-      color={`${isCheckedIn ? 'var(--time-clock-secondary-color)' : 'var(--time-clock-primary-color)'}`}
+      color={`${isCheckedIn ? 'var(--time-clock-secondary)' : 'var(--time-clock-primary)'}`}
       c="white"
       onClick={isCheckedIn ? onCheckOut : onCheckIn}
       className={classes.button}

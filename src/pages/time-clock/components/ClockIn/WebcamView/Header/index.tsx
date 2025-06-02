@@ -17,7 +17,7 @@ export default function Header({ isCapturing, onFlash, onRotateCamera, onReCaptu
         {isCapturing && (
           <>
             <Image src="/imgs/time-clock/chevron-left.svg" w={20} h={20} />
-            <Text c="var(--time-clock-accent-color)">{t('Re capture')}</Text>
+            <Text c="var(--time-clock-accent)">{t('Re capture')}</Text>
           </>
         )}
       </Flex>

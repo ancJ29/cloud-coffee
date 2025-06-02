@@ -1,40 +1,97 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Image, Stack, Text } from '@mantine/core'
+import { ActionIcon, Collapse, Flex, Stack, Text } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { IconChevronDown, IconChevronRight } from '@tabler/icons-react'
+import Item from '../Item'
 
 export default function IOSGuide() {
   const t = useTranslation()
+  const [opened, { toggle }] = useDisclosure(false)
 
-  const steps = [
+  const mainSteps = [
     <>
-      {t('Open the')} <strong>{t('Settings')}</strong> {t('app on your phone')}
+      {t('Open')} <strong>{t('Settings')}</strong> {t('app on your phone')}
     </>,
     <>
-      {t('Scroll down and select')} <strong>{t('App')}</strong>
+      {t('Scroll down and tap')} <strong>{t('Privacy & Security')}</strong>
     </>,
     <>
-      {t('Scroll down and select')} <strong>Chrome</strong> ({t('or the browser you are using')})
+      {t('Tap')} <strong>{t('Location Services')}</strong>
     </>,
     <>
-      {t('Select')} <strong>{t('Location')}</strong>
+      {t('Make sure')} <strong>{t('Location Services')}</strong> {t('is turned')}{' '}
+      <strong>{t('ON')}</strong>
     </>,
     <>
-      {t('Select')} <strong>{t('While Using the App')}</strong> {t('or')}{' '}
-      <strong>{t('Ask Next Time or When I Share')}</strong>
+      {t('Scroll down and tap your browser (e.g.,')} <strong>{t('Safari Websites')}</strong>,{' '}
+      <strong>{t('Chrome')}</strong>)
     </>,
-    <>{t('Return to your browser and refresh the page to continue')}</>,
+    <>
+      {t('Select')} <strong>{t('Ask Next Time Or When I Share')}</strong> {t('or')}{' '}
+      <strong>{t('While Using the App')}</strong>
+    </>,
   ]
+
+  const safariSteps = [
+    <>
+      {t('Go back to the main')} <strong>{t('Settings')}</strong> {t('screen and tap')}{' '}
+      <strong>{t('Apps')}</strong>
+    </>,
+    <>
+      {t('Scroll down and tap')} <strong>{t('Safari')}</strong>
+    </>,
+    <>
+      {t('Scroll down and tap')} <strong>{t('Location')}</strong>
+    </>,
+    <>
+      {t('Select')} <strong>{t('Ask')}</strong> {t('or')} <strong>{t('Allow')}</strong>
+    </>,
+  ]
+
+  const finalStep = (
+    <>
+      {t('Return to your browser, switch to the previous tab, and')}{' '}
+      <strong>{t('refresh the page')}</strong>
+    </>
+  )
 
   return (
     <Stack gap={30}>
-      {steps.map((step, idx) => (
-        <Stack key={idx} gap={-5}>
-          <Text fz={16} px={20}>
-            {`${idx + 1}. `}
-            {step}
-          </Text>
-          <Image src={`/imgs/location-permission/ios/${idx + 1}.png`} />
-        </Stack>
+      {mainSteps.map((step, idx) => (
+        <Item
+          key={idx}
+          index={idx + 1}
+          content={step}
+          image={`/imgs/location-permission/ios/${idx + 1}.png`}
+        />
       ))}
+      <Stack gap={10}>
+        <Flex justify="space-between" align="center" bg="var(--highlight)" gap={4} onClick={toggle}>
+          <Text fz={16} px={10}>
+            {t('If you are using Safari, please follow these additional steps')}
+          </Text>
+          <ActionIcon variant="transparent">
+            {opened ? <IconChevronDown color="black" /> : <IconChevronRight color="black" />}
+          </ActionIcon>
+        </Flex>
+        <Collapse in={opened} transitionDuration={300} transitionTimingFunction="linear">
+          <Stack gap={30}>
+            {safariSteps.map((step, idx) => (
+              <Item
+                key={mainSteps.length + idx}
+                index={mainSteps.length + idx + 1}
+                content={step}
+                image={`/imgs/location-permission/ios/${mainSteps.length + idx + 1}.png`}
+              />
+            ))}
+          </Stack>
+        </Collapse>
+      </Stack>
+      <Item
+        index={mainSteps.length + (opened ? safariSteps.length : 0) + 1}
+        content={finalStep}
+        image={`/imgs/location-permission/ios/${mainSteps.length + (opened ? safariSteps.length : 0) + 1}.png`}
+      />
     </Stack>
   )
 }

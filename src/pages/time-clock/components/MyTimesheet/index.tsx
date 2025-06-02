@@ -6,7 +6,7 @@ export default function MyTimesheet() {
 
   return (
     <Stack px={20} align="center" justify="center" h="100%">
-      <Text c="var(--time-clock-accent-color)">{t('Sorry, this feature is implemented yet')}</Text>
+      <Text c="var(--time-clock-accent)">{t('Sorry, this feature is implemented yet')}</Text>
     </Stack>
   )
 }

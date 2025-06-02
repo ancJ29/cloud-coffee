@@ -68,9 +68,7 @@ export default function WebcamView({ isCheckedIn, onSubmit, onReturn }: WebcamVi
         />
       )}
       <Stack align="center" px={20} gap={8} mt={10} h={100}>
-        <LiveClock
-          c={isCheckedIn ? 'var(--time-clock-live-clock-color)' : 'var(--time-clock-primary-color)'}
-        />
+        <LiveClock c={isCheckedIn ? 'var(--time-clock-live-clock)' : 'var(--time-clock-primary)'} />
         <Address />
       </Stack>
       <CaptureContainer

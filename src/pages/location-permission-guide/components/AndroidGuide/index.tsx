@@ -1,5 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Stack, Text } from '@mantine/core'
+import { Stack } from '@mantine/core'
+import Item from '../Item'
 
 export default function AndroidGuide() {
   const t = useTranslation()
@@ -8,31 +9,30 @@ export default function AndroidGuide() {
     <>{t('On the home screen of your device, find the icon of the browser app you are using')}</>,
     <>{t('Tap and hold the app icon')}</>,
     <>
-      {t('Tap on')} <strong>{t('App info')}</strong>
+      {t('Tap')} <strong>{t('App Info')}</strong>
     </>,
     <>
-      {t('Select')} <strong>{t('Permissions')}</strong>
+      {t('Tap')} <strong>{t('Permissions')}</strong>
     </>,
     <>
-      {t('Select')} <strong>{t('Location')}</strong>
+      {t('Tap')} <strong>{t('Location')}</strong>
     </>,
     <>
       {t('Select')} <strong>{t('Always allow')}</strong> {t('or')}{' '}
       <strong>{t('Allow only while using the app')}</strong> {t('or')}{' '}
       <strong>{t('Always ask')}</strong>
     </>,
-    <>{t('Return to your browser and refresh the page to continue')}</>,
+    <>
+      {' '}
+      {t('Return to your browser, switch to the previous tab, and')}{' '}
+      <strong>{t('refresh the page')}</strong>
+    </>,
   ]
 
   return (
     <Stack gap={10}>
       {steps.map((step, idx) => (
-        <Stack key={idx} gap={-5}>
-          <Text fz={16} px={10}>
-            {`${idx + 1}. `}
-            {step}
-          </Text>
-        </Stack>
+        <Item key={idx} index={idx + 1} content={step} />
       ))}
     </Stack>
   )
