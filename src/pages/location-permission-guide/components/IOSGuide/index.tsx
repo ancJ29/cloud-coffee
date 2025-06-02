@@ -21,7 +21,7 @@ export default function IOSGuide() {
       {t('Select')} <strong>{t('While Using the App')}</strong> {t('or')}{' '}
       <strong>{t('Ask Next Time or When I Share')}</strong>
     </>,
-    <>{t('Return to your browser to continue using the app')}</>,
+    <>{t('Return to your browser and refresh the page to continue')}</>,
   ]
 
   return (

@@ -24,7 +24,7 @@ export default function CaptureContainer({
       {isCapturing ? (
         <Button
           color={
-            isCheckedOut ? 'var(--time-clock-primary-color)' : 'var(--time-clock-secondary-color)'
+            isCheckedOut ? 'var(--time-clock-secondary-color)' : 'var(--time-clock-primary-color)'
           }
           className={classes.confirmButton}
           onClick={onSubmit}

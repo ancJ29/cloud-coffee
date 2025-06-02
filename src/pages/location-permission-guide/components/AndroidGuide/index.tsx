@@ -21,7 +21,7 @@ export default function AndroidGuide() {
       <strong>{t('Allow only while using the app')}</strong> {t('or')}{' '}
       <strong>{t('Always ask')}</strong>
     </>,
-    <>{t('Return to your browser to continue using the app')}</>,
+    <>{t('Return to your browser and refresh the page to continue')}</>,
   ]
 
   return (

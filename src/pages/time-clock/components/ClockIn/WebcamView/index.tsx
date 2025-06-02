@@ -70,7 +70,7 @@ export default function WebcamView({ isCheckedOut, onSubmit, onReturn }: WebcamV
       <Stack align="center" px={20} gap={8} mt={10} h={100}>
         <LiveClock
           c={
-            isCheckedOut ? 'var(--time-clock-primary-color)' : 'var(--time-clock-live-clock-color)'
+            isCheckedOut ? 'var(--time-clock-live-clock-color)' : 'var(--time-clock-primary-color)'
           }
         />
         <Address />

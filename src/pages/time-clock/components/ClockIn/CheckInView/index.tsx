@@ -29,15 +29,15 @@ export default function CheckInView({
         w={200}
         src={
           isCheckedOut
-            ? '/imgs/time-clock/default.svg'
-            : (shifts[shifts.length - 1]?.startImageUrl ?? PLACEHOLDER_IMAGE_URL)
+            ? (shifts[shifts.length - 1]?.startImageUrl ?? PLACEHOLDER_IMAGE_URL)
+            : '/imgs/time-clock/default.svg'
         }
         radius="50%"
       />
       <Stack gap={8} align="center">
         <LiveClock
           c={
-            isCheckedOut ? 'var(--time-clock-primary-color)' : 'var(--time-clock-live-clock-color)'
+            isCheckedOut ? 'var(--time-clock-live-clock-color)' : 'var(--time-clock-primary-color)'
           }
         />
         <Address />
