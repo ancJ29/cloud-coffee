@@ -119,7 +119,7 @@ export default function WorkEntry() {
             message={
               success
                 ? t(`Checked ${isCheckIn ? 'in' : 'out'} successfully`)
-                : `${t(`Failed to check ${isCheckIn ? 'in' : 'out'}`)}\n${message}`
+                : `${t(`Failed to check ${isCheckIn ? 'in' : 'out'}`)}\n${t(message)}`
             }
           />
         ),
