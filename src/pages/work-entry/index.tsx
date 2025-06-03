@@ -98,6 +98,7 @@ export default function WorkEntry() {
           startImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
         })
         success = res?.success
+        message = res?.message
       } else {
         const res = await checkOutByUser({
           clientId,
