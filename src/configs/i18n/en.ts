@@ -91,8 +91,8 @@ export default {
   'Are you sure to save changes?': 'Are you sure to save changes?',
   'Save changes': 'Save changes',
   'Retry': 'Retry',
-  'Scan the QR code to go to the check-in/check-out page':
-    'Scan the QR code to go to the check-in/check-out page',
+  'Scan the QR code to go to the checkin/checkout page':
+    'Scan the QR code to go to the checkin/checkout page',
   'Or click': 'Or click',
   'to access the page': 'to access the page',
   'here': 'here',
@@ -142,12 +142,12 @@ export default {
   'The user ID is missing': 'The user ID is missing',
   'Please check the URL or contact support if you believe this is a mistake':
     'Please check the URL or contact support if you believe this is a mistake',
-  'You are too far from the location (over 100 meters) to check in':
-    'You are too far from the location (over 100 meters) to check in',
-  'You are too far from the location (over 100 meters) to check out':
-    'You are too far from the location (over 100 meters) to check out',
-  'You have already checked in': 'You have already checked in',
-  'You have not checked in yet': 'You have not checked in yet',
+  'You are too far from the location (over 100 meters) to clock in':
+    'You are too far from the location (over 100 meters) to clock in',
+  'You are too far from the location (over 100 meters) to clock out':
+    'You are too far from the location (over 100 meters) to clock out',
+  'You have already clocked in': 'You have already clocked in',
+  'You have not clocked in yet': 'You have not clocked in yet',
   'Location permission has not been granted to the browser':
     'Location permission has not been granted to the browser',
   'Address not found': 'Address not found',

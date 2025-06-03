@@ -80,10 +80,10 @@ export default {
   'Check out': 'Kết thúc làm việc',
   'Please select user and venue': 'Vui làm chọn nhân viên và địa điểm',
   'Work entry': 'Ghi nhận giờ làm',
-  'Checked in successfully': 'Check-in thành công',
-  'Checked out successfully': 'Check-out thành công',
-  'Failed to check in': 'Check-in thất bại',
-  'Failed to check out': 'Check-out thất bại',
+  'Checked in successfully': 'Checkin thành công',
+  'Checked out successfully': 'Checkout thành công',
+  'Failed to check in': 'Checkin thất bại',
+  'Failed to check out': 'Checkout thất bại',
   'Total': 'Tổng cộng',
   'Clock in': 'Vào ca',
   'Clock out': 'Ra ca',
@@ -91,8 +91,8 @@ export default {
   'Are you sure to save changes?': 'Bạn có chắc chắn muốn cập nhật thông tin?',
   'Save changes': 'Lưu thay đổi',
   'Retry': 'Thử lại',
-  'Scan the QR code to go to the check-in/check-out page':
-    'Quét mã QR để đi đến trang check-in/check-out',
+  'Scan the QR code to go to the checkin/checkout page':
+    'Quét mã QR để đi đến trang checkin/checkout',
   'Or click': 'Hoặc nhấn',
   'to access the page': 'để truy cập trang',
   'here': 'tại đây',
@@ -146,8 +146,8 @@ export default {
     'Bạn đang ở quá xa địa điểm (hơn 100 mét) nên không thể clock in',
   'You are too far from the location (over 100 meters) to clock out':
     'Bạn đang ở quá xa địa điểm (hơn 100 mét) nên không thể clock out',
-  'You have already clock in': 'Bạn đã clock in rồi',
-  'You have not clock in yet': 'Bạn chưa thực hiện clock in',
+  'You have already clocked in': 'Bạn đã clock in rồi',
+  'You have not clocked in yet': 'Bạn chưa thực hiện clock in',
   'Location permission has not been granted to the browser':
     'Trình duyệt chưa được cấp quyền truy cập vị trí',
   'Address not found': 'Không tìm thấy địa chỉ',

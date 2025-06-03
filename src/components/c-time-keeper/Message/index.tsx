@@ -14,7 +14,7 @@ export default function Message({ success = true, message }: MessageProps) {
       ) : (
         <IconX color="var(--error)" size={80} />
       )}
-      <Text fw="bold" fz={{ base: 30, sm: 40 }} ta="center">
+      <Text fw="bold" fz={{ base: 30, sm: 40 }} ta="center" style={{ whiteSpace: 'pre-line' }}>
         {message}
       </Text>
     </Stack>
