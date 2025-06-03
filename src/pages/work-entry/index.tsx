@@ -80,6 +80,7 @@ export default function WorkEntry() {
   const submit = useCallback(
     async (file: File) => {
       let success: boolean | undefined
+      let message: string | undefined
       const objectKey = getObjectKey(clientId, selectedUserId, file, isCheckIn)
       const imageUrl = getImageUrl(objectKey)
       const uploadResult = await uploadImageToS3({
@@ -104,6 +105,7 @@ export default function WorkEntry() {
           endImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
         })
         success = res?.success
+        message = res?.message
       }
       modals.open({
         withCloseButton: false,
@@ -117,7 +119,7 @@ export default function WorkEntry() {
             message={
               success
                 ? t(`Checked ${isCheckIn ? 'in' : 'out'} successfully`)
-                : t(`Failed to check ${isCheckIn ? 'in' : 'out'}`)
+                : `${t(`Failed to check ${isCheckIn ? 'in' : 'out'}`)}\n${message}`
             }
           />
         ),
