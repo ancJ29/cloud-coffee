@@ -194,4 +194,6 @@ export default {
   'If you are using Safari, please follow these additional steps':
     'Nếu bạn đang sử dụng Safari, vui lòng làm theo các bước bổ sung sau',
   'Location access permission instructions': 'Hướng dẫn cấp quyền truy cập vị trí',
+  'Please use tablet or laptop device to view this page':
+    'Vui lòng sử dụng máy tính bảng hoặc máy tính để xem trang này',
 }

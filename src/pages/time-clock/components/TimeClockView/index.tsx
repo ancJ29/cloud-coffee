@@ -1,4 +1,5 @@
 import { Stack } from '@mantine/core'
+import { BrowserView, MobileView } from 'react-device-detect'
 import { Tabs, tabs } from '../../_configs'
 import ClockIn from '../ClockIn'
 import MobileOnlyWarning from '../MobileOnlyWarning'
@@ -20,25 +21,29 @@ export default function TimeClockView({
 }: TimeClockViewProps) {
   return (
     <>
-      <MobileOnlyWarning />
-      <Stack className={classes.container} hiddenFrom="md">
-        <div className={classes.content}>
-          {selectedTab === Tabs.TIME_CLOCK && <ClockIn userId={userId} />}
-          {selectedTab === Tabs.MY_TIMESHEET && <MyTimesheet />}
-          {selectedTab === Tabs.TIME_OFF_CENTER && <TimeOffCenter />}
-        </div>
+      <BrowserView>
+        <MobileOnlyWarning />
+      </BrowserView>
+      <MobileView>
+        <Stack className={classes.container}>
+          <div className={classes.content}>
+            {selectedTab === Tabs.TIME_CLOCK && <ClockIn userId={userId} />}
+            {selectedTab === Tabs.MY_TIMESHEET && <MyTimesheet />}
+            {selectedTab === Tabs.TIME_OFF_CENTER && <TimeOffCenter />}
+          </div>
 
-        <div className={classes.tabBar}>
-          {tabs.map((tab, idx) => (
-            <TabItem
-              key={idx}
-              tab={tab}
-              isSelected={tab.label === selectedTab}
-              onClick={() => onChangeSelectedTab(tab.label)}
-            />
-          ))}
-        </div>
-      </Stack>
+          <div className={classes.tabBar}>
+            {tabs.map((tab, idx) => (
+              <TabItem
+                key={idx}
+                tab={tab}
+                isSelected={tab.label === selectedTab}
+                onClick={() => onChangeSelectedTab(tab.label)}
+              />
+            ))}
+          </div>
+        </Stack>
+      </MobileView>
     </>
   )
 }

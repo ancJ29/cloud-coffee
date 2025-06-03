@@ -15,8 +15,10 @@ import {
 import { getImageUrl, getObjectKey, ONE_SECOND } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
+import { isMobile, isTablet } from 'react-device-detect'
 import { useSearchParams } from 'react-router-dom'
 import CheckInView from './components/CheckInView'
+import NonMobileOnly from './components/NonMobileOnly'
 import UserSelector from './components/UserSelector'
 import WorkEntryView from './components/WorkEntryView'
 
@@ -127,6 +129,10 @@ export default function WorkEntry() {
     },
     [clientId, isCheckIn, selectedUserId, t, venueId],
   )
+
+  if (isMobile && !isTablet) {
+    return <NonMobileOnly />
+  }
 
   return (
     <>

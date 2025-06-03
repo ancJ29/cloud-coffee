@@ -194,4 +194,6 @@ export default {
     'Return to your browser, switch to the previous tab, and',
   'refresh the page': 'refresh the page',
   'Location access permission instructions': 'Location access permission instructions',
+  'Please use tablet or laptop device to view this page':
+    'Please use tablet or laptop device to view this page',
 }

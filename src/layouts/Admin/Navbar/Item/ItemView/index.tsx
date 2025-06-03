@@ -44,6 +44,7 @@ export default function ItemView({
         w={navbarOpened ? '-webkit-fill-available' : ''}
         className={classes.container}
         color={isChoose ? 'var(--mantine-color-body)' : 'var(--text-color)'}
+        visibleFrom={menuItem.visibleFrom}
       >
         <Flex justify="space-between" align="center" px={10.5}>
           <Flex gap={8} align="end" className={classes.content}>

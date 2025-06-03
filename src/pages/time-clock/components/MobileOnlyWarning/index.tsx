@@ -5,7 +5,7 @@ export default function MobileOnlyWarning() {
   const t = useTranslation()
 
   return (
-    <Center w="100vw" h="100vh" visibleFrom="md">
+    <Center w="100vw" h="100vh">
       <Text ta="center">{t('Please use mobile device to view this page')}</Text>
     </Center>
   )

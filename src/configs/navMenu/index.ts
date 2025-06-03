@@ -29,5 +29,6 @@ export const navMenu: MenuItem[] = [
     icon: IconQrcode,
     url: '/qr-code-for-attendance',
     roles: [ClientRoles.OWNER],
+    visibleFrom: 'sm',
   },
 ]
