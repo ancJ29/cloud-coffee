@@ -14,12 +14,14 @@ export default async function callApi<T extends RequestAction, U, R>({
   schema,
   log = false,
   adminKey,
+  delay,
 }: CallApiProps<T, U, R> & {
   log?: boolean
   adminKey?: string
+  delay?: number
 }): Promise<R | undefined> {
   const token = sessionStorage.__TOKEN__ || localStorage.__TOKEN__
-  const res = await request({ action, payload }, token, adminKey)
+  const res = await request({ data: { action, payload }, token, adminKey, delay })
   if (log) {
     debug(
       {

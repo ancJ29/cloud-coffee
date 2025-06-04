@@ -1,6 +1,7 @@
 import {
   checkInByUserSchema,
   checkOutByUserSchema,
+  DelayProps,
   getShiftsByAdminSchema,
   getShiftsSchema,
   RequestAction,
@@ -20,21 +21,23 @@ export async function getAllShifts(payload: GetShiftsRequest) {
   })
 }
 
-type CheckInByUserRequest = z.infer<typeof checkInByUserSchema.request>['payload']
+type CheckInByUserRequest = z.infer<typeof checkInByUserSchema.request>['payload'] & DelayProps
 export async function checkInByUser(payload: CheckInByUserRequest) {
   return await callApi({
     action: RequestAction.CHECK_IN_BY_USER,
     payload,
     schema: checkInByUserSchema,
+    delay: payload.delay,
   })
 }
 
-type CheckOutByUserRequest = z.infer<typeof checkOutByUserSchema.request>['payload']
+type CheckOutByUserRequest = z.infer<typeof checkOutByUserSchema.request>['payload'] & DelayProps
 export async function checkOutByUser(payload: CheckOutByUserRequest) {
   return await callApi({
     action: RequestAction.CHECK_OUT_BY_USER,
     payload,
     schema: checkOutByUserSchema,
+    delay: payload.delay,
   })
 }
 
@@ -47,11 +50,13 @@ export async function updateShift(payload: UpdateShiftRequest) {
   })
 }
 
-type GetShiftsByAdminRequest = z.infer<typeof getShiftsByAdminSchema.request>['payload']
+type GetShiftsByAdminRequest = z.infer<typeof getShiftsByAdminSchema.request>['payload'] &
+  DelayProps
 export async function getAllShiftsByAdmin(payload: GetShiftsByAdminRequest) {
   return await loadAll({
     action: RequestAction.GET_SHIFTS_BY_ADMIN,
     payload,
     schema: getShiftsByAdminSchema,
+    delay: payload.delay,
   })
 }

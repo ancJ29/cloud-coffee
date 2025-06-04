@@ -22,7 +22,7 @@ import NonMobileOnly from './components/NonMobileOnly'
 import UserSelector from './components/UserSelector'
 import WorkEntryView from './components/WorkEntryView'
 
-const MODAL_CLOSE_DELAY = 1.5 * ONE_SECOND
+const MODAL_CLOSE_DELAY = 2.2 * ONE_SECOND
 const MAX_PAGE_INDEX = 3
 
 export default function WorkEntry() {
@@ -96,6 +96,7 @@ export default function WorkEntry() {
           userId: selectedUserId,
           venueId,
           startImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
+          delay: 400,
         })
         success = res?.success
         message = res?.message
@@ -104,6 +105,7 @@ export default function WorkEntry() {
           clientId,
           userId: selectedUserId,
           endImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
+          delay: 400,
         })
         success = res?.success
         message = res?.message

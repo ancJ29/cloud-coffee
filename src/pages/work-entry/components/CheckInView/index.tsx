@@ -14,7 +14,7 @@ import Fireworks from './Fireworks'
 import UserInformation from './UserInformation'
 
 const COUNTDOWN_TIME = 3
-const CAPTURE_DELAY = (COUNTDOWN_TIME + 0.3) * ONE_SECOND
+const CAPTURE_DELAY = COUNTDOWN_TIME * ONE_SECOND
 
 type CheckInViewProps = {
   venue?: Venue

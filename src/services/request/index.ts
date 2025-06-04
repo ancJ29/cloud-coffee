@@ -4,11 +4,14 @@ import axios from 'axios'
 import logger from '../logger'
 import loadingStore from './store/loading'
 
-export default async function request(
-  data: GenericObject,
-  token: string | null,
-  adminKey?: string,
-) {
+type RequestProps = {
+  data: GenericObject
+  token: string | null
+  adminKey?: string
+  delay?: number
+}
+
+export default async function request({ data, token, adminKey, delay }: RequestProps) {
   loadingStore.startLoading()
 
   const baseUrl = import.meta.env.VITE_BASE_URL
@@ -27,6 +30,6 @@ export default async function request(
   } catch (error) {
     logger.error('[api-error]', error)
   } finally {
-    loadingStore.stopLoading()
+    loadingStore.stopLoading(delay)
   }
 }

@@ -14,3 +14,7 @@ export type OptionProps = {
 
 export type DateValue = Date | null
 export type DatesRangeValue = [DateValue, DateValue]
+
+export type DelayProps = {
+  delay?: number
+}
