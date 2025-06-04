@@ -12,7 +12,7 @@ type ManageButtonProps = {
 export default function ManageButton({ navigateUrl = '/working-status' }: ManageButtonProps) {
   const t = useTranslation()
   const navigate = useNavigate()
-  const isMobile = useWindowResize()
+  const isMobileScreen = useWindowResize()
 
   const onClick = useCallback(() => {
     navigate(navigateUrl)
@@ -23,7 +23,7 @@ export default function ManageButton({ navigateUrl = '/working-status' }: Manage
       className={classes.button}
       color="var(--btn-manage-bg)"
       onClick={onClick}
-      size={isMobile ? 'sm' : 'lg'}
+      size={isMobileScreen ? 'sm' : 'lg'}
     >
       {t('Manager')}
     </Button>

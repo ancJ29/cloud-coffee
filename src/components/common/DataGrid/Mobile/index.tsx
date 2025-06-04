@@ -1,6 +1,6 @@
 import Select from '@/components/common/Select'
 import { DataGridColumnProps, DataGridProps, GenericObject } from '@/types'
-import { Card, Flex, MantineStyleProp, Pagination, Text } from '@mantine/core'
+import { Card, Flex, Pagination, Text } from '@mantine/core'
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 import { limitOptions } from '../_configs'
 import EmptyBox from '../EmptyBox'
@@ -167,7 +167,7 @@ function RowContent<T extends GenericObject>({
   column: DataGridColumnProps
   row: T
 }) {
-  return <DataRow key={column.key} title={column.header} content={_renderRowContent(row, column)} />
+  return <DataRow key={column.key} column={column} content={_renderRowContent(row, column)} />
 }
 
 function _renderRowContent(row: GenericObject, column: DataGridColumnProps) {
@@ -185,22 +185,18 @@ function _renderRowContent(row: GenericObject, column: DataGridColumnProps) {
 }
 
 function DataRow({
-  title,
+  column,
   content,
-  columnStyle,
 }: {
-  title: string | ReactNode
+  column: DataGridColumnProps
   content: string | ReactNode
-  columnStyle?: MantineStyleProp
 }) {
   return (
-    <Flex w="100%" justify="space-between" align="start" gap={5} py={4} px={12}>
+    <Flex w="100%" justify="space-between" gap={5} py={4} px={12} style={column.style}>
       <Text fw="bold" miw="40%" maw="50%">
-        {title}
+        {column.header}
       </Text>
-      <Flex ta="end" style={columnStyle}>
-        {content}
-      </Flex>
+      <Flex ta="end">{content}</Flex>
     </Flex>
   )
 }

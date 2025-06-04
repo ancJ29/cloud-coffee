@@ -4,10 +4,10 @@ import Filter, { FilterProps } from '../Filter'
 import ShiftSchedule from '../ShiftSchedule'
 
 export default function TimeSheetView({ ...props }: FilterProps) {
-  const isMobile = useWindowResize()
+  const isMobileScreen = useWindowResize()
 
   return (
-    <Stack gap={isMobile ? 10 : 20} pb={40}>
+    <Stack gap={isMobileScreen ? 10 : 20} pb={40}>
       <Filter {...props} />
       <ShiftSchedule />
     </Stack>

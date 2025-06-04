@@ -17,7 +17,7 @@ type CalendarProps = {
 }
 
 export default function Calendar({ events, resources, onEventClick, onDateSet }: CalendarProps) {
-  const isMobile = useWindowResize()
+  const isMobileScreen = useWindowResize()
 
   return (
     <div className={classes.calendar}>
@@ -33,7 +33,7 @@ export default function Calendar({ events, resources, onEventClick, onDateSet }:
           center: 'title',
           right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth',
         }}
-        height={isMobile ? undefined : '90vh'}
+        height={isMobileScreen ? undefined : '90vh'}
         fixedWeekCount={false}
         editable={true}
         selectable={true}

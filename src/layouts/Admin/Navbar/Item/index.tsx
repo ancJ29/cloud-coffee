@@ -21,7 +21,7 @@ export default function Item({
 }: ItemProps) {
   const location = useLocation()
   const navigate = useNavigate()
-  const isMobile = useWindowResize()
+  const isMobileScreen = useWindowResize()
   const [opened, setOpened] = useState(false)
   const [active, setActive] = useState(location.pathname)
   const ml = level * 1
@@ -39,12 +39,12 @@ export default function Item({
     }
     if (!menuItem.subs) {
       navigate(menuItem.url || '')
-      isMobile && closeNavbar()
+      isMobileScreen && closeNavbar()
       return
     }
     setOpened(!opened)
     openNavbar()
-  }, [closeNavbar, isMobile, menuItem, navigate, opened, openNavbar])
+  }, [closeNavbar, isMobileScreen, menuItem, navigate, opened, openNavbar])
 
   const isHighlighted = useCallback((item: MenuItem, activeUrl: string): boolean => {
     return activeUrl === item.url

@@ -16,11 +16,11 @@ type AdminLayoutProps = {
 }
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
-  const isMobile = useWindowResize()
+  const isMobileScreen = useWindowResize()
   const navigate = useNavigate()
   const { removeToken, user } = useAuthStore()
   const [navbarOpened, { toggle: toggleNavbar, close: closeNavbar, open: openNavbar }] =
-    useDisclosure(!isMobile)
+    useDisclosure(!isMobileScreen)
   const [language] = useState(localStorage.__LANGUAGE__ || Language.VI)
   const { roles } = useRoleStore()
   const filterMenu = filterMenuByRole(navMenu, roles.get(user?.roleId || '')?.name || '')
@@ -39,9 +39,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }, [navigate, removeToken])
 
   const goToProfilePage = useCallback(() => {
-    isMobile && closeNavbar()
+    isMobileScreen && closeNavbar()
     navigate('/profile')
-  }, [closeNavbar, isMobile, navigate])
+  }, [closeNavbar, isMobileScreen, navigate])
 
   const goToTimesheetPage = useCallback(() => {
     navigate('/timesheet')

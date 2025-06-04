@@ -31,7 +31,7 @@ export default function Navbar({
   closeNavbar,
   openNavbar,
 }: NavbarProps) {
-  const isMobile = useWindowResize()
+  const isMobileScreen = useWindowResize()
 
   const content = (
     <>
@@ -71,7 +71,7 @@ export default function Navbar({
       >
         {content}
       </Box>
-      {isMobile && (
+      {isMobileScreen && (
         <Drawer
           opened={navbarOpened}
           onClose={closeNavbar}

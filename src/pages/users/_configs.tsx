@@ -1,6 +1,6 @@
 import { Role, SalaryRule, User } from '@/services/domain'
 import { DataGridColumnProps, FilterProps, OptionProps } from '@/types'
-import CopyUserUrlButton from './components/CopyUserUrlButton'
+import ShareUserUrlButton from './components/ShareUserUrlButton'
 import Status from './components/Status'
 
 export const configs = (
@@ -59,8 +59,9 @@ export const configs = (
       header: t('Checkin link'),
       width: '15%',
       textAlign: 'center',
+      style: { alignItems: 'center' },
       renderCell: (_, user: User) => {
-        return <CopyUserUrlButton user={user} />
+        return <ShareUserUrlButton user={user} />
       },
     },
   ]

@@ -28,7 +28,7 @@ export default function Profile({
   onGoToProfilePage,
 }: ProfileProps) {
   const t = useTranslation()
-  const isMobile = useWindowResize()
+  const isMobileScreen = useWindowResize()
   const { user } = useAuthStore()
   const [opened, setOpened] = useState(false)
 
@@ -42,14 +42,14 @@ export default function Profile({
 
   return (
     <Menu
-      width={isMobile ? 200 : 250}
+      width={isMobileScreen ? 200 : 250}
       position="top-start"
       radius={10}
       shadow="md"
       offset={8}
       opened={opened}
       onChange={setOpened}
-      zIndex={isMobile ? 1200 : 200}
+      zIndex={isMobileScreen ? 1200 : 200}
     >
       <Menu.Target>
         <UnstyledButton>
