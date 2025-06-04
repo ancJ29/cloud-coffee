@@ -34,8 +34,6 @@ export default {
   'Add user': 'Add user',
   'Add': 'Add',
   'Are you sure you want to add new user?': 'Are you sure you want to add new user?',
-  'Please copy and keep password safe before create new user':
-    'Please copy and keep password safe before create new user',
   'Are you sure you want to update user?': 'Are you sure you want to update user?',
   'Update user': 'Update user',
   'Password copied to clipboard': 'Password copied to clipboard',
@@ -196,4 +194,7 @@ export default {
   'Location access permission instructions': 'Location access permission instructions',
   'Please use tablet or laptop device to view this page':
     'Please use tablet or laptop device to view this page',
+  'Copy': 'Copy',
+  'Copied': 'Copied',
+  'Checkin link': 'Checkin link',
 }

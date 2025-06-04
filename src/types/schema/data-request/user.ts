@@ -21,7 +21,7 @@ export const getUsersSchema = _typeBuilder({
       .object({
         id: stringSchema,
         name: stringSchema,
-        username: stringSchema,
+        username: nullishStringSchema,
         email: nullishStringSchema,
         avatar: nullishStringSchema,
         roleId: stringSchema,
@@ -60,7 +60,6 @@ export const updateUserSchema = _typeBuilder({
     .object({
       id: stringSchema,
       name: stringSchema,
-      username: stringSchema,
       email: nullishStringSchema,
       avatar: nullishStringSchema,
       roleId: stringSchema,
@@ -80,9 +79,7 @@ export const addUserSchema = _typeBuilder({
   payload: z
     .object({
       name: stringSchema,
-      username: stringSchema,
       email: nullishStringSchema,
-      password: stringSchema,
       avatar: nullishStringSchema,
       roleId: stringSchema,
       salaryRuleId: optionalStringSchema,

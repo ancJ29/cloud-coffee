@@ -8,7 +8,7 @@ const WorkEntryWrapper = lazy(() => import('@/layouts/WorkEntry'))
 const routeConfigs: RouteConfig[] = [
   {
     path: '/*',
-    element: () => <Navigate to="/timesheet" />,
+    element: () => <Navigate to="/users" />,
   },
   {
     path: '/users',

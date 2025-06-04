@@ -1,5 +1,6 @@
 import { Role, SalaryRule, User } from '@/services/domain'
 import { DataGridColumnProps, FilterProps, OptionProps } from '@/types'
+import CopyUserUrlButton from './components/CopyUserUrlButton'
 import Status from './components/Status'
 
 export const configs = (
@@ -22,7 +23,7 @@ export const configs = (
     {
       key: 'email',
       header: t('Email'),
-      width: '25%',
+      width: '20%',
       renderCell: (_, user: User) => {
         return user.email || '-'
       },
@@ -30,7 +31,7 @@ export const configs = (
     {
       key: 'role',
       header: t('Role'),
-      width: '15%',
+      width: '10%',
 
       renderCell: (_, user: User) => {
         return t(roles.get(user.roleId)?.name || '')
@@ -47,10 +48,19 @@ export const configs = (
     {
       key: 'active',
       header: t('Status'),
-      width: '20%',
+      width: '15%',
       textAlign: 'center',
       renderCell: (_, user: User) => {
         return <Status enabled={user.enabled} />
+      },
+    },
+    {
+      key: 'checkin-link',
+      header: t('Checkin link'),
+      width: '15%',
+      textAlign: 'center',
+      renderCell: (_, user: User) => {
+        return <CopyUserUrlButton user={user} />
       },
     },
   ]

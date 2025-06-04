@@ -11,7 +11,6 @@ const w = '100%'
 const initialValues: UpdateUserRequest = {
   id: '',
   name: '',
-  username: '',
   email: '',
   roleId: '',
   salaryRuleId: '',
@@ -56,8 +55,7 @@ export default function EditUserForm({
         onConfirm({
           ...values,
           name: values.name.trim(),
-          email: values.email?.trim(),
-          username: values.username.trim(),
+          email: values.email?.trim() || undefined,
         })
       },
     })
@@ -81,13 +79,6 @@ export default function EditUserForm({
           placeholder={t('Enter your fullname')}
           withAsterisk
           {...form.getInputProps('name')}
-        />
-        <TextInput
-          w={w}
-          label={t('Username')}
-          placeholder={t('Username')}
-          withAsterisk
-          {...form.getInputProps('username')}
         />
         <TextInput
           w={w}
@@ -120,7 +111,6 @@ export default function EditUserForm({
 function _validate(t: (s: string) => string) {
   return {
     name: (value: string) => (value === '' ? t('Field is required') : null),
-    username: (value: string) => (value === '' ? t('Field is required') : null),
     email: (value?: string | null) => {
       if (!value || value.trim() === '') {
         return null

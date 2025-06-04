@@ -34,8 +34,6 @@ export default {
   'Add user': 'Thêm nhân viên',
   'Add': 'Thêm',
   'Are you sure you want to add new user?': 'Bạn có chắc chắn muốn thêm nhân viên mới?',
-  'Please copy and keep password safe before create new user':
-    'Vui lòng sao chép và lưu mật khẩu trước khi tạo nhân viên mới',
   'Are you sure you want to update user?': 'Bạn có chắc chắn muốn cập nhật nhân viên?',
   'Update user': 'Cập nhật nhân viên',
   'Password copied to clipboard': 'Mật khẩu đã được sao chép',
@@ -196,4 +194,7 @@ export default {
   'Location access permission instructions': 'Hướng dẫn cấp quyền truy cập vị trí',
   'Please use tablet or laptop device to view this page':
     'Vui lòng sử dụng máy tính bảng hoặc máy tính để xem trang này',
+  'Copy': 'Sao chép',
+  'Copied': 'Đã sao chép',
+  'Checkin link': 'Link chấm công',
 }
