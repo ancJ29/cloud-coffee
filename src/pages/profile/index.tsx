@@ -36,7 +36,7 @@ export default function Profile() {
         ...values,
         name: values.name.trim(),
         email: values.email?.trim(),
-        username: values.username.trim(),
+        username: values.username?.trim() || undefined,
         enabled: true,
       }).then((res) => showNotification({ t, success: res?.success }))
     },
@@ -55,7 +55,7 @@ function _validate(t: (s: string) => string) {
       }
       return /^\S+@\S+$/.test(value) ? null : t('Invalid email')
     },
-    username: (value: string) => (value === '' ? t('Field is required') : null),
+    username: (value?: string | null) => (value === '' || !value ? t('Field is required') : null),
     roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
   }
 }
