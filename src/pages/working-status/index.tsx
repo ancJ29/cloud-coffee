@@ -32,6 +32,7 @@ export default function WorkingStatus() {
           clientId,
           start: startOfDay(now),
           end: now,
+          delay: 600,
         }),
       ])
 
