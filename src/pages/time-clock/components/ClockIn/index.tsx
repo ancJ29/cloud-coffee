@@ -49,7 +49,7 @@ export default function ClockIn({ userId }: ClockInProps) {
         userId,
         start: startOfDay(Date.now()),
         end: endOfDay(Date.now()),
-        delay: 800,
+        delay: 600,
       })
       if (shifts) {
         setShifts(shifts)
@@ -117,7 +117,7 @@ export default function ClockIn({ userId }: ClockInProps) {
           userId,
           startImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
           ...location,
-          delay: 1000,
+          delay: 400,
         })
         success = res?.success
         message = res?.message
@@ -127,7 +127,7 @@ export default function ClockIn({ userId }: ClockInProps) {
           userId,
           endImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
           ...location,
-          delay: 1000,
+          delay: 400,
         })
         success = res?.success
         message = res?.message
