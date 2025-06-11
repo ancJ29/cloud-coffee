@@ -13,7 +13,6 @@ const initialValues: AddUserRequest = {
   email: '',
   roleId: '',
   salaryRuleId: '',
-  baseSalary: 0,
   canSendEmail: true,
 }
 
