@@ -8,7 +8,7 @@ export const loginSchema = _typeBuilder({
   guestOnly: true,
   action: z.literal(RequestAction.LOGIN),
   payload: z.object({
-    username: stringSchema,
+    email: stringSchema,
     password: stringSchema,
   }),
   response: z.object({
@@ -24,7 +24,6 @@ export const getMeSchema = _typeBuilder({
     .object({
       id: stringSchema,
       name: stringSchema,
-      username: nullishStringSchema,
       email: nullishStringSchema,
       avatar: nullishStringSchema,
       roleId: stringSchema,

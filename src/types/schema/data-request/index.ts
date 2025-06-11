@@ -1,12 +1,15 @@
 import { z } from 'zod'
 import { changePasswordSchema, getMeSchema, loginSchema, resetPasswordSchema } from './auth'
-import { getClientByDomainSchema, getClientsByAdminSchema } from './client'
+import {
+  getClientByDomainSchema,
+  getClientsByAdminSchema,
+  registerClientAccountSchema,
+} from './client'
 import { getPreSignedUrlSchema } from './image'
 import {
   clearDatabaseSchema,
   initCloudCoffeeDataSchema,
   initNovaWorkDataSchema,
-  initPhamTuanMotorcareDataSchema,
   initTemplateDateSchema,
 } from './init-data'
 import { getVersionSchema } from './metadata'
@@ -42,6 +45,7 @@ export const requestSchema = z.union([
   resetPasswordSchema.request,
   getClientsByAdminSchema.request,
   getClientByDomainSchema.request,
+  registerClientAccountSchema.request,
   getUsersSchema.request,
   getUsersByAdminSchema.request,
   updateUserSchema.request,
@@ -61,7 +65,6 @@ export const requestSchema = z.union([
   initTemplateDateSchema.request,
   initCloudCoffeeDataSchema.request,
   initNovaWorkDataSchema.request,
-  initPhamTuanMotorcareDataSchema.request,
   getPreSignedUrlSchema.request,
 ])
 
@@ -72,6 +75,7 @@ export const responseSchema = z.union([
   resetPasswordSchema.response,
   getClientsByAdminSchema.response,
   getClientByDomainSchema.response,
+  registerClientAccountSchema.response,
   getUsersSchema.response,
   getUsersByAdminSchema.response,
   updateUserSchema.response,
@@ -91,6 +95,5 @@ export const responseSchema = z.union([
   initTemplateDateSchema.response,
   initCloudCoffeeDataSchema.response,
   initNovaWorkDataSchema.response,
-  initPhamTuanMotorcareDataSchema.response,
   getPreSignedUrlSchema.response,
 ])

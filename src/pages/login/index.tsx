@@ -7,13 +7,13 @@ import { useCallback } from 'react'
 import LoginView from './components/LoginView'
 
 export type FormProps = {
-  username: string
+  email: string
   password: string
   remember: boolean
 }
 
 const initialValues: FormProps = {
-  username: '',
+  email: '',
   password: '',
   remember: localStorage.__REMEMBER__ === 'true',
 }
@@ -36,7 +36,7 @@ export default function Login() {
         setToken(res.token, form.values.remember)
       } else {
         form.setErrors({
-          password: 'Username or password is incorrect',
+          password: 'Email or password is incorrect',
         })
       }
     },
@@ -48,7 +48,7 @@ export default function Login() {
 
 function _validate(t: (s: string) => string) {
   return {
-    email: (value: string) => (value === '' ? t('Please enter username') : null),
+    email: (value: string) => (value === '' ? t('Please enter email') : null),
     password: (value: string) => (value === '' ? t('Please enter password') : null),
   }
 }

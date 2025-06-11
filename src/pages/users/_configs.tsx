@@ -13,12 +13,7 @@ export const configs = (
       key: 'name',
       sortable: true,
       header: t('Name'),
-      width: '15%',
-    },
-    {
-      key: 'username',
-      header: t('Username'),
-      width: '15%',
+      width: '20%',
     },
     {
       key: 'email',
@@ -40,7 +35,7 @@ export const configs = (
     {
       key: 'salaryRule',
       header: t('Salary rule'),
-      width: '10%',
+      width: '15%',
       renderCell: (_, user: User) => {
         return salaryRules.get(user.salaryRuleId || '')?.name || ''
       },
@@ -48,7 +43,7 @@ export const configs = (
     {
       key: 'active',
       header: t('Status'),
-      width: '15%',
+      width: '20%',
       textAlign: 'center',
       renderCell: (_, user: User) => {
         return <Status enabled={user.enabled} />

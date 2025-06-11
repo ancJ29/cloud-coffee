@@ -15,7 +15,6 @@ const initialValues: UpdateUserRequest = {
   roleId: '',
   salaryRuleId: '',
   clientId: '',
-  baseSalary: 0,
   enabled: true,
   canSendEmail: true,
 }

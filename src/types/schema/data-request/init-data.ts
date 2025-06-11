@@ -27,7 +27,7 @@ export const initCloudCoffeeDataSchema = _typeBuilder({
     domain: stringSchema,
     salaryRuleName: stringSchema,
     hourlyPay: numberSchema,
-    ownerUserName: stringSchema,
+    ownerEmail: stringSchema,
     totalUsers: numberSchema,
   }),
   response: z.object({
@@ -44,27 +44,8 @@ export const initNovaWorkDataSchema = _typeBuilder({
     standardHours: numberSchema,
     hourlyPay: numberSchema,
     overtimePay: numberSchema,
-    ownerUserName: stringSchema,
+    ownerEmail: stringSchema,
     totalUsers: numberSchema,
-  }),
-  response: z.object({
-    success: booleanSchema,
-  }),
-})
-
-export const initPhamTuanMotorcareDataSchema = _typeBuilder({
-  action: z.literal(RequestAction.INIT_PHAM_TUAN_MOTORCARE_DATA),
-  payload: z.object({
-    clientName: optionalStringSchema.default(ClientNames.PHAM_TUAN_MOTORCARE),
-    domain: stringSchema,
-    ownerUserName: stringSchema,
-    users: z
-      .object({
-        name: stringSchema,
-        isFemale: booleanSchema,
-        roleName: stringSchema,
-      })
-      .array(),
   }),
   response: z.object({
     success: booleanSchema,

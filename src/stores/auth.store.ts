@@ -87,10 +87,9 @@ function clearStorage() {
   localStorage.__LANGUAGE__ = language
 }
 
-function isValidDomain(userDomain: string) {
-  if (IS_DEV) {
+function isValidDomain(userDomain?: string) {
+  if (IS_DEV || !userDomain) {
     return true
   }
-  const currentDomain = window.location.hostname
-  return userDomain === currentDomain
+  return userDomain === window.location.hostname
 }

@@ -48,7 +48,7 @@ export default {
   'Venue': 'Địa điểm',
   'Salary rule': 'Quy tắc lương',
   'Check your email': 'Kiểm tra email',
-  'Invalid user': 'nhân viên không hợp lệ',
+  'Invalid user': 'Nhân viên không hợp lệ',
   'Select all': 'Chọn tất cả',
   'No results found': 'Không tìm thấy kết quả',
   'Item per page': 'Số dòng',
@@ -67,8 +67,6 @@ export default {
   'Settings': 'Cài đặt',
   'Monthly salary management': 'Quản lý bảng lương',
   'Month': 'Tháng',
-  'Username': 'Tài khoản',
-  'Please enter username': 'Vui lòng nhập tài khoản',
   'Export excel': 'Xuất file excel',
   'Sorry, this feature is implemented yet': 'Xin lỗi, chức năng này vẫn chưa được triển khai',
   'Standard hours': 'Giờ chuẩn',
@@ -197,4 +195,5 @@ export default {
   'Copy': 'Sao chép',
   'Copied': 'Đã sao chép',
   'Checkin link': 'Link chấm công',
+  'Email or password is incorrect': 'Email hoặc mật khẩu không đúng',
 }

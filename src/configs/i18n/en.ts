@@ -67,8 +67,6 @@ export default {
   'Settings': 'Settings',
   'Monthly salary': 'Monthly salary',
   'Month': 'Month',
-  'Username': 'Username',
-  'Please enter username': 'Please enter username',
   'Export excel': 'Export excel',
   'Sorry, this feature is implemented yet': 'Sorry, this feature is implemented yet',
   'Standard hours': 'Standard hours',
@@ -197,4 +195,5 @@ export default {
   'Copy': 'Copy',
   'Copied': 'Copied',
   'Checkin link': 'Checkin link',
+  'Email or password is incorrect': 'Email or password is incorrect',
 }

@@ -1,5 +1,12 @@
 import { z } from 'zod'
-import { booleanSchema, getSchema, listResponse, nullishBooleanSchema, stringSchema } from '../base'
+import {
+  booleanSchema,
+  getSchema,
+  listResponse,
+  nullishBooleanSchema,
+  optionalStringSchema,
+  stringSchema,
+} from '../base'
 import { clientMemoSchema } from '../configs'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
@@ -32,4 +39,19 @@ export const getClientsByAdminSchema = _typeBuilder({
       })
       .extend(clientMemoSchema.shape),
   ),
+})
+
+export const registerClientAccountSchema = _typeBuilder({
+  guestOnly: true,
+  action: z.literal(RequestAction.REGISTER_CLIENT_ACCOUNT),
+  payload: z.object({
+    businessName: stringSchema,
+    name: stringSchema,
+    email: stringSchema,
+    password: stringSchema,
+  }),
+  response: z.object({
+    success: booleanSchema,
+    message: optionalStringSchema,
+  }),
 })

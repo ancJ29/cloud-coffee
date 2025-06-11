@@ -21,7 +21,6 @@ export const getUsersSchema = _typeBuilder({
       .object({
         id: stringSchema,
         name: stringSchema,
-        username: nullishStringSchema,
         email: nullishStringSchema,
         avatar: nullishStringSchema,
         roleId: stringSchema,
@@ -60,7 +59,6 @@ export const updateUserSchema = _typeBuilder({
     .object({
       id: stringSchema,
       name: stringSchema,
-      username: nullishStringSchema,
       email: nullishStringSchema,
       avatar: nullishStringSchema,
       roleId: stringSchema,

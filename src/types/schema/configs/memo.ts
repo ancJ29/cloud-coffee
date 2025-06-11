@@ -1,11 +1,11 @@
 import { z } from 'zod'
-import { optionalBooleanSchema, optionalNumberSchema, stringSchema } from '../base'
+import { optionalBooleanSchema, optionalStringSchema } from '../base'
 
 export const clientMemoSchema = z.object({
-  domain: stringSchema,
+  domain: optionalStringSchema,
 })
 
 export const userMemoSchema = z.object({
-  baseSalary: optionalNumberSchema.default(0),
+  isEmailVerified: optionalBooleanSchema.default(false),
   canSendEmail: optionalBooleanSchema.default(false),
 })
