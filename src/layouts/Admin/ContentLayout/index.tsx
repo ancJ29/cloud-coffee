@@ -29,7 +29,7 @@ export default function ContentLayout({
     <div className={`${classes.container} ${!navbarOpened ? classes.shifted : ''}`}>
       <Flex justify="space-between" align="center" hiddenFrom="sm" className={classes.header}>
         <Image src="favicon.svg" w={28} />
-        <Text fw={500}>{t(title)}</Text>
+        <Text fw={600}>{t(title)}</Text>
         <Burger opened={navbarOpened} onClick={toggleNavbar} size="sm" />
       </Flex>
       <div className={classes.content}>{children}</div>

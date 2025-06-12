@@ -25,6 +25,7 @@ export default function AccountVerificationBanner({
       title: t('Verify your account'),
       centered: true,
       size: 'md',
+      zIndex: 2000,
       children: <StatusMessage success={res?.success} />,
     })
   }, [t])
@@ -34,6 +35,7 @@ export default function AccountVerificationBanner({
       title: t('Verify your account'),
       centered: true,
       size: 'md',
+      zIndex: 2000,
       children: <VerifyAccountForm onSubmit={handSendVerifyEmail} />,
     })
   }, [handSendVerifyEmail, t])
