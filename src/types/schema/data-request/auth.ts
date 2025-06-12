@@ -62,3 +62,22 @@ export const resetPasswordSchema = _typeBuilder({
     success: booleanSchema,
   }),
 })
+
+export const sendVerifyEmailSchema = _typeBuilder({
+  authOnly: true,
+  action: z.literal(RequestAction.SEND_VERIFY_EMAIL),
+  payload: z.object({}),
+  response: z.object({
+    success: booleanSchema,
+  }),
+})
+
+export const verifyEmailSchema = _typeBuilder({
+  action: z.literal(RequestAction.VERIFY_EMAIL),
+  payload: z.object({
+    token: stringSchema,
+  }),
+  response: z.object({
+    success: booleanSchema,
+  }),
+})

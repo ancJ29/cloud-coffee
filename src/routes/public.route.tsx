@@ -2,7 +2,7 @@ import { RouteConfig } from '@/types'
 import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
 
-const ServiceWrapper = lazy(() => import('@/layouts/Auth'))
+const AuthWrapper = lazy(() => import('@/layouts/Auth'))
 const WorkEntryWrapper = lazy(() => import('@/layouts/WorkEntry'))
 
 const routeConfigs: RouteConfig[] = [
@@ -13,17 +13,17 @@ const routeConfigs: RouteConfig[] = [
   {
     path: '/login',
     element: lazy(() => import('@/pages/login')),
-    wrapper: ServiceWrapper,
+    wrapper: AuthWrapper,
   },
   {
     path: '/reset-password',
     element: lazy(() => import('@/pages/reset-password')),
-    wrapper: ServiceWrapper,
+    wrapper: AuthWrapper,
   },
   {
     path: '/reset-password/check-email',
     element: lazy(() => import('@/pages/check-email')),
-    wrapper: ServiceWrapper,
+    wrapper: AuthWrapper,
   },
   {
     path: '/work-entry',
@@ -42,6 +42,11 @@ const routeConfigs: RouteConfig[] = [
   {
     path: '/location-permission-guide',
     element: lazy(() => import('@/pages/location-permission-guide')),
+  },
+  {
+    path: '/verify-email',
+    element: lazy(() => import('@/pages/verify-email')),
+    wrapper: AuthWrapper,
   },
 ]
 

@@ -114,18 +114,6 @@ export const theme: MantineThemeOverride = createTheme({
       '#ab1b1f',
       '#961018',
     ],
-    deepBlue: [
-      '#eff1fb',
-      '#dadff0',
-      '#b2bbe4',
-      '#8795d8',
-      '#6375ce',
-      '#4d61c9',
-      '#4157c7',
-      '#3448b0',
-      '#2c409e',
-      '#22368c',
-    ],
   },
 })
 
@@ -152,6 +140,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--time-clock-live-clock': '#d36c18',
     '--time-clock-error': '#FF5757',
     '--highlight': '#FFEC98',
+    '--account-verify-btn': '#FDE68A',
+    '--account-verify-text': '#92400D',
   },
   light: {
     '--border-color': theme.colors.xGray[1],

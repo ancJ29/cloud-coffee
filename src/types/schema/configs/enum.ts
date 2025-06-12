@@ -1,0 +1,14 @@
+export enum ClientName {
+  CLOUD_COFFEE = 'Cloud Coffee',
+  NOVA_WORK = 'Nova Work',
+}
+
+export enum TemplateType {
+  SEND_MAIL_RESET_PASSWORD = 'SEND_MAIL_RESET_PASSWORD',
+  SEND_VERIFY_EMAIL = 'SEND_VERIFY_EMAIL',
+}
+
+export enum InternalTaskType {
+  CALCULATE_MONTHLY_SALARY = 'CALCULATE_MONTHLY_SALARY',
+  CLEANUP_OLD_IMAGES = 'CLEANUP_OLD_IMAGES',
+}

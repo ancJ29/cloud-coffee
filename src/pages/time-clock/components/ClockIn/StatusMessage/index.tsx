@@ -20,7 +20,7 @@ export default function StatusMessage({
   return (
     <Stack align="center" py={15} gap={15}>
       <Image src={`/imgs/time-clock/${success ? 'success' : 'failure'}.svg`} w={50} h={50} />
-      <Text fw="bold" c={`var(--time-clock-${success ? 'primary' : 'error'}-color)`} fz={20}>
+      <Text fw="bold" c={`var(--time-clock-${success ? 'primary' : 'error'})`} fz={20}>
         {`${t(success ? 'Success' : 'Failure')}!`}
       </Text>
       {success ? (

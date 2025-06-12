@@ -196,4 +196,18 @@ export default {
   'Copied': 'Đã sao chép',
   'Checkin link': 'Link chấm công',
   'Email or password is incorrect': 'Email hoặc mật khẩu không đúng',
+  'The verification link is invalid or has been modified':
+    'Liên kết xác minh không hợp lệ hoặc đã bị thay đổi',
+  'The verification link has expired': 'Liên kết xác minh đã hết hạn',
+  'Please request a new one': 'Vui lòng yêu cầu một liên kết mới',
+  'Verifying your email address...': 'Đang xác minh địa chỉ email của bạn...',
+  'Account not verified': 'Tài khoản chưa được xác minh',
+  'Verify your account': 'Xác minh tài khoản',
+  'We will send a verification email to': 'Chúng tôi sẽ gửi một email xác thực đến',
+  'Please check your inbox and follow the instructions to verify your account':
+    'Vui lòng kiểm tra hộp thư của bạn và làm theo hướng dẫn để xác thực tài khoản',
+  'Send': 'Gửi',
+  'Please check your email and follow the instructions to verify your account':
+    'Vui lòng kiểm tra email và làm theo hướng dẫn để xác thực tài khoản',
+  'Verification failed. Please try again later': 'Gửi xác thực thất bại. Vui lòng thử lại sau',
 }

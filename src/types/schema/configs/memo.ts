@@ -7,5 +7,4 @@ export const clientMemoSchema = z.object({
 
 export const userMemoSchema = z.object({
   isEmailVerified: optionalBooleanSchema.default(false),
-  canSendEmail: optionalBooleanSchema.default(false),
 })

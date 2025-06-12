@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom'
 
 const AdminWrapper = lazy(() => import('@/layouts/Admin'))
 const WorkEntryWrapper = lazy(() => import('@/layouts/WorkEntry'))
+const AuthWrapper = lazy(() => import('@/layouts/Auth'))
 
 const routeConfigs: RouteConfig[] = [
   {
@@ -57,6 +58,11 @@ const routeConfigs: RouteConfig[] = [
   {
     path: '/location-permission-guide',
     element: lazy(() => import('@/pages/location-permission-guide')),
+  },
+  {
+    path: '/verify-email',
+    element: lazy(() => import('@/pages/verify-email')),
+    wrapper: AuthWrapper,
   },
 ]
 

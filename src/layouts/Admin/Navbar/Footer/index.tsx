@@ -1,5 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Stack, Text } from '@mantine/core'
+import AccountVerificationBanner from './AccountVerificationBanner'
 import classes from './Footer.module.scss'
 import Profile from './Profile'
 
@@ -22,6 +23,7 @@ export default function Footer({
 
   return (
     <Stack gap={0} className={classes.container}>
+      <AccountVerificationBanner navbarOpened={navbarOpened} />
       <Profile
         navbarOpened={navbarOpened}
         language={language}

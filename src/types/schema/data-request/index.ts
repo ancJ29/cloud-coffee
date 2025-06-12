@@ -1,5 +1,12 @@
 import { z } from 'zod'
-import { changePasswordSchema, getMeSchema, loginSchema, resetPasswordSchema } from './auth'
+import {
+  changePasswordSchema,
+  getMeSchema,
+  loginSchema,
+  resetPasswordSchema,
+  sendVerifyEmailSchema,
+  verifyEmailSchema,
+} from './auth'
 import {
   getClientByDomainSchema,
   getClientsByAdminSchema,
@@ -46,6 +53,8 @@ export const requestSchema = z.union([
   getClientsByAdminSchema.request,
   getClientByDomainSchema.request,
   registerClientAccountSchema.request,
+  sendVerifyEmailSchema.request,
+  verifyEmailSchema.request,
   getUsersSchema.request,
   getUsersByAdminSchema.request,
   updateUserSchema.request,
@@ -76,6 +85,8 @@ export const responseSchema = z.union([
   getClientsByAdminSchema.response,
   getClientByDomainSchema.response,
   registerClientAccountSchema.response,
+  sendVerifyEmailSchema.response,
+  verifyEmailSchema.response,
   getUsersSchema.response,
   getUsersByAdminSchema.response,
   updateUserSchema.response,

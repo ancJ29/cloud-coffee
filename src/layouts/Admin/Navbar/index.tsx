@@ -1,4 +1,5 @@
 import useWindowResize from '@/hooks/useWindowResize'
+import useAuthStore from '@/stores/auth.store'
 import { MenuItem } from '@/types'
 import { Box, Drawer, ScrollArea, Stack } from '@mantine/core'
 import Footer from './Footer'
@@ -31,6 +32,7 @@ export default function Navbar({
   closeNavbar,
   openNavbar,
 }: NavbarProps) {
+  const { user } = useAuthStore()
   const isMobileScreen = useWindowResize()
 
   const content = (
@@ -40,7 +42,9 @@ export default function Navbar({
         navbarOpened={navbarOpened}
         toggleNavbar={toggleNavbar}
       />
-      <ScrollArea h="calc(100dvh - 36px - 20px - 20px - 72px - 20px)">
+      <ScrollArea
+        h={`calc(100dvh - 36px - 20px - 20px - 72px - 20px - ${user?.isEmailVerified ? '0px' : '50px'})`}
+      >
         <Stack gap={0}>
           {menu.map((menuItem) => (
             <Item

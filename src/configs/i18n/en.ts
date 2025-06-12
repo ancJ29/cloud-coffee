@@ -196,4 +196,18 @@ export default {
   'Copied': 'Copied',
   'Checkin link': 'Checkin link',
   'Email or password is incorrect': 'Email or password is incorrect',
+  'The verification link is invalid or has been modified':
+    'The verification link is invalid or has been modified',
+  'The verification link has expired': 'The verification link has expired',
+  'Please request a new one': 'Please request a new one',
+  'Verifying your email address...': 'Verifying your email address...',
+  'Account not verified': 'Account not verified',
+  'Verify your account': 'Verify your account',
+  'We will send a verification email to': 'We will send a verification email to',
+  'Please check your inbox and follow the instructions to verify your account':
+    'Please check your inbox and follow the instructions to verify your account',
+  'Send': 'Send',
+  'Please check your email and follow the instructions to verify your account':
+    'Please check your email and follow the instructions to verify your account',
+  'Verification failed. Please try again later': 'Verification failed. Please try again later',
 }

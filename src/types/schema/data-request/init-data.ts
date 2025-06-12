@@ -1,10 +1,11 @@
 import { z } from 'zod'
 import { booleanSchema, numberSchema, optionalStringSchema, stringSchema } from '../base'
-import { ClientNames } from '../configs'
+import { ClientName } from '../configs'
 import { RequestAction } from '../request'
 import { _typeBuilder } from './type-builder'
 
 export const clearDatabaseSchema = _typeBuilder({
+  guestOnly: true,
   action: z.literal(RequestAction.CLEAR_DATABASE),
   payload: z.object({}),
   response: z.object({
@@ -13,6 +14,7 @@ export const clearDatabaseSchema = _typeBuilder({
 })
 
 export const initTemplateDateSchema = _typeBuilder({
+  guestOnly: true,
   action: z.literal(RequestAction.INIT_TEMPLATE_DATA),
   payload: z.object({}),
   response: z.object({
@@ -21,9 +23,10 @@ export const initTemplateDateSchema = _typeBuilder({
 })
 
 export const initCloudCoffeeDataSchema = _typeBuilder({
+  guestOnly: true,
   action: z.literal(RequestAction.INIT_CLOUD_COFFEE_DATA),
   payload: z.object({
-    clientName: optionalStringSchema.default(ClientNames.CLOUD_COFFEE),
+    clientName: optionalStringSchema.default(ClientName.CLOUD_COFFEE),
     domain: stringSchema,
     salaryRuleName: stringSchema,
     hourlyPay: numberSchema,
@@ -36,9 +39,10 @@ export const initCloudCoffeeDataSchema = _typeBuilder({
 })
 
 export const initNovaWorkDataSchema = _typeBuilder({
+  guestOnly: true,
   action: z.literal(RequestAction.INIT_NOVA_WORK_DATA),
   payload: z.object({
-    clientName: optionalStringSchema.default(ClientNames.NOVA_WORK),
+    clientName: optionalStringSchema.default(ClientName.NOVA_WORK),
     domain: stringSchema,
     salaryRuleName: stringSchema,
     standardHours: numberSchema,

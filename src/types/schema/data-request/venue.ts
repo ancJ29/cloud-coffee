@@ -17,7 +17,6 @@ export const getVenuesSchema = _typeBuilder({
 })
 
 export const getVenuesByAdminSchema = _typeBuilder({
-  authOnly: true,
   action: z.literal(RequestAction.GET_VENUES_BY_ADMIN),
   payload: getSchema.extend({ clientId: optionalStringSchema }),
   response: listResponse(
