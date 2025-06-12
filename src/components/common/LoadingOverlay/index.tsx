@@ -4,7 +4,7 @@ export default function LoadingOverlay({ visible = true, ...props }: LoadingOver
   return (
     <MantineLoadingOverlay
       visible={visible}
-      zIndex={2000}
+      zIndex={10000}
       overlayProps={{ blur: 3, backgroundOpacity: 0.1 }}
       {...props}
       h="100dvh"
