@@ -13,7 +13,6 @@ const initialValues: AddUserRequest = {
   email: '',
   roleId: '',
   salaryRuleId: '',
-  canSendEmail: true,
 }
 
 type AddUserFormProps = {

@@ -16,7 +16,6 @@ const initialValues: UpdateUserRequest = {
   salaryRuleId: '',
   clientId: '',
   enabled: true,
-  canSendEmail: true,
 }
 
 type EditUserFormProps = {
