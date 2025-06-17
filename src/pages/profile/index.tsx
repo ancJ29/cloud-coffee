@@ -3,8 +3,11 @@ import useTranslation from '@/hooks/useTranslation'
 import { updateUser, User } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
+import { getEmailSchema } from '@/utils'
 import { useForm } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { useCallback, useMemo } from 'react'
+import z from 'zod'
 import ProfileForm from './components/ProfileForm'
 
 export default function Profile() {
@@ -18,7 +21,7 @@ export default function Profile() {
           clientId: user?.client.id || '',
         }
       : undefined,
-    validate: _validate(t),
+    validate: zodResolver(schema(t)),
   })
 
   const roleOptions = useMemo(
@@ -45,15 +48,9 @@ export default function Profile() {
   return <ProfileForm form={form} onSubmit={submit} roleOptions={roleOptions} />
 }
 
-function _validate(t: (s: string) => string) {
-  return {
-    name: (value: string) => (value === '' ? t('Field is required') : null),
-    email: (value?: string | null) => {
-      if (!value || value.trim() === '') {
-        return null
-      }
-      return /^\S+@\S+$/.test(value) ? null : t('Invalid email')
-    },
-    roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
-  }
-}
+export const schema = (t: (key: string) => string) =>
+  z.object({
+    name: z.string().trim().min(1, t('Field is required')),
+    email: getEmailSchema(t),
+    roleId: z.string().trim().min(1, t('Field is required')),
+  })

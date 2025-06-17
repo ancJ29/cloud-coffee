@@ -49,6 +49,11 @@ export type HandlerContext = {
   clientId: string
 }
 
+export type ResetPasswordToken = {
+  id: string
+  tokenVersion: number
+}
+
 export enum ClientRoles {
   OWNER = 'Owner',
   STAFF = 'Staff',

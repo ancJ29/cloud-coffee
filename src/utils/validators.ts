@@ -50,23 +50,34 @@ export const getPasswordSchema = (t: (key: string) => string) =>
     }
   })
 
-export const getEmailSchema = (t: (key: string) => string) =>
-  z.string().superRefine((val, ctx) => {
-    const trimmed = val.trim()
+export const getEmailSchema = (t: (key: string) => string, options?: { required?: boolean }) => {
+  const required = options?.required ?? true
 
-    if (trimmed === '') {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: t('Please enter email'),
-      })
-      return
-    }
+  return z
+    .string()
+    .nullish()
+    .superRefine((val, ctx) => {
+      const trimmed = val?.trim()
 
-    const emailRegex = /^\S+@\S+\.\S+$/
-    if (!emailRegex.test(trimmed)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: t('Invalid email'),
-      })
-    }
-  })
+      if (required && (!trimmed || trimmed === '')) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: t('Please enter email'),
+        })
+        return
+      }
+
+      if (!required && (!trimmed || trimmed === '')) {
+        return
+      }
+
+      const emailRegex = /^\S+@\S+\.\S+$/
+
+      if (!emailRegex.test(trimmed!)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: t('Invalid email'),
+        })
+      }
+    })
+}

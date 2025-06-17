@@ -2,9 +2,12 @@ import Select from '@/components/common/Select'
 import useTranslation from '@/hooks/useTranslation'
 import { UpdateUserRequest, User } from '@/services/domain'
 import { OptionProps } from '@/types'
+import { getEmailSchema } from '@/utils'
 import { Button, Stack, Switch, Text, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { modals } from '@mantine/modals'
+import { zodResolver } from 'mantine-form-zod-resolver'
+import z from 'zod'
 
 const w = '100%'
 
@@ -36,7 +39,7 @@ export default function EditUserForm({
   const t = useTranslation()
   const form = useForm<UpdateUserRequest>({
     initialValues: { ...initialValues, ...user, enabled: user.enabled || false },
-    validate: _validate(t),
+    validate: zodResolver(schema(t)),
   })
 
   const onSubmit = (values: UpdateUserRequest) => {
@@ -106,17 +109,9 @@ export default function EditUserForm({
   )
 }
 
-function _validate(t: (s: string) => string) {
-  return {
-    name: (value: string) => (value === '' ? t('Field is required') : null),
-    email: (value?: string | null) => {
-      if (!value || value.trim() === '') {
-        return null
-      }
-      return /^\S+@\S+$/.test(value) ? null : t('Invalid email')
-    },
-    roleId: (value: string | null) => (value === '' || !value ? t('Field is required') : null),
-    salaryRuleId: (value?: string | null) =>
-      value === '' || !value ? t('Field is required') : null,
-  }
-}
+export const schema = (t: (key: string) => string) =>
+  z.object({
+    name: z.string().trim().min(1, t('Field is required')),
+    email: getEmailSchema(t, { required: false }),
+    roleId: z.string().trim().min(1, t('Field is required')),
+  })

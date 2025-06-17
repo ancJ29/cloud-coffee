@@ -2705,10 +2705,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-mantine-form-zod-resolver@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/mantine-form-zod-resolver/-/mantine-form-zod-resolver-1.2.1.tgz#b0c49b5c8d9d3c2310896956f70ee3ed48cd4811"
-  integrity sha512-8Y7jX3ybZEhQeLzkbrzCS9gulnCX7sgjM5bCkRDxQHbmal8V5lLM9yZq583UEme8DuM77x/BJNTrBkYZo+JUFw==
+mantine-form-zod-resolver@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/mantine-form-zod-resolver/-/mantine-form-zod-resolver-1.3.0.tgz#4159e5a3e47f6a88ee9aac862d80828d6f9f29a3"
+  integrity sha512-XlXXkJCYuUuOllW0zedYW+m/lbdFQ/bso1Vz+pJOYkxgjhoGvzN2EXWCS2+0iTOT9Q7WnOwWvHmvpTJN3PxSXw==
 
 math-intrinsics@^1.1.0:
   version "1.1.0"
