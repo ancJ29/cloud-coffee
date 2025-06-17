@@ -1,10 +1,26 @@
-.inputLabel {
-  font-size: 14px;
-  font-weight: 400;
+.inputWrapper {
+  --input-color: black !important;
+  --input-placeholder-color: #888888 !important;
+}
+
+.input {
+  border-bottom: 1px solid #c5c5c5;
+  font-size: 16px;
+  font-weight: 300;
+  border-radius: 0;
+  padding: 0px 10px;
+  --input-bd: transparent !important;
+}
+
+.innerInput {
+  padding: 0px 10px;
 }
 
 .root {
-  border-radius: 6px;
+  height: 60px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 300;
 }
 
 .title {

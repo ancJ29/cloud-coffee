@@ -1,4 +1,4 @@
-import { BackgroundImage, Stack, useMantineColorScheme } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import { ReactNode } from 'react'
 
 type AuthLayoutProps = {
@@ -6,13 +6,25 @@ type AuthLayoutProps = {
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const { colorScheme } = useMantineColorScheme()
-
   return (
-    <BackgroundImage src={`/imgs/auth/background-${colorScheme}.png`} h="100dvh">
-      <Stack h="100dvh" align="center" justify="center">
+    <Stack
+      bg="var(--auth-surface)"
+      h="100dvh"
+      w="100dvw"
+      align="center"
+      justify="center"
+      style={{ overflowY: 'auto' }}
+    >
+      <Stack
+        bg="var(--auth-background)"
+        w={{ base: '100%', sm: 400 }}
+        h="100dvh"
+        align="center"
+        justify="center"
+        gap={20}
+      >
         {children}
       </Stack>
-    </BackgroundImage>
+    </Stack>
   )
 }

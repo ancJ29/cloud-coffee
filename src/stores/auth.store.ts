@@ -10,7 +10,7 @@ import { create } from 'zustand'
 type AuthStore = {
   user: GetMeResponse | null
   token: string | null
-  setToken: (token: string, remember?: boolean) => void
+  setToken: (token: string) => void
   removeToken: () => void
   getMe: (t: (key: string) => string) => Promise<void>
 }
@@ -18,19 +18,14 @@ type AuthStore = {
 export default create<AuthStore>((set, get) => ({
   user: null,
   token: loadToken(),
-  setToken: (token: string, remember?: boolean) => {
+  setToken: (token: string) => {
     if (token) {
       if (!_decode(token)) {
         return
       }
       set(() => ({ token }))
       localStorage.__LAST_LOGIN__ = Date.now()
-      localStorage.__REMEMBER__ = remember ?? localStorage.__REMEMBER__
-      if (remember) {
-        localStorage.__TOKEN__ = token
-      } else {
-        sessionStorage.__TOKEN__ = token
-      }
+      localStorage.__TOKEN__ = token
     }
   },
   removeToken: () => {
@@ -43,7 +38,7 @@ export default create<AuthStore>((set, get) => ({
       if (!isValidDomain(user.client?.domain)) {
         get().removeToken()
         showNotification({
-          success: false,
+          type: 'error',
           message: t('The domain you are trying to access is invalid'),
         })
         return
@@ -77,12 +72,10 @@ function _decode(token: string) {
 }
 
 function clearStorage() {
-  const remember = localStorage.__REMEMBER__ === 'true'
   const version = localStorage.__VERSION__
   const language = localStorage.__LANGUAGE__ || Language.VI
   localStorage.clear()
   sessionStorage.clear()
-  localStorage.__REMEMBER__ = remember
   localStorage.__VERSION__ = version
   localStorage.__LANGUAGE__ = language
 }

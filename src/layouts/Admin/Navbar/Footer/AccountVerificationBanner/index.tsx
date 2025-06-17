@@ -1,5 +1,5 @@
 import useTranslation from '@/hooks/useTranslation'
-import { sendVerifyEmail } from '@/services/domain'
+import { requestVerifyEmail } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import { Button } from '@mantine/core'
 import { modals } from '@mantine/modals'
@@ -19,7 +19,7 @@ export default function AccountVerificationBanner({
   const t = useTranslation()
 
   const handSendVerifyEmail = useCallback(async () => {
-    const res = await sendVerifyEmail()
+    const res = await requestVerifyEmail()
     modals.closeAll()
     modals.open({
       title: t('Verify your account'),

@@ -1,0 +1,33 @@
+.root {
+  position: relative;
+}
+
+.label {
+  font-size: 16px;
+  position: absolute;
+  z-index: 2;
+  top: 7px;
+  left: var(--mantine-spacing-sm);
+  pointer-events: none;
+  color: #888888;
+  transition:
+    transform 150ms ease,
+    font-size 150ms ease,
+    color 150ms ease;
+
+  &[data-floating] {
+    transform: translate(calc(var(--mantine-spacing-sm) * -1), -28px);
+    font-weight: 600;
+    font-size: 16px;
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  }
+}
+
+.required {
+  transition: opacity 150ms ease;
+  opacity: 0;
+
+  [data-floating] & {
+    opacity: 1;
+  }
+}

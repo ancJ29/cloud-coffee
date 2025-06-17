@@ -1,4 +1,5 @@
 import {
+  Anchor,
   Button,
   Checkbox,
   createTheme,
@@ -7,6 +8,7 @@ import {
   Input,
   MantineThemeOverride,
   Modal,
+  PasswordInput,
 } from '@mantine/core'
 import classes from './themes.module.scss'
 
@@ -16,11 +18,12 @@ export const theme: MantineThemeOverride = createTheme({
   fontFamily: 'Open Sans, sans-serif',
   fontSizes: { md: '14px' },
   components: {
-    InputWrapper: Input.Wrapper.extend({
-      classNames: { label: classes.inputLabel },
-    }),
     Input: Input.extend({
-      classNames: { input: classes.root },
+      classNames: { input: classes.input, wrapper: classes.inputWrapper },
+      defaultProps: { variant: 'unstyled' },
+    }),
+    PasswordInput: PasswordInput.extend({
+      classNames: { innerInput: classes.innerInput },
     }),
     Modal: Modal.extend({
       classNames: {
@@ -40,6 +43,11 @@ export const theme: MantineThemeOverride = createTheme({
     Grid: Grid.extend({
       classNames: { inner: classes.gridInner },
     }),
+    Anchor: Anchor.extend({
+      defaultProps: {
+        c: '#545454',
+      },
+    }),
   },
   colors: {
     dark: [
@@ -55,40 +63,16 @@ export const theme: MantineThemeOverride = createTheme({
       '#141414',
     ],
     primary: [
-      '#e2f5ff',
-      '#cbe6ff',
-      '#99caff',
-      '#62acff',
-      '#3693ff',
-      '#1883ff',
-      '#007bff',
-      '#0069e5',
-      '#005dce',
-      '#0050b7',
-    ],
-    xOrange: [
-      '#fff0e4',
-      '#ffe0cf',
-      '#fac0a1',
-      '#f69e6e',
-      '#f28043',
-      '#f06e27',
-      '#f06418',
-      '#d6530c',
-      '#bf4906',
-      '#a73c00',
-    ],
-    xGreen: [
-      '#e8fcf4',
-      '#d9f3e8',
-      '#b6e5d1',
-      '#8fd6b8',
-      '#6ec9a3',
-      '#59c295',
-      '#4cbe8e',
-      '#3ca77a',
-      '#30956c',
-      '#1d815b',
+      '#dce4f4',
+      '#b8c6e3',
+      '#91a7d2',
+      '#708cc4',
+      '#5b7bbb',
+      '#5073b8',
+      '#3f60a0',
+      '#365793',
+      '#294b83',
+      '#223f70',
     ],
     xGray: [
       '#f3f5f7',
@@ -102,46 +86,33 @@ export const theme: MantineThemeOverride = createTheme({
       '#586a74',
       '#465c67',
     ],
-    xRed: [
-      '#ffeaea',
-      '#fdd6d6',
-      '#f1abab',
-      '#e67d7e',
-      '#de5757',
-      '#d93e3e',
-      '#d73131',
-      '#bf2324',
-      '#ab1b1f',
-      '#961018',
-    ],
   },
 })
 
 // https://mantine.dev/styles/css-variables/#css-variables-resolver
 export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
-    '--success': theme.colors.xGreen[7],
-    '--error': theme.colors.xRed[5],
-    '--warning': theme.colors.xOrange[6],
-    '--work-entry-bg': '#22368c',
+    '--success': '#3ca77a',
+    '--error': '#d93e3e',
+    '--warning': '#D36C18',
+    '--info': theme.colors.primary[6],
     '--check-in-btn': '#EBF0F4',
     '--check-in-text': '#002F75  ',
     '--check-out-btn': '#0056BE',
     '--check-out-text': '#EFEFEF',
     '--user-icon-bg': '#CEBD7C',
     '--check-out-indicator': theme.colors.xGray[3],
-    '--clock-in-btn-bg': '#6A6A6A',
-    '--tab-bar-item-selected': '#74A2CC',
     '--btn-manage-bg': '#4CA8EF',
     '--time-clock-bg': theme.colors.dark[0],
     '--time-clock-primary': '#3F60A0',
     '--time-clock-accent': '#888888',
     '--time-clock-secondary': '#e38e49',
-    '--time-clock-live-clock': '#d36c18',
-    '--time-clock-error': '#FF5757',
+    '--time-clock-live-clock': '#D36C18',
     '--highlight': '#FFEC98',
     '--account-verify-btn': '#FDE68A',
     '--account-verify-text': '#92400D',
+    '--auth-background': '#F5F5F5',
+    '--auth-surface': '#ebebeb',
   },
   light: {
     '--border-color': theme.colors.xGray[1],

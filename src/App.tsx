@@ -1,6 +1,6 @@
 import LoadingOverlay from '@/components/common/LoadingOverlay'
-import { resolver } from '@/configs/themes'
-import { useCustomTheme } from '@/hooks/useCustomTheme'
+import Notifications from '@/components/common/Notifications'
+import { resolver, theme } from '@/configs/themes'
 import useTranslation from '@/hooks/useTranslation'
 import privateRoutes from '@/routes/private.route'
 import publicRoutes from '@/routes/public.route'
@@ -14,13 +14,11 @@ import useVenueStore from '@/stores/venue.store'
 import { MantineProvider } from '@mantine/core'
 import { DatesProvider } from '@mantine/dates'
 import { ModalsProvider } from '@mantine/modals'
-import { Notifications } from '@mantine/notifications'
 import { Suspense, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import { useRoutes } from 'react-router-dom'
 
 export default function App() {
   const t = useTranslation()
-  const { theme } = useCustomTheme()
   const loadingGlobal = useSyncExternalStore(loadingStore.subscribe, loadingStore.getSnapshot)
   const { token, user } = useAuthStore()
   const [loading, setLoading] = useState(true)
@@ -37,7 +35,7 @@ export default function App() {
 
   return (
     <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-      <Notifications position="top-right" zIndex={1000} w={300} />
+      <Notifications />
       <ModalsProvider>
         <DatesProvider settings={{ locale: 'vi' }}>
           <LoadingOverlay visible={loadingGlobal} />

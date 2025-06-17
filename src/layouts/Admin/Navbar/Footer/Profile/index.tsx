@@ -8,7 +8,6 @@ import { IconSettings } from '@tabler/icons-react'
 import { useCallback, useState } from 'react'
 import LanguageSelector from './LanguageSelector'
 import MenuItem from './MenuItem'
-import PrimaryColorSelector from './PrimaryColorSelector'
 import ThemeModeSwitch from './ThemeModeSwitch'
 import UserInformation from './UserInformation'
 
@@ -71,8 +70,6 @@ export default function Profile({
           onChangeLanguage={onChangeLanguage}
           onCloseMenu={handleCloseMenu}
         />
-
-        <PrimaryColorSelector />
 
         <ThemeModeSwitch />
 

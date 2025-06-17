@@ -98,11 +98,11 @@ export default {
     Promise.all(promises)
       .then(() => {
         setTimeout(() => {
-          showNotification({ t, success: true })
+          showNotification({ t })
         }, 500)
       })
       .catch((error) => {
-        showNotification({ success: false, message: error.message })
+        showNotification({ type: 'error', message: error.message })
       })
   },
 }

@@ -1,28 +1,55 @@
-import { NotificationData, notifications } from '@mantine/notifications'
+import { NotificationType } from '@/types'
+import { ONE_SECOND } from '@/utils'
+import { notifications } from '@mantine/notifications'
 
-interface NotificationProps extends Omit<NotificationData, 'message'> {
-  t?: (key: string) => string
-  success?: boolean
+const typeStyles: Record<NotificationType, { backgroundColor: string; defaultMessage?: string }> = {
+  info: {
+    backgroundColor: 'var(--info)',
+    defaultMessage: 'Your changes have been saved',
+  },
+  warning: {
+    backgroundColor: 'var(--warning)',
+  },
+  error: {
+    backgroundColor: 'var(--error)',
+    defaultMessage: 'Unknown error',
+  },
+}
+
+type ShowNotificationProps = {
   message?: string
+  type?: NotificationType
+  autoClose?: number
+  t?: (key: string) => string
 }
 
-export function showNotification({ t, success, ...props }: NotificationProps) {
-  const defaultMessage = success ? t?.('Your changes have been saved') : t?.('Unknown error')
+export function showNotification({
+  message,
+  type = 'info',
+  autoClose = 5 * ONE_SECOND,
+  t,
+}: ShowNotificationProps) {
+  const { backgroundColor, defaultMessage } = typeStyles[type]
+
+  const _message = message || (t ? defaultMessage : '')
+
   notifications.show({
-    ...props,
-    withBorder: true,
-    autoClose: 2000,
-    message: props.message || defaultMessage,
-    color: _color(success),
+    message: _message,
+    autoClose,
+    color: backgroundColor,
+    radius: 0,
+    withCloseButton: false,
+    style: {
+      backgroundColor,
+    },
+    styles: {
+      root: {
+        backgroundColor,
+      },
+      description: {
+        color: 'white',
+        textAlign: 'center',
+      },
+    },
   })
-}
-
-function _color(success?: boolean): string {
-  if (success === true) {
-    return 'var(--success)'
-  }
-  if (success === false) {
-    return 'var(--error)'
-  }
-  return 'primary.5'
 }

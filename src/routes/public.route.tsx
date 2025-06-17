@@ -16,13 +16,13 @@ const routeConfigs: RouteConfig[] = [
     wrapper: AuthWrapper,
   },
   {
-    path: '/reset-password',
-    element: lazy(() => import('@/pages/reset-password')),
+    path: '/forgot-password',
+    element: lazy(() => import('@/pages/forgot-password')),
     wrapper: AuthWrapper,
   },
   {
-    path: '/reset-password/check-email',
-    element: lazy(() => import('@/pages/check-email')),
+    path: '/reset-password',
+    element: lazy(() => import('@/pages/reset-password')),
     wrapper: AuthWrapper,
   },
   {

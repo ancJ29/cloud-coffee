@@ -1,7 +1,8 @@
+import PasswordInput from '@/components/common/PasswordInput'
+import PasswordStrengthInput from '@/components/common/PasswordStrengthInput'
 import useTranslation from '@/hooks/useTranslation'
-import { Button, Stack, TextInput } from '@mantine/core'
+import { Anchor, Button, Flex, Stack } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-import { IconArrowRight } from '@tabler/icons-react'
 import { FormProps } from '..'
 
 export type ResetPasswordFormProps = {
@@ -14,16 +15,25 @@ export default function ResetPasswordForm({ form, onSubmit }: ResetPasswordFormP
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Stack gap={15}>
-        <TextInput
-          data-autofocus
-          label={t('Email')}
-          placeholder="example@email.com"
-          {...form.getInputProps('email')}
+      <Stack gap={30} w="80%" mt={25}>
+        <PasswordStrengthInput
+          label={t('New password')}
+          {...form.getInputProps('newPassword')}
+          mt={10}
         />
-        <Button fullWidth type="submit" mt={10} rightSection={<IconArrowRight size={16} />}>
-          {t('Continue')}
+        <PasswordInput
+          label={t('Confirm your new password')}
+          {...form.getInputProps('confirmPassword')}
+          mt={10}
+        />
+
+        <Button fullWidth type="submit" mt={10}>
+          {t('Reset password')}
         </Button>
+
+        <Flex justify="center">
+          <Anchor href="/forgot-password">{t('Back to Forgot Password?')}</Anchor>
+        </Flex>
       </Stack>
     </form>
   )

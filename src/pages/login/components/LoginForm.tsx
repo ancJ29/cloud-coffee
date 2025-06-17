@@ -1,11 +1,13 @@
+import PasswordInput from '@/components/common/PasswordInput'
+import TextInput from '@/components/common/TextInput'
 import useTranslation from '@/hooks/useTranslation'
-import { Anchor, Button, Checkbox, Group, PasswordInput, Stack, TextInput } from '@mantine/core'
+import { LoginRequest } from '@/services/domain'
+import { Anchor, Button, Flex, Stack } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-import { FormProps } from '..'
 
 export type LoginFormProps = {
-  form: UseFormReturnType<FormProps>
-  onSubmit: (values: FormProps) => void
+  form: UseFormReturnType<LoginRequest>
+  onSubmit: (values: LoginRequest) => void
 }
 
 export default function LoginForm({ form, onSubmit }: LoginFormProps) {
@@ -13,29 +15,15 @@ export default function LoginForm({ form, onSubmit }: LoginFormProps) {
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Stack gap={15}>
-        <TextInput
-          data-autofocus
-          label={t('Email')}
-          placeholder="example@email.com"
-          {...form.getInputProps('email')}
-        />
-        <PasswordInput
-          label={t('Password')}
-          placeholder={t('Your password')}
-          {...form.getInputProps('password')}
-        />
-        <Group justify="space-between" mt={5}>
-          <Checkbox
-            checked={form.values.remember}
-            label={t('Remember me')}
-            {...form.getInputProps('remember')}
-          />
-          <Anchor size="sm" href="/reset-password">
-            {t('Forgot password?')}
-          </Anchor>
-        </Group>
-        <Button fullWidth type="submit" my={10}>
+      <Stack gap={25} w="80%" mt={25}>
+        <TextInput label={t('Enter an email')} {...form.getInputProps('email')} />
+        <PasswordInput label={t('Enter a password')} {...form.getInputProps('password')} mt={10} />
+
+        <Flex justify="end">
+          <Anchor href="/forgot-password">{t('Forgot your password?')}</Anchor>
+        </Flex>
+
+        <Button fullWidth type="submit">
           {t('Sign in')}
         </Button>
       </Stack>

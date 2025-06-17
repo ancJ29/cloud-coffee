@@ -52,9 +52,9 @@ export const changePasswordSchema = _typeBuilder({
   }),
 })
 
-export const resetPasswordSchema = _typeBuilder({
+export const requestPasswordResetSchema = _typeBuilder({
   guestOnly: true,
-  action: z.literal(RequestAction.RESET_PASSWORD),
+  action: z.literal(RequestAction.REQUEST_PASSWORD_RESET),
   payload: z.object({
     email: stringSchema,
   }),
@@ -63,9 +63,21 @@ export const resetPasswordSchema = _typeBuilder({
   }),
 })
 
-export const sendVerifyEmailSchema = _typeBuilder({
+export const resetPasswordSchema = _typeBuilder({
+  guestOnly: true,
+  action: z.literal(RequestAction.RESET_PASSWORD),
+  payload: z.object({
+    token: stringSchema,
+    newPassword: stringSchema,
+  }),
+  response: z.object({
+    success: booleanSchema,
+  }),
+})
+
+export const requestVerifyEmailSchema = _typeBuilder({
   authOnly: true,
-  action: z.literal(RequestAction.SEND_VERIFY_EMAIL),
+  action: z.literal(RequestAction.REQUEST_VERIFY_EMAIL),
   payload: z.object({}),
   response: z.object({
     success: booleanSchema,

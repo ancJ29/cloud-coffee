@@ -1,55 +1,70 @@
 import { showNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { resetPassword } from '@/services/domain'
+import { LoginState } from '@/types'
+import { getPasswordSchema } from '@/utils'
 import { useForm } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import z from 'zod'
 import ResetPasswordView from './components/ResetPasswordView'
-import { ONE_SECOND } from '@/utils'
 
-export type FormProps = {
-  email: string
-}
+export type FormProps = { newPassword: string; confirmPassword: string }
 
 const initialValues: FormProps = {
-  email: '',
+  newPassword: '',
+  confirmPassword: '',
 }
 
 export default function ResetPassword() {
   const t = useTranslation()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const token = searchParams.get('token')
+
   const form = useForm<FormProps>({
     initialValues,
-    validate: _validate(t),
+    validateInputOnBlur: true,
+    validate: zodResolver(schema(t)),
   })
 
   const submit = useCallback(
     async (values: FormProps) => {
-      resetPassword(values).then((res) => {
+      if (!token) {
+        showNotification({
+          type: 'error',
+          message: t('The reset link is invalid or has been modified'),
+        })
+        return
+      }
+
+      resetPassword({ token, newPassword: values.newPassword }).then((res) => {
         const success = res?.success
         if (success) {
-          setTimeout(
-            () => navigate(`/reset-password/check-email?email=${values.email}`),
-            ONE_SECOND,
-          )
+          const state: LoginState = {
+            message: t('Password successfully changed. Please login'),
+            type: 'info',
+          }
+          navigate('/login', { state })
         } else {
-          showNotification({
-            t,
-            success,
-            message: t('Invalid user'),
-          })
+          showNotification({ type: 'error', message: t('The reset link has expired') })
         }
       })
     },
-    [navigate, t],
+    [navigate, t, token],
   )
 
   return <ResetPasswordView form={form} onSubmit={submit} />
 }
 
-function _validate(t: (s: string) => string) {
-  return {
-    email: (value: string) =>
-      value === '' ? t('Please enter email') : !/^\S+@\S+$/.test(value) ? t('Invalid email') : null,
-  }
-}
+export const schema = (t: (key: string) => string) =>
+  z
+    .object({
+      newPassword: getPasswordSchema(t),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      path: ['confirmPassword'],
+      message: t('The passwords did not match'),
+    })

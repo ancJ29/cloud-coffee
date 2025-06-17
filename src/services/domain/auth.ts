@@ -3,14 +3,15 @@ import {
   getMeSchema,
   loginSchema,
   RequestAction,
+  requestPasswordResetSchema,
+  requestVerifyEmailSchema,
   resetPasswordSchema,
-  sendVerifyEmailSchema,
   verifyEmailSchema,
 } from '@/types'
 import { z } from 'zod'
 import callApi from '../api'
 
-type LoginRequest = z.infer<typeof loginSchema.request>['payload']
+export type LoginRequest = z.infer<typeof loginSchema.request>['payload']
 export async function login(payload: LoginRequest) {
   return await callApi({
     action: RequestAction.LOGIN,
@@ -37,7 +38,18 @@ export async function changePassword(payload: ChangePasswordRequest) {
   })
 }
 
-type ResetPasswordRequest = z.infer<typeof resetPasswordSchema.request>['payload']
+export type RequestPasswordResetRequest = z.infer<
+  typeof requestPasswordResetSchema.request
+>['payload']
+export async function requestPasswordReset(payload: RequestPasswordResetRequest) {
+  return await callApi({
+    action: RequestAction.REQUEST_PASSWORD_RESET,
+    payload,
+    schema: requestPasswordResetSchema,
+  })
+}
+
+export type ResetPasswordRequest = z.infer<typeof resetPasswordSchema.request>['payload']
 export async function resetPassword(payload: ResetPasswordRequest) {
   return await callApi({
     action: RequestAction.RESET_PASSWORD,
@@ -46,10 +58,10 @@ export async function resetPassword(payload: ResetPasswordRequest) {
   })
 }
 
-export async function sendVerifyEmail() {
+export async function requestVerifyEmail() {
   return await callApi({
-    action: RequestAction.SEND_VERIFY_EMAIL,
-    schema: sendVerifyEmailSchema,
+    action: RequestAction.REQUEST_VERIFY_EMAIL,
+    schema: requestVerifyEmailSchema,
   })
 }
 
@@ -58,6 +70,6 @@ export async function verifyEmail(payload: VerifyEmailRequest) {
   return await callApi({
     action: RequestAction.VERIFY_EMAIL,
     payload,
-    schema: sendVerifyEmailSchema,
+    schema: verifyEmailSchema,
   })
 }

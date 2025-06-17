@@ -1,39 +1,47 @@
-import useMount from '@/hooks/useMount'
+import { showNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
-import { login } from '@/services/domain'
+import { login, LoginRequest } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
-import { useForm } from '@mantine/form'
-import { useCallback } from 'react'
+import { LoginState } from '@/types'
+import { useForm, zodResolver } from '@mantine/form'
+import { useCallback, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { z } from 'zod'
 import LoginView from './components/LoginView'
 
-export type FormProps = {
-  email: string
-  password: string
-  remember: boolean
-}
-
-const initialValues: FormProps = {
+const initialValues: LoginRequest = {
   email: '',
   password: '',
-  remember: localStorage.__REMEMBER__ === 'true',
 }
 
 export default function Login() {
   const t = useTranslation()
   const { setToken } = useAuthStore()
 
-  const form = useForm<FormProps>({
+  const form = useForm<LoginRequest>({
     initialValues,
-    validate: _validate(t),
+    validateInputOnBlur: true,
+    validate: zodResolver(schema(t)),
   })
 
-  useMount(() => form.setFieldValue('remember', localStorage.__REMEMBER__ === 'true'))
+  const location = useLocation()
+  const navigate = useNavigate()
+  useEffect(() => {
+    const state = location.state as LoginState
+    if (state) {
+      showNotification(state)
+      navigate(location.pathname, { replace: true })
+    }
+  }, [location, navigate])
 
   const submit = useCallback(
-    async (values: FormProps) => {
-      const res = await login(values)
+    async (values: LoginRequest) => {
+      const res = await login({
+        ...values,
+        email: values.email.trim(),
+      })
       if (res?.token) {
-        setToken(res.token, form.values.remember)
+        setToken(res.token)
       } else {
         form.setErrors({
           password: 'Email or password is incorrect',
@@ -46,9 +54,8 @@ export default function Login() {
   return <LoginView form={form} onSubmit={submit} />
 }
 
-function _validate(t: (s: string) => string) {
-  return {
-    email: (value: string) => (value === '' ? t('Please enter email') : null),
-    password: (value: string) => (value === '' ? t('Please enter password') : null),
-  }
-}
+export const schema = (t: (key: string) => string) =>
+  z.object({
+    email: z.string().trim().min(1, t('Please enter email')),
+    password: z.string().trim().min(1, t('Please enter password')),
+  })

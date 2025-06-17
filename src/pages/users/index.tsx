@@ -78,7 +78,7 @@ export default function Users() {
     (values: AddUserRequest) => {
       addUser(values).then((res) => {
         const success = res?.success
-        showNotification({ t, success })
+        showNotification({ t, type: success ? 'info' : 'error' })
         load(true)
         getData()
       })
@@ -110,7 +110,7 @@ export default function Users() {
     (values: UpdateUserRequest) => {
       updateUser(values).then((res) => {
         const success = res?.success
-        showNotification({ t, success })
+        showNotification({ t, type: success ? 'info' : 'error' })
         modals.closeAll()
         load(true)
         getData()

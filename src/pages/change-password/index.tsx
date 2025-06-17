@@ -31,7 +31,7 @@ export default function ChangPassword() {
     (values: FormProps) => {
       changePassword(values).then((res) => {
         const success = res?.success
-        showNotification({ t, success })
+        showNotification({ t, type: success ? 'info' : 'error' })
         success && setTimeout(() => navigate('/profile'), ONE_SECOND)
       })
     },
