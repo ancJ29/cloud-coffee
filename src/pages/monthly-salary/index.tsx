@@ -46,8 +46,8 @@ export default function MonthlySalary() {
       if (!date) {
         return
       }
-      setDate(date)
-      await getData(date)
+      setDate(new Date(date))
+      await getData(new Date(date))
     },
     [getData],
   )
