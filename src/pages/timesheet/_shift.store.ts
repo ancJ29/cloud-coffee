@@ -7,8 +7,8 @@ import { cloneDeep, createStore, endOfDay, startOfDay } from '@/utils'
 type State = {
   currents: Record<string, Shift[]>
   updates: Record<string, Shift[]>
-  startDate: DateValue
-  endDate: DateValue
+  startDate: Date
+  endDate: Date
   roleId: string | null
   venueId: string | null
   keyword?: string
@@ -58,24 +58,31 @@ export default {
   ...store,
   async initData() {
     const state = store.getSnapshot()
+
     const shifts = await getAllShifts({
-      start: state.startDate?.getTime() || 0,
-      end: state.endDate?.getTime() || 0,
+      start: new Date(state.startDate || 0).getTime(),
+      end: new Date(state.endDate || 0).getTime(),
     })
     dispatch({ type: ActionType.INIT_DATA, shifts })
   },
   async changeDate(value: DatesRangeValue) {
     const [start, end] = value
-    if (!start || !end) {
-      return
-    }
-    const startDate = new Date(startOfDay(start.getTime()))
-    const endDate = new Date(endOfDay(end.getTime()))
+    if (!start || !end) return
+
+    const startDate = new Date(startOfDay(new Date(start || 0).getTime()))
+    const endDate = new Date(endOfDay(new Date(end || 0).getTime()))
+
     const shifts = await getAllShifts({
       start: startDate.getTime(),
       end: endDate.getTime(),
     })
-    dispatch({ type: ActionType.CHANGE_DATE, startDate, endDate, shifts })
+
+    dispatch({
+      type: ActionType.CHANGE_DATE,
+      startDate: new Date(startDate).toDateString(),
+      endDate: new Date(endDate).toDateString(),
+      shifts,
+    })
   },
   changeRoleId(roleId: string | null) {
     dispatch({ type: ActionType.CHANGE_ROLE_ID, roleId })
@@ -126,8 +133,8 @@ function reducer(action: Action, state: State): State {
           ...state,
           currents,
           updates: cloneDeep(currents),
-          startDate: action.startDate,
-          endDate: action.endDate,
+          startDate: new Date(action.startDate),
+          endDate: new Date(action.endDate),
           roleId: null,
           venueId: null,
           keyword: undefined,

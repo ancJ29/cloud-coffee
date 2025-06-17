@@ -76,45 +76,47 @@ export function formatDuration(totalMilliseconds: number | null) {
   return `${hours}:${minutes.toString().padStart(2, '0')}`
 }
 
-export function isSameDate(a: Date | null, b?: Date | null) {
-  if (!b || !a) {
-    return false
-  }
-  return a.toLocaleDateString() === b.toLocaleDateString()
+export function isSameDate(a: DateValue, b?: DateValue) {
+  if (!a || !b) return false
+  return new Date(a).toDateString() === new Date(b).toDateString()
+}
+
+function toDateValueRange(start: Date, end: Date): [DateValue, DateValue] {
+  return [start.toISOString(), end.toISOString()]
 }
 
 export function today(date: Date): [DateValue, DateValue] {
-  return [date, date]
+  return toDateValueRange(date, date)
 }
 
 export function yesterday(date: Date): [DateValue, DateValue] {
   const yesterday = new Date(date)
   yesterday.setDate(yesterday.getDate() - 1)
-  return [yesterday, yesterday]
+  return toDateValueRange(yesterday, yesterday)
 }
 
 export function thisWeek(date: Date): [DateValue, DateValue] {
-  const _startOfWeek = new Date(startOfWeek(date.getTime()))
-  const _endOfWeek = new Date(endOfWeek(date.getTime()))
-  return [_startOfWeek, _endOfWeek]
+  const start = new Date(startOfWeek(date.getTime()))
+  const end = new Date(endOfWeek(date.getTime()))
+  return toDateValueRange(start, end)
 }
 
 export function lastWeek(date: Date): [DateValue, DateValue] {
-  const lastWeek = date.getTime() - ONE_WEEK
-  const startOfLastWeek = new Date(startOfWeek(lastWeek))
-  const endOfLastWeek = new Date(endOfWeek(lastWeek))
-  return [startOfLastWeek, endOfLastWeek]
+  const lastWeekTime = date.getTime() - ONE_WEEK
+  const start = new Date(startOfWeek(lastWeekTime))
+  const end = new Date(endOfWeek(lastWeekTime))
+  return toDateValueRange(start, end)
 }
 
 export function thisMonth(date: Date): [DateValue, DateValue] {
-  const _startOfMonth = new Date(startOfMonth(date.getTime()))
-  const _endOfMonth = new Date(endOfMonth(date.getTime()))
-  return [_startOfMonth, _endOfMonth]
+  const start = new Date(startOfMonth(date.getTime()))
+  const end = new Date(endOfMonth(date.getTime()))
+  return toDateValueRange(start, end)
 }
 
 export function lastMonth(date: Date): [DateValue, DateValue] {
   const lastMonthDate = new Date(date.getFullYear(), date.getMonth() - 1, 1)
-  const startOfLastMonth = new Date(startOfMonth(lastMonthDate.getTime()))
-  const endOfLastMonth = new Date(endOfMonth(lastMonthDate.getTime()))
-  return [startOfLastMonth, endOfLastMonth]
+  const start = new Date(startOfMonth(lastMonthDate.getTime()))
+  const end = new Date(endOfMonth(lastMonthDate.getTime()))
+  return toDateValueRange(start, end)
 }
