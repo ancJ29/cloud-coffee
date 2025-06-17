@@ -49,6 +49,7 @@ export function showNotification({
       description: {
         color: 'white',
         textAlign: 'center',
+        padding: '10px',
       },
     },
   })
