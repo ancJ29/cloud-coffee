@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react'
-import path from 'path'
+import path from 'node:path'
 import { defineConfig } from 'vite'
 
 process.env.VITE_APP_VERSION = process.env.npm_package_version

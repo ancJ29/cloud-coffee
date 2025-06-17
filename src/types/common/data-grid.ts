@@ -30,7 +30,7 @@ export type DataGridColumnProps = {
   style?: MantineStyleProp
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sortValue?: (record: any) => string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   renderCell?: (
     /* eslint-disable @typescript-eslint/no-explicit-any */
     value: any,

@@ -1,10 +1,4 @@
-import {
-  Badge as MantineBadge,
-  BadgeProps as MantineBadgeProps,
-  useMantineColorScheme,
-} from '@mantine/core'
-
-interface BadgeProps extends MantineBadgeProps {}
+import { BadgeProps, Badge as MantineBadge, useMantineColorScheme } from '@mantine/core'
 
 export default function Badge({ ...props }: BadgeProps) {
   const { colorScheme } = useMantineColorScheme()

@@ -25,11 +25,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "src/vite-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "vite.config.mjs"
-  ],
+  "include": ["src/vite-env.d.ts", "**/*.ts", "**/*.tsx", "vite.config.ts"],
   "exclude": ["node_modules"]
 }
