@@ -115,7 +115,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--auth-surface': '#ebebeb',
   },
   light: {
-    '--border-color': '#C5C5C5',
+    '--border-color': '#E5E5E5',
     '--hover-bg': theme.colors.primary[0],
     '--text-color': 'black',
     '--even-row-bg': theme.colors.dark[0],
