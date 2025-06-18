@@ -226,4 +226,5 @@ export default {
   'Includes uppercase letter': 'Includes uppercase letter',
   'Includes special symbol': 'Includes special symbol',
   'Email does not exist': 'Email does not exist',
+  'Dashboard': 'Dashboard',
 }

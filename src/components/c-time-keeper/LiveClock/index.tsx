@@ -2,7 +2,11 @@ import { formatTime, ONE_SECOND } from '@/utils'
 import { Text, TextProps } from '@mantine/core'
 import { useEffect, useState } from 'react'
 
-export default function LiveClock(props: TextProps) {
+interface LiveClockProps extends TextProps {
+  format?: string
+}
+
+export default function LiveClock({ format = 'hh:mm:ss A', ...props }: LiveClockProps) {
   const [currentTime, setCurrentTime] = useState(Date.now())
 
   useEffect(() => {
@@ -14,7 +18,7 @@ export default function LiveClock(props: TextProps) {
 
   return (
     <Text fz={28} fw="bold" style={{ letterSpacing: 3 }} {...props}>
-      {formatTime(currentTime, 'hh:mm:ss A')}
+      {formatTime(currentTime, format)}
     </Text>
   )
 }

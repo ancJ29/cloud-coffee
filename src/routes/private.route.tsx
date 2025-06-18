@@ -12,6 +12,11 @@ const routeConfigs: RouteConfig[] = [
     element: () => <Navigate to="/users" />,
   },
   {
+    path: '/dashboard',
+    element: lazy(() => import('@/pages/dashboard')),
+    wrapper: AdminWrapper,
+  },
+  {
     path: '/users',
     element: lazy(() => import('@/pages/users')),
     wrapper: AdminWrapper,

@@ -226,4 +226,5 @@ export default {
   'Password must be at least 6 characters long': 'Mật khẩu phải có ít nhất 6 ký tự',
   'Password is too weak': 'Mật khẩu quá yếu',
   'Email does not exist': 'Email không tồn tại',
+  'Dashboard': 'Trang tổng quan',
 }

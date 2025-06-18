@@ -6,7 +6,6 @@ export type MenuItem = {
   icon: React.ElementType
   url?: string
   onClick?: () => void
-  roles?: string[]
   visibleFrom?: MantineBreakpoint
   subs?: MenuItem[]
 }

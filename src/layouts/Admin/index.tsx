@@ -2,8 +2,6 @@ import { Language } from '@/configs/i18n'
 import { navMenu } from '@/configs/navMenu'
 import useWindowResize from '@/hooks/useWindowResize'
 import useAuthStore from '@/stores/auth.store'
-import useRoleStore from '@/stores/role.store'
-import { MenuItem } from '@/types'
 import { Box } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { useCallback, useState } from 'react'
@@ -18,12 +16,10 @@ type AdminLayoutProps = {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const isMobileScreen = useWindowResize()
   const navigate = useNavigate()
-  const { removeToken, user } = useAuthStore()
+  const { removeToken } = useAuthStore()
   const [navbarOpened, { toggle: toggleNavbar, close: closeNavbar, open: openNavbar }] =
     useDisclosure(!isMobileScreen)
   const [language] = useState(localStorage.__LANGUAGE__ || Language.VI)
-  const { roles } = useRoleStore()
-  const filterMenu = filterMenuByRole(navMenu, roles.get(user?.roleId || '')?.name || '')
 
   const handleChangeLanguage = (value: string) => {
     if (value === language) {
@@ -50,7 +46,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <Box>
       <Navbar
-        menu={filterMenu}
+        menu={navMenu}
         navbarOpened={navbarOpened}
         language={language}
         onChangeLanguage={handleChangeLanguage}
@@ -66,13 +62,4 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </ContentLayout>
     </Box>
   )
-}
-
-function filterMenuByRole(menu: MenuItem[], role: string): MenuItem[] {
-  return menu
-    .filter((item) => item.roles?.includes(role))
-    .map((item) => ({
-      ...item,
-      subs: item.subs ? filterMenuByRole(item.subs, role) : undefined,
-    }))
 }
