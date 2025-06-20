@@ -16,8 +16,20 @@ export default function Item({ user, onClick }: ItemProps) {
         <Text fz={16}>{user.name}</Text>
       </div>
       <div className={classes.action}>
-        <Image src="/imgs/staff/edit.svg" width={20} height={20} onClick={onClick} />
-        <Image src="/imgs/staff/delete.svg" width={20} height={20} onClick={() => {}} />
+        <Image
+          src="/imgs/staff/edit.svg"
+          width={20}
+          height={20}
+          className={classes.icon}
+          onClick={onClick}
+        />
+        <Image
+          src="/imgs/staff/delete.svg"
+          width={20}
+          height={20}
+          className={classes.icon}
+          onClick={() => {}}
+        />
       </div>
     </div>
   )
