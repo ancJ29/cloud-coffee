@@ -1,3 +1,7 @@
+import useTranslation from '@/hooks/useTranslation'
+import { Text } from '@mantine/core'
+
 export default function RoleAndPermissions() {
-  return <div>Role And Permissions</div>
+  const t = useTranslation()
+  return <Text c="var(--time-clock-accent)">{t('Sorry, this feature is implemented yet')}</Text>
 }
