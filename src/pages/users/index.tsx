@@ -89,7 +89,7 @@ export default function Users() {
   const handleAddUser = useCallback(
     (values?: AddUserRequest) => {
       modals.open({
-        title: t('Add user'),
+        title: t('Add staff'),
         centered: true,
         size: 'md',
         children: (
@@ -122,7 +122,7 @@ export default function Users() {
   const handleEditUser = useCallback(
     (user: User) => {
       modals.open({
-        title: t('Update user'),
+        title: t('Update staff'),
         centered: true,
         size: 'md',
         children: (

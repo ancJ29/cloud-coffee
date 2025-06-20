@@ -15,10 +15,10 @@ export const navMenu: MenuItem[] = [
     url: '/dashboard',
   },
   {
-    key: 'users',
-    label: 'User management',
+    key: 'staffs',
+    label: 'Staff management',
     icon: IconUserCircle,
-    url: '/users',
+    url: '/staffs',
   },
   {
     key: 'timesheet',

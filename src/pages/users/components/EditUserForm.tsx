@@ -44,8 +44,8 @@ export default function EditUserForm({
 
   const onSubmit = (values: UpdateUserRequest) => {
     modals.openConfirmModal({
-      title: t('Update user'),
-      children: <Text size="sm">{t('Are you sure you want to update user?')}</Text>,
+      title: t('Update staff'),
+      children: <Text size="sm">{t('Are you sure you want to update staff?')}</Text>,
       labels: { confirm: t('Confirm'), cancel: t('Cancel') },
       onCancel: () => {
         modals.closeAll()

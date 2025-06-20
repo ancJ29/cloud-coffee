@@ -43,8 +43,8 @@ export default function AddUserForm({
 
   const onSubmit = (values: AddUserRequest) => {
     modals.openConfirmModal({
-      title: t('Add user'),
-      children: <Text size="sm">{t('Are you sure you want to add new user?')}</Text>,
+      title: t('Add staff'),
+      children: <Text size="sm">{t('Are you sure you want to add new staff?')}</Text>,
       labels: { confirm: t('Confirm'), cancel: t('Cancel') },
       onCancel: () => {
         modals.closeAll()

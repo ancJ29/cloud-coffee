@@ -111,11 +111,12 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--highlight': '#FFEC98',
     '--account-verify-btn': '#FDE68A',
     '--account-verify-text': '#92400D',
-    '--auth-background': '#F5F5F5',
+    '--auth-background': theme.colors.dark[0],
     '--auth-surface': '#ebebeb',
+    '--navbar': '#17233A',
   },
   light: {
-    '--border-color': '#E5E5E5',
+    '--border-color': '#C5C5C5',
     '--hover-bg': theme.colors.primary[0],
     '--text-color': 'black',
     '--even-row-bg': theme.colors.dark[0],
@@ -123,6 +124,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--select-item': theme.colors.primary[1],
     '--shift-item-bg': theme.colors.xGray[0],
     '--shift-accordion-bg': theme.colors.dark[0],
+    '--mantine-color-body': theme.colors.dark[0],
   },
   dark: {
     '--border-color': theme.colors.dark[8],
@@ -133,7 +135,6 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--select-item': theme.colors.primary[5],
     '--shift-item-bg': theme.colors.dark[6],
     '--shift-accordion-bg': theme.colors.dark[6],
-
     '--mantine-color-body': theme.colors.dark[6],
   },
 })

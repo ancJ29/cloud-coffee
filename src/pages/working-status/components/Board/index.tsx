@@ -16,7 +16,7 @@ export default function Board({ userShiftStatusList, ...props }: BoardProps) {
     <Card shadow="md" withBorder className={classes.container}>
       <Stack gap={0} className={classes.header}>
         <Text fw="bold" fz={28} mb={10}>
-          {t('User shift status')}
+          {t('Staff shift status')}
         </Text>
         <Filter {...props} />
       </Stack>

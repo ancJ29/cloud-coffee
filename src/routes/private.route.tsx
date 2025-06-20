@@ -9,7 +9,7 @@ const AuthWrapper = lazy(() => import('@/layouts/Auth'))
 const routeConfigs: RouteConfig[] = [
   {
     path: '/*',
-    element: () => <Navigate to="/users" />,
+    element: () => <Navigate to="/staffs" />,
   },
   {
     path: '/dashboard',
@@ -17,8 +17,18 @@ const routeConfigs: RouteConfig[] = [
     wrapper: AdminWrapper,
   },
   {
-    path: '/users',
-    element: lazy(() => import('@/pages/users')),
+    path: '/staffs',
+    element: lazy(() => import('@/pages/staffs')),
+    wrapper: AdminWrapper,
+  },
+  {
+    path: '/staffs/add',
+    element: lazy(() => import('@/pages/staffs/add')),
+    wrapper: AdminWrapper,
+  },
+  {
+    path: '/staffs/edit',
+    element: lazy(() => import('@/pages/staffs/edit')),
     wrapper: AdminWrapper,
   },
   {

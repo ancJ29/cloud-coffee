@@ -4,8 +4,9 @@ import {
   Autocomplete as MantineAutocomplete,
   AutocompleteProps as MantineAutocompleteProps,
 } from '@mantine/core'
-import { IconFilter, IconX } from '@tabler/icons-react'
+import { IconX } from '@tabler/icons-react'
 import { useCallback, useMemo, useRef, useState } from 'react'
+import classes from '../TextInput/TextInput.module.scss'
 
 export interface AutocompleteProps extends MantineAutocompleteProps {
   data?: string[]
@@ -89,18 +90,43 @@ export default function Autocomplete({
     return defaultValue || currentValue ? <IconX onClick={clear} size={14} /> : undefined
   }, [currentValue, defaultValue, clear])
 
+  const [focused, setFocused] = useState(false)
+
+  const floating = defaultValue || currentValue ? true : focused || undefined
+
+  const onFocus = useCallback(
+    (e: React.FocusEvent<HTMLInputElement, Element>) => {
+      setFocused(true)
+      props.onFocus?.(e)
+    },
+    [props],
+  )
+
+  const onBlur = useCallback(
+    (e: React.FocusEvent<HTMLInputElement, Element>) => {
+      setFocused(false)
+      props.onBlur?.(e)
+    },
+    [props],
+  )
+
   return (
     <MantineAutocomplete
       ref={unFocusOnMatch ? inputRef : undefined}
       defaultValue={defaultValue}
       value={defaultValue ? undefined : currentValue}
-      leftSection={<IconFilter size={14} />}
       rightSection={disabled ? undefined : clearIcon}
       data={data}
       onKeyDown={_onEnter}
       onChange={_onChange}
       disabled={disabled ?? (data?.length || 0) < 1}
       {...props}
+      label={props.label}
+      classNames={classes}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      data-floating={floating}
+      labelProps={{ 'data-floating': floating }}
     />
   )
 }

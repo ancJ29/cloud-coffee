@@ -7,7 +7,7 @@ export default function MissingUserId() {
   return (
     <Stack align="center" justify="center" gap={10} h="100dvh" px={10}>
       <Text ta="center" fw="bold" fz={20}>
-        {t('The user ID is missing')}
+        {t('The staff ID is missing')}
       </Text>
       <Text ta="center">
         {t('Please check the URL or contact support if you believe this is a mistake')}
