@@ -238,4 +238,5 @@ export default {
   'Please enter staff name': 'Please enter staff name',
   'Invalid phone number': 'Invalid phone number',
   'Please enter phone number': 'Please enter phone number',
+  'The staff ID is wrong. Please try again': 'The staff ID is wrong. Please try again',
 }

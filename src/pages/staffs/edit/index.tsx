@@ -1,3 +1,60 @@
+import { showNotification } from '@/configs/notifications'
+import useMount from '@/hooks/useMount'
+import useTranslation from '@/hooks/useTranslation'
+import { updateUser, UpdateUserRequest } from '@/services/domain'
+import useUserStore from '@/stores/user.store'
+import { getEmailSchema, getPhoneSchema } from '@/utils'
+import { useForm } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
+import { useCallback } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import z from 'zod'
+import EditStaffView from './components/EditStaffView'
+import WrongUserId from './components/WrongUserId'
+
 export default function EditStaff() {
-  return <></>
+  const t = useTranslation()
+  const [searchParams] = useSearchParams()
+  const id = searchParams.get('id')
+  const { users, load } = useUserStore()
+
+  const form = useForm<UpdateUserRequest>({
+    validate: zodResolver(schema(t)),
+    validateInputOnBlur: true,
+  })
+
+  const getData = useCallback(() => {
+    const user = users.get(id || '')
+
+    user && form.setValues({ ...user, enabled: user.enabled ?? true })
+  }, [form, id, users])
+  useMount(getData)
+
+  const handleSubmit = useCallback(
+    (values: UpdateUserRequest) => {
+      updateUser({
+        ...values,
+        name: values.name.trim(),
+        email: values.email?.trim(),
+      }).then((res) => {
+        const success = res?.success
+        showNotification({ t, type: success ? 'info' : 'error' })
+        load(true)
+      })
+    },
+    [load, t],
+  )
+
+  if (!form.values) {
+    return <WrongUserId />
+  }
+
+  return <EditStaffView form={form} onSubmit={handleSubmit} />
 }
+
+export const schema = (t: (key: string) => string) =>
+  z.object({
+    name: z.string().trim().min(1, t('Please enter staff name')),
+    email: getEmailSchema(t, { required: false }),
+    phone: getPhoneSchema(t, { required: false }),
+  })

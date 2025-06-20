@@ -238,4 +238,5 @@ export default {
   'Please enter staff name': 'Vui lòng nhập tên nhân viên',
   'Invalid phone number': 'Số điện thoại không hợp lệ',
   'Please enter phone number': 'Vui lòng nhập số điện thoại',
+  'The staff ID is wrong. Please try again': 'ID người dùng bị sai. Vui lòng thử lại',
 }

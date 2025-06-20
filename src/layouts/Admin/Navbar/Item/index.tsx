@@ -47,11 +47,11 @@ export default function Item({
   }, [closeNavbar, isMobileScreen, menuItem, navigate, opened, openNavbar])
 
   const isHighlighted = useCallback((item: MenuItem, activeUrl: string): boolean => {
-    return activeUrl === item.url
+    return activeUrl.includes(item.url || '')
   }, [])
 
   const isBold = useCallback((item: MenuItem, activeUrl: string): boolean => {
-    if (activeUrl === item.url) {
+    if (activeUrl.includes(item.url || '')) {
       return true
     }
     if (item.subs) {

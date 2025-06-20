@@ -83,7 +83,7 @@ export const addUserSchema = _typeBuilder({
       email: nullishStringSchema,
       avatar: nullishStringSchema,
       roleId: stringSchema,
-      salaryRuleId: optionalStringSchema,
+      salaryRuleId: nullishStringSchema,
       phone: nullishStringSchema,
     })
     .extend(userMemoSchema.shape),

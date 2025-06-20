@@ -3,6 +3,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { login, LoginRequest } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import { LoginState } from '@/types'
+import { ONE_SECOND } from '@/utils'
 import { useForm } from '@mantine/form'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { useCallback, useEffect } from 'react'
@@ -30,7 +31,7 @@ export default function Login() {
   useEffect(() => {
     const state = location.state as LoginState
     if (state) {
-      showNotification(state)
+      showNotification({ ...state, autoClose: 5 * ONE_SECOND })
       navigate(location.pathname, { replace: true })
     }
   }, [location, navigate])

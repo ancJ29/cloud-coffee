@@ -26,12 +26,12 @@ type ShowNotificationProps = {
 export function showNotification({
   message,
   type = 'info',
-  autoClose = 5 * ONE_SECOND,
+  autoClose = 3 * ONE_SECOND,
   t,
 }: ShowNotificationProps) {
   const { backgroundColor, defaultMessage } = typeStyles[type]
 
-  const _message = message || (t ? defaultMessage : '')
+  const _message = message || (t ? t(defaultMessage || '') : '')
 
   notifications.show({
     message: _message,
@@ -49,7 +49,7 @@ export function showNotification({
       description: {
         color: 'white',
         textAlign: 'center',
-        padding: '10px',
+        padding: '6px',
       },
     },
   })

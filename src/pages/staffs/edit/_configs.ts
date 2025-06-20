@@ -1,4 +1,4 @@
-import { AddUserRequest } from '@/services/domain'
+import { UpdateUserRequest } from '@/services/domain'
 import { UseFormReturnType } from '@mantine/form'
 import { Tabs } from '../_configs'
 import BasicInformation from './components/BasicInformation'
@@ -15,7 +15,7 @@ export const tabs = [
   { label: Tabs.ROLE_AND_PERMISSIONS, content: RoleAndPermissions },
 ]
 
-export type AddStaffForm = {
-  form: UseFormReturnType<AddUserRequest>
-  onSubmit: (values: AddUserRequest) => void
+export type UpdateStaffForm = {
+  form: UseFormReturnType<UpdateUserRequest>
+  onSubmit: (values: UpdateUserRequest) => void
 }
