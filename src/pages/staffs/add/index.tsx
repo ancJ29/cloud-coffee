@@ -39,7 +39,7 @@ export default function AddStaff() {
         const success = res?.success
         showNotification({ t, type: success ? 'info' : 'error' })
         load(true)
-        setTimeout(() => navigate('/staffs'), 1.5 * ONE_SECOND)
+        success && setTimeout(() => navigate('/staffs'), 1.5 * ONE_SECOND)
       })
     },
     [load, navigate, roles, t],
