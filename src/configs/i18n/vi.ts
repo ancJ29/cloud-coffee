@@ -227,4 +227,13 @@ export default {
   'Email does not exist': 'Email không tồn tại',
   'Dashboard': 'Trang tổng quan',
   'Staff name': 'Tên nhân viên',
+  'Basic information': 'Thông tin cơ bản',
+  'Working mode': 'Chế độ làm việc',
+  'Leave days': 'Ngày phép',
+  'Staff information': 'Thông tin nhân sự',
+  'Role & permissions': 'Chức vụ & quyền truy cập',
+  'Save staff': 'Lưu nhân viên',
+  'Email address': 'Địa chỉ email',
+  'Phone number': 'Số điện thoại',
+  'Please enter staff name': 'Vui lòng nhập tên nhân viên',
 }

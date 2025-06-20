@@ -57,5 +57,4 @@ export type ResetPasswordToken = {
 export enum ClientRoles {
   OWNER = 'Owner',
   STAFF = 'Staff',
-  CASHIER = 'Cashier',
 }

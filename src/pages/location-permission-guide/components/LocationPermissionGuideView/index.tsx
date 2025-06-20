@@ -1,6 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Stack, Tabs, Text } from '@mantine/core'
-import { Tabs as TabsEnum, tabs } from '../_configs'
+import { Tabs as TabsEnum, tabs } from '../../_configs'
 
 export default function LocationPermissionGuideView() {
   const t = useTranslation()

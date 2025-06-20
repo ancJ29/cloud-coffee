@@ -28,7 +28,7 @@ export default function ContentLayout({
   return (
     <div className={`${classes.container} ${!navbarOpened ? classes.shifted : ''}`}>
       <Flex justify="space-between" align="center" hiddenFrom="sm" className={classes.header}>
-        <Image src="favicon.svg" w={28} />
+        <Image src="/favicon.svg" w={28} />
         <Text fw={600} c="white">
           {t(title)}
         </Text>

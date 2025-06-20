@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: 6px;
+  margin: 10px;
+}
+
+.list {
+  --tabs-list-line-start: none;
+}
+
+.tabList {
+  padding-bottom: 20px;
+
+  @media only screen and (max-width: 768px) {
+    border-bottom: 1px solid var(--border-color);
+  }
+}

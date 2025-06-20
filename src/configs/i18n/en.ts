@@ -227,4 +227,13 @@ export default {
   'Email does not exist': 'Email does not exist',
   'Dashboard': 'Dashboard',
   'Staff name': 'Staff name',
+  'Basic information': 'Basic information',
+  'Working mode': 'Working mode',
+  'Leave days': 'Leave days',
+  'Staff information': 'Staff information',
+  'Role & permissions': 'Role & permissions',
+  'Save staff': 'Save staff',
+  'Email address': 'Email address',
+  'Phone number': 'Phone number',
+  'Please enter staff name': 'Please enter staff name',
 }

@@ -21,7 +21,7 @@ export default function Header({ onClick, navbarOpened, toggleNavbar }: HeaderPr
     >
       {navbarOpened ? (
         <Flex align="center" gap={5}>
-          <Image src="favicon.svg" w={36} onClick={onClick} />
+          <Image src="/favicon.svg" w={36} onClick={onClick} />
           <Text fz={16} fw={700} mt={1}>
             {t('TITLE')}
           </Text>
