@@ -46,11 +46,11 @@ export default function Login() {
         setToken(res.token)
       } else {
         form.setErrors({
-          password: 'Email or password is incorrect',
+          password: t('Email or password is incorrect'),
         })
       }
     },
-    [setToken, form],
+    [setToken, form, t],
   )
 
   return <LoginView form={form} onSubmit={submit} />
