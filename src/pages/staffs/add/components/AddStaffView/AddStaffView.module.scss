@@ -8,14 +8,8 @@
   margin: 10px;
 }
 
-.list {
-  --tabs-list-line-start: none;
-}
-
 .tabList {
-  padding-bottom: 20px;
-
   @media only screen and (max-width: 768px) {
-    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
   }
 }

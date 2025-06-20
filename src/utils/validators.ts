@@ -81,3 +81,35 @@ export const getEmailSchema = (t: (key: string) => string, options?: { required?
       }
     })
 }
+
+export const getPhoneSchema = (t: (key: string) => string, options?: { required?: boolean }) => {
+  const required = options?.required ?? true
+
+  return z
+    .string()
+    .nullish()
+    .superRefine((val, ctx) => {
+      const trimmed = val?.trim()
+
+      if (required && (!trimmed || trimmed === '')) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: t('Please enter phone number'),
+        })
+        return
+      }
+
+      if (!required && (!trimmed || trimmed === '')) {
+        return
+      }
+
+      const phoneRegex = /^(?:\+84|0)(3|5|7|8|9)[0-9]{8}$/
+
+      if (!phoneRegex.test(trimmed!)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: t('Invalid phone number'),
+        })
+      }
+    })
+}

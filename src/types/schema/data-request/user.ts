@@ -27,6 +27,7 @@ export const getUsersSchema = _typeBuilder({
         salaryRuleId: nullishStringSchema,
         clientId: stringSchema,
         enabled: nullishBooleanSchema,
+        phone: nullishStringSchema,
       })
       .extend(userMemoSchema.shape),
   ),
@@ -65,6 +66,7 @@ export const updateUserSchema = _typeBuilder({
       salaryRuleId: nullishStringSchema,
       clientId: stringSchema,
       enabled: booleanSchema,
+      phone: nullishStringSchema,
     })
     .extend(userMemoSchema.shape),
   response: z.object({
@@ -82,6 +84,7 @@ export const addUserSchema = _typeBuilder({
       avatar: nullishStringSchema,
       roleId: stringSchema,
       salaryRuleId: optionalStringSchema,
+      phone: nullishStringSchema,
     })
     .extend(userMemoSchema.shape),
   response: z.object({

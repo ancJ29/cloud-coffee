@@ -236,4 +236,6 @@ export default {
   'Email address': 'Địa chỉ email',
   'Phone number': 'Số điện thoại',
   'Please enter staff name': 'Vui lòng nhập tên nhân viên',
+  'Invalid phone number': 'Số điện thoại không hợp lệ',
+  'Please enter phone number': 'Vui lòng nhập số điện thoại',
 }

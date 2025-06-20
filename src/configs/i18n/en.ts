@@ -236,4 +236,6 @@ export default {
   'Email address': 'Email address',
   'Phone number': 'Phone number',
   'Please enter staff name': 'Please enter staff name',
+  'Invalid phone number': 'Invalid phone number',
+  'Please enter phone number': 'Please enter phone number',
 }
