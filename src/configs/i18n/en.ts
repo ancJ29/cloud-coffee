@@ -239,4 +239,5 @@ export default {
   'Invalid phone number': 'Invalid phone number',
   'Please enter phone number': 'Please enter phone number',
   'The staff ID is wrong. Please try again': 'The staff ID is wrong. Please try again',
+  'Search by staff name': 'Search by staff name',
 }
