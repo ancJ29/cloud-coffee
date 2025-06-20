@@ -1,7 +1,7 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Stack, Text } from '@mantine/core'
 import { AddStaffForm } from '../../_configs'
-import AddFormStaff from './BasicInformationForm'
+import BasicInformationForm from './BasicInformationForm'
 
 export default function BasicInformation({ ...props }: AddStaffForm) {
   const t = useTranslation()
@@ -11,7 +11,7 @@ export default function BasicInformation({ ...props }: AddStaffForm) {
       <Text fz={20} fw="bold">
         {t('Basic information')}
       </Text>
-      <AddFormStaff {...props} />
+      <BasicInformationForm {...props} />
     </Stack>
   )
 }
