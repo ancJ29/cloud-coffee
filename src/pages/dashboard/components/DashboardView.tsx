@@ -1,4 +1,4 @@
-import LiveClock from '@/components/c-time-keeper/LiveClock'
+import { LiveClock } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { Stack, Text } from '@mantine/core'
 import Item from './Item'
@@ -15,13 +15,7 @@ export default function DashboardView() {
         <Item
           title={t('Current Time')}
           content={
-            <LiveClock
-              format="HH:mm A"
-              fz={36}
-              c="var(--time-clock-primary)"
-              lh="normal"
-              fw="normal"
-            />
+            <LiveClock format="HH:mm A" fz={36} c="var(--text-secondary)" lh="normal" fw="normal" />
           }
         />
         <Item title={t('Employees Clocked in')} content="0" />

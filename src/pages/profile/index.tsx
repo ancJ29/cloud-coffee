@@ -1,8 +1,9 @@
-import { showNotification } from '@/configs/notifications'
+import { pushNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { updateUser, User } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import useRoleStore from '@/stores/role.store'
+import { NotificationType } from '@/types'
 import { getEmailSchema } from '@/utils'
 import { useForm } from '@mantine/form'
 import { zodResolver } from 'mantine-form-zod-resolver'
@@ -40,7 +41,12 @@ export default function Profile() {
         name: values.name.trim(),
         email: values.email?.trim(),
         enabled: true,
-      }).then((res) => showNotification({ t, type: res?.success ? 'info' : 'error' }))
+      }).then((res) =>
+        pushNotification({
+          t,
+          type: res?.success ? NotificationType.INFO : NotificationType.ERROR,
+        }),
+      )
     },
     [t],
   )
@@ -50,7 +56,7 @@ export default function Profile() {
 
 export const schema = (t: (key: string) => string) =>
   z.object({
-    name: z.string().trim().min(1, t('Field is required')),
+    name: z.string().trim().min(1, t('Please enter name')),
     email: getEmailSchema(t),
-    roleId: z.string().trim().min(1, t('Field is required')),
+    roleId: z.string().trim().min(1, t('Please select role')),
   })

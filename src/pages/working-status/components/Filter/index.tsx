@@ -1,4 +1,4 @@
-import AutocompleteForFilterData from '@/components/c-time-keeper/AutocompleteForFilterData'
+import { AutocompleteForFilterData } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { unique } from '@/utils'
 import { UserShiftStatus } from '../../_configs'
@@ -15,12 +15,10 @@ export default function Filter({ users, keyword, onChangeKeyword }: FilterProps)
   return (
     <AutocompleteForFilterData
       key={keyword}
-      label={t('Name')}
-      w="100%"
+      label={t('Staff name')}
       data={unique(users.map((el) => el.name))}
       defaultValue={keyword}
       onReload={onChangeKeyword}
-      mb={20}
     />
   )
 }

@@ -1,6 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Button, Image, Stack } from '@mantine/core'
-import classes from './CaptureContainer.module.scss'
+import classes from './index.module.scss'
 
 type CaptureContainerProps = {
   isCheckedIn: boolean

@@ -1,11 +1,15 @@
 import { ActionIcon, Image } from '@mantine/core'
 
 type ClosePopupProps = {
-  zIndex: number
+  isDisplay: boolean
   onClick: () => void
 }
 
-export default function ClosePopup({ zIndex, onClick }: ClosePopupProps) {
+export default function ClosePopup({ isDisplay, onClick }: ClosePopupProps) {
+  if (!isDisplay) {
+    return <></>
+  }
+
   return (
     <ActionIcon
       variant="transparent"
@@ -14,7 +18,7 @@ export default function ClosePopup({ zIndex, onClick }: ClosePopupProps) {
         bottom: '10dvh',
         left: '50%',
         transform: 'translateX(-50%)',
-        zIndex,
+        zIndex: 9999,
       }}
       onClick={onClick}
     >

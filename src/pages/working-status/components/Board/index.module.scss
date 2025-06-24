@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+  padding: 20px;
+  border-radius: 8px;
+  width: 40vw;
+  max-height: 90dvh;
+  margin-top: 30px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media only screen and (max-width: 768px) {
+    width: 90vw;
+    max-height: 60dvh;
+    margin-top: 10px;
+    padding: 15px;
+  }
+}
+
+.content {
+  overflow: auto;
+}

@@ -1,7 +1,7 @@
 import useFilterData from '@/hooks/useFilterData'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
-import { getSalaries, Salary } from '@/services/domain'
+import { Salary, getSalaries } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import useUserStore from '@/stores/user.store'
 import { DateValue } from '@/types'

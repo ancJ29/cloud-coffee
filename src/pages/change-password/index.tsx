@@ -1,10 +1,13 @@
-import { showNotification } from '@/configs/notifications'
+import { pushNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { changePassword } from '@/services/domain'
-import { ONE_SECOND } from '@/utils'
+import { NotificationType } from '@/types'
+import { getPasswordSchema, ONE_SECOND } from '@/utils'
 import { useForm } from '@mantine/form'
+import { zodResolver } from 'mantine-form-zod-resolver'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import z from 'zod'
 import ChangePasswordView from './components/ChangePasswordView'
 
 export type FormProps = {
@@ -19,20 +22,21 @@ const initialValues: FormProps = {
   confirmPassword: '',
 }
 
-export default function ChangPassword() {
+export default function ChangePassword() {
   const t = useTranslation()
   const navigate = useNavigate()
   const form = useForm<FormProps>({
     initialValues: initialValues,
-    validate: _validate(t),
+    validateInputOnBlur: true,
+    validate: zodResolver(schema(t)),
   })
 
   const submit = useCallback(
     (values: FormProps) => {
       changePassword(values).then((res) => {
         const success = res?.success
-        showNotification({ t, type: success ? 'info' : 'error' })
-        success && setTimeout(() => navigate('/profile'), ONE_SECOND)
+        pushNotification({ t, type: success ? NotificationType.INFO : NotificationType.ERROR })
+        success && setTimeout(() => navigate('/profile'), 2 * ONE_SECOND)
       })
     },
     [navigate, t],
@@ -41,11 +45,14 @@ export default function ChangPassword() {
   return <ChangePasswordView form={form} onSubmit={submit} />
 }
 
-function _validate(t: (s: string) => string) {
-  return {
-    currentPassword: (value: string) => (value === '' ? t('Field is required') : null),
-    newPassword: (value: string) => (value === '' ? t('Field is required') : null),
-    confirmPassword: (value: string, values: FormProps) =>
-      value !== values.newPassword ? t('The passwords did not match') : null,
-  }
-}
+export const schema = (t: (key: string) => string) =>
+  z
+    .object({
+      currentPassword: z.string().trim().min(1, t('Please enter current password')),
+      newPassword: getPasswordSchema(t),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      path: ['confirmPassword'],
+      message: t('The passwords did not match'),
+    })

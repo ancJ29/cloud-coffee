@@ -1,16 +1,17 @@
-import AutocompleteForFilterData from '@/components/c-time-keeper/AutocompleteForFilterData'
+import { AutocompleteForFilterData } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { User } from '@/services/domain'
 import { Box } from '@mantine/core'
 import Header from '../Header'
 import StaffTable from '../StaffTable'
-import classes from './StaffsView.module.scss'
+import classes from './index.module.scss'
 
 type StaffsViewProps = {
   users: User[]
   keyword: string
-  onEditStaff: (user: User) => void
   onAddStaff: () => void
+  onEditStaff: (user: User) => void
+  onDeleteStaff: (user: User) => void
   onChangeKeyWord: (value?: string) => void
 }
 
@@ -19,6 +20,7 @@ export default function StaffsView({
   keyword,
   onAddStaff,
   onEditStaff,
+  onDeleteStaff,
   onChangeKeyWord,
 }: StaffsViewProps) {
   const t = useTranslation()
@@ -36,7 +38,7 @@ export default function StaffsView({
         mt={15}
       />
 
-      <StaffTable users={users} onEditStaff={onEditStaff} />
+      <StaffTable users={users} onEditStaff={onEditStaff} onDeleteStaff={onDeleteStaff} />
     </Box>
   )
 }

@@ -1,17 +1,17 @@
-import ActionButtons from '@/components/c-time-keeper/ActionButtons'
-import Camera from '@/components/c-time-keeper/Camera'
-import IconUserWithCorner from '@/components/c-time-keeper/IconUserWithCorner'
-import ManageButton from '@/components/c-time-keeper/ManageButton'
-import Picture from '@/components/c-time-keeper/Picture'
+import { ManageButton } from '@/components'
 import useCameraPermission from '@/hooks/useCameraPermission'
 import { User, Venue } from '@/services/domain'
 import { dataUrlToFile, formatTime, ONE_SECOND } from '@/utils'
-import { Stack, Text } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
-import classes from './CheckInView.module.scss'
+import Actions from './Actions'
+import Camera from './Camera'
 import Fireworks from './Fireworks'
+import IconUserWithCorner from './IconUserWithCorner'
+import Picture from './Picture'
 import UserInformation from './UserInformation'
+import VenueInformation from './VenueInformation'
 
 const COUNTDOWN_TIME = 3
 const CAPTURE_DELAY = COUNTDOWN_TIME * ONE_SECOND
@@ -82,16 +82,12 @@ export default function CheckInView({ venue, user, onSubmit }: CheckInViewProps)
           ) : (
             <Camera webcamRef={webcamRef} isCapturing={isCapturing} countdown={countdown} />
           )}
-          <ActionButtons
-            isVisible={imageSrc !== null}
-            onRetry={handleRetry}
-            onSubmit={handleSubmit}
-          />
+          <Actions isVisible={imageSrc !== null} onRetry={handleRetry} onSubmit={handleSubmit} />
         </Stack>
       ) : (
         <IconUserWithCorner />
       )}
-      <Text className={classes.venue}>{venue?.name}</Text>
+      <VenueInformation venue={venue} />
       <UserInformation user={user} />
       <Fireworks />
       <ManageButton />

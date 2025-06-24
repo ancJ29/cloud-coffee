@@ -8,7 +8,7 @@ import {
   resetPasswordSchema,
   verifyEmailSchema,
 } from '@/types'
-import { z } from 'zod'
+import z from 'zod'
 import callApi from '../api'
 
 export type LoginRequest = z.infer<typeof loginSchema.request>['payload']
@@ -26,15 +26,6 @@ export async function getMe() {
     action: RequestAction.GET_ME,
     schema: getMeSchema,
     log: true,
-  })
-}
-
-type ChangePasswordRequest = z.infer<typeof changePasswordSchema.request>['payload']
-export async function changePassword(payload: ChangePasswordRequest) {
-  return await callApi({
-    action: RequestAction.CHANGE_PASSWORD,
-    payload,
-    schema: changePasswordSchema,
   })
 }
 
@@ -71,5 +62,14 @@ export async function verifyEmail(payload: VerifyEmailRequest) {
     action: RequestAction.VERIFY_EMAIL,
     payload,
     schema: verifyEmailSchema,
+  })
+}
+
+type ChangePasswordRequest = z.infer<typeof changePasswordSchema.request>['payload']
+export async function changePassword(payload: ChangePasswordRequest) {
+  return await callApi({
+    action: RequestAction.CHANGE_PASSWORD,
+    payload,
+    schema: changePasswordSchema,
   })
 }

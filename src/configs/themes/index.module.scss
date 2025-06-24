@@ -1,0 +1,35 @@
+.inputWrapper {
+  --input-color: var(--mantine-color-text) !important;
+  --input-placeholder-color: var(--placeholder) !important;
+}
+
+.input {
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: 300;
+  border-radius: 0;
+  padding: 0px 10px;
+  --input-bd: transparent !important;
+}
+
+.innerInput {
+  padding: 0px 10px;
+}
+
+.title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.content {
+  border-radius: var(--mantine-radius-md);
+}
+
+.gridInner {
+  --grid-margin: 0;
+  width: 100%;
+}
+
+.item {
+  --item-border: var(--border);
+}

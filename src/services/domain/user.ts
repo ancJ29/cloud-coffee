@@ -5,7 +5,7 @@ import {
   RequestAction,
   updateUserSchema,
 } from '@/types'
-import { z } from 'zod'
+import z from 'zod'
 import callApi from '../api'
 import { loadAll } from '../data-loader'
 

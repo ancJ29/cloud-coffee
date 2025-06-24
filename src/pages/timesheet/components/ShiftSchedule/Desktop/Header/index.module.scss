@@ -1,0 +1,17 @@
+.container {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0 9px 0;
+  font-weight: 600;
+  background-color: var(--data-grid-header);
+  height: fit-content;
+  border-radius: 6px 6px 0 0;
+  color: black;
+}
+
+.centerItem {
+  text-align: center;
+}
+
+.nameItem {
+  padding-left: 20px;
+}

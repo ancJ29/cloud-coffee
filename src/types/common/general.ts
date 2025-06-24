@@ -19,9 +19,8 @@ export type DelayProps = {
   delay?: number
 }
 
-export type NotificationType = 'info' | 'warning' | 'error'
-
-export type LoginState = {
-  message: string
-  type: NotificationType
+export enum NotificationType {
+  INFO = 'INFO',
+  WARNING = 'WARNING',
+  ERROR = 'ERROR',
 }

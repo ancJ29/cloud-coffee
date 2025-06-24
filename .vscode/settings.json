@@ -2,14 +2,14 @@
   "files.exclude": {
     "**/node_modules": true
   },
-  "cSpell.ignorePaths": [
-    "./src/configs/i18n/vi.ts"
-  ],
+  "cSpell.ignorePaths": ["./src/configs/i18n/vi.ts"],
   "cSpell.words": [
     "checkin",
+    "ctkper",
     "exceljs",
     "mantine",
     "Qrcode",
+    "saigontek",
     "tabler",
     "timesheet",
     "VITE"
@@ -18,5 +18,5 @@
     "source.organizeImports": "explicit",
     "source.addMissingImports": "explicit",
     "source.removeUnusedImports": "explicit"
-  },
+  }
 }

@@ -1,5 +1,5 @@
-import Message from '@/components/c-time-keeper/Message'
 import { BUCKET_NAME, IS_DEV, PLACEHOLDER_IMAGE_URL } from '@/configs/constant'
+import { pushNotification } from '@/configs/notifications'
 import { useGeoLocation } from '@/hooks/useGeoLocation'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
@@ -13,6 +13,7 @@ import {
   uploadImageToS3,
   User,
 } from '@/services/domain'
+import { NotificationType } from '@/types'
 import { endOfDay, getImageUrl, getObjectKey, startOfDay } from '@/utils'
 import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
@@ -38,9 +39,9 @@ export default function ClockIn({ userId }: ClockInProps) {
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
   const [isCheckedIn, setIsCheckedIn] = useState(false)
-  const [zIndex, setZIndex] = useState(-1)
   const [isCheckSuccessful, setIsCheckSuccessful] = useState<boolean | undefined>(undefined)
   const [key, setKey] = useState(0)
+  const [isDisplayCloseButton, setIsDisplayCloseButton] = useState(false)
 
   const getShiftData = useCallback(
     async (clientId: string) => {
@@ -82,19 +83,32 @@ export default function ClockIn({ userId }: ClockInProps) {
     setPageIndex((prev) => (prev > 0 ? prev - 1 : prev))
   }, [])
 
+  const handleCheckInCheckOut = useCallback(
+    (isCheckIn = true) => {
+      setIsCheckIn(isCheckIn)
+      goToNextPage()
+    },
+    [goToNextPage],
+  )
+
+  const closePopup = useCallback(async () => {
+    setIsDisplayCloseButton(false)
+    modals.closeAll()
+    if (isCheckSuccessful) {
+      setPageIndex(0)
+    } else {
+      setKey((prev) => prev + 1)
+    }
+    await getShiftData(clientId)
+  }, [clientId, getShiftData, isCheckSuccessful])
+
   const submit = useCallback(
     async (file: File) => {
       if (!location) {
-        modals.open({
-          centered: true,
-          size: 'lg',
-          children: (
-            <Message
-              success={false}
-              message={t(
-                'We could not access your location. Please make sure you have granted location access in your browser settings',
-              )}
-            />
+        pushNotification({
+          type: NotificationType.ERROR,
+          message: t(
+            'We could not access your location. Please make sure you have granted location access in your browser settings',
           ),
         })
         return
@@ -132,7 +146,7 @@ export default function ClockIn({ userId }: ClockInProps) {
         success = res?.success
         message = res?.message
       }
-      setZIndex(9999)
+      setIsDisplayCloseButton(true)
       setIsCheckSuccessful(success)
       modals.open({
         withCloseButton: false,
@@ -155,25 +169,6 @@ export default function ClockIn({ userId }: ClockInProps) {
     },
     [address, clientId, isCheckIn, location, t, userId],
   )
-
-  const handleCheckInCheckOut = useCallback(
-    (isCheckIn = true) => {
-      setIsCheckIn(isCheckIn)
-      goToNextPage()
-    },
-    [goToNextPage],
-  )
-
-  const closePopup = useCallback(async () => {
-    setZIndex(-1)
-    modals.closeAll()
-    if (isCheckSuccessful) {
-      setPageIndex(0)
-    } else {
-      setKey((prev) => prev + 1)
-    }
-    await getShiftData(clientId)
-  }, [clientId, getShiftData, isCheckSuccessful])
 
   if (denied) {
     return <LocationDeniedNotice />
@@ -198,7 +193,7 @@ export default function ClockIn({ userId }: ClockInProps) {
           onReturn={goToPreviousPage}
         />
       )}
-      <ClosePopup zIndex={zIndex} onClick={closePopup} />
+      <ClosePopup isDisplay={isDisplayCloseButton} onClick={closePopup} />
     </>
   )
 }

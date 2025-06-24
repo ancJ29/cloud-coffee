@@ -8,7 +8,7 @@ export default function Header() {
     <div
       style={{
         padding: '10px',
-        borderBottom: '1px solid var(--border-color)',
+        borderBottom: '1px solid var(--border)',
       }}
     >
       <Text fz={16}>{t('Staff name')}</Text>

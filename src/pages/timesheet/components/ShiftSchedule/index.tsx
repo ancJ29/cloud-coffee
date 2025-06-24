@@ -1,10 +1,10 @@
-import Laptop from './Laptop'
+import Desktop from './Desktop'
 import Mobile from './Mobile'
 
 export default function ShiftSchedule() {
   return (
     <>
-      <Laptop />
+      <Desktop />
       <Mobile />
     </>
   )

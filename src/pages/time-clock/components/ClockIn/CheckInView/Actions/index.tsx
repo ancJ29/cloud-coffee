@@ -1,5 +1,5 @@
 import { Button } from '@mantine/core'
-import classes from './Actions.module.scss'
+import classes from './index.module.scss'
 
 type ActionsProps = {
   isCheckedIn: boolean

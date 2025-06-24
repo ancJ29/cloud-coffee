@@ -1,14 +1,15 @@
-import Avatar from '@/components/common/Avatar'
+import { Avatar } from '@/components'
 import { User } from '@/services/domain'
 import { Image, Text } from '@mantine/core'
-import classes from './Item.module.scss'
+import classes from './index.module.scss'
 
 type ItemProps = {
   user: User
-  onClick: () => void
+  onEdit: (user: User) => void
+  onDelete: (user: User) => void
 }
 
-export default function Item({ user, onClick }: ItemProps) {
+export default function Item({ user, onEdit, onDelete }: ItemProps) {
   return (
     <div className={classes.container}>
       <div className={classes.info}>
@@ -21,14 +22,14 @@ export default function Item({ user, onClick }: ItemProps) {
           width={20}
           height={20}
           className={classes.icon}
-          onClick={onClick}
+          onClick={() => onEdit(user)}
         />
         <Image
           src="/imgs/staff/delete.svg"
           width={20}
           height={20}
           className={classes.icon}
-          onClick={() => {}}
+          onClick={() => onDelete(user)}
         />
       </div>
     </div>

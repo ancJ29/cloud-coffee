@@ -1,8 +1,8 @@
-import LiveClock from '@/components/c-time-keeper/LiveClock'
+import { LiveClock } from '@/components'
 import { User } from '@/services/domain'
 import { formatTime } from '@/utils'
 import { Stack, Text } from '@mantine/core'
-import classes from './UserInformation.module.scss'
+import classes from './index.module.scss'
 
 type UserInformationProps = {
   user: User

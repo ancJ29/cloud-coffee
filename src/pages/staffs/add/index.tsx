@@ -1,9 +1,9 @@
-import { showNotification } from '@/configs/notifications'
+import { pushNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { addUser, AddUserRequest } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useUserStore from '@/stores/user.store'
-import { ClientRoles } from '@/types'
+import { ClientRoles, NotificationType } from '@/types'
 import { getEmailSchema, getPhoneSchema, ONE_SECOND } from '@/utils'
 import { useForm } from '@mantine/form'
 import { zodResolver } from 'mantine-form-zod-resolver'
@@ -37,7 +37,7 @@ export default function AddStaff() {
           Array.from(roles.values()).find((role) => role.name === ClientRoles.STAFF)?.id || '',
       }).then((res) => {
         const success = res?.success
-        showNotification({ t, type: success ? 'info' : 'error' })
+        pushNotification({ t, type: success ? NotificationType.INFO : NotificationType.ERROR })
         load(true)
         success && setTimeout(() => navigate('/staffs'), 1.5 * ONE_SECOND)
       })

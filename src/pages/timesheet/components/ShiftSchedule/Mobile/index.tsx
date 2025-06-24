@@ -1,4 +1,4 @@
-import EmptyBox from '@/components/common/DataGrid/EmptyBox'
+import { EmptyBox } from '@/components'
 import useUserStore from '@/stores/user.store'
 import { Stack } from '@mantine/core'
 import { useSyncExternalStore } from 'react'

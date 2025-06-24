@@ -4,7 +4,7 @@ import LoginForm, { LoginFormProps } from './LoginForm'
 export default function LoginView({ ...props }: LoginFormProps) {
   return (
     <>
-      <Image src="/logo.svg" w={250} />
+      <Image src="/favicon.svg" w={250} />
       <LoginForm {...props} />
     </>
   )

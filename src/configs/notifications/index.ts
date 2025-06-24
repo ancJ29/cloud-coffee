@@ -3,32 +3,32 @@ import { ONE_SECOND } from '@/utils'
 import { notifications } from '@mantine/notifications'
 
 const typeStyles: Record<NotificationType, { backgroundColor: string; defaultMessage?: string }> = {
-  info: {
+  INFO: {
     backgroundColor: 'var(--info)',
     defaultMessage: 'Your changes have been saved',
   },
-  warning: {
+  WARNING: {
     backgroundColor: 'var(--warning)',
   },
-  error: {
+  ERROR: {
     backgroundColor: 'var(--error)',
     defaultMessage: 'Unknown error',
   },
 }
 
-type ShowNotificationProps = {
+type pushNotificationProps = {
   message?: string
   type?: NotificationType
   autoClose?: number
   t?: (key: string) => string
 }
 
-export function showNotification({
+export function pushNotification({
   message,
-  type = 'info',
+  type = NotificationType.INFO,
   autoClose = 3 * ONE_SECOND,
   t,
-}: ShowNotificationProps) {
+}: pushNotificationProps) {
   const { backgroundColor, defaultMessage } = typeStyles[type]
 
   const _message = message || (t ? t(defaultMessage || '') : '')

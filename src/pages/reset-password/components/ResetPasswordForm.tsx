@@ -1,7 +1,6 @@
-import PasswordInput from '@/components/common/PasswordInput'
-import PasswordStrengthInput from '@/components/common/PasswordStrengthInput'
+import { PasswordInput, PasswordStrengthInput } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
-import { Anchor, Button, Flex, Stack } from '@mantine/core'
+import { Button, Stack } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { FormProps } from '..'
 
@@ -22,18 +21,14 @@ export default function ResetPasswordForm({ form, onSubmit }: ResetPasswordFormP
           mt={10}
         />
         <PasswordInput
-          label={t('Confirm your new password')}
+          label={t('Confirm new password')}
           {...form.getInputProps('confirmPassword')}
           mt={10}
         />
 
-        <Button fullWidth type="submit" mt={10}>
+        <Button fullWidth type="submit" mt={10} className="auth-btn">
           {t('Reset password')}
         </Button>
-
-        <Flex justify="center">
-          <Anchor href="/forgot-password">{t('Back to Forgot Password?')}</Anchor>
-        </Flex>
       </Stack>
     </form>
   )

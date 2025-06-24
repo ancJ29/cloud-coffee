@@ -1,12 +1,9 @@
-import Avatar from '@/components/common/Avatar'
-import Select from '@/components/common/Select'
+import { Select, TextInput } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { User } from '@/services/domain'
-import { MantineWidth, OptionProps } from '@/types'
-import { Anchor, Button, Flex, Stack, TextInput } from '@mantine/core'
+import { OptionProps } from '@/types'
+import { Anchor, Avatar, Button, Center, Stack } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-
-const w: MantineWidth = { base: '100%', sm: 400 }
 
 type ProfileFormProps = {
   form: UseFormReturnType<User>
@@ -19,33 +16,28 @@ export default function ProfileForm({ form, onSubmit, roleOptions }: ProfileForm
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Flex gap={15} align="center" justify="center" h="100%" direction="column">
-        <Avatar size={120} src={form.values.avatar} />
-        <Stack gap={12} align="center" w={w}>
-          <TextInput
-            w={w}
-            withAsterisk
-            label={t('Name')}
-            data-autofocus
-            {...form.getInputProps('name')}
-          />
-          <TextInput w={w} label={t('Email')} {...form.getInputProps('email')} />
-          <Select
-            w={w}
-            withAsterisk
-            label={t('Role')}
-            options={roleOptions}
-            disabled
-            {...form.getInputProps('roleId')}
-          />
+      <Stack gap={35} w={{ base: '80%', sm: 400 }}>
+        <Center>
+          <Avatar size={120} src={form.values.avatar} />
+        </Center>
+        <TextInput withAsterisk label={t('Name')} data-autofocus {...form.getInputProps('name')} />
+        <TextInput withAsterisk label={t('Email')} {...form.getInputProps('email')} />
+        <Select
+          withAsterisk
+          label={t('Role')}
+          options={roleOptions}
+          disabled
+          {...form.getInputProps('roleId')}
+        />
+        <Stack gap={20}>
           <Button type="submit" mt={10}>
             {t('Save')}
           </Button>
           <Anchor ta="center" href="/change-password">
-            {t('Update password')}
+            {t('Change password')}
           </Anchor>
         </Stack>
-      </Flex>
+      </Stack>
     </form>
   )
 }

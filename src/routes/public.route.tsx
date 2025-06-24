@@ -46,11 +46,10 @@ const routeConfigs: RouteConfig[] = [
   {
     path: '/verify-email',
     element: lazy(() => import('@/pages/verify-email')),
-    wrapper: AuthWrapper,
   },
 ]
 
-const guestRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrapper }) => ({
+export const publicRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrapper }) => ({
   path,
   element: Wrapper ? (
     <Wrapper>
@@ -60,5 +59,3 @@ const guestRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrapp
     <Component />
   ),
 }))
-
-export default guestRoutes

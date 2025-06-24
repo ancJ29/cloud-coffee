@@ -1,4 +1,4 @@
-import ManageButton from '@/components/c-time-keeper/ManageButton'
+import { ManageButton } from '@/components'
 import { Venue } from '@/services/domain'
 import { Flex, Stack } from '@mantine/core'
 import Board, { BoardProps } from '../Board'

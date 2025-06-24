@@ -1,0 +1,26 @@
+.container {
+  height: 100dvh;
+  width: 100dvw;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.content {
+  width: 450px;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 50px 0;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  @media only screen and (max-width: 768px) {
+    height: 100dvh;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

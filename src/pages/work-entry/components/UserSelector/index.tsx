@@ -2,7 +2,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { User } from '@/services/domain'
 import { ActionIcon, Avatar, Card, Flex, Grid, Stack, Text } from '@mantine/core'
 import { IconX } from '@tabler/icons-react'
-import classes from './UserSelector.module.scss'
+import classes from './index.module.scss'
 
 type UserSelectorProps = {
   isCheckIn: boolean

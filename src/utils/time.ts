@@ -7,6 +7,10 @@ export const ONE_HOUR = ONE_MINUTE * 60
 export const ONE_DAY = ONE_HOUR * 24
 export const ONE_WEEK = ONE_DAY * 7
 
+export function formatTime(dateTime?: number | string | Date | null, format = 'DD/MM/YYYY HH:mm') {
+  return dateTime ? dayjs(dateTime).format(format) : '-'
+}
+
 export function startOfDay(timestamp: number) {
   return dayjs(timestamp).startOf('day').valueOf()
 }
@@ -37,33 +41,6 @@ export function endOfMonth(timestamp: number): number {
   date.setDate(0)
   date.setHours(23, 59, 59, 999)
   return date.getTime()
-}
-
-export function formatTime(dateTime?: number | string | Date | null, format = 'DD/MM/YYYY HH:mm') {
-  return dateTime ? dayjs(dateTime).format(format) : '-'
-}
-
-export function diffHours(start: number | null, end: number | null) {
-  if (!start || !end) {
-    return 0
-  }
-  const diffMilliseconds = end - start
-  if (diffMilliseconds <= 0) {
-    return 0
-  }
-  return Math.floor(diffMilliseconds / ONE_HOUR)
-}
-
-export function diffMinutes(start: number | null, end: number | null) {
-  if (!start || !end) {
-    return 0
-  }
-  const diffMilliseconds = end - start
-  if (diffMilliseconds <= 0) {
-    return 0
-  }
-  const totalMinutes = Math.floor(diffMilliseconds / ONE_MINUTE)
-  return totalMinutes % 60
 }
 
 export function formatDuration(totalMilliseconds: number | null) {

@@ -1,5 +1,5 @@
 import { Image } from '@mantine/core'
-import classes from './Fireworks.module.scss'
+import classes from './index.module.scss'
 
 export default function Fireworks() {
   return (

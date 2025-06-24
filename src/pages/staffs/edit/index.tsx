@@ -1,8 +1,9 @@
-import { showNotification } from '@/configs/notifications'
+import { pushNotification } from '@/configs/notifications'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import { updateUser, UpdateUserRequest } from '@/services/domain'
 import useUserStore from '@/stores/user.store'
+import { NotificationType } from '@/types'
 import { getEmailSchema, getPhoneSchema } from '@/utils'
 import { useForm } from '@mantine/form'
 import { zodResolver } from 'mantine-form-zod-resolver'
@@ -38,7 +39,7 @@ export default function EditStaff() {
         email: values.email?.trim(),
       }).then((res) => {
         const success = res?.success
-        showNotification({ t, type: success ? 'info' : 'error' })
+        pushNotification({ t, type: success ? NotificationType.INFO : NotificationType.ERROR })
         load(true)
       })
     },

@@ -1,5 +1,4 @@
-import PhoneInput from '@/components/common/PhoneInput'
-import TextInput from '@/components/common/TextInput'
+import { PhoneInput, TextInput } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { Button, Stack } from '@mantine/core'
 import { UpdateStaffForm } from '../../../_configs'

@@ -1,12 +1,12 @@
-import LiveClock from '@/components/c-time-keeper/LiveClock'
+import { LiveClock } from '@/components'
 import { dataUrlToFile, formatTime } from '@/utils'
 import { Image, Stack } from '@mantine/core'
 import { useCallback, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
-import Address from '../CheckInView/Address'
+import Address from '../Address'
 import CaptureContainer from './CaptureContainer'
 import Header from './Header'
-import classes from './WebcamView.module.scss'
+import classes from './index.module.scss'
 
 type WebcamViewProps = {
   isCheckedIn: boolean
@@ -68,7 +68,7 @@ export default function WebcamView({ isCheckedIn, onSubmit, onReturn }: WebcamVi
         />
       )}
       <Stack align="center" px={20} gap={8} mt={10} h={100}>
-        <LiveClock c={isCheckedIn ? 'var(--time-clock-live-clock)' : 'var(--time-clock-primary)'} />
+        <LiveClock c={isCheckedIn ? 'var(--warning)' : 'var(--time-clock-primary)'} />
         <Address />
       </Stack>
       <CaptureContainer

@@ -1,5 +1,4 @@
-import PasswordInput from '@/components/common/PasswordInput'
-import TextInput from '@/components/common/TextInput'
+import { PasswordInput, TextInput } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { LoginRequest } from '@/services/domain'
 import { Anchor, Button, Flex, Stack } from '@mantine/core'
@@ -20,10 +19,12 @@ export default function LoginForm({ form, onSubmit }: LoginFormProps) {
         <PasswordInput label={t('Enter a password')} {...form.getInputProps('password')} mt={10} />
 
         <Flex justify="end">
-          <Anchor href="/forgot-password">{t('Forgot your password?')}</Anchor>
+          <Anchor c="var(--auth-anchor)" href="/forgot-password">
+            {t('Forgot your password?')}
+          </Anchor>
         </Flex>
 
-        <Button fullWidth type="submit">
+        <Button fullWidth type="submit" className="auth-btn">
           {t('Sign in')}
         </Button>
       </Stack>

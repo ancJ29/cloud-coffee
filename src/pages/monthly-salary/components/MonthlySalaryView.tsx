@@ -1,8 +1,8 @@
-import DataGrid from '@/components/common/DataGrid'
 import { Salary } from '@/services/domain'
 import { DataGridColumnProps, DateValue } from '@/types'
 import { Stack } from '@mantine/core'
 import Filter from './Filter'
+import { DataGrid } from '@/components'
 
 type MonthlySalaryViewProps = {
   dataGridConfigs: DataGridColumnProps[]

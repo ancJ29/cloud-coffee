@@ -1,7 +1,7 @@
-import ManageButton from '@/components/c-time-keeper/ManageButton'
+import { ManageButton } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { Button, Stack } from '@mantine/core'
-import classes from './WorkEntryView.module.scss'
+import classes from './index.module.scss'
 
 type WorkEntryViewProps = {
   onCheckIn: () => void

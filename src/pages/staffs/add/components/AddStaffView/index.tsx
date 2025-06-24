@@ -2,7 +2,7 @@ import useTranslation from '@/hooks/useTranslation'
 import { Stack, Tabs, Text } from '@mantine/core'
 import { Tabs as TabsEnum } from '../../../_configs'
 import { AddStaffForm, tabs } from '../../_configs'
-import classes from './AddStaffView.module.scss'
+import classes from './index.module.scss'
 
 export default function AddStaffView({ ...props }: AddStaffForm) {
   const t = useTranslation()

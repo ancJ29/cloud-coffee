@@ -1,7 +1,7 @@
-import LiveClock from '@/components/c-time-keeper/LiveClock'
+import { LiveClock } from '@/components'
 import { formatTime } from '@/utils'
 import { Stack, Text } from '@mantine/core'
-import classes from './Information.module.scss'
+import classes from './index.module.scss'
 
 export default function Information() {
   const now = Date.now()

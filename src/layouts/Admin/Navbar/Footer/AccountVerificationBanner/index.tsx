@@ -1,75 +1,33 @@
 import useTranslation from '@/hooks/useTranslation'
-import { requestVerifyEmail } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import { Button } from '@mantine/core'
-import { modals } from '@mantine/modals'
 import { IconAlertTriangle } from '@tabler/icons-react'
-import { useCallback } from 'react'
-import StatusMessage from './StatusMessage'
-import VerifyAccountForm from './VerifyAccountForm'
 
 type AccountVerificationBannerProps = {
-  navbarOpened: boolean
+  onRequestVerifyEmail: () => void
 }
 
 export default function AccountVerificationBanner({
-  navbarOpened,
+  onRequestVerifyEmail,
 }: AccountVerificationBannerProps) {
-  const { user } = useAuthStore()
   const t = useTranslation()
-
-  const handSendVerifyEmail = useCallback(async () => {
-    const res = await requestVerifyEmail()
-    modals.closeAll()
-    modals.open({
-      title: t('Verify your account'),
-      centered: true,
-      size: 'md',
-      zIndex: 2000,
-      children: <StatusMessage success={res?.success} />,
-    })
-  }, [t])
-
-  const onClick = useCallback(() => {
-    modals.open({
-      title: t('Verify your account'),
-      centered: true,
-      size: 'md',
-      zIndex: 2000,
-      children: <VerifyAccountForm onSubmit={handSendVerifyEmail} />,
-    })
-  }, [handSendVerifyEmail, t])
+  const { user } = useAuthStore()
 
   if (user?.isEmailVerified) {
     return <></>
   }
 
-  return navbarOpened ? (
+  return (
     <Button
       variant="outline"
-      color="var(--account-verify-btn)"
-      c="var(--account-verify-text)"
+      color="var(--highlight)"
+      c="var(--highlight)"
       fz={12}
-      mb={10}
       leftSection={<IconAlertTriangle size={20} />}
-      h={40}
-      onClick={onClick}
+      onClick={onRequestVerifyEmail}
+      size="sm"
     >
-      {t('Account not verified')}
+      {t('Email not verified')}
     </Button>
-  ) : (
-    <div
-      style={{
-        height: '40px',
-        borderRadius: '6px',
-        border: '1px solid var(--account-verify-btn)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: '10px',
-      }}
-    >
-      <IconAlertTriangle size={20} color="var(--account-verify-text)" />
-    </div>
   )
 }

@@ -1,5 +1,5 @@
 import { Box, Text } from '@mantine/core'
-import classes from './MenuItem.module.scss'
+import classes from './index.module.scss'
 
 type MenuItemProps = {
   leftIcon: React.ReactNode
@@ -27,7 +27,7 @@ export default function MenuItem({
     <Box className={classes.container} onClick={_onClick} style={style}>
       <div className={classes.item}>
         {leftIcon}
-        {typeof label === 'string' ? <Text>{label}</Text> : label}
+        {typeof label === 'string' ? <Text fz={12}>{label}</Text> : label}
       </div>
 
       {rightIcon}

@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 6px;
+  margin: 10px;
+}
+
+.tabList {
+  @media only screen and (max-width: 768px) {
+    padding-bottom: 20px;
+  }
+}

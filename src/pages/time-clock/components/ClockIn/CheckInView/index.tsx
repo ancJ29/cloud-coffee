@@ -1,9 +1,9 @@
-import LiveClock from '@/components/c-time-keeper/LiveClock'
+import { LiveClock } from '@/components'
 import { PLACEHOLDER_IMAGE_URL } from '@/configs/constant'
 import { Shift, User } from '@/services/domain'
 import { Image, Stack } from '@mantine/core'
+import Address from '../Address'
 import Actions from './Actions'
-import Address from './Address'
 import Header from './Header'
 import ShiftInformation from './ShiftInformation'
 
@@ -35,7 +35,7 @@ export default function CheckInView({
         radius="50%"
       />
       <Stack gap={8} align="center">
-        <LiveClock c={isCheckedIn ? 'var(--time-clock-live-clock)' : 'var(--time-clock-primary)'} />
+        <LiveClock c={isCheckedIn ? 'var(--warning)' : 'var(--time-clock-primary)'} />
         <Address />
       </Stack>
       <Actions isCheckedIn={isCheckedIn} onCheckIn={onCheckIn} onCheckOut={onCheckOut} />

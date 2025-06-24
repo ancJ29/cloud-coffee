@@ -1,4 +1,3 @@
-import useWindowResize from '@/hooks/useWindowResize'
 import { MenuItem } from '@/types'
 import { useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -7,71 +6,57 @@ import ItemView from './ItemView'
 type ItemProps = {
   menuItem: MenuItem
   level?: number
-  navbarOpened: boolean
-  closeNavbar: () => void
-  openNavbar: () => void
+  closeNavbar?: () => void
+  isMobile?: boolean
 }
 
-export default function Item({
-  menuItem,
-  level = 0,
-  navbarOpened,
-  closeNavbar,
-  openNavbar,
-}: ItemProps) {
+export default function Item({ menuItem, level = 0, isMobile = false, closeNavbar }: ItemProps) {
   const location = useLocation()
   const navigate = useNavigate()
-  const isMobileScreen = useWindowResize()
   const [opened, setOpened] = useState(false)
   const [active, setActive] = useState(location.pathname)
   const ml = level * 1
 
   useEffect(() => {
     setActive(location.pathname)
-    setOpened(isBold(menuItem, location.pathname))
+    setOpened(isActiveSection(menuItem, location.pathname))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname])
+
+  const isActiveSection = useCallback((item: MenuItem, activeUrl: string): boolean => {
+    if (activeUrl.includes(item.url || '') && !item.onClick) {
+      return true
+    }
+    if (item.subs) {
+      return item.subs.some((sub: MenuItem) => isActiveSection(sub, activeUrl))
+    }
+    return false
+  }, [])
 
   const onClick = useCallback(() => {
     if (menuItem.onClick) {
       menuItem.onClick()
+      closeNavbar?.()
       return
     }
     if (!menuItem.subs) {
+      closeNavbar?.()
       navigate(menuItem.url || '')
-      isMobileScreen && closeNavbar()
       return
     }
     setOpened(!opened)
-    openNavbar()
-  }, [closeNavbar, isMobileScreen, menuItem, navigate, opened, openNavbar])
-
-  const isHighlighted = useCallback((item: MenuItem, activeUrl: string): boolean => {
-    return activeUrl.includes(item.url || '')
-  }, [])
-
-  const isBold = useCallback((item: MenuItem, activeUrl: string): boolean => {
-    if (activeUrl.includes(item.url || '')) {
-      return true
-    }
-    if (item.subs) {
-      return item.subs.some((sub: MenuItem) => isBold(sub, activeUrl))
-    }
-    return false
-  }, [])
+  }, [closeNavbar, menuItem, navigate, opened])
 
   return (
     <ItemView
       menuItem={menuItem}
       opened={opened}
-      isHighlighted={isHighlighted(menuItem, active)}
-      isBold={isBold(menuItem, active)}
-      onClick={onClick}
+      isActiveSection={isActiveSection(menuItem, active)}
       ml={ml}
+      onClick={onClick}
       level={level}
-      navbarOpened={navbarOpened}
+      isMobile={isMobile}
       closeNavbar={closeNavbar}
-      openNavbar={openNavbar}
     />
   )
 }

@@ -1,58 +1,39 @@
-import Avatar from '@/components/common/Avatar'
 import useTranslation from '@/hooks/useTranslation'
-import useWindowResize from '@/hooks/useWindowResize'
 import useAuthStore from '@/stores/auth.store'
-import { showNotImplementedModal } from '@/utils'
-import { Button, Menu, UnstyledButton } from '@mantine/core'
+import { Avatar, Button, Menu, UnstyledButton } from '@mantine/core'
 import { IconSettings } from '@tabler/icons-react'
 import { useCallback, useState } from 'react'
-import LanguageSelector from './LanguageSelector'
 import MenuItem from './MenuItem'
-import ThemeModeSwitch from './ThemeModeSwitch'
 import UserInformation from './UserInformation'
 
 type ProfileProps = {
-  navbarOpened: boolean
-  language: string
-  onChangeLanguage: (language: string) => void
   onLogout: () => void
-  onGoToProfilePage: () => void
+  onGoToProfile: () => void
+  onSettingsClick: () => void
 }
 
-export default function Profile({
-  navbarOpened,
-  language,
-  onChangeLanguage,
-  onLogout,
-  onGoToProfilePage,
-}: ProfileProps) {
-  const t = useTranslation()
-  const isMobileScreen = useWindowResize()
+export default function Profile({ onLogout, onGoToProfile, onSettingsClick }: ProfileProps) {
   const { user } = useAuthStore()
+  const t = useTranslation()
   const [opened, setOpened] = useState(false)
 
   const handleCloseMenu = useCallback(() => {
     setOpened(false)
   }, [])
 
-  const handleSettingClick = useCallback(() => {
-    showNotImplementedModal(t)
-  }, [t])
-
   return (
     <Menu
-      width={isMobileScreen ? 200 : 250}
+      width={200}
       position="top-start"
       radius={10}
       shadow="md"
-      offset={8}
+      offset={0}
       opened={opened}
       onChange={setOpened}
-      zIndex={isMobileScreen ? 1200 : 200}
     >
       <Menu.Target>
         <UnstyledButton>
-          <UserInformation navbarOpened={navbarOpened} />
+          <UserInformation menuOpened={opened} />
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown p={10}>
@@ -60,26 +41,18 @@ export default function Profile({
           leftIcon={<Avatar size={20} src={user?.avatar} />}
           label={t('Profile')}
           onCloseMenu={handleCloseMenu}
-          onClick={onGoToProfilePage}
+          onClick={onGoToProfile}
         />
 
-        <Menu.Divider p={5} />
-
-        <LanguageSelector
-          language={language}
-          onChangeLanguage={onChangeLanguage}
-          onCloseMenu={handleCloseMenu}
-        />
-
-        <ThemeModeSwitch />
+        <Menu.Divider p={0} />
 
         <MenuItem
-          leftIcon={<IconSettings size={20} strokeWidth={1.5} />}
+          leftIcon={<IconSettings size={16} strokeWidth={1.5} />}
           label={t('Settings')}
-          onCloseMenu={handleSettingClick}
+          onCloseMenu={onSettingsClick}
         />
 
-        <Button fullWidth mt={15} variant="default" size="xs" onClick={onLogout}>
+        <Button fullWidth mt={4} variant="default" size="xs" onClick={onLogout}>
           {t('Logout')}
         </Button>
       </Menu.Dropdown>

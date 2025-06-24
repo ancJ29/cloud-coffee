@@ -1,9 +1,9 @@
-import Avatar from '@/components/common/Avatar'
+import { Avatar } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { Flex, Stack, Tabs, Text } from '@mantine/core'
 import { Tabs as TabsEnum } from '../../../_configs'
 import { tabs, UpdateStaffForm } from '../../_configs'
-import classes from './EditStaffView.module.scss'
+import classes from './index.module.scss'
 
 export default function EditStaffView({ ...props }: UpdateStaffForm) {
   const t = useTranslation()

@@ -1,12 +1,12 @@
 import { Stack } from '@mantine/core'
 import { isBrowser } from 'react-device-detect'
-import { Tabs, tabs } from '../../_configs'
+import { tabs, Tabs } from '../../_configs'
 import ClockIn from '../ClockIn'
-import MobileOnlyWarning from '../MobileOnlyWarning'
 import MyTimesheet from '../MyTimesheet'
-import TabItem from '../TabItem'
 import TimeOffCenter from '../TimeOffCenter'
-import classes from './TimeClockView.module.scss'
+import MobileOnlyWarning from './MobileOnlyWarning'
+import TabItem from './TabItem'
+import classes from './index.module.scss'
 
 type TimeClockViewProps = {
   userId: string

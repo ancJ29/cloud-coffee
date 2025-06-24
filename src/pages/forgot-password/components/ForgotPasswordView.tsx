@@ -2,14 +2,14 @@ import useTranslation from '@/hooks/useTranslation'
 import { Anchor, Image } from '@mantine/core'
 import ForgotPasswordForm, { ForgotPasswordFormProps } from './ForgotPasswordForm'
 
-export default function ResetPasswordView({ ...props }: ForgotPasswordFormProps) {
+export default function ForgotPasswordView({ ...props }: ForgotPasswordFormProps) {
   const t = useTranslation()
 
   return (
     <>
-      <Image src="/logo.svg" w={250} />
+      <Image src="/favicon.svg" w={250} />
       <ForgotPasswordForm {...props} />
-      <Anchor href="/login" ta="center" fw="bold">
+      <Anchor href="/login" ta="center" fw="bold" c="var(--auth-anchor)">
         {t('Back to Login')}
       </Anchor>
     </>

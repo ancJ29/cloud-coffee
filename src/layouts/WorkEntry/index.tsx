@@ -9,9 +9,9 @@ export default function WorkEntryLayout({ children }: WorkEntryLayoutProps) {
     <BackgroundImage
       src="/imgs/work-entry/bg.png"
       h="100dvh"
-      w="100vw"
+      w="100dvw"
       radius={0}
-      style={{ overflow: 'auto' }}
+      style={{ overflowY: 'auto' }}
     >
       {children}
     </BackgroundImage>

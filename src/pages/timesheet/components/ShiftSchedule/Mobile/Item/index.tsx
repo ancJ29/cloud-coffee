@@ -1,4 +1,4 @@
-import Avatar from '@/components/common/Avatar'
+import { Avatar } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { SalaryRule, Shift, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
@@ -11,7 +11,7 @@ import { modals } from '@mantine/modals'
 import { IconCameraPin, IconChevronDown } from '@tabler/icons-react'
 import { ReactNode, useCallback, useMemo } from 'react'
 import ShiftImage from '../../ShiftImage'
-import classes from './Item.module.scss'
+import classes from './index.module.scss'
 
 type ItemProps = {
   user?: User

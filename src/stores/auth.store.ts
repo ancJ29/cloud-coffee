@@ -1,8 +1,8 @@
 import { IS_DEV } from '@/configs/constant'
 import { Language } from '@/configs/i18n'
-import { showNotification } from '@/configs/notifications'
+import { pushNotification } from '@/configs/notifications'
 import { getMe, GetMeResponse } from '@/services/domain'
-import { HandlerContext } from '@/types'
+import { HandlerContext, NotificationType } from '@/types'
 import { ONE_DAY } from '@/utils'
 import { jwtDecode } from 'jwt-decode'
 import { create } from 'zustand'
@@ -37,8 +37,8 @@ export default create<AuthStore>((set, get) => ({
     if (user) {
       if (!isValidDomain(user.client?.domain)) {
         get().removeToken()
-        showNotification({
-          type: 'error',
+        pushNotification({
+          type: NotificationType.ERROR,
           message: t('The domain you are trying to access is invalid'),
         })
         return

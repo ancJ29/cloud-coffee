@@ -6,7 +6,7 @@ export default function TimeOffCenter() {
 
   return (
     <Stack px={20} align="center" justify="center" h="100%">
-      <Text c="var(--time-clock-accent)">{t('Sorry, this feature is implemented yet')}</Text>
+      <Text c="dimmed">{t('Sorry, this feature is implemented yet')}</Text>
     </Stack>
   )
 }

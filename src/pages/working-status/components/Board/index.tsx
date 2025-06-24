@@ -3,7 +3,7 @@ import { Card, Stack, Text } from '@mantine/core'
 import { UserShiftStatus } from '../../_configs'
 import Filter, { FilterProps } from '../Filter'
 import UserList from '../UserList'
-import classes from './Board.module.scss'
+import classes from './index.module.scss'
 
 export type BoardProps = {
   userShiftStatusList: UserShiftStatus[]
@@ -14,8 +14,8 @@ export default function Board({ userShiftStatusList, ...props }: BoardProps) {
 
   return (
     <Card shadow="md" withBorder className={classes.container}>
-      <Stack gap={0} className={classes.header}>
-        <Text fw="bold" fz={28} mb={10}>
+      <Stack gap={20}>
+        <Text fw="bold" fz={28}>
           {t('Staff shift status')}
         </Text>
         <Filter {...props} />

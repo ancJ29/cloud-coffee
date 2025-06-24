@@ -1,7 +1,7 @@
-import { showNotification } from '@/configs/notifications'
+import { pushNotification } from '@/configs/notifications'
 import { getAllShifts, Shift, updateShift } from '@/services/domain'
 import useUserStore from '@/stores/user.store'
-import { DatesRangeValue, DateValue } from '@/types'
+import { DatesRangeValue, DateValue, NotificationType } from '@/types'
 import { cloneDeep, createStore, endOfDay, startOfDay } from '@/utils'
 
 type State = {
@@ -11,8 +11,19 @@ type State = {
   endDate: Date
   roleId: string | null
   venueId: string | null
-  keyword?: string
+  keyword: string
   updatedShifts: Record<string, Shift>
+}
+
+const defaultState = {
+  currents: {},
+  updates: {},
+  startDate: new Date(startOfDay(Date.now())),
+  endDate: new Date(endOfDay(Date.now())),
+  roleId: null,
+  venueId: null,
+  keyword: '',
+  updatedShifts: {},
 }
 
 enum ActionType {
@@ -39,17 +50,6 @@ type Action = {
   shiftId?: string
 }
 
-const defaultState = {
-  currents: {},
-  updates: {},
-  startDate: new Date(startOfDay(Date.now())),
-  endDate: new Date(endOfDay(Date.now())),
-  roleId: null,
-  venueId: null,
-  keyword: undefined,
-  updatedShifts: {},
-}
-
 const { dispatch, ...store } = createStore<State, Action>(reducer, {
   ...defaultState,
 })
@@ -60,8 +60,8 @@ export default {
     const state = store.getSnapshot()
 
     const shifts = await getAllShifts({
-      start: new Date(state.startDate || 0).getTime(),
-      end: new Date(state.endDate || 0).getTime(),
+      start: state.startDate.getTime(),
+      end: state.endDate.getTime(),
     })
     dispatch({ type: ActionType.INIT_DATA, shifts })
   },
@@ -105,11 +105,11 @@ export default {
     Promise.all(promises)
       .then(() => {
         setTimeout(() => {
-          showNotification({ t })
+          pushNotification({ t })
         }, 500)
       })
       .catch((error) => {
-        showNotification({ type: 'error', message: error.message })
+        pushNotification({ type: NotificationType.ERROR, message: error.message })
       })
   },
 }
@@ -137,7 +137,7 @@ function reducer(action: Action, state: State): State {
           endDate: new Date(action.endDate),
           roleId: null,
           venueId: null,
-          keyword: undefined,
+          keyword: '',
         }
       }
       break
@@ -165,7 +165,7 @@ function reducer(action: Action, state: State): State {
       const updates = _filterShifts(state.currents, state.roleId, state.venueId, action.keyword)
       return {
         ...state,
-        keyword: action.keyword,
+        keyword: action.keyword || '',
         updates,
       }
     }

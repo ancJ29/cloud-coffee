@@ -1,14 +1,10 @@
-import { showNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { login, LoginRequest } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
-import { LoginState } from '@/types'
-import { ONE_SECOND } from '@/utils'
 import { useForm } from '@mantine/form'
 import { zodResolver } from 'mantine-form-zod-resolver'
-import { useCallback, useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { z } from 'zod'
+import { useCallback } from 'react'
+import z from 'zod'
 import LoginView from './components/LoginView'
 
 const initialValues: LoginRequest = {
@@ -26,16 +22,6 @@ export default function Login() {
     validate: zodResolver(schema(t)),
   })
 
-  const location = useLocation()
-  const navigate = useNavigate()
-  useEffect(() => {
-    const state = location.state as LoginState
-    if (state) {
-      showNotification({ ...state, autoClose: 5 * ONE_SECOND })
-      navigate(location.pathname, { replace: true })
-    }
-  }, [location, navigate])
-
   const submit = useCallback(
     async (values: LoginRequest) => {
       const res = await login({
@@ -50,13 +36,13 @@ export default function Login() {
         })
       }
     },
-    [setToken, form, t],
+    [form, setToken, t],
   )
 
   return <LoginView form={form} onSubmit={submit} />
 }
 
-export const schema = (t: (key: string) => string) =>
+const schema = (t: (key: string) => string) =>
   z.object({
     email: z.string().trim().min(1, t('Please enter email')),
     password: z.string().trim().min(1, t('Please enter password')),

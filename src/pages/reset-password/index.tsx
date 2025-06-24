@@ -1,7 +1,7 @@
-import { showNotification } from '@/configs/notifications'
+import { pushNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
 import { resetPassword } from '@/services/domain'
-import { LoginState } from '@/types'
+import { NotificationType } from '@/types'
 import { getPasswordSchema } from '@/utils'
 import { useForm } from '@mantine/form'
 import { zodResolver } from 'mantine-form-zod-resolver'
@@ -32,8 +32,8 @@ export default function ResetPassword() {
   const submit = useCallback(
     async (values: FormProps) => {
       if (!token) {
-        showNotification({
-          type: 'error',
+        pushNotification({
+          type: NotificationType.ERROR,
           message: t('The reset link is invalid or has been modified'),
         })
         return
@@ -42,13 +42,16 @@ export default function ResetPassword() {
       resetPassword({ token, newPassword: values.newPassword }).then((res) => {
         const success = res?.success
         if (success) {
-          const state: LoginState = {
-            message: t('Password successfully changed. Please login'),
-            type: 'info',
-          }
-          navigate('/login', { state })
+          pushNotification({
+            type: NotificationType.INFO,
+            message: t('Password successfully changed. Please login.'),
+          })
+          navigate('/login')
         } else {
-          showNotification({ type: 'error', message: t('The reset link has expired') })
+          pushNotification({
+            type: NotificationType.ERROR,
+            message: t('The reset link has expired'),
+          })
         }
       })
     },

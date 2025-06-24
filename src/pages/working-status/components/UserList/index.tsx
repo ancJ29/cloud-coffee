@@ -1,4 +1,4 @@
-import Avatar from '@/components/common/Avatar'
+import { Avatar } from '@/components'
 import { Indicator, Text } from '@mantine/core'
 import { ShiftStatus, UserShiftStatus } from '../../_configs'
 import classes from './UserList.module.scss'

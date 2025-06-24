@@ -4,9 +4,9 @@ import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
 import { useMemo } from 'react'
 import store from './_shift.store'
-import TimeSheetView from './components/TimeSheetView'
+import TimeSheetView from './components/TimesheetView'
 
-export default function TimeSheet() {
+export default function Timesheet() {
   const t = useTranslation()
   const { roles } = useRoleStore()
   const { venues } = useVenueStore()

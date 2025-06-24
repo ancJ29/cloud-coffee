@@ -10,7 +10,7 @@ export const configs = (
     {
       key: 'name',
       header: t('Name'),
-      width: '25%',
+      width: '30%',
       renderCell: (_, salary: Salary) => {
         return users.get(salary.userId)?.name || ''
       },
@@ -18,7 +18,7 @@ export const configs = (
     {
       key: 'standardHours',
       header: t('Standard hours'),
-      width: '12%',
+      width: '20%',
       textAlign: 'right',
       renderCell: (_, salary: Salary) => {
         return formatDuration(salary.standardHours * ONE_HOUR)
@@ -27,7 +27,7 @@ export const configs = (
     {
       key: 'overtimeHours',
       header: t('Overtime hours'),
-      width: '12%',
+      width: '20%',
       textAlign: 'right',
       renderCell: (_, salary: Salary) => {
         return formatDuration(salary.overtimeHours * ONE_HOUR)
@@ -36,7 +36,7 @@ export const configs = (
     {
       key: 'totalSalary',
       header: `${t('Total salary')} (VND)`,
-      width: '20%',
+      width: '30%',
       textAlign: 'right',
       renderCell: (_, salary: Salary) => {
         return formatNumber(salary.totalSalary)

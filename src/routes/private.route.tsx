@@ -4,12 +4,11 @@ import { Navigate } from 'react-router-dom'
 
 const AdminWrapper = lazy(() => import('@/layouts/Admin'))
 const WorkEntryWrapper = lazy(() => import('@/layouts/WorkEntry'))
-const AuthWrapper = lazy(() => import('@/layouts/Auth'))
 
 const routeConfigs: RouteConfig[] = [
   {
     path: '/*',
-    element: () => <Navigate to="/staffs" />,
+    element: () => <Navigate to="/dashboard" />,
   },
   {
     path: '/dashboard',
@@ -52,8 +51,8 @@ const routeConfigs: RouteConfig[] = [
     wrapper: AdminWrapper,
   },
   {
-    path: '/qr-code-for-attendance',
-    element: lazy(() => import('@/pages/qr-code-for-attendance')),
+    path: '/attendance',
+    element: lazy(() => import('@/pages/attendance')),
     wrapper: AdminWrapper,
   },
   {
@@ -77,11 +76,10 @@ const routeConfigs: RouteConfig[] = [
   {
     path: '/verify-email',
     element: lazy(() => import('@/pages/verify-email')),
-    wrapper: AuthWrapper,
   },
 ]
 
-const authRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrapper }) => {
+export const privateRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrapper }) => {
   return {
     path,
     element: Wrapper ? (
@@ -93,5 +91,3 @@ const authRoutes = routeConfigs.map(({ path, element: Component, wrapper: Wrappe
     ),
   }
 })
-
-export default authRoutes

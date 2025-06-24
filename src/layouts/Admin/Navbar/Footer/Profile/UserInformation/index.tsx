@@ -1,32 +1,40 @@
-import Avatar from '@/components/common/Avatar'
+import { Avatar } from '@/components'
 import useAuthStore from '@/stores/auth.store'
-import { Box, Stack, Text } from '@mantine/core'
+import { Stack, Text } from '@mantine/core'
 import { IconChevronUp } from '@tabler/icons-react'
-import classes from './UserInformation.module.scss'
+import classes from './index.module.scss'
 
 type UserInformationProps = {
-  navbarOpened: boolean
+  menuOpened: boolean
 }
 
-export default function UserInformation({ navbarOpened }: UserInformationProps) {
+export default function UserInformation({ menuOpened }: UserInformationProps) {
   const { user } = useAuthStore()
 
   return (
     <div className={classes.wrapper}>
-      <Box className={`${classes.container} ${!navbarOpened ? classes.shifted : ''}`}>
-        <div className={classes.item}>
-          <Avatar size={40} src={user?.avatar} />
-          {navbarOpened && (
-            <Stack gap={0}>
-              <Text fw={400}>{user?.name || ''}</Text>
-              <Text c="dimmed" fz={10}>
-                {user?.email || ''}
-              </Text>
-            </Stack>
-          )}
+      <div className={classes.container}>
+        <div className={classes.content}>
+          <Avatar size={30} src={user?.avatar} />
+          <Stack gap={0}>
+            <Text fz={12} fw={400}>
+              {user?.name || ''}
+            </Text>
+            <Text c="dimmed" fz={8}>
+              {user?.email || ''}
+            </Text>
+          </Stack>
         </div>
-        {navbarOpened && <IconChevronUp size={20} strokeWidth={1.5} />}
-      </Box>
+        <IconChevronUp
+          size={16}
+          stroke={2}
+          style={{
+            transform: menuOpened ? 'rotate(180deg)' : 'none',
+            transition: 'transform 200ms ease',
+            marginTop: '1px',
+          }}
+        />
+      </div>
     </div>
   )
 }
