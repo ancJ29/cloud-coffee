@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border: 0.75px solid var(--border);
+  min-height: calc(100dvh - var(--desktop-padding) * 2);
+  padding: 20px;
+  border-radius: 6px;
+
+  @media only screen and (max-width: 768px) {
+    min-height: calc(100dvh - var(--mobile-padding) * 2 - 10px - var(--navbar-height));
+  }
+}

@@ -1,10 +1,9 @@
 import { AutocompleteForFilterData } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { User } from '@/services/domain'
-import { Box } from '@mantine/core'
+import Wrapper from '../Wrapper'
 import Header from './Header'
 import StaffTable from './StaffTable'
-import classes from './index.module.scss'
 
 type StaffsViewProps = {
   users: User[]
@@ -26,7 +25,7 @@ export default function StaffsView({
   const t = useTranslation()
 
   return (
-    <Box className={classes.container}>
+    <Wrapper>
       <Header onAddStaff={onAddStaff} />
 
       <AutocompleteForFilterData
@@ -39,6 +38,6 @@ export default function StaffsView({
       />
 
       <StaffTable users={users} onEditStaff={onEditStaff} onDeleteStaff={onDeleteStaff} />
-    </Box>
+    </Wrapper>
   )
 }

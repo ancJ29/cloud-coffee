@@ -1,6 +1,7 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Stack, Tabs, Text } from '@mantine/core'
 import { tabs, Tabs as TabsEnum, UserForm } from '../../_configs'
+import Wrapper from '../Wrapper'
 import classes from './index.module.scss'
 
 type StaffEditorProps = {
@@ -11,7 +12,7 @@ export default function StaffEditor({ title, ...props }: StaffEditorProps) {
   const t = useTranslation()
 
   return (
-    <div className={classes.container}>
+    <Wrapper>
       <Text fz={20} fw="bold">
         {t(title)}
       </Text>
@@ -32,6 +33,6 @@ export default function StaffEditor({ title, ...props }: StaffEditorProps) {
           </Tabs.Panel>
         ))}
       </Tabs>
-    </div>
+    </Wrapper>
   )
 }

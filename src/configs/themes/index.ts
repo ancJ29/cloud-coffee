@@ -30,6 +30,8 @@ export const theme: MantineThemeOverride = createTheme({
       classNames: {
         title: classes.title,
         content: classes.content,
+        body: classes.body,
+        header: classes.header,
       },
       defaultProps: { zIndex: 2000 },
     }),
@@ -86,6 +88,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--btn-danger': '#B02727',
     '--navbar-width': '214px',
     '--navbar-height': '50px',
+    '--desktop-padding': '30px',
+    '--mobile-padding': '16px',
   },
   light: {
     '--mantine-color-text': '#3B3B3B',

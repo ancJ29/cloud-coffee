@@ -22,7 +22,17 @@
 }
 
 .content {
-  border-radius: var(--mantine-radius-md);
+  border-radius: 6px;
+}
+
+.body {
+  padding: 20px 20px 22px 20px;
+}
+
+.header{
+  border-bottom: 1px solid var(--border);
+  padding: 8px 15px 4px 20px;
+  min-height: 50px;
 }
 
 .gridInner {

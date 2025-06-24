@@ -1,10 +1,11 @@
 .container {
   overflow-y: auto;
-  margin: 30px;
-  margin-left: calc(var(--navbar-width) + 30px);
+  margin: var(--desktop-padding);
+  margin-left: calc(var(--navbar-width) + var(--desktop-padding));
 
   @media only screen and (max-width: 768px) {
-    margin: 16px 16px 26px 16px;
-    margin-top: calc(var(--navbar-height) + 16px);
+    margin: var(--mobile-padding);
+    margin-bottom: calc(var(--mobile-padding) + 10px);
+    margin-top: calc(var(--navbar-height) + var(--mobile-padding));
   }
 }
