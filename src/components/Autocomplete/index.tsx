@@ -91,7 +91,6 @@ export function Autocomplete({
   }, [currentValue, defaultValue, clear])
 
   const [focused, setFocused] = useState(false)
-
   const floating = defaultValue || currentValue ? true : focused || undefined
 
   const onFocus = useCallback(
@@ -116,7 +115,7 @@ export function Autocomplete({
       defaultValue={defaultValue}
       value={defaultValue ? undefined : currentValue}
       rightSection={disabled ? undefined : clearIcon}
-      data={data}
+      data={currentValue === '' ? [] : data}
       onKeyDown={_onEnter}
       onChange={_onChange}
       disabled={disabled ?? (data?.length || 0) < 1}

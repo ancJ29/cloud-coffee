@@ -205,4 +205,5 @@ export default {
   'Delete staff successfully': 'Delete staff successfully',
   'Staff deleted successfully': 'Staff deleted successfully',
   'Please close this window': 'Please close this window',
+  'No staff named was found': 'No staff named %s was found',
 }

@@ -27,7 +27,6 @@ export default function StaffsView({
   return (
     <Wrapper>
       <Header onAddStaff={onAddStaff} />
-
       <AutocompleteForFilterData
         key={keyword}
         label={t('Search by staff name')}
@@ -36,8 +35,12 @@ export default function StaffsView({
         onReload={onChangeKeyWord}
         mt={15}
       />
-
-      <StaffTable users={users} onEditStaff={onEditStaff} onDeleteStaff={onDeleteStaff} />
+      <StaffTable
+        users={users}
+        keyword={keyword}
+        onEditStaff={onEditStaff}
+        onDeleteStaff={onDeleteStaff}
+      />
     </Wrapper>
   )
 }
