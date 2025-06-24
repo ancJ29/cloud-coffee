@@ -16,7 +16,7 @@ export default function ForgotPasswordForm({ form, onSubmit }: ForgotPasswordFor
     <form onSubmit={form.onSubmit(onSubmit)}>
       <Stack gap={25} w="80%" mt={25}>
         <TextInput label={t('Enter an email')} {...form.getInputProps('email')} />
-        <Button type="submit" mt={10} className="auth-btn">
+        <Button type="submit" mt={10} className="btn-auth">
           {t('Send Reset Password')}
         </Button>
       </Stack>

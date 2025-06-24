@@ -1,53 +1,59 @@
 import { pushNotification } from '@/configs/notifications'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
-import { updateUser, UpdateUserRequest } from '@/services/domain'
+import { updateUser } from '@/services/domain'
 import useUserStore from '@/stores/user.store'
 import { NotificationType } from '@/types'
 import { getEmailSchema, getPhoneSchema } from '@/utils'
 import { useForm } from '@mantine/form'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { useCallback } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import z from 'zod'
+import { UserFormProps } from '../_configs'
 import EditStaffView from './components/EditStaffView'
-import WrongUserId from './components/WrongUserId'
 
 export default function EditStaff() {
   const t = useTranslation()
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const id = searchParams.get('id')
   const { users, load } = useUserStore()
 
-  const form = useForm<UpdateUserRequest>({
+  const form = useForm<UserFormProps>({
     validate: zodResolver(schema(t)),
     validateInputOnBlur: true,
   })
 
   const getData = useCallback(() => {
-    const user = users.get(id || '')
-
-    user && form.setValues({ ...user, enabled: user.enabled ?? true })
+    if (!id) {
+      return
+    }
+    const user = users.get(id)
+    user && form.setValues({ ...user })
   }, [form, id, users])
   useMount(getData)
 
   const handleSubmit = useCallback(
-    (values: UpdateUserRequest) => {
+    (values: UserFormProps) => {
       updateUser({
         ...values,
+        id: id || '',
+        clientId: values.clientId || '',
         name: values.name.trim(),
         email: values.email?.trim(),
+        enabled: true,
       }).then((res) => {
         const success = res?.success
         pushNotification({ t, type: success ? NotificationType.INFO : NotificationType.ERROR })
         load(true)
       })
     },
-    [load, t],
+    [id, load, t],
   )
 
-  if (!form.values) {
-    return <WrongUserId />
+  if (!id) {
+    navigate('/staffs')
   }
 
   return <EditStaffView form={form} onSubmit={handleSubmit} />

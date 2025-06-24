@@ -26,7 +26,7 @@ export default function ResetPasswordForm({ form, onSubmit }: ResetPasswordFormP
           mt={10}
         />
 
-        <Button fullWidth type="submit" mt={10} className="auth-btn">
+        <Button fullWidth type="submit" mt={10} className="btn-auth">
           {t('Reset password')}
         </Button>
       </Stack>

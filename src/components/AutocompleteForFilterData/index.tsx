@@ -1,4 +1,4 @@
-import Autocomplete, { AutocompleteProps } from '../Autocomplete'
+import { Autocomplete, AutocompleteProps } from '@/components'
 
 type OmitProps = 'data' | 'onEnter' | 'onMatch' | 'onClear'
 type OmittedAutocompleteProps = Omit<AutocompleteProps, OmitProps>

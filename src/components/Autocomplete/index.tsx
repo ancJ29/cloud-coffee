@@ -18,7 +18,7 @@ export interface AutocompleteProps extends MantineAutocompleteProps {
   onClear?: () => void
 }
 
-export default function Autocomplete({
+export function Autocomplete({
   data: _data,
   options,
   disabled,

@@ -186,7 +186,7 @@ export default {
   'Staff information': 'Thông tin nhân sự',
   'Role & permissions': 'Chức vụ & quyền truy cập',
   'Search by staff name': 'Tìm theo tên nhân viên',
-  'Staff management': 'Quản lý nhân viên',
+  'Staff Management': 'Quản lý Nhân viên',
   'Add staff': 'Thêm nhân viên',
   'Email address': 'Địa chỉ email',
   'Phone number': 'Số điện thoại',
@@ -198,4 +198,13 @@ export default {
   'Unknown error': 'Lỗi không xác định',
   'Please enter phone number': 'Vui lòng nhập số điện thoại',
   'The staff ID is wrong. Please try again': 'ID người dùng bị sai. Vui lòng thử lại',
+  'Delete staff': 'Xóa nhân viên',
+  'Are you sure you want to do this? This action will':
+    'Bạn có chắc chắn muốn thực hiện việc này không? Hành động này sẽ',
+  'permanently delete': 'xoá vĩnh viễn',
+  "all of this staff's data and": 'mọi dữ liệu của nhân viên này và',
+  'cannot be recovered': 'không thể khôi phục',
+  'Delete staff successfully': 'Xóa nhân viên thành công',
+  'Staff deleted successfully': 'Đã xoá nhân viên thành công',
+  'Please close this window': 'Vui lòng đóng cửa sổ này',
 }

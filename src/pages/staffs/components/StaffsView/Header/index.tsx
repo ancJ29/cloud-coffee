@@ -11,7 +11,7 @@ export default function Header({ onAddStaff }: HeaderProps) {
 
   return (
     <Box className={classes.container}>
-      <Text className={classes.title}>{t('Staff management')}</Text>
+      <Text className={classes.title}>{t('Staff Management')}</Text>
       <Button className={classes.button} onClick={onAddStaff}>
         {t('Add staff')}
       </Button>

@@ -31,6 +31,7 @@ export const theme: MantineThemeOverride = createTheme({
         title: classes.title,
         content: classes.content,
       },
+      defaultProps: { zIndex: 2000 },
     }),
     Grid: Grid.extend({
       classNames: { inner: classes.gridInner },
@@ -81,6 +82,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--even-row': '#E6E6E6',
     '--shift-accordion': '#EAEAEA',
     '--shift-item': '#F3F3F3',
+    '--btn-cancel': '#586673',
+    '--btn-danger': '#B02727',
     '--navbar-width': '214px',
     '--navbar-height': '50px',
   },

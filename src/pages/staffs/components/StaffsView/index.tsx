@@ -2,8 +2,8 @@ import { AutocompleteForFilterData } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { User } from '@/services/domain'
 import { Box } from '@mantine/core'
-import Header from '../Header'
-import StaffTable from '../StaffTable'
+import Header from './Header'
+import StaffTable from './StaffTable'
 import classes from './index.module.scss'
 
 type StaffsViewProps = {

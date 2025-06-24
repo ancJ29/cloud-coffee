@@ -1,3 +1,4 @@
+export * from './Autocomplete'
 export * from './AutocompleteForFilterData'
 export * from './Avatar'
 export * from './DataGrid'

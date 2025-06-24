@@ -24,7 +24,7 @@ export default function LoginForm({ form, onSubmit }: LoginFormProps) {
           </Anchor>
         </Flex>
 
-        <Button fullWidth type="submit" className="auth-btn">
+        <Button fullWidth type="submit" className="btn-auth">
           {t('Sign in')}
         </Button>
       </Stack>

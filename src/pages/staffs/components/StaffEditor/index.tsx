@@ -1,21 +1,20 @@
-import { Avatar } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
-import { Flex, Stack, Tabs, Text } from '@mantine/core'
-import { Tabs as TabsEnum } from '../../../_configs'
-import { tabs, UpdateStaffForm } from '../../_configs'
+import { Stack, Tabs, Text } from '@mantine/core'
+import { tabs, Tabs as TabsEnum, UserForm } from '../../_configs'
 import classes from './index.module.scss'
 
-export default function EditStaffView({ ...props }: UpdateStaffForm) {
+type StaffEditorProps = {
+  title: string
+} & UserForm
+
+export default function StaffEditor({ title, ...props }: StaffEditorProps) {
   const t = useTranslation()
 
   return (
     <div className={classes.container}>
-      <Flex gap={10} align="center">
-        <Avatar size={60} src={props.form.values.avatar} />
-        <Text fz={20} fw="bold">
-          {t('Update staff')}
-        </Text>
-      </Flex>
+      <Text fz={20} fw="bold">
+        {t(title)}
+      </Text>
       <Tabs defaultValue={TabsEnum.BASIC_INFORMATION} variant="outline">
         <Tabs.List grow justify="space-between" className={classes.tabList}>
           {tabs.map((tab, idx) => (

@@ -1,6 +1,6 @@
 import { pushNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
-import { addUser, AddUserRequest } from '@/services/domain'
+import { addUser } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
 import useUserStore from '@/stores/user.store'
 import { ClientRoles, NotificationType } from '@/types'
@@ -10,9 +10,10 @@ import { zodResolver } from 'mantine-form-zod-resolver'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import z from 'zod'
+import { UserFormProps } from '../_configs'
 import AddStaffView from './components/AddStaffView'
 
-const initialValues: AddUserRequest = {
+const initialValues: UserFormProps = {
   name: '',
   roleId: '',
 }
@@ -22,14 +23,14 @@ export default function AddStaff() {
   const navigate = useNavigate()
   const { load } = useUserStore()
   const { roles } = useRoleStore()
-  const form = useForm<AddUserRequest>({
+  const form = useForm<UserFormProps>({
     initialValues,
     validate: zodResolver(schema(t)),
     validateInputOnBlur: true,
   })
 
   const handleSubmit = useCallback(
-    (values: AddUserRequest) => {
+    (values: UserFormProps) => {
       addUser({
         name: values.name.trim(),
         email: values.email?.trim(),
@@ -39,7 +40,7 @@ export default function AddStaff() {
         const success = res?.success
         pushNotification({ t, type: success ? NotificationType.INFO : NotificationType.ERROR })
         load(true)
-        success && setTimeout(() => navigate('/staffs'), 1.5 * ONE_SECOND)
+        success && setTimeout(() => navigate('/staffs'), 2 * ONE_SECOND)
       })
     },
     [load, navigate, roles, t],

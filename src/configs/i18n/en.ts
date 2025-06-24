@@ -184,7 +184,7 @@ export default {
   'Staff information': 'Staff information',
   'Role & permissions': 'Role & permissions',
   'Search by staff name': 'Search by staff name',
-  'Staff management': 'Staff management',
+  'Staff Management': 'Staff Management',
   'Add staff': 'Add staff',
   'Email address': 'Email address',
   'Phone number': 'Phone number',
@@ -196,4 +196,13 @@ export default {
   'Unknown error': 'Unknown error',
   'Please enter phone number': 'Please enter phone number',
   'The staff ID is wrong. Please try again': 'The staff ID is wrong. Please try again',
+  'Delete staff': 'Delete staff',
+  'Are you sure you want to do this? This action will':
+    'Are you sure you want to do this? This action will',
+  'permanently delete': 'permanently delete',
+  "all of this staff's data and": "all of this staff's data and",
+  'cannot be recovered': 'cannot be recovered',
+  'Delete staff successfully': 'Delete staff successfully',
+  'Staff deleted successfully': 'Staff deleted successfully',
+  'Please close this window': 'Please close this window',
 }

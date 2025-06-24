@@ -1,7 +1,6 @@
 import { navMenu } from '@/configs/navMenu'
 import { pushNotification } from '@/configs/notifications'
 import useTranslation from '@/hooks/useTranslation'
-import useWindowResize from '@/hooks/useWindowResize'
 import { requestVerifyEmail } from '@/services/domain'
 import useAuthStore from '@/stores/auth.store'
 import { MenuItem, NotificationType } from '@/types'
@@ -21,9 +20,8 @@ type AdminLayoutProps = {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const t = useTranslation()
   const navigate = useNavigate()
-  const isMobileScreen = useWindowResize()
   const { removeToken } = useAuthStore()
-  const [opened, { toggle, close, open }] = useDisclosure(!isMobileScreen)
+  const [opened, { toggle, close, open }] = useDisclosure(false)
 
   const logout = useCallback(() => {
     removeToken()
@@ -84,7 +82,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       title: t('Verify your account'),
       centered: true,
       size: 'md',
-      zIndex: 2000,
       children: <VerifyAccountForm onSubmit={handSendVerifyEmail} />,
     })
   }, [handSendVerifyEmail, t])

@@ -4,9 +4,13 @@ import useTranslation from '@/hooks/useTranslation'
 import { User, getAllUsers, updateUser } from '@/services/domain'
 import useUserStore from '@/stores/user.store'
 import { NotificationType } from '@/types'
+import { ONE_SECOND } from '@/utils'
+import { modals } from '@mantine/modals'
 import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import StaffsView from './components/StaffsView'
+import DeleteStaffForm from './components/StaffsView/DeleteStaffForm'
+import DeleteSuccessMessage from './components/StaffsView/DeleteSuccessMessage'
 
 export default function Staffs() {
   const t = useTranslation()
@@ -46,15 +50,39 @@ export default function Staffs() {
     navigate('/staffs/add')
   }, [navigate])
 
-  const handleDeleteStaff = useCallback(
+  const updateStaff = useCallback(
     (user: User) => {
       updateUser({ ...user, enabled: false }).then((res) => {
         const success = res?.success
-        pushNotification({ t, type: success ? NotificationType.INFO : NotificationType.ERROR })
-        load(true)
+        if (success) {
+          modals.open({
+            title: t('Delete staff successfully'),
+            centered: true,
+            size: 'md',
+            children: <DeleteSuccessMessage />,
+          })
+          load(true)
+          setTimeout(() => modals.closeAll(), 5 * ONE_SECOND)
+        } else {
+          pushNotification({ t, type: NotificationType.ERROR })
+        }
       })
     },
     [load, t],
+  )
+
+  const handleDeleteStaff = useCallback(
+    (user: User) => {
+      modals.open({
+        title: `${t('Delete staff')} ${user.name}`,
+        centered: true,
+        size: 'md',
+        children: (
+          <DeleteStaffForm onConfirm={() => updateStaff(user)} onCancel={() => modals.closeAll()} />
+        ),
+      })
+    },
+    [t, updateStaff],
   )
 
   return (
