@@ -94,7 +94,7 @@ function UserInformation({
         </Stack>
       </Flex>
       <DataRow title={t('Total')} content={formatDuration(total)} />
-      <DataRow title={`${t('Expected salary')}`} content={`${expectedSalary} VND`} />
+      <DataRow title={`${t('Expected salary')}`} content={`${expectedSalary} VNĐ`} />
     </Stack>
   )
 }
@@ -173,7 +173,7 @@ function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: Sa
     <Stack className={classes.shiftContainer}>
       <DataRow title={t('Date')} content={formatTime(shift.start, 'ddd DD/MM/YYYY')} />
       <DataRow title={t('Total')} content={formatDuration(total || 0) ?? '-'} />
-      <DataRow title={`${t('Expected salary')}`} content={`${expectedSalary} VND`} />
+      <DataRow title={`${t('Expected salary')}`} content={`${expectedSalary} VNĐ`} />
       <DataRow title={t('Clock in')} content={formatTime(shift.start, 'HH:mm')} />
       <DataRow title={t('Clock out')} content={formatTime(shift.end, 'HH:mm')} />
       <DataRow title={t('Venue')} content={venues.get(shift.venueId)?.name} />

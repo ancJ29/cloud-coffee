@@ -33,7 +33,7 @@ export function exportToMonthlySalaryExcel(
     'Tên',
     'Giờ chuẩn',
     'Giờ làm thêm',
-    'Tổng lương (VND)',
+    'Tổng lương (VNĐ)',
   ])
 
   headerRow.eachCell((cell) => {

@@ -14,7 +14,7 @@ export default function Header() {
         {t('Total')}
       </Grid.Col>
       <Grid.Col span={1.75} className={classes.centerItem}>
-        {`${t('Expected salary')} (VND)`}
+        {`${t('Expected salary')} (VNĐ)`}
       </Grid.Col>
       <Grid.Col span={1.75} className={classes.centerItem}>
         {t('Clock in')}

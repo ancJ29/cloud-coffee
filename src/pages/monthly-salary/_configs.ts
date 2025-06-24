@@ -35,7 +35,7 @@ export const configs = (
     },
     {
       key: 'totalSalary',
-      header: `${t('Total salary')} (VND)`,
+      header: `${t('Total salary')} (VNĐ)`,
       width: '30%',
       textAlign: 'right',
       renderCell: (_, salary: Salary) => {
