@@ -26,8 +26,8 @@ export default function StaffEditor({ title, ...props }: StaffEditorProps) {
         </Tabs.List>
 
         {tabs.map((tab, idx) => (
-          <Tabs.Panel key={idx} value={tab.label} px={10} pt={10}>
-            <Stack align="center" justify="center" mt={10}>
+          <Tabs.Panel key={idx} value={tab.label} pt={20}>
+            <Stack align="center" justify="center">
               <tab.content {...props} />
             </Stack>
           </Tabs.Panel>

@@ -1,4 +1,5 @@
 export * from './array'
+export * from './event'
 export * from './excel'
 export * from './file'
 export * from './log'
