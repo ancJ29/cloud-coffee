@@ -1,6 +1,6 @@
 import { CopyInput, PhoneInput, TextInput } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
-import { Button, Stack } from '@mantine/core'
+import { Button, Group, Stack } from '@mantine/core'
 import { UserForm } from '../../../_configs'
 
 export default function BasicInformation({ form, onSubmit }: UserForm) {
@@ -9,14 +9,14 @@ export default function BasicInformation({ form, onSubmit }: UserForm) {
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Stack gap={20} w="100%">
+      <Stack gap={15} w="100%">
         <TextInput label={t('Staff name')} withAsterisk {...form.getInputProps('name')} />
         <TextInput label={t('Email address')} {...form.getInputProps('email')} />
         <PhoneInput label={t('Phone number')} {...form.getInputProps('phone')} />
-        {form.values.id && <CopyInput label="URL" value={url} />}
-        <Button fullWidth type="submit" mt={10}>
-          {t('Save staff')}
-        </Button>
+        {form.values.id && <CopyInput label="URL" value={url} disabled />}
+        <Group justify="flex-end" mt={20}>
+          <Button type="submit">{t('Save staff')}</Button>
+        </Group>
       </Stack>
     </form>
   )

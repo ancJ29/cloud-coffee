@@ -15,10 +15,10 @@ export default function StaffEditor({ title, ...props }: StaffEditorProps) {
   return (
     <Wrapper>
       <Text fz={28} fw="bold">
-        {t(title)}
+        {title}
       </Text>
       <Tabs defaultValue={TabsEnum.BASIC_INFORMATION} variant="outline" radius="md">
-        <Tabs.List grow justify="space-between" className={classes.tabList}>
+        <Tabs.List className={classes.tabList}>
           {tabs.map((tab, idx) => (
             <Tabs.Tab key={idx} value={tab.label}>
               {t(tab.label)}

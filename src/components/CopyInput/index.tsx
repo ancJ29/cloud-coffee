@@ -14,7 +14,7 @@ export function CopyInput({ ...props }: TextInputProps) {
       <CopyButton value={value} timeout={2 * ONE_SECOND}>
         {({ copied, copy }) => (
           <Tooltip label={t(copied ? 'Copied' : 'Copy')} withArrow position="right">
-            <ActionIcon color={copied ? 'teal' : 'gray'} variant="subtle" onClick={copy}>
+            <ActionIcon color={copied ? 'teal' : 'gray'} variant="subtle" onClick={copy} mt={16}>
               {copied ? <IconCheck size={18} /> : <IconCopy size={18} />}
             </ActionIcon>
           </Tooltip>

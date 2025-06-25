@@ -9,7 +9,7 @@ type WrapperProps = {
 export default function Wrapper({ title, children }: WrapperProps) {
   return (
     <Stack className={classes.container}>
-      <Text fz={20} fw="bold" ta={{ base: 'left', sm: 'center' }} w="100%">
+      <Text fz={20} fw="bold">
         {title}
       </Text>
       <Stack className={classes.content}>{children}</Stack>
