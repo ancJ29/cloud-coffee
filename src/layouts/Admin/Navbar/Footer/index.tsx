@@ -1,6 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Stack, Text } from '@mantine/core'
-import AccountVerificationBanner from './AccountVerificationBanner'
+import EmailVerificationBanner from './EmailVerificationBanner'
 import Profile from './Profile'
 
 type FooterProps = {
@@ -20,7 +20,7 @@ export default function Footer({
 
   return (
     <Stack gap={6} w="100%">
-      <AccountVerificationBanner onRequestVerifyEmail={onRequestVerifyEmail} />
+      <EmailVerificationBanner onRequestVerifyEmail={onRequestVerifyEmail} />
 
       <Profile
         onLogout={onLogout}

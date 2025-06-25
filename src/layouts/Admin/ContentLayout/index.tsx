@@ -1,3 +1,4 @@
+import useAuthStore from '@/stores/auth.store'
 import classes from './index.module.scss'
 
 type ContentLayoutProps = {
@@ -5,5 +6,11 @@ type ContentLayoutProps = {
 }
 
 export default function ContentLayout({ children }: ContentLayoutProps) {
-  return <div className={classes.container}>{children}</div>
+  const { user } = useAuthStore()
+
+  return (
+    <div className={`${classes.container} ${user?.isEmailVerified ? '' : classes.withEmailBanner}`}>
+      {children}
+    </div>
+  )
 }

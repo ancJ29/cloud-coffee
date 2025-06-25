@@ -208,4 +208,5 @@ export default {
   'Staff deleted successfully': 'Đã xoá nhân viên thành công',
   'Please close this window': 'Vui lòng đóng cửa sổ này',
   'No staff named was found': 'Không tìm thấy nhân viên %s',
+  'Verify now': 'Xác minh ngay',
 }

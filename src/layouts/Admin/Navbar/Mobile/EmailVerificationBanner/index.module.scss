@@ -1,0 +1,14 @@
+.container {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  height: var(--email-banner-height);
+  width: 100dvw;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--warning);
+  color: white;
+  z-index: 50;
+}

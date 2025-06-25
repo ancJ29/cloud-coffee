@@ -91,6 +91,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     '--navbar-height': '50px',
     '--desktop-padding': '30px',
     '--mobile-padding': '16px',
+    '--email-banner-height': '32px',
   },
   light: {
     '--mantine-color-text': '#3B3B3B',

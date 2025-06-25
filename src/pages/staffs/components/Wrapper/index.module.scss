@@ -11,3 +11,9 @@
     min-height: calc(100dvh - var(--mobile-padding) * 2 - 10px - var(--navbar-height));
   }
 }
+
+.withEmailBanner {
+  @media only screen and (max-width: 768px) {
+    min-height: calc(100dvh - var(--mobile-padding) * 2 - 10px - var(--navbar-height) - var(--email-banner-height));
+  }
+}

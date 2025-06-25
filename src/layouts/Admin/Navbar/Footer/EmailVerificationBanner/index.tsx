@@ -3,13 +3,13 @@ import useAuthStore from '@/stores/auth.store'
 import { Button } from '@mantine/core'
 import { IconAlertTriangle } from '@tabler/icons-react'
 
-type AccountVerificationBannerProps = {
+type EmailVerificationBannerProps = {
   onRequestVerifyEmail: () => void
 }
 
-export default function AccountVerificationBanner({
+export default function EmailVerificationBanner({
   onRequestVerifyEmail,
-}: AccountVerificationBannerProps) {
+}: EmailVerificationBannerProps) {
   const t = useTranslation()
   const { user } = useAuthStore()
 

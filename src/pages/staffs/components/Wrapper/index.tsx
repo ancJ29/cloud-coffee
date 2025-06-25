@@ -1,3 +1,4 @@
+import useAuthStore from '@/stores/auth.store'
 import classes from './index.module.scss'
 
 type WrapperProps = {
@@ -5,5 +6,11 @@ type WrapperProps = {
 }
 
 export default function Wrapper({ children }: WrapperProps) {
-  return <div className={classes.container}>{children}</div>
+  const { user } = useAuthStore()
+
+  return (
+    <div className={`${classes.container} ${user?.isEmailVerified ? '' : classes.withEmailBanner}`}>
+      {children}
+    </div>
+  )
 }

@@ -8,7 +8,7 @@ export default function DashboardView() {
 
   return (
     <Stack align="center" justify="center" h="100%">
-      <Stack gap={10} align="center" mt={20} w="100%">
+      <Stack gap={10} align="center" w="100%">
         <Text fw="bold" fz={16} mb={10}>
           {t(`What's news?`)}
         </Text>
