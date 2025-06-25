@@ -1,5 +1,6 @@
 .root {
   position: relative;
+  margin-top: 15px;
 }
 
 .label {
@@ -9,7 +10,7 @@
   top: 7px;
   left: var(--mantine-spacing-sm);
   pointer-events: none;
-  color: #888888;
+  color: var(--placeholder);
   transition:
     transform 150ms ease,
     font-size 150ms ease,

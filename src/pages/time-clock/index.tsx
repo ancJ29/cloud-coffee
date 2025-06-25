@@ -6,7 +6,8 @@ import TimeClockView from './components/TimeClockView'
 
 export default function TimeClock() {
   const [searchParams] = useSearchParams()
-  const userId = searchParams.get('userId')
+  const userId = searchParams.get('id')
+
   const [selectedTab, setSelectedTab] = useState(Tabs.TIME_CLOCK)
 
   if (!userId) {

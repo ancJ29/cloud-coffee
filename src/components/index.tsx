@@ -1,6 +1,7 @@
 export * from './Autocomplete'
 export * from './AutocompleteForFilterData'
 export * from './Avatar'
+export * from './CopyInput'
 export * from './DataGrid'
 export * from './DateSelect'
 export * from './EmptyBox'

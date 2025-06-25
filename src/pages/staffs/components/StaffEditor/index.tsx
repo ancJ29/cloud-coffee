@@ -1,6 +1,7 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Stack, Tabs, Text } from '@mantine/core'
+import { Tabs, Text } from '@mantine/core'
 import { tabs, Tabs as TabsEnum, UserForm } from '../../_configs'
+import StaffEditorWrapper from '../StaffEditor/Wrapper'
 import Wrapper from '../Wrapper'
 import classes from './index.module.scss'
 
@@ -13,10 +14,10 @@ export default function StaffEditor({ title, ...props }: StaffEditorProps) {
 
   return (
     <Wrapper>
-      <Text fz={20} fw="bold">
+      <Text fz={28} fw="bold">
         {t(title)}
       </Text>
-      <Tabs defaultValue={TabsEnum.BASIC_INFORMATION} variant="outline">
+      <Tabs defaultValue={TabsEnum.BASIC_INFORMATION} variant="outline" radius="md">
         <Tabs.List grow justify="space-between" className={classes.tabList}>
           {tabs.map((tab, idx) => (
             <Tabs.Tab key={idx} value={tab.label}>
@@ -26,10 +27,10 @@ export default function StaffEditor({ title, ...props }: StaffEditorProps) {
         </Tabs.List>
 
         {tabs.map((tab, idx) => (
-          <Tabs.Panel key={idx} value={tab.label} pt={20}>
-            <Stack align="center" justify="center">
+          <Tabs.Panel key={idx} value={tab.label} pt={25}>
+            <StaffEditorWrapper title={t(tab.label)}>
               <tab.content {...props} />
-            </Stack>
+            </StaffEditorWrapper>
           </Tabs.Panel>
         ))}
       </Tabs>

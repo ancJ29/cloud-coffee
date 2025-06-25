@@ -207,4 +207,6 @@ export default {
   'Please close this window': 'Please close this window',
   'No staff named was found': 'No staff named %s was found',
   'Verify now': 'Verify now',
+  'Copy': 'Copy',
+  'Copied': 'Copied',
 }

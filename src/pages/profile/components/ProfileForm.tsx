@@ -16,7 +16,7 @@ export default function ProfileForm({ form, onSubmit, roleOptions }: ProfileForm
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Stack gap={35} w={{ base: '80%', sm: 400 }}>
+      <Stack gap={25} w={{ base: '80%', sm: 400 }}>
         <Center>
           <Avatar size={120} src={form.values.avatar} />
         </Center>
@@ -29,10 +29,8 @@ export default function ProfileForm({ form, onSubmit, roleOptions }: ProfileForm
           disabled
           {...form.getInputProps('roleId')}
         />
-        <Stack gap={20}>
-          <Button type="submit" mt={10}>
-            {t('Save')}
-          </Button>
+        <Stack gap={20} mt={10}>
+          <Button type="submit">{t('Save')}</Button>
           <Anchor ta="center" href="/change-password">
             {t('Change password')}
           </Anchor>

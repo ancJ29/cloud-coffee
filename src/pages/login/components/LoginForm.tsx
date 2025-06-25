@@ -14,9 +14,9 @@ export default function LoginForm({ form, onSubmit }: LoginFormProps) {
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Stack gap={25} w="80%" mt={25}>
+      <Stack gap={25} w="80%" mt={15}>
         <TextInput label={t('Enter an email')} {...form.getInputProps('email')} />
-        <PasswordInput label={t('Enter a password')} {...form.getInputProps('password')} mt={10} />
+        <PasswordInput label={t('Enter a password')} {...form.getInputProps('password')} />
 
         <Flex justify="end">
           <Anchor c="var(--auth-anchor)" href="/forgot-password">

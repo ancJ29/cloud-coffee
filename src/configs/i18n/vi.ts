@@ -209,4 +209,6 @@ export default {
   'Please close this window': 'Vui lòng đóng cửa sổ này',
   'No staff named was found': 'Không tìm thấy nhân viên %s',
   'Verify now': 'Xác minh ngay',
+  'Copy': 'Sao chép',
+  'Copied': 'Đã sao chép',
 }

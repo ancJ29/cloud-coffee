@@ -14,7 +14,7 @@ export default function ChangePasswordForm({ form, onSubmit }: ChangePasswordFor
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
-      <Stack gap={35} w={{ base: '80%', sm: 400 }}>
+      <Stack gap={25} w={{ base: '80%', sm: 400 }}>
         <PasswordInput
           label={t('Password')}
           withAsterisk
