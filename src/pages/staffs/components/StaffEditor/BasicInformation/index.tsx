@@ -14,7 +14,7 @@ export default function BasicInformation({ form, onSubmit }: UserForm) {
         <TextInput label={t('Email address')} {...form.getInputProps('email')} />
         <PhoneInput label={t('Phone number')} {...form.getInputProps('phone')} />
         {form.values.id && <CopyInput label="URL" value={url} disabled />}
-        <Group justify="flex-end" mt={20}>
+        <Group justify="flex-end" mt={10}>
           <Button type="submit">{t('Save staff')}</Button>
         </Group>
       </Stack>

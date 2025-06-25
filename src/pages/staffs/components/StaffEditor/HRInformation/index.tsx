@@ -17,8 +17,8 @@ export default function HRInformation() {
       <Select label={t('Contact type')} options={[]} />
       <TextInput label={t('Job title')} />
       <TextInput label={t('Internal staff ID')} />
-      <Group justify="flex-end" mt={20}>
-        <Button type="submit">{t('Save staff')}</Button>
+      <Group justify="flex-end" mt={10}>
+        <Button>{t('Save staff')}</Button>
       </Group>
     </Stack>
   )

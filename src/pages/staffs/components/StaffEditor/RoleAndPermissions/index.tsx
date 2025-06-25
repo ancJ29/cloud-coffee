@@ -36,8 +36,8 @@ export default function RoleAndPermissions() {
       <Checkbox label={t('Can Clock in on Web')} />
       <Checkbox label={t('Skip Clock In/Out Notifications for this staff')} />
       <Checkbox label={t('Can submit Manual Timesheet')} />
-      <Group justify="flex-end" mt={20}>
-        <Button type="submit">{t('Save staff')}</Button>
+      <Group justify="flex-end" mt={10}>
+        <Button>{t('Save staff')}</Button>
       </Group>
     </Stack>
   )
