@@ -30,6 +30,7 @@ export const getMeSchema = _typeBuilder({
       salaryRuleId: nullishStringSchema,
       enabled: nullishBooleanSchema,
       phone: nullishStringSchema,
+      publicId: stringSchema,
       client: z
         .object({
           id: stringSchema,
