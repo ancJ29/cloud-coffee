@@ -19,7 +19,7 @@ export default function LeaveDays() {
       <NumberInput label={t('Remaining leave')} disabled defaultValue={0} />
       <DateInput
         label={t('Leave year starts on')}
-        defaultValue={new Date(startOfYear(Date.now())).toDateString()}
+        defaultValue={new Date(startOfYear(Date.now()))}
         hint={t('Annual leave will start on this date')}
       />
       <Checkbox label={t('Accrues leave?')} />

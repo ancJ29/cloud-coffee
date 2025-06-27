@@ -12,7 +12,7 @@ export type OptionProps = {
   label: string
 }
 
-export type DateValue = string | null
+export type DateValue = Date | null
 export type DatesRangeValue = [DateValue, DateValue]
 
 export type DelayProps = {

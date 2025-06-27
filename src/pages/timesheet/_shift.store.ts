@@ -79,8 +79,8 @@ export default {
 
     dispatch({
       type: ActionType.CHANGE_DATE,
-      startDate: new Date(startDate).toDateString(),
-      endDate: new Date(endDate).toDateString(),
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
       shifts,
     })
   },

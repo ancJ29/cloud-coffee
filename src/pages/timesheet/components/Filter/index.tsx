@@ -58,7 +58,7 @@ export default function Filter({ roleOptions, venueOptions }: FilterProps) {
       <DateSelect
         label={t('Date')}
         w={{ base: '100%', sm: '16vw' }}
-        dateValue={[startDate.toDateString(), endDate.toDateString()]}
+        dateValue={[startDate, endDate]}
         onChangeDateValue={onChangeDate}
       />
       <SaveButton onClick={() => store.save(t)} />

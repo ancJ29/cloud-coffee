@@ -13,8 +13,7 @@ interface DateInputProps extends MantineDateInputProps {
 export function DateInput({ hint, ...props }: DateInputProps) {
   const [focused, setFocused] = useState(false)
   const value = props.defaultValue || props.value
-  const floating =
-    typeof value === 'string' && value.trim().length !== 0 ? true : focused || undefined
+  const floating = value !== undefined ? true : focused || undefined
 
   const onFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement, Element>) => {

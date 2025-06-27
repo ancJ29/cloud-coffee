@@ -67,7 +67,7 @@ export function isSameDate(a: DateValue, b?: DateValue) {
 }
 
 function toDateValueRange(start: Date, end: Date): [DateValue, DateValue] {
-  return [start.toISOString(), end.toISOString()]
+  return [start, end]
 }
 
 export function today(date: Date): [DateValue, DateValue] {
