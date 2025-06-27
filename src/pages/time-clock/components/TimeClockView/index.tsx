@@ -9,13 +9,13 @@ import TabItem from './TabItem'
 import classes from './index.module.scss'
 
 type TimeClockViewProps = {
-  userId: string
+  publicId: string
   selectedTab: Tabs
   onChangeSelectedTab: (tab: Tabs) => void
 }
 
 export default function TimeClockView({
-  userId,
+  publicId,
   selectedTab,
   onChangeSelectedTab,
 }: TimeClockViewProps) {
@@ -26,7 +26,7 @@ export default function TimeClockView({
   return (
     <Stack className={classes.container}>
       <div className={classes.content}>
-        {selectedTab === Tabs.TIME_CLOCK && <ClockIn userId={userId} />}
+        {selectedTab === Tabs.TIME_CLOCK && <ClockIn publicId={publicId} />}
         {selectedTab === Tabs.MY_TIMESHEET && <MyTimesheet />}
         {selectedTab === Tabs.TIME_OFF_CENTER && <TimeOffCenter />}
       </div>

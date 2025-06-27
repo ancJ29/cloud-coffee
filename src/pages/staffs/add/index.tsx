@@ -9,6 +9,7 @@ import { useForm } from '@mantine/form'
 import { zodResolver } from 'mantine-form-zod-resolver'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 import z from 'zod'
 import { UserFormProps } from '../_configs'
 import AddStaffView from './components/AddStaffView'
@@ -16,6 +17,7 @@ import AddStaffView from './components/AddStaffView'
 const initialValues: UserFormProps = {
   name: '',
   roleId: '',
+  publicId: uuidv4(),
 }
 
 export default function AddStaff() {
@@ -23,6 +25,7 @@ export default function AddStaff() {
   const navigate = useNavigate()
   const { load } = useUserStore()
   const { roles } = useRoleStore()
+
   const form = useForm<UserFormProps>({
     initialValues,
     validate: zodResolver(schema(t)),
@@ -34,6 +37,7 @@ export default function AddStaff() {
       addUser({
         name: values.name.trim(),
         email: values.email?.trim(),
+        publicId: values.publicId,
         roleId:
           Array.from(roles.values()).find((role) => role.name === ClientRoles.STAFF)?.id || '',
       }).then((res) => {

@@ -26,10 +26,10 @@ import WebcamView from './WebcamView'
 const MAX_PAGE_INDEX = 1
 
 type ClockInProps = {
-  userId: string
+  publicId: string
 }
 
-export default function ClockIn({ userId }: ClockInProps) {
+export default function ClockIn({ publicId }: ClockInProps) {
   const t = useTranslation()
   const { address, location, denied } = useGeoLocation()
   const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
@@ -43,36 +43,31 @@ export default function ClockIn({ userId }: ClockInProps) {
   const [key, setKey] = useState(0)
   const [isDisplayCloseButton, setIsDisplayCloseButton] = useState(false)
 
-  const getShiftData = useCallback(
-    async (clientId: string) => {
-      const shifts = await getAllShiftsByAdmin({
-        clientId,
-        userId,
-        start: startOfDay(Date.now()),
-        end: endOfDay(Date.now()),
-        delay: 600,
-      })
-      if (shifts) {
-        setShifts(shifts)
-        setIsCheckedIn(shifts.length > 0 && shifts[shifts.length - 1].end === undefined)
-      }
-    },
-    [userId],
-  )
+  const getShiftData = useCallback(async (clientId: string, userId: string) => {
+    const shifts = await getAllShiftsByAdmin({
+      clientId,
+      userId,
+      start: startOfDay(Date.now()),
+      end: endOfDay(Date.now()),
+      delay: 600,
+    })
+    if (shifts) {
+      setShifts(shifts)
+      setIsCheckedIn(shifts.length > 0 && shifts[shifts.length - 1].end === undefined)
+    }
+  }, [])
 
   const getData = useCallback(async () => {
     const clientId = await getClientByDomain({ domain }).then((res) => res?.id)
     if (clientId) {
       setClientId(clientId)
-      const [users] = await Promise.all([
-        getAllUsersByAdmin({ id: userId, clientId }),
-        getShiftData(clientId),
-      ])
+      const users = await getAllUsersByAdmin({ publicId, clientId })
       if (users.length > 0) {
+        await getShiftData(clientId, users[0].id)
         setUser(users[0])
       }
     }
-  }, [domain, getShiftData, userId])
+  }, [domain, getShiftData, publicId])
   useMount(getData)
 
   const goToNextPage = useCallback(() => {
@@ -99,8 +94,8 @@ export default function ClockIn({ userId }: ClockInProps) {
     } else {
       setKey((prev) => prev + 1)
     }
-    await getShiftData(clientId)
-  }, [clientId, getShiftData, isCheckSuccessful])
+    await getShiftData(clientId, user?.id || '')
+  }, [clientId, getShiftData, isCheckSuccessful, user?.id])
 
   const submit = useCallback(
     async (file: File) => {
@@ -116,7 +111,7 @@ export default function ClockIn({ userId }: ClockInProps) {
 
       let success: boolean | undefined
       let message: string | undefined
-      const objectKey = getObjectKey(clientId, userId, file, isCheckIn)
+      const objectKey = getObjectKey(clientId, user?.id || '', file, isCheckIn)
       const imageUrl = getImageUrl(objectKey)
       const uploadResult = await uploadImageToS3({
         bucketName: BUCKET_NAME,
@@ -128,7 +123,7 @@ export default function ClockIn({ userId }: ClockInProps) {
       if (isCheckIn) {
         const res = await checkInByUser({
           clientId,
-          userId,
+          userId: user?.id || '',
           startImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
           ...location,
           delay: 400,
@@ -138,7 +133,7 @@ export default function ClockIn({ userId }: ClockInProps) {
       } else {
         const res = await checkOutByUser({
           clientId,
-          userId,
+          userId: user?.id || '',
           endImageUrl: uploadResult.success ? imageUrl : PLACEHOLDER_IMAGE_URL,
           ...location,
           delay: 400,
@@ -167,7 +162,7 @@ export default function ClockIn({ userId }: ClockInProps) {
         ),
       })
     },
-    [address, clientId, isCheckIn, location, t, userId],
+    [address, clientId, isCheckIn, location, t, user?.id],
   )
 
   if (denied) {

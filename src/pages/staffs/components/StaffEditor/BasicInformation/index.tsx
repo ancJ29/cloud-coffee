@@ -6,7 +6,7 @@ import SaveStaffButton from '../SaveStaffButton'
 
 export default function BasicInformation({ form, onSubmit }: UserForm) {
   const t = useTranslation()
-  const url = `${window.location.origin}/time-clock?id=${form.values.id}`
+  const url = `${window.location.origin}/time-clock?id=${form.values.publicId}`
 
   return (
     <form onSubmit={form.onSubmit(onSubmit)}>
@@ -14,7 +14,7 @@ export default function BasicInformation({ form, onSubmit }: UserForm) {
         <TextInput label={t('Staff name')} withAsterisk {...form.getInputProps('name')} />
         <TextInput label={t('Email address')} {...form.getInputProps('email')} />
         <PhoneInput label={t('Phone number')} {...form.getInputProps('phone')} />
-        {form.values.id && <CopyInput label="URL" value={url} disabled />}
+        <CopyInput label="URL" value={url} disabled />
         <SaveStaffButton />
       </Stack>
     </form>

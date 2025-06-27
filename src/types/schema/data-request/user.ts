@@ -28,6 +28,7 @@ export const getUsersSchema = _typeBuilder({
         clientId: stringSchema,
         enabled: nullishBooleanSchema,
         phone: nullishStringSchema,
+        publicId: stringSchema,
       })
       .extend(userMemoSchema.shape),
   ),
@@ -37,6 +38,7 @@ export const getUsersByAdminSchema = _typeBuilder({
   action: z.literal(RequestAction.GET_USERS_BY_ADMIN),
   payload: getSchema.extend({
     id: optionalStringSchema,
+    publicId: optionalStringSchema,
     clientId: optionalStringSchema,
   }),
   response: listResponse(
@@ -45,6 +47,7 @@ export const getUsersByAdminSchema = _typeBuilder({
       name: stringSchema,
       avatar: nullishStringSchema,
       clientId: stringSchema,
+      publicId: stringSchema,
       role: z.object({
         id: stringSchema,
         name: stringSchema,
@@ -67,6 +70,7 @@ export const updateUserSchema = _typeBuilder({
       clientId: stringSchema,
       enabled: booleanSchema,
       phone: nullishStringSchema,
+      publicId: stringSchema,
     })
     .extend(userMemoSchema.shape),
   response: z.object({
@@ -85,6 +89,7 @@ export const addUserSchema = _typeBuilder({
       roleId: stringSchema,
       salaryRuleId: nullishStringSchema,
       phone: nullishStringSchema,
+      publicId: stringSchema,
     })
     .extend(userMemoSchema.shape),
   response: z.object({

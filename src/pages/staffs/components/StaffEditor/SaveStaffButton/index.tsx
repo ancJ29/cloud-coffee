@@ -6,7 +6,9 @@ export default function SaveStaffButton({ ...props }: ButtonProps) {
 
   return (
     <Group justify="flex-end" mt={10}>
-      <Button {...props}>{t('Save staff')}</Button>
+      <Button type="submit" {...props}>
+        {t('Save staff')}
+      </Button>
     </Group>
   )
 }
