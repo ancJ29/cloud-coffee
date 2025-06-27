@@ -1,7 +1,8 @@
 import { Collapse, NumberInput, Select } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
-import { Button, Checkbox, Group, Stack } from '@mantine/core'
+import { Checkbox, Stack } from '@mantine/core'
 import { useState } from 'react'
+import SaveStaffButton from '../SaveStaffButton'
 import BookableLeaveDays from './BookableLeaveDays'
 import DayBreak from './DayBreak'
 import OvertimePolicy from './OvertimePolicy'
@@ -32,9 +33,7 @@ export default function WorkingMode() {
       <BookableLeaveDays isWorksShifts={isWorksShifts} />
       <DayBreak isWorksShifts={isWorksShifts} />
 
-      <Group justify="flex-end" mt={10}>
-        <Button>{t('Save staff')}</Button>
-      </Group>
+      <SaveStaffButton />
     </Stack>
   )
 }

@@ -1,7 +1,8 @@
 import { Collapse, Select } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
-import { Button, Checkbox, Group, Stack } from '@mantine/core'
+import { Checkbox, Stack } from '@mantine/core'
 import { useState } from 'react'
+import SaveStaffButton from '../SaveStaffButton'
 
 export default function RoleAndPermissions() {
   const t = useTranslation()
@@ -37,9 +38,7 @@ export default function RoleAndPermissions() {
       <Checkbox label={t('Can Clock in on Web')} />
       <Checkbox label={t('Skip Clock In/Out Notifications for this staff')} />
       <Checkbox label={t('Can submit Manual Timesheet')} />
-      <Group justify="flex-end" mt={10}>
-        <Button>{t('Save staff')}</Button>
-      </Group>
+      <SaveStaffButton />
     </Stack>
   )
 }

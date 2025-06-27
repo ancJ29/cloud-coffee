@@ -1,7 +1,8 @@
 import { CopyInput, PhoneInput, TextInput } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
-import { Button, Group, Stack } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import { UserForm } from '../../../_configs'
+import SaveStaffButton from '../SaveStaffButton'
 
 export default function BasicInformation({ form, onSubmit }: UserForm) {
   const t = useTranslation()
@@ -14,9 +15,7 @@ export default function BasicInformation({ form, onSubmit }: UserForm) {
         <TextInput label={t('Email address')} {...form.getInputProps('email')} />
         <PhoneInput label={t('Phone number')} {...form.getInputProps('phone')} />
         {form.values.id && <CopyInput label="URL" value={url} disabled />}
-        <Group justify="flex-end" mt={10}>
-          <Button type="submit">{t('Save staff')}</Button>
-        </Group>
+        <SaveStaffButton />
       </Stack>
     </form>
   )

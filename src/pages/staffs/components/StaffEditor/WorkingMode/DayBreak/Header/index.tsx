@@ -5,7 +5,7 @@ export default function Header() {
   const t = useTranslation()
 
   return (
-    <Grid gutter={0} align="end" mt={10}>
+    <Grid gutter={0} align="start" mt={10}>
       <Grid.Col span={2}>
         <Text fz={16}>{t('Break at')}</Text>
       </Grid.Col>

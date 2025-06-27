@@ -9,8 +9,7 @@ type BookableLeaveDaysProps = {
 
 export default function BookableLeaveDays({ isWorksShifts }: BookableLeaveDaysProps) {
   const t = useTranslation()
-
-  const weekDays = WEEKDAYS.map((day, idx) => ({ label: t(day), value: idx }))
+  const weekDays = WEEKDAYS.map((day, idx) => ({ label: t(day), value: idx.toString() }))
 
   return (
     <Stack gap={0}>

@@ -3,7 +3,7 @@ import { Checkbox, Grid, Group, Image, NumberInput } from '@mantine/core'
 
 type ItemProps = {
   onRemove: () => void
-  weekDays: { label: string; value: number }[]
+  weekDays: { label: string; value: string }[]
 }
 
 export default function Item({ weekDays, onRemove }: ItemProps) {
@@ -31,8 +31,8 @@ export default function Item({ weekDays, onRemove }: ItemProps) {
         />
       </Grid.Col>
       <Grid.Col span={5}>
-        <Checkbox.Group defaultValue={[]}>
-          <Group ml={10}>
+        <Checkbox.Group defaultValue={[]} ml={10}>
+          <Group>
             {weekDays.map((day) => (
               <Checkbox key={day.value} label={day.label} />
             ))}
@@ -40,7 +40,14 @@ export default function Item({ weekDays, onRemove }: ItemProps) {
         </Checkbox.Group>
       </Grid.Col>
       <Grid.Col span={1}>
-        <Image src="/imgs/staff/delete.svg" w={16} onClick={onRemove} ml={10} mb={4} />
+        <Image
+          src="/imgs/staff/delete.svg"
+          w={16}
+          onClick={onRemove}
+          ml={10}
+          mb={4}
+          style={{ cursor: 'pointer' }}
+        />
       </Grid.Col>
     </Grid>
   )

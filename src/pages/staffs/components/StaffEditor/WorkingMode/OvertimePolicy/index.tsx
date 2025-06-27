@@ -19,7 +19,14 @@ export default function OvertimePolicy() {
       <Collapse in={isEligibleForOvertime}>
         <Stack gap={20} w="100%">
           <Collapse in={!isSpecifyOvertimeRatesPerDay}>
-            <NumberInput withAsterisk label={t('Overtime rate multiplier')} defaultValue={1} />
+            <NumberInput
+              withAsterisk
+              label={t('Overtime rate multiplier')}
+              defaultValue={1}
+              decimalScale={2}
+              allowNegative={false}
+              fixedDecimalScale
+            />
           </Collapse>
           <Checkbox
             label={t('Specify overtime rates per day')}
