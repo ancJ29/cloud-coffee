@@ -1,20 +1,19 @@
 import classes from '@/styles/Input.module.scss'
 import {
-  DateInput as MantineDateInput,
-  DateInputProps as MantineDateInputProps,
-} from '@mantine/dates'
+  NumberInput as MantineNumberInput,
+  NumberInputProps as MantineNumberInputProps,
+} from '@mantine/core'
 import { useCallback, useState } from 'react'
 import { InputLabel } from '../InputLabel'
 
-interface DateInputProps extends MantineDateInputProps {
+interface NumberInputProps extends MantineNumberInputProps {
   hint?: string
 }
 
-export function DateInput({ hint, ...props }: DateInputProps) {
+export function NumberInput({ hint, ...props }: NumberInputProps) {
   const [focused, setFocused] = useState(false)
-  const value = props.defaultValue || props.value
   const floating =
-    typeof value === 'string' && value.trim().length !== 0 ? true : focused || undefined
+    props.value !== undefined || props.defaultValue !== undefined ? true : focused || undefined
 
   const onFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -33,9 +32,11 @@ export function DateInput({ hint, ...props }: DateInputProps) {
   )
 
   return (
-    <MantineDateInput
-      valueFormat="DD/MM/YYYY"
+    <MantineNumberInput
+      decimalScale={2}
       {...props}
+      thousandSeparator=","
+      decimalSeparator="."
       label={<InputLabel label={props.label} hint={hint} />}
       classNames={classes}
       onFocus={onFocus}

@@ -1,4 +1,4 @@
-import { Select } from '@/components'
+import { Collapse, Select } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { Button, Checkbox, Group, Stack } from '@mantine/core'
 import { useState } from 'react'
@@ -18,21 +18,22 @@ export default function RoleAndPermissions() {
         onChange={(e) => setIsAdministrator(e.target.checked)}
         label={t('This staff is an administrator')}
       />
-      {isAdministrator && (
+      <Collapse in={isAdministrator} ml={32}>
         <Checkbox
           label={t(
             'Are you sure you want this user to have administrator access? This will give them access to all data for your organization',
           )}
-          ml={32}
         />
-      )}
+      </Collapse>
       <Select label={t('Team')} options={[]} />
       <Checkbox
         checked={canAccessMobileApp}
         onChange={(e) => setCanAccessMobileApp(e.target.checked)}
         label={t('Can access the Mobile App')}
       />
-      {canAccessMobileApp && <Checkbox label={t('Require GPS on Mobile')} />}
+      <Collapse in={canAccessMobileApp}>
+        <Checkbox label={t('Require GPS on Mobile')} />
+      </Collapse>
       <Checkbox label={t('Can Clock in on Web')} />
       <Checkbox label={t('Skip Clock In/Out Notifications for this staff')} />
       <Checkbox label={t('Can submit Manual Timesheet')} />

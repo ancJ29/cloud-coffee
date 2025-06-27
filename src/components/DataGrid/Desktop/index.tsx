@@ -217,7 +217,9 @@ function _contentBuilder<T extends GenericObject>(
           {rows.map((row, idx) => (
             <Flex key={idx} onClick={onRowClick?.bind(null, row)} className={classes.row}>
               <OrderCell hasOrderColumn={hasOrderColumn} index={orderFrom + idx} />
-              {columns?.map((column) => <Cell key={column.key} row={row} column={column} />)}
+              {columns?.map((column) => (
+                <Cell key={column.key} row={row} column={column} />
+              ))}
             </Flex>
           ))}
         </div>

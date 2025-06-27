@@ -18,9 +18,9 @@ export default function DashboardView() {
             <LiveClock format="HH:mm A" fz={36} c="var(--text-secondary)" lh="normal" fw="normal" />
           }
         />
-        <Item title={t('Employees Clocked in')} content="0" />
-        <Item title={t('Employees Clocked out')} content="0" />
-        <Item title={t('Employees on Leave Today')} content="0" />
+        <Item title={t('Staffs Clocked in')} content="0" />
+        <Item title={t('Staffs Clocked out')} content="0" />
+        <Item title={t('Staffs on Leave Today')} content="0" />
         <Item title={t('Open Leave Request')} content="0" />
       </Stack>
     </Stack>

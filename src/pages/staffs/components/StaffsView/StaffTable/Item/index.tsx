@@ -31,11 +31,11 @@ export default function Item({ user, onEdit, onDelete }: ItemProps) {
         <Text fz={16}>{user.name}</Text>
       </div>
       <div className={classes.action}>
-        <Image src="/imgs/staff/edit.svg" width={20} height={20} className={classes.icon} />
+        <Image src="/imgs/staff/edit.svg" w={20} h={20} className={classes.icon} />
         <Image
           src="/imgs/staff/delete.svg"
-          width={20}
-          height={20}
+          w={20}
+          h={20}
           className={classes.icon}
           onClick={handleDelete}
         />

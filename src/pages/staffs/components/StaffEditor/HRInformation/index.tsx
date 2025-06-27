@@ -11,7 +11,7 @@ export default function HRInformation() {
       <DateInput label={t('Join date')} />
       <DateInput label={t('End date')} />
       <DateInput label={t('Date of birth')} />
-      <TextInput label={t('Employee address')} />
+      <TextInput label={t('Staff address')} />
       <TextInput label={t('Personal contact email')} />
       <TextInput label={t('Emergency contact name')} />
       <PhoneInput label={t('Emergency contact phone number')} />

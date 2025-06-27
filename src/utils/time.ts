@@ -43,6 +43,14 @@ export function endOfMonth(timestamp: number): number {
   return date.getTime()
 }
 
+export function startOfYear(timestamp: number): number {
+  const date = new Date(timestamp)
+  date.setDate(1)
+  date.setMonth(0)
+  date.setHours(0, 0, 0, 0)
+  return date.getTime()
+}
+
 export function formatDuration(totalMilliseconds: number | null) {
   if (totalMilliseconds === null) {
     return '-'
