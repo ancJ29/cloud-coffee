@@ -1,4 +1,4 @@
-import { Collapse, Select } from '@/components'
+import { Collapse } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { Checkbox, Stack } from '@mantine/core'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ export default function RoleAndPermissions() {
 
   return (
     <Stack gap={20} w="100%">
-      <Select label={t('Manage')} options={[]} />
+      {/* <Select label={t('Manage')} options={[]} /> */}
       <Checkbox label={t('This staff is a manager of other staffs')} />
       <Checkbox label={t('This staff can manage teams of staffs')} />
       <Checkbox
@@ -26,7 +26,7 @@ export default function RoleAndPermissions() {
           )}
         />
       </Collapse>
-      <Select label={t('Team')} options={[]} />
+      {/* <Select label={t('Team')} options={[]} /> */}
       <Checkbox
         checked={canAccessMobileApp}
         onChange={(e) => setCanAccessMobileApp(e.target.checked)}
