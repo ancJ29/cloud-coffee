@@ -6,6 +6,7 @@ import {
   Input,
   MantineThemeOverride,
   Modal,
+  NumberInput,
   PasswordInput,
   createTheme,
 } from '@mantine/core'
@@ -22,6 +23,9 @@ export const theme: MantineThemeOverride = createTheme({
     }),
     PasswordInput: PasswordInput.extend({
       classNames: { innerInput: classes.innerInput },
+    }),
+    NumberInput: NumberInput.extend({
+      classNames: { control: classes.control },
     }),
     Button: Button.extend({
       defaultProps: { size: 'md', fw: 300, radius: 6 },

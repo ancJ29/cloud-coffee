@@ -117,7 +117,7 @@ export function DateSelect({ label, dateValue, onChangeDateValue, ...props }: Da
             component="button"
             type="button"
             pointer
-            rightSection={<IconChevronDown size={16} />}
+            rightSection={<IconChevronDown size={14} />}
             onClick={() => combobox.toggleDropdown()}
             rightSectionPointerEvents="none"
           >

@@ -26,6 +26,7 @@ export default function OvertimePolicy() {
               decimalScale={2}
               allowNegative={false}
               fixedDecimalScale
+              styles={{ root: { marginTop: 0 } }}
             />
           </Collapse>
           <Checkbox

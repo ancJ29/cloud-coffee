@@ -24,6 +24,7 @@ export default function RoleAndPermissions() {
           label={t(
             'Are you sure you want this user to have administrator access? This will give them access to all data for your organization',
           )}
+          styles={{ label: { backgroundColor: 'var(--highlight' } }}
         />
       </Collapse>
       <Select label={t('Team')} options={[]} />

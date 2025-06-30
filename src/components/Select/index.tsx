@@ -41,7 +41,7 @@ export function Select({ options, ...props }: SelectProps) {
     <MantineSelect
       data={data}
       checkIconPosition="right"
-      rightSection={<IconChevronDown size={16} />}
+      rightSection={<IconChevronDown size={14} />}
       {...props}
       label={props.label}
       classNames={classes}

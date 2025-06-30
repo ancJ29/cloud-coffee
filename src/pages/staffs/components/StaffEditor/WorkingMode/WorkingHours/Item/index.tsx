@@ -1,4 +1,4 @@
-import { TimeInput } from '@/components'
+import { TimeSelect } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { ActionIcon, Checkbox, Grid } from '@mantine/core'
 import { IconCopy } from '@tabler/icons-react'
@@ -13,19 +13,19 @@ export default function Item({ label, startTime, endTime, showCopyIcon }: ItemPr
   const t = useTranslation()
 
   return (
-    <Grid gutter={0} align="end">
-      <Grid.Col span={3.5}>
+    <Grid gutter={0} align="center">
+      <Grid.Col span={4}>
         <Checkbox label={t(label)} defaultChecked />
       </Grid.Col>
       <Grid.Col span={3.5}>
-        <TimeInput defaultValue={startTime} size="xs" />
+        <TimeSelect defaultValue={startTime} />
       </Grid.Col>
       <Grid.Col span={3.5}>
-        <TimeInput defaultValue={endTime} size="xs" ml={10} />
+        <TimeSelect defaultValue={endTime} ml={10} />
       </Grid.Col>
-      <Grid.Col span={1.5}>
+      <Grid.Col span={1}>
         {showCopyIcon && (
-          <ActionIcon ml={15} variant="transparent">
+          <ActionIcon ml={10} variant="transparent">
             <IconCopy size={18} />
           </ActionIcon>
         )}

@@ -29,21 +29,21 @@ function Item({ label, value, showCopyIcon }: ItemProps) {
 
   return (
     <Grid gutter={0} align="end">
-      <Grid.Col span={3.5}>
-        <Text fz={16}>{t(label)}</Text>
+      <Grid.Col span={4}>
+        <Text fz={14}>{t(label)}</Text>
       </Grid.Col>
       <Grid.Col span={7}>
         <NumberInput
           defaultValue={value}
-          size="xs"
           decimalScale={2}
           allowNegative={false}
           fixedDecimalScale
+          styles={{ root: { marginTop: 0 } }}
         />
       </Grid.Col>
-      <Grid.Col span={1.5}>
+      <Grid.Col span={1}>
         {showCopyIcon && (
-          <ActionIcon ml={15} variant="transparent">
+          <ActionIcon ml={10} variant="transparent">
             <IconCopy size={18} />
           </ActionIcon>
         )}

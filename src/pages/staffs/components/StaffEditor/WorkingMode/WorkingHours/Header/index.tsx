@@ -6,7 +6,7 @@ export default function Header() {
 
   return (
     <Grid gutter={0} align="end" mt={10}>
-      <Grid.Col span={3.5}>
+      <Grid.Col span={4}>
         <Text fz={16}>{t('Day')}</Text>
       </Grid.Col>
       <Grid.Col span={3.5}>
@@ -17,7 +17,7 @@ export default function Header() {
           {t('End time')}
         </Text>
       </Grid.Col>
-      <Grid.Col span={1.5} />
+      <Grid.Col span={1} />
     </Grid>
   )
 }
