@@ -1,18 +1,18 @@
 import { pushNotification } from '@/configs/notifications'
-import { getAllShifts, Shift, updateShift } from '@/services/domain'
+import { AttendanceLog, getAllAttendanceLogs, updateAttendanceLog } from '@/services/domain'
 import useUserStore from '@/stores/user.store'
 import { DatesRangeValue, DateValue, NotificationType } from '@/types'
 import { cloneDeep, createStore, endOfDay, startOfDay } from '@/utils'
 
 type State = {
-  currents: Record<string, Shift[]>
-  updates: Record<string, Shift[]>
+  currents: Record<string, AttendanceLog[]>
+  updates: Record<string, AttendanceLog[]>
   startDate: Date
   endDate: Date
   roleId: string | null
   venueId: string | null
   keyword: string
-  updatedShifts: Record<string, Shift>
+  updatedAttendanceLog: Record<string, AttendanceLog>
 }
 
 const defaultState = {
@@ -23,7 +23,7 @@ const defaultState = {
   roleId: null,
   venueId: null,
   keyword: '',
-  updatedShifts: {},
+  updatedAttendanceLog: {},
 }
 
 enum ActionType {
@@ -38,7 +38,7 @@ enum ActionType {
 
 type Action = {
   type: ActionType
-  shifts?: Shift[]
+  attendanceLogs?: AttendanceLog[]
   startDate?: DateValue
   endDate?: DateValue
   roleId?: string | null
@@ -47,7 +47,7 @@ type Action = {
   checkInTime?: string
   checkOutTime?: string
   userId?: string
-  shiftId?: string
+  attendanceLogId?: string
 }
 
 const { dispatch, ...store } = createStore<State, Action>(reducer, {
@@ -59,11 +59,11 @@ export default {
   async initData() {
     const state = store.getSnapshot()
 
-    const shifts = await getAllShifts({
+    const attendanceLogs = await getAllAttendanceLogs({
       start: state.startDate.getTime(),
       end: state.endDate.getTime(),
     })
-    dispatch({ type: ActionType.INIT_DATA, shifts })
+    dispatch({ type: ActionType.INIT_DATA, attendanceLogs })
   },
   async changeDate(value: DatesRangeValue) {
     const [start, end] = value
@@ -72,7 +72,7 @@ export default {
     const startDate = new Date(startOfDay(new Date(start || 0).getTime()))
     const endDate = new Date(endOfDay(new Date(end || 0).getTime()))
 
-    const shifts = await getAllShifts({
+    const attendanceLogs = await getAllAttendanceLogs({
       start: startDate.getTime(),
       end: endDate.getTime(),
     })
@@ -81,7 +81,7 @@ export default {
       type: ActionType.CHANGE_DATE,
       startDate: new Date(startDate),
       endDate: new Date(endDate),
-      shifts,
+      attendanceLogs,
     })
   },
   changeRoleId(roleId: string | null) {
@@ -93,15 +93,17 @@ export default {
   changeKeyword(keyword?: string) {
     dispatch({ type: ActionType.CHANGE_KEYWORD, keyword })
   },
-  changeCheckInTime(userId: string, shiftId: string, checkInTime: string) {
-    dispatch({ type: ActionType.CHANGE_CHECK_IN_TIME, userId, shiftId, checkInTime })
+  changeCheckInTime(userId: string, attendanceLogId: string, checkInTime: string) {
+    dispatch({ type: ActionType.CHANGE_CHECK_IN_TIME, userId, attendanceLogId, checkInTime })
   },
-  changeCheckOutTime(userId: string, shiftId: string, checkOutTime: string) {
-    dispatch({ type: ActionType.CHANGE_CHECK_OUT_TIME, userId, shiftId, checkOutTime })
+  changeCheckOutTime(userId: string, attendanceLogId: string, checkOutTime: string) {
+    dispatch({ type: ActionType.CHANGE_CHECK_OUT_TIME, userId, attendanceLogId, checkOutTime })
   },
   save(t: (key: string) => string) {
     const state = store.getSnapshot()
-    const promises = Object.values(state.updatedShifts).map((shift) => updateShift(shift))
+    const promises = Object.values(state.updatedAttendanceLog).map((attendanceLog) =>
+      updateAttendanceLog(attendanceLog),
+    )
     Promise.all(promises)
       .then(() => {
         setTimeout(() => {
@@ -117,8 +119,8 @@ export default {
 function reducer(action: Action, state: State): State {
   switch (action.type) {
     case ActionType.INIT_DATA:
-      if (action.shifts !== undefined) {
-        const currents = initShiftsByUserId(action.shifts)
+      if (action.attendanceLogs !== undefined) {
+        const currents = initAttendanceLogsByUserId(action.attendanceLogs)
         return {
           ...state,
           currents,
@@ -127,8 +129,8 @@ function reducer(action: Action, state: State): State {
       }
       break
     case ActionType.CHANGE_DATE:
-      if (action.shifts !== undefined && action.startDate && action.endDate) {
-        const currents = initShiftsByUserId(action.shifts)
+      if (action.attendanceLogs !== undefined && action.startDate && action.endDate) {
+        const currents = initAttendanceLogsByUserId(action.attendanceLogs)
         return {
           ...state,
           currents,
@@ -143,7 +145,12 @@ function reducer(action: Action, state: State): State {
       break
     case ActionType.CHANGE_ROLE_ID:
       if (action.roleId !== undefined) {
-        const updates = _filterShifts(state.currents, action.roleId, state.venueId, state.keyword)
+        const updates = _filterAttendanceLogs(
+          state.currents,
+          action.roleId,
+          state.venueId,
+          state.keyword,
+        )
         return {
           ...state,
           roleId: action.roleId,
@@ -153,7 +160,12 @@ function reducer(action: Action, state: State): State {
       break
     case ActionType.CHANGE_VENUE_ID:
       if (action.venueId !== undefined) {
-        const updates = _filterShifts(state.currents, state.roleId, action.venueId, state.keyword)
+        const updates = _filterAttendanceLogs(
+          state.currents,
+          state.roleId,
+          action.venueId,
+          state.keyword,
+        )
         return {
           ...state,
           venueId: action.venueId,
@@ -162,7 +174,12 @@ function reducer(action: Action, state: State): State {
       }
       break
     case ActionType.CHANGE_KEYWORD: {
-      const updates = _filterShifts(state.currents, state.roleId, state.venueId, action.keyword)
+      const updates = _filterAttendanceLogs(
+        state.currents,
+        state.roleId,
+        state.venueId,
+        action.keyword,
+      )
       return {
         ...state,
         keyword: action.keyword || '',
@@ -172,20 +189,20 @@ function reducer(action: Action, state: State): State {
     case ActionType.CHANGE_CHECK_IN_TIME:
       if (
         action.userId !== undefined &&
-        action.shiftId !== undefined &&
+        action.attendanceLogId !== undefined &&
         action.checkInTime !== undefined
       ) {
         const updates = {
           ...state.updates,
-          [action.userId]: state.updates[action.userId].map((shift) => {
-            if (shift.id === action.shiftId) {
+          [action.userId]: state.updates[action.userId].map((attendanceLog) => {
+            if (attendanceLog.id === action.attendanceLogId) {
               const [hh, mm] = action.checkInTime?.split(':').map(Number) ?? [0, 0]
-              const date = new Date(shift.start)
+              const date = new Date(attendanceLog.start)
               date.setHours(hh, mm, 0, 0)
-              state.updatedShifts[shift.id] = shift
-              return { ...shift, start: date.getTime() }
+              state.updatedAttendanceLog[attendanceLog.id] = attendanceLog
+              return { ...attendanceLog, start: date.getTime() }
             }
-            return shift
+            return attendanceLog
           }),
         }
         return { ...state, updates }
@@ -194,26 +211,26 @@ function reducer(action: Action, state: State): State {
     case ActionType.CHANGE_CHECK_OUT_TIME:
       if (
         action.userId !== undefined &&
-        action.shiftId !== undefined &&
+        action.attendanceLogId !== undefined &&
         action.checkOutTime !== undefined
       ) {
         const updates = {
           ...state.updates,
-          [action.userId]: state.updates[action.userId].map((shift) => {
-            if (shift.id === action.shiftId) {
+          [action.userId]: state.updates[action.userId].map((attendanceLog) => {
+            if (attendanceLog.id === action.attendanceLogId) {
               const [hh, mm] = action.checkOutTime?.split(':').map(Number) ?? [0, 0]
-              const date = new Date(shift.start)
+              const date = new Date(attendanceLog.start)
               date.setHours(hh, mm, 0, 0)
-              if (date.getTime() < shift.start) {
+              if (date.getTime() < attendanceLog.start) {
                 date.setDate(date.getDate() + 1)
               }
 
-              const updatedShift = { ...shift, end: date.getTime() }
-              state.updatedShifts[shift.id] = updatedShift
+              const updatedAttendanceLog = { ...attendanceLog, end: date.getTime() }
+              state.updatedAttendanceLog[attendanceLog.id] = updatedAttendanceLog
 
-              return updatedShift
+              return updatedAttendanceLog
             }
-            return shift
+            return attendanceLog
           }),
         }
         return { ...state, updates }
@@ -223,25 +240,25 @@ function reducer(action: Action, state: State): State {
   return state
 }
 
-function initShiftsByUserId(shifts: Shift[]) {
-  const shiftsByUserId: Record<string, Shift[]> = {}
+function initAttendanceLogsByUserId(attendanceLogs: AttendanceLog[]) {
+  const attendanceLogsByUserId: Record<string, AttendanceLog[]> = {}
 
-  shifts.map((shift) => {
-    const shifts = shiftsByUserId[shift.userId] || []
-    shiftsByUserId[shift.userId] = [...shifts, shift]
+  attendanceLogs.map((attendanceLog) => {
+    const attendanceLogs = attendanceLogsByUserId[attendanceLog.userId] || []
+    attendanceLogsByUserId[attendanceLog.userId] = [...attendanceLogs, attendanceLog]
   })
 
-  return shiftsByUserId
+  return attendanceLogsByUserId
 }
 
-function _filterShifts(
-  shiftsByUserId: Record<string, Shift[]>,
+function _filterAttendanceLogs(
+  attendanceLogsByUserId: Record<string, AttendanceLog[]>,
   roleId: string | null,
   venueId: string | null,
   keyword?: string,
-): Record<string, Shift[]> {
+): Record<string, AttendanceLog[]> {
   const { users } = useUserStore.getState()
-  let updates = shiftsByUserId
+  let updates = attendanceLogsByUserId
 
   if (roleId !== null) {
     updates = Object.fromEntries(
@@ -251,9 +268,9 @@ function _filterShifts(
 
   if (venueId !== null) {
     updates = Object.fromEntries(
-      Object.entries(updates).map(([userId, shifts]) => [
+      Object.entries(updates).map(([userId, attendanceLogs]) => [
         userId,
-        shifts.filter((shift) => shift.venueId === venueId),
+        attendanceLogs.filter((attendanceLog) => attendanceLog.venueId === venueId),
       ]),
     )
   }

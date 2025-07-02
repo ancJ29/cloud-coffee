@@ -3,11 +3,11 @@
   overflow: auto;
 }
 
-.shiftContainer {
+.attendanceContainer {
   gap: 0;
   border: 1px solid var(--border);
   border-radius: 6px;
   margin: 8px 0;
   padding: 10px;
-  background-color: var(--shift-item);
+  background-color: var(--attendance-item);
 }

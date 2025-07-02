@@ -10,6 +10,8 @@ export const nullishStringSchema = stringSchema.nullish()
 export const booleanSchema = z.boolean()
 export const nullishBooleanSchema = booleanSchema.nullish()
 export const optionalBooleanSchema = booleanSchema.optional()
+export const timeSchema = z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/)
+export const dayOfWeekSchema = z.number().int().gte(0).lte(6)
 
 export const getSchema = z.object({
   cursor: optionalStringSchema,

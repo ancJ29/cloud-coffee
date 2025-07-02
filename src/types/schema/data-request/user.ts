@@ -17,20 +17,19 @@ export const getUsersSchema = _typeBuilder({
   action: z.literal(RequestAction.GET_USERS),
   payload: getSchema,
   response: listResponse(
-    z
-      .object({
-        id: stringSchema,
-        name: stringSchema,
-        email: nullishStringSchema,
-        avatar: nullishStringSchema,
-        roleId: stringSchema,
-        salaryRuleId: nullishStringSchema,
-        clientId: stringSchema,
-        enabled: nullishBooleanSchema,
-        phone: nullishStringSchema,
-        publicId: stringSchema,
-      })
-      .extend(userMemoSchema.shape),
+    z.object({
+      id: stringSchema,
+      name: stringSchema,
+      email: nullishStringSchema,
+      avatar: nullishStringSchema,
+      roleId: stringSchema,
+      workShiftId: nullishStringSchema,
+      clientId: stringSchema,
+      enabled: nullishBooleanSchema,
+      phone: nullishStringSchema,
+      publicId: stringSchema,
+      memo: userMemoSchema,
+    }),
   ),
 })
 
@@ -59,20 +58,19 @@ export const getUsersByAdminSchema = _typeBuilder({
 export const updateUserSchema = _typeBuilder({
   authOnly: true,
   action: z.literal(RequestAction.UPDATE_USER),
-  payload: z
-    .object({
-      id: stringSchema,
-      name: stringSchema,
-      email: nullishStringSchema,
-      avatar: nullishStringSchema,
-      roleId: stringSchema,
-      salaryRuleId: nullishStringSchema,
-      clientId: stringSchema,
-      enabled: booleanSchema,
-      phone: nullishStringSchema,
-      publicId: stringSchema,
-    })
-    .extend(userMemoSchema.shape),
+  payload: z.object({
+    id: stringSchema,
+    name: stringSchema,
+    email: nullishStringSchema,
+    avatar: nullishStringSchema,
+    roleId: stringSchema,
+    workShiftId: nullishStringSchema,
+    clientId: stringSchema,
+    enabled: booleanSchema,
+    phone: nullishStringSchema,
+    publicId: stringSchema,
+    memo: userMemoSchema,
+  }),
   response: z.object({
     success: booleanSchema,
   }),
@@ -81,17 +79,15 @@ export const updateUserSchema = _typeBuilder({
 export const addUserSchema = _typeBuilder({
   authOnly: true,
   action: z.literal(RequestAction.ADD_USER),
-  payload: z
-    .object({
-      name: stringSchema,
-      email: nullishStringSchema,
-      avatar: nullishStringSchema,
-      roleId: stringSchema,
-      salaryRuleId: nullishStringSchema,
-      phone: nullishStringSchema,
-      publicId: stringSchema,
-    })
-    .extend(userMemoSchema.shape),
+  payload: z.object({
+    name: stringSchema,
+    email: nullishStringSchema,
+    avatar: nullishStringSchema,
+    roleId: stringSchema,
+    workShiftId: nullishStringSchema,
+    phone: nullishStringSchema,
+    publicId: stringSchema,
+  }),
   response: z.object({
     success: booleanSchema,
   }),

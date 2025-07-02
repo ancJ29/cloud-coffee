@@ -10,7 +10,7 @@ import useUserStore from '@/stores/user.store'
 import { DatesRangeValue, MantineWidth, OptionProps } from '@/types'
 import { unique } from '@/utils'
 import { useCallback, useSyncExternalStore } from 'react'
-import store from '../../_shift.store'
+import store from '../../_attendance.store'
 
 const w: MantineWidth = { base: '100%', sm: '15vw' }
 

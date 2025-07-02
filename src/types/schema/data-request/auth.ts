@@ -20,26 +20,24 @@ export const getMeSchema = _typeBuilder({
   authOnly: true,
   action: z.literal(RequestAction.GET_ME),
   payload: z.object({}),
-  response: z
-    .object({
+  response: z.object({
+    id: stringSchema,
+    name: stringSchema,
+    email: nullishStringSchema,
+    avatar: nullishStringSchema,
+    roleId: stringSchema,
+    workShiftId: nullishStringSchema,
+    enabled: nullishBooleanSchema,
+    phone: nullishStringSchema,
+    publicId: stringSchema,
+    memo: userMemoSchema,
+    client: z.object({
       id: stringSchema,
       name: stringSchema,
-      email: nullishStringSchema,
-      avatar: nullishStringSchema,
-      roleId: stringSchema,
-      salaryRuleId: nullishStringSchema,
-      enabled: nullishBooleanSchema,
-      phone: nullishStringSchema,
-      publicId: stringSchema,
-      client: z
-        .object({
-          id: stringSchema,
-          name: stringSchema,
-          enabled: booleanSchema,
-        })
-        .extend(clientMemoSchema.shape),
-    })
-    .extend(userMemoSchema.shape),
+      enabled: booleanSchema,
+      memo: clientMemoSchema,
+    }),
+  }),
 })
 
 export const changePasswordSchema = _typeBuilder({

@@ -1,27 +1,24 @@
 import { Avatar } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
-import { SalaryRule, Shift, User } from '@/services/domain'
+import { AttendanceLog, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
-import useSalaryRuleStore from '@/stores/salaryRule.store'
 import useVenueStore from '@/stores/venue.store'
-import { calculateSalary, formatDuration, formatNumber, formatTime, ONE_HOUR } from '@/utils'
+import { formatDuration, formatTime, ONE_HOUR } from '@/utils'
 import { ActionIcon, Box, Card, Collapse, Flex, Group, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
 import { IconCameraPin, IconChevronDown } from '@tabler/icons-react'
 import { ReactNode, useCallback, useMemo } from 'react'
-import ShiftImage from '../../ShiftImage'
+import AttendanceLogImage from '../../AttendanceLogImage'
 import classes from './index.module.scss'
 
 type ItemProps = {
   user?: User
-  shifts: Shift[]
+  attendanceLogs: AttendanceLog[]
 }
 
-export default function Item({ user, shifts }: ItemProps) {
+export default function Item({ user, attendanceLogs }: ItemProps) {
   const [opened, { toggle }] = useDisclosure(false)
-  const { salaryRules } = useSalaryRuleStore()
-  const salaryRule = salaryRules.get(user?.salaryRuleId || '')
 
   const handleClick = useCallback(
     (event: React.MouseEvent) => {
@@ -32,14 +29,14 @@ export default function Item({ user, shifts }: ItemProps) {
   )
 
   const total = useMemo(() => {
-    const totalMilliseconds = shifts.some((shift) => shift.end != null)
-      ? shifts.reduce((acc, shift) => {
-          if (shift.end == null) {
+    const totalMilliseconds = attendanceLogs.some((attendanceLog) => attendanceLog.end != null)
+      ? attendanceLogs.reduce((acc, attendanceLog) => {
+          if (attendanceLog.end == null) {
             return acc
           }
 
-          let duration = shift.end - shift.start
-          if (shift.end < shift.start) {
+          let duration = attendanceLog.end - attendanceLog.start
+          if (attendanceLog.end < attendanceLog.start) {
             duration += 24 * ONE_HOUR
           }
 
@@ -48,7 +45,7 @@ export default function Item({ user, shifts }: ItemProps) {
       : null
 
     return totalMilliseconds
-  }, [shifts])
+  }, [attendanceLogs])
 
   if (!user) {
     return <></>
@@ -56,10 +53,10 @@ export default function Item({ user, shifts }: ItemProps) {
 
   return (
     <Card shadow="md" withBorder p={12} radius={8}>
-      <UserInformation user={user} total={total} salaryRule={salaryRule} onClick={handleClick} />
-      <Wrapper isShown={shifts.length > 0} opened={opened} onClick={handleClick}>
-        {shifts.map((shift) => (
-          <ShiftInformation key={shift.id} shift={shift} salaryRule={salaryRule} />
+      <UserInformation user={user} total={total} onClick={handleClick} />
+      <Wrapper isShown={attendanceLogs.length > 0} opened={opened} onClick={handleClick}>
+        {attendanceLogs.map((attendanceLog) => (
+          <AttendanceLogInformation key={attendanceLog.id} attendanceLog={attendanceLog} />
         ))}
       </Wrapper>
     </Card>
@@ -69,18 +66,14 @@ export default function Item({ user, shifts }: ItemProps) {
 function UserInformation({
   user,
   total,
-  salaryRule,
   onClick,
 }: {
   user: User
   total: number | null
-  salaryRule?: SalaryRule
   onClick: (event: React.MouseEvent) => void
 }) {
   const { roles } = useRoleStore()
   const t = useTranslation()
-
-  const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
 
   return (
     <Stack gap={0} onClick={onClick}>
@@ -94,7 +87,6 @@ function UserInformation({
         </Stack>
       </Flex>
       <DataRow title={t('Total')} content={formatDuration(total)} />
-      <DataRow title={`${t('Expected salary')}`} content={`${expectedSalary} VNĐ`} />
     </Stack>
   )
 }
@@ -144,41 +136,39 @@ function Wrapper({
   )
 }
 
-function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: SalaryRule }) {
+function AttendanceLogInformation({ attendanceLog }: { attendanceLog: AttendanceLog }) {
   const { venues } = useVenueStore()
   const t = useTranslation()
 
   const total = useMemo(() => {
-    if (!shift.end) {
+    if (!attendanceLog.end) {
       return
     }
-    let totalMilliseconds = shift.end - shift.start
-    if (shift.end < shift.start) {
+    let totalMilliseconds = attendanceLog.end - attendanceLog.start
+    if (attendanceLog.end < attendanceLog.start) {
       totalMilliseconds += 24 * ONE_HOUR
     }
     return totalMilliseconds
-  }, [shift])
-  const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
+  }, [attendanceLog])
 
   const onClick = useCallback(() => {
     modals.open({
       withCloseButton: false,
       centered: true,
       size: 'xl',
-      children: <ShiftImage shift={shift} />,
+      children: <AttendanceLogImage attendanceLog={attendanceLog} />,
     })
-  }, [shift])
+  }, [attendanceLog])
 
   return (
-    <Stack className={classes.shiftContainer}>
-      <DataRow title={t('Date')} content={formatTime(shift.start, 'ddd DD/MM/YYYY')} />
+    <Stack className={classes.attendanceContainer}>
+      <DataRow title={t('Date')} content={formatTime(attendanceLog.start, 'ddd DD/MM/YYYY')} />
       <DataRow title={t('Total')} content={formatDuration(total || 0) ?? '-'} />
-      <DataRow title={`${t('Expected salary')}`} content={`${expectedSalary} VNĐ`} />
-      <DataRow title={t('Clock in')} content={formatTime(shift.start, 'HH:mm')} />
-      <DataRow title={t('Clock out')} content={formatTime(shift.end, 'HH:mm')} />
-      <DataRow title={t('Venue')} content={venues.get(shift.venueId)?.name} />
+      <DataRow title={t('Clock in')} content={formatTime(attendanceLog.start, 'HH:mm')} />
+      <DataRow title={t('Clock out')} content={formatTime(attendanceLog.end, 'HH:mm')} />
+      <DataRow title={t('Venue')} content={venues.get(attendanceLog.venueId)?.name} />
       <DataRow
-        title={t('Shift image')}
+        title={t('Attendance image')}
         content={
           <ActionIcon variant="transparent" onClick={onClick} size="sm">
             <IconCameraPin stroke={1.5} />

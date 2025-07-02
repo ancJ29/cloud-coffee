@@ -18,6 +18,7 @@ const initialValues: UserFormProps = {
   name: '',
   roleId: '',
   publicId: uuidv4(),
+  memo: {},
 }
 
 export default function AddStaff() {

@@ -19,7 +19,7 @@ export default function Desktop({
     <div className={classes.container}>
       <Image src="/logo-white.svg" className={classes.logo} onClick={onGoToRoot} />
       <ScrollArea
-        h={`calc(100dvh - 20px - 10px - 22px - 10px - 60px - ${user?.isEmailVerified ? '0px' : '50px'})`}
+        h={`calc(100dvh - 20px - 10px - 22px - 10px - 60px - ${user?.memo.isEmailVerified ? '0px' : '50px'})`}
         mt={10}
         w="100%"
       >

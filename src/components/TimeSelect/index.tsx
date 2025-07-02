@@ -1,12 +1,12 @@
 import { Select, SelectProps } from '@mantine/core'
 import { IconChevronDown } from '@tabler/icons-react'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 interface TimeSelectProps extends Omit<SelectProps, 'data'> {
   step?: number
 }
 
-export function TimeSelect({ step = 1, ...props }: TimeSelectProps) {
+function TimeSelectComponent({ step = 1, ...props }: TimeSelectProps) {
   const data = useMemo(
     () =>
       Array.from({ length: 24 * (60 / step) }, (_, index) => {
@@ -26,6 +26,9 @@ export function TimeSelect({ step = 1, ...props }: TimeSelectProps) {
       data={data}
       checkIconPosition="right"
       rightSection={<IconChevronDown size={14} />}
+      allowDeselect={false}
     />
   )
 }
+
+export const TimeSelect = React.memo(TimeSelectComponent)

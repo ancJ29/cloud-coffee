@@ -3,7 +3,7 @@ import useTranslation from '@/hooks/useTranslation'
 import useRoleStore from '@/stores/role.store'
 import useVenueStore from '@/stores/venue.store'
 import { useMemo } from 'react'
-import store from './_shift.store'
+import store from './_attendance.store'
 import TimesheetView from './components/TimesheetView'
 
 export default function Timesheet() {

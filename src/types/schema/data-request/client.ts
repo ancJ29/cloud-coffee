@@ -17,13 +17,12 @@ export const getClientByDomainSchema = _typeBuilder({
   payload: z.object({
     domain: stringSchema,
   }),
-  response: z
-    .object({
-      id: stringSchema,
-      name: stringSchema,
-      enabled: nullishBooleanSchema,
-    })
-    .extend(clientMemoSchema.shape),
+  response: z.object({
+    id: stringSchema,
+    name: stringSchema,
+    enabled: nullishBooleanSchema,
+    memo: clientMemoSchema,
+  }),
 })
 
 export const getClientsByAdminSchema = _typeBuilder({
@@ -31,13 +30,12 @@ export const getClientsByAdminSchema = _typeBuilder({
   action: z.literal(RequestAction.GET_CLIENTS_BY_ADMIN),
   payload: getSchema,
   response: listResponse(
-    z
-      .object({
-        id: stringSchema,
-        name: stringSchema,
-        enabled: booleanSchema,
-      })
-      .extend(clientMemoSchema.shape),
+    z.object({
+      id: stringSchema,
+      name: stringSchema,
+      enabled: booleanSchema,
+      memo: clientMemoSchema,
+    }),
   ),
 })
 

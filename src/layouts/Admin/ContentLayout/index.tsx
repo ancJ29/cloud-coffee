@@ -9,7 +9,9 @@ export default function ContentLayout({ children }: ContentLayoutProps) {
   const { user } = useAuthStore()
 
   return (
-    <div className={`${classes.container} ${user?.isEmailVerified ? '' : classes.withEmailBanner}`}>
+    <div
+      className={`${classes.container} ${user?.memo.isEmailVerified ? '' : classes.withEmailBanner}`}
+    >
       {children}
     </div>
   )

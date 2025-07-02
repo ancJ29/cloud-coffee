@@ -13,7 +13,7 @@ export default function EmailVerificationBanner({
   const t = useTranslation()
   const { user } = useAuthStore()
 
-  if (user?.isEmailVerified) {
+  if (user?.memo.isEmailVerified) {
     return <></>
   }
 

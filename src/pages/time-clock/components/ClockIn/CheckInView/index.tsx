@@ -1,16 +1,16 @@
 import { LiveClock } from '@/components'
 import { PLACEHOLDER_IMAGE_URL } from '@/configs/constant'
-import { Shift, User } from '@/services/domain'
+import { AttendanceLog, User } from '@/services/domain'
 import { Image, Stack } from '@mantine/core'
 import Address from '../Address'
 import Actions from './Actions'
+import AttendanceLogsInformation from './AttendanceLogsInformation'
 import Header from './Header'
-import ShiftInformation from './ShiftInformation'
 
 type CheckInViewProps = {
   isCheckedIn: boolean
   user?: User
-  shifts: Shift[]
+  attendanceLogs: AttendanceLog[]
   onCheckIn: () => void
   onCheckOut: () => void
 }
@@ -18,7 +18,7 @@ type CheckInViewProps = {
 export default function CheckInView({
   isCheckedIn,
   user,
-  shifts,
+  attendanceLogs,
   onCheckIn,
   onCheckOut,
 }: CheckInViewProps) {
@@ -29,7 +29,7 @@ export default function CheckInView({
         w={200}
         src={
           isCheckedIn
-            ? (shifts[shifts.length - 1]?.startImageUrl ?? PLACEHOLDER_IMAGE_URL)
+            ? (attendanceLogs[attendanceLogs.length - 1]?.startImageUrl ?? PLACEHOLDER_IMAGE_URL)
             : '/imgs/time-clock/default.svg'
         }
         radius="50%"
@@ -39,7 +39,7 @@ export default function CheckInView({
         <Address />
       </Stack>
       <Actions isCheckedIn={isCheckedIn} onCheckIn={onCheckIn} onCheckOut={onCheckOut} />
-      <ShiftInformation shifts={shifts} />
+      <AttendanceLogsInformation attendanceLogs={attendanceLogs} />
     </Stack>
   )
 }

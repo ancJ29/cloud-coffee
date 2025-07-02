@@ -6,9 +6,9 @@ import loadingStore from '@/services/request/store/loading'
 import useAuthStore from '@/stores/auth.store'
 import useMetadataStore from '@/stores/metadata'
 import useRoleStore from '@/stores/role.store'
-import useSalaryRuleStore from '@/stores/salaryRule.store'
 import useUserStore from '@/stores/user.store'
 import useVenueStore from '@/stores/venue.store'
+import useWorkShiftStore from '@/stores/work-shift.store'
 import { LoadingOverlay, MantineProvider } from '@mantine/core'
 import { DatesProvider } from '@mantine/dates'
 import { ModalsProvider } from '@mantine/modals'
@@ -67,7 +67,7 @@ async function loadData(token: string | null, t: (key: string) => string) {
     await Promise.all([
       useRoleStore.getState().load(),
       useVenueStore.getState().load(),
-      useSalaryRuleStore.getState().load(),
+      useWorkShiftStore.getState().load(),
       useUserStore.getState().load(),
     ])
   }

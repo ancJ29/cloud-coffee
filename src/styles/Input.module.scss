@@ -7,7 +7,7 @@
   display: flex;
   gap: 5px;
   flex-direction: row;
-  font-size: 16px;
+  font-size: 14px;
   position: absolute;
   z-index: 2;
   top: 7px;
@@ -21,7 +21,7 @@
   &[data-floating] {
     transform: translate(calc(var(--mantine-spacing-sm) * -1), -28px);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
   }
 }

@@ -1,22 +1,22 @@
 import { IS_DEV } from '@/configs/constant'
 import useMount from '@/hooks/useMount'
 import {
-  getAllShiftsByAdmin,
+  AttendanceLog,
+  getAllAttendanceLogsByAdmin,
   getAllUsersByAdmin,
   getAllVenuesByAdmin,
   getClientByDomain,
-  Shift,
   Venue,
 } from '@/services/domain'
 import { startOfDay } from '@/utils'
 import { useCallback, useState } from 'react'
-import { ShiftStatus, UserShiftStatus } from './_configs'
+import { AttendanceStatus, UserAttendanceStatus } from './_configs'
 import WorkingStatusView from './components/WorkingStatusView'
 
 export default function WorkingStatus() {
   const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
-  const [currents, setCurrents] = useState<UserShiftStatus[]>([])
-  const [updates, setUpdates] = useState<UserShiftStatus[]>([])
+  const [currents, setCurrents] = useState<UserAttendanceStatus[]>([])
+  const [updates, setUpdates] = useState<UserAttendanceStatus[]>([])
   const [keyword, setKeyword] = useState<string | undefined>('')
   const [venues, setVenues] = useState<Venue[]>([])
 
@@ -25,10 +25,10 @@ export default function WorkingStatus() {
 
     if (clientId) {
       const now = Date.now()
-      const [users, venues, shifts] = await Promise.all([
+      const [users, venues, attendanceLogs] = await Promise.all([
         getAllUsersByAdmin({ clientId }),
         getAllVenuesByAdmin({ clientId }),
-        getAllShiftsByAdmin({
+        getAllAttendanceLogsByAdmin({
           clientId,
           start: startOfDay(now),
           end: now,
@@ -38,28 +38,31 @@ export default function WorkingStatus() {
 
       setVenues(venues)
 
-      const shiftsByUserId = shifts.reduce<Record<string, Shift[]>>((acc, shift) => {
-        if (!acc[shift.userId]) {
-          acc[shift.userId] = []
+      const attendanceLogsByUserId = attendanceLogs.reduce<Record<string, AttendanceLog[]>>(
+        (acc, attendanceLog) => {
+          if (!acc[attendanceLog.userId]) {
+            acc[attendanceLog.userId] = []
+          }
+          acc[attendanceLog.userId].push(attendanceLog)
+          return acc
+        },
+        {},
+      )
+
+      const userAttendanceStatusList: UserAttendanceStatus[] = users.map((user) => {
+        const userAttendanceLogs = attendanceLogsByUserId[user.id] || []
+
+        let attendanceStatus = AttendanceStatus.NOT_WORKING
+        if (userAttendanceLogs.length > 0) {
+          const isWorking = userAttendanceLogs.some((userAttendanceLog) => !userAttendanceLog.end)
+          attendanceStatus = isWorking ? AttendanceStatus.WORKING : AttendanceStatus.DONE
         }
-        acc[shift.userId].push(shift)
-        return acc
-      }, {})
 
-      const userShiftStatusList: UserShiftStatus[] = users.map((user) => {
-        const userShifts = shiftsByUserId[user.id] || []
-
-        let shiftStatus = ShiftStatus.NOT_WORKING
-        if (userShifts.length > 0) {
-          const isWorking = userShifts.some((shift) => !shift.end)
-          shiftStatus = isWorking ? ShiftStatus.WORKING : ShiftStatus.DONE
-        }
-
-        return { ...user, shiftStatus }
+        return { ...user, attendanceStatus }
       })
 
-      setCurrents(userShiftStatusList)
-      setUpdates(userShiftStatusList)
+      setCurrents(userAttendanceStatusList)
+      setUpdates(userAttendanceStatusList)
     }
   }, [domain])
   useMount(getData)
@@ -68,10 +71,10 @@ export default function WorkingStatus() {
     (keyword?: string) => {
       setKeyword(keyword)
 
-      const userShiftStatusList = currents.filter((user) =>
+      const userAttendanceStatusList = currents.filter((user) =>
         user.name.toLowerCase().includes((keyword || '').toLowerCase()),
       )
-      setUpdates(userShiftStatusList)
+      setUpdates(userAttendanceStatusList)
     },
     [currents],
   )
@@ -80,7 +83,7 @@ export default function WorkingStatus() {
     <WorkingStatusView
       venues={venues}
       users={currents}
-      userShiftStatusList={updates}
+      userAttendanceStatusList={updates}
       keyword={keyword}
       onChangeKeyword={handleChangeKeyword}
     />

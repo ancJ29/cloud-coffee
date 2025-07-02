@@ -44,9 +44,9 @@ export const checkOutByUserSchema = _typeBuilder({
   }),
 })
 
-export const getShiftsSchema = _typeBuilder({
+export const getAttendanceLogsSchema = _typeBuilder({
   authOnly: true,
-  action: z.literal(RequestAction.GET_SHIFTS),
+  action: z.literal(RequestAction.GET_ATTENDANCE_LOGS),
   payload: getSchema.extend({
     start: numberSchema,
     end: numberSchema,
@@ -64,9 +64,9 @@ export const getShiftsSchema = _typeBuilder({
   ),
 })
 
-export const updateShiftSchema = _typeBuilder({
+export const updateAttendanceLogSchema = _typeBuilder({
   authOnly: true,
-  action: z.literal(RequestAction.UPDATE_SHIFT),
+  action: z.literal(RequestAction.UPDATE_ATTENDANCE_LOG),
   payload: z.object({
     id: stringSchema,
     start: numberSchema,
@@ -77,8 +77,8 @@ export const updateShiftSchema = _typeBuilder({
   }),
 })
 
-export const getShiftsByAdminSchema = _typeBuilder({
-  action: z.literal(RequestAction.GET_SHIFTS_BY_ADMIN),
+export const getAttendanceLogsByAdminSchema = _typeBuilder({
+  action: z.literal(RequestAction.GET_ATTENDANCE_LOGS_BY_ADMIN),
   payload: getSchema.extend({
     start: numberSchema,
     end: optionalNumberSchema,

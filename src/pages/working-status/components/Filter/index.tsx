@@ -1,10 +1,10 @@
 import { AutocompleteForFilterData } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
 import { unique } from '@/utils'
-import { UserShiftStatus } from '../../_configs'
+import { UserAttendanceStatus } from '../../_configs'
 
 export type FilterProps = {
-  users: UserShiftStatus[]
+  users: UserAttendanceStatus[]
   keyword?: string
   onChangeKeyword: (keyword?: string) => void
 }

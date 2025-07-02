@@ -32,7 +32,7 @@ export default function Mobile({
 
         <Burger opened={navbarOpened} onClick={toggleNavbar} color="white" size={20} />
 
-        {!user?.isEmailVerified && <EmailVerificationBanner onClick={onRequestVerifyEmail} />}
+        {!user?.memo.isEmailVerified && <EmailVerificationBanner onClick={onRequestVerifyEmail} />}
 
         <Collapse
           ref={collapseRef}

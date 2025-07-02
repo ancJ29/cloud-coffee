@@ -35,7 +35,7 @@ export default create<AuthStore>((set, get) => ({
   getMe: async (t: (key: string) => string) => {
     const user = await getMe()
     if (user) {
-      if (!isValidDomain(user.client?.domain)) {
+      if (!isValidDomain(user.client?.memo.domain)) {
         get().removeToken()
         pushNotification({
           type: NotificationType.ERROR,

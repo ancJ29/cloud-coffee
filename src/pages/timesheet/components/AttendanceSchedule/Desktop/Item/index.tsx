@@ -1,45 +1,35 @@
 import { Avatar } from '@/components'
 import useTranslation from '@/hooks/useTranslation'
-import { SalaryRule, Shift, User } from '@/services/domain'
+import { AttendanceLog, User } from '@/services/domain'
 import useRoleStore from '@/stores/role.store'
-import useSalaryRuleStore from '@/stores/salaryRule.store'
 import useVenueStore from '@/stores/venue.store'
-import {
-  calculateSalary,
-  formatDuration,
-  formatNumber,
-  formatTime,
-  ONE_HOUR,
-  unique,
-} from '@/utils'
+import { formatDuration, formatTime, ONE_HOUR, unique } from '@/utils'
 import { Accordion, ActionIcon, Flex, Grid, Stack, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { IconCameraPin, IconChevronRight } from '@tabler/icons-react'
 import { useCallback, useMemo, useState } from 'react'
-import store from '../../../../_shift.store'
-import ShiftImage from '../../ShiftImage'
+import store from '../../../../_attendance.store'
+import AttendanceLogImage from '../../AttendanceLogImage'
 import TimeSelect from '../TimeSelect'
 import classes from './index.module.scss'
 
 type ItemProps = {
   user?: User
-  shifts: Shift[]
+  attendanceLogs: AttendanceLog[]
 }
 
-export default function Item({ user, shifts }: ItemProps) {
+export default function Item({ user, attendanceLogs }: ItemProps) {
   const [opened, setOpened] = useState(true)
-  const { salaryRules } = useSalaryRuleStore()
-  const salaryRule = salaryRules.get(user?.salaryRuleId || '')
 
   const total = useMemo(() => {
-    const totalMilliseconds = shifts.some((shift) => shift.end != null)
-      ? shifts.reduce((acc, shift) => {
-          if (shift.end == null) {
+    const totalMilliseconds = attendanceLogs.some((attendanceLog) => attendanceLog.end != null)
+      ? attendanceLogs.reduce((acc, attendanceLog) => {
+          if (attendanceLog.end == null) {
             return acc
           }
 
-          let duration = shift.end - shift.start
-          if (shift.end < shift.start) {
+          let duration = attendanceLog.end - attendanceLog.start
+          if (attendanceLog.end < attendanceLog.start) {
             duration += 24 * ONE_HOUR
           }
 
@@ -47,7 +37,7 @@ export default function Item({ user, shifts }: ItemProps) {
         }, 0)
       : null
     return totalMilliseconds
-  }, [shifts])
+  }, [attendanceLogs])
 
   if (!user) {
     return <></>
@@ -64,18 +54,17 @@ export default function Item({ user, shifts }: ItemProps) {
       defaultValue={user.id}
     >
       <Accordion.Item value={user.id}>
-        <Accordion.Control onClick={() => setOpened(!opened)} bg="var(--shift-accordion)">
+        <Accordion.Control onClick={() => setOpened(!opened)} bg="var(--attendance-accordion)">
           <UserInformation
             user={user}
             total={total}
             opened={opened}
-            shifts={shifts}
-            salaryRule={salaryRule}
+            attendanceLogs={attendanceLogs}
           />
         </Accordion.Control>
         <Accordion.Panel>
-          {shifts.map((shift) => (
-            <ShiftInformation key={shift.id} shift={shift} salaryRule={salaryRule} />
+          {attendanceLogs.map((attendanceLog) => (
+            <AttendanceInformation key={attendanceLog.id} attendanceLog={attendanceLog} />
           ))}
         </Accordion.Panel>
       </Accordion.Item>
@@ -87,30 +76,26 @@ function UserInformation({
   user,
   total,
   opened,
-  shifts,
-  salaryRule,
+  attendanceLogs,
 }: {
   user: User
   total: number | null
   opened: boolean
-  shifts: Shift[]
-  salaryRule?: SalaryRule
+  attendanceLogs: AttendanceLog[]
 }) {
   const t = useTranslation()
   const { roles } = useRoleStore()
   const { venues } = useVenueStore()
 
   const _venues = useMemo(() => {
-    return unique(shifts.map((e) => venues.get(e.venueId)?.name))
+    return unique(attendanceLogs.map((e) => venues.get(e.venueId)?.name))
       .filter(Boolean)
       .join(', ')
-  }, [shifts, venues])
-
-  const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
+  }, [attendanceLogs, venues])
 
   return (
     <Grid>
-      <Grid.Col span={2.25} className={classes.nameItem}>
+      <Grid.Col span={3} className={classes.nameItem}>
         <Flex gap={5} w="fit-content" align="center">
           <IconChevronRight
             size={18}
@@ -129,79 +114,76 @@ function UserInformation({
           </Stack>
         </Flex>
       </Grid.Col>
-      <Grid.Col span={1.75} className={classes.infoItem}>
+      <Grid.Col span={2} className={classes.infoItem}>
         {formatDuration(total)}
       </Grid.Col>
-      <Grid.Col span={1.75} className={classes.infoItem}>
-        {expectedSalary}
-      </Grid.Col>
-      <Grid.Col span={1.75} className={classes.infoItem}>
+      <Grid.Col span={2} className={classes.infoItem}>
         -
       </Grid.Col>
-      <Grid.Col span={1.75} className={classes.infoItem}>
+      <Grid.Col span={2} className={classes.infoItem}>
         -
       </Grid.Col>
-      <Grid.Col span={2.25} className={classes.infoItem}>
+      <Grid.Col span={2.5} className={classes.infoItem}>
         <Text className={classes.venueText}>{_venues}</Text>
       </Grid.Col>
     </Grid>
   )
 }
 
-function ShiftInformation({ shift, salaryRule }: { shift: Shift; salaryRule?: SalaryRule }) {
+function AttendanceInformation({ attendanceLog }: { attendanceLog: AttendanceLog }) {
   const { venues } = useVenueStore()
 
   const total = useMemo(() => {
-    if (!shift.end) {
+    if (!attendanceLog.end) {
       return
     }
-    let totalMilliseconds = shift.end - shift.start
-    if (shift.end < shift.start) {
+    let totalMilliseconds = attendanceLog.end - attendanceLog.start
+    if (attendanceLog.end < attendanceLog.start) {
       totalMilliseconds += 24 * ONE_HOUR
     }
     return totalMilliseconds
-  }, [shift])
-  const expectedSalary = formatNumber(calculateSalary(total || 0, salaryRule))
+  }, [attendanceLog])
 
   const onClick = useCallback(() => {
     modals.open({
       withCloseButton: false,
       centered: true,
       size: 'xl',
-      children: <ShiftImage shift={shift} />,
+      children: <AttendanceLogImage attendanceLog={attendanceLog} />,
     })
-  }, [shift])
+  }, [attendanceLog])
 
   return (
-    <Grid className={classes.shiftContainer}>
-      <Grid.Col span={2.25} className={classes.dateItem}>
+    <Grid className={classes.attendanceContainer}>
+      <Grid.Col span={3} className={classes.dateItem}>
         <Text w={32} c="dimmed">
-          {formatTime(shift.start, 'ddd')}
+          {formatTime(attendanceLog.start, 'ddd')}
         </Text>
-        {formatTime(shift.start, 'DD/MM')}
+        {formatTime(attendanceLog.start, 'DD/MM')}
       </Grid.Col>
-      <Grid.Col span={1.75} className={classes.shiftItem}>
+      <Grid.Col span={2} className={classes.attendanceItem}>
         {formatDuration(total || 0) ?? '-'}
       </Grid.Col>
-      <Grid.Col span={1.75} className={classes.shiftItem}>
-        {expectedSalary}
-      </Grid.Col>
-      <Grid.Col span={1.75} className={classes.timeItem}>
+      <Grid.Col span={2} className={classes.timeItem}>
         <TimeSelect
-          value={shift.start}
-          onChangeValue={(value) => store.changeCheckInTime(shift.userId, shift.id, value)}
+          value={attendanceLog.start}
+          onChangeValue={(value) =>
+            store.changeCheckInTime(attendanceLog.userId, attendanceLog.id, value)
+          }
         />
       </Grid.Col>
-      <Grid.Col span={1.75} className={classes.timeItem}>
+      <Grid.Col span={2} className={classes.timeItem}>
         <TimeSelect
-          value={shift.end}
-          onChangeValue={(value) => store.changeCheckOutTime(shift.userId, shift.id, value)}
+          value={attendanceLog.end}
+          onChangeValue={(value) =>
+            store.changeCheckOutTime(attendanceLog.userId, attendanceLog.id, value)
+          }
         />
       </Grid.Col>
-      <Grid.Col span={2.25} className={classes.shiftItem}>
-        <Text className={classes.venueText}>{venues.get(shift.venueId)?.name || '-'}</Text>
+      <Grid.Col span={2.5} className={classes.attendanceItem}>
+        <Text className={classes.venueText}>{venues.get(attendanceLog.venueId)?.name || '-'}</Text>
       </Grid.Col>
-      <Grid.Col span={0.5} className={classes.shiftItem}>
+      <Grid.Col span={0.5} className={classes.attendanceItem}>
         <ActionIcon variant="transparent" onClick={onClick}>
           <IconCameraPin stroke={1.5} />
         </ActionIcon>

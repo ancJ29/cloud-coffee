@@ -1,18 +1,18 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Shift } from '@/services/domain'
+import { AttendanceLog } from '@/services/domain'
 import { Image, SimpleGrid, Stack, Text } from '@mantine/core'
 
-type ShiftImageProps = {
-  shift: Shift
+type AttendanceLogImageProps = {
+  attendanceLog: AttendanceLog
 }
 
-export default function ShiftImage({ shift }: ShiftImageProps) {
+export default function AttendanceLogImage({ attendanceLog }: AttendanceLogImageProps) {
   const t = useTranslation()
 
   return (
     <SimpleGrid cols={{ base: 1, sm: 2 }}>
-      <Item title={t('Clock in')} content={shift.startImageUrl} />
-      <Item title={t('Clock out')} content={shift.endImageUrl} />
+      <Item title={t('Clock in')} content={attendanceLog.startImageUrl} />
+      <Item title={t('Clock out')} content={attendanceLog.endImageUrl} />
     </SimpleGrid>
   )
 }

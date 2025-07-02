@@ -4,12 +4,12 @@ import { useGeoLocation } from '@/hooks/useGeoLocation'
 import useMount from '@/hooks/useMount'
 import useTranslation from '@/hooks/useTranslation'
 import {
+  AttendanceLog,
   checkInByUser,
   checkOutByUser,
-  getAllShiftsByAdmin,
+  getAllAttendanceLogsByAdmin,
   getAllUsersByAdmin,
   getClientByDomain,
-  Shift,
   uploadImageToS3,
   User,
 } from '@/services/domain'
@@ -34,7 +34,7 @@ export default function ClockIn({ publicId }: ClockInProps) {
   const { address, location, denied } = useGeoLocation()
   const domain = IS_DEV ? import.meta.env.VITE_DOMAIN : window.location.hostname
   const [user, setUser] = useState<User | undefined>(undefined)
-  const [shifts, setShifts] = useState<Shift[]>([])
+  const [attendanceLogs, setAttendanceLogs] = useState<AttendanceLog[]>([])
   const [clientId, setClientId] = useState('')
   const [pageIndex, setPageIndex] = useState(0)
   const [isCheckIn, setIsCheckIn] = useState(true)
@@ -43,17 +43,19 @@ export default function ClockIn({ publicId }: ClockInProps) {
   const [key, setKey] = useState(0)
   const [isDisplayCloseButton, setIsDisplayCloseButton] = useState(false)
 
-  const getShiftData = useCallback(async (clientId: string, userId: string) => {
-    const shifts = await getAllShiftsByAdmin({
+  const getAttendanceLogData = useCallback(async (clientId: string, userId: string) => {
+    const attendanceLogs = await getAllAttendanceLogsByAdmin({
       clientId,
       userId,
       start: startOfDay(Date.now()),
       end: endOfDay(Date.now()),
       delay: 600,
     })
-    if (shifts) {
-      setShifts(shifts)
-      setIsCheckedIn(shifts.length > 0 && shifts[shifts.length - 1].end === undefined)
+    if (attendanceLogs) {
+      setAttendanceLogs(attendanceLogs)
+      setIsCheckedIn(
+        attendanceLogs.length > 0 && attendanceLogs[attendanceLogs.length - 1].end === undefined,
+      )
     }
   }, [])
 
@@ -63,11 +65,11 @@ export default function ClockIn({ publicId }: ClockInProps) {
       setClientId(clientId)
       const users = await getAllUsersByAdmin({ publicId, clientId })
       if (users.length > 0) {
-        await getShiftData(clientId, users[0].id)
+        await getAttendanceLogData(clientId, users[0].id)
         setUser(users[0])
       }
     }
-  }, [domain, getShiftData, publicId])
+  }, [domain, getAttendanceLogData, publicId])
   useMount(getData)
 
   const goToNextPage = useCallback(() => {
@@ -94,8 +96,8 @@ export default function ClockIn({ publicId }: ClockInProps) {
     } else {
       setKey((prev) => prev + 1)
     }
-    await getShiftData(clientId, user?.id || '')
-  }, [clientId, getShiftData, isCheckSuccessful, user?.id])
+    await getAttendanceLogData(clientId, user?.id || '')
+  }, [clientId, getAttendanceLogData, isCheckSuccessful, user?.id])
 
   const submit = useCallback(
     async (file: File) => {
@@ -175,7 +177,7 @@ export default function ClockIn({ publicId }: ClockInProps) {
         <CheckInView
           isCheckedIn={isCheckedIn}
           user={user}
-          shifts={shifts}
+          attendanceLogs={attendanceLogs}
           onCheckIn={handleCheckInCheckOut}
           onCheckOut={() => handleCheckInCheckOut(false)}
         />

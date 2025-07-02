@@ -1,20 +1,22 @@
 import { Avatar } from '@/components'
 import { Indicator, Text } from '@mantine/core'
-import { ShiftStatus, UserShiftStatus } from '../../_configs'
+import { AttendanceStatus, UserAttendanceStatus } from '../../_configs'
 import classes from './index.module.scss'
 
 type UserListProps = {
-  userShiftStatusList: UserShiftStatus[]
+  userAttendanceStatusList: UserAttendanceStatus[]
 }
 
-export default function UserList({ userShiftStatusList }: UserListProps) {
-  return userShiftStatusList.map((user) => (
+export default function UserList({ userAttendanceStatusList }: UserListProps) {
+  return userAttendanceStatusList.map((user) => (
     <div key={user.id} className={classes.item}>
       <Indicator
-        disabled={user.shiftStatus === ShiftStatus.NOT_WORKING}
+        disabled={user.attendanceStatus === AttendanceStatus.NOT_WORKING}
         size={10}
         color={
-          user.shiftStatus === ShiftStatus.WORKING ? 'var(--success)' : 'var(--check-out-indicator)'
+          user.attendanceStatus === AttendanceStatus.WORKING
+            ? 'var(--success)'
+            : 'var(--check-out-indicator)'
         }
         offset={4}
         position="top-start"

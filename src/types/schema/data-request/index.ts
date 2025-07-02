@@ -1,5 +1,12 @@
 import { z } from 'zod'
 import {
+  checkInByUserSchema,
+  checkOutByUserSchema,
+  getAttendanceLogsByAdminSchema,
+  getAttendanceLogsSchema,
+  updateAttendanceLogSchema,
+} from './attendance-log'
+import {
   changePasswordSchema,
   getMeSchema,
   loginSchema,
@@ -14,26 +21,15 @@ import {
   registerClientAccountSchema,
 } from './client'
 import { getPreSignedUrlSchema } from './image'
-import {
-  clearDatabaseSchema,
-  initCloudCoffeeDataSchema,
-  initNovaWorkDataSchema,
-  initTemplateDateSchema,
-} from './init-data'
+import { clearDatabaseSchema, initCloudCoffeeDataSchema, initTemplateDateSchema } from './init-data'
 import { getVersionSchema } from './metadata'
 import { getSalarySchema } from './report'
 import { getRolesSchema } from './role'
-import { getSalaryRulesSchema } from './salary-rule'
-import {
-  checkInByUserSchema,
-  checkOutByUserSchema,
-  getShiftsByAdminSchema,
-  getShiftsSchema,
-  updateShiftSchema,
-} from './shift'
 import { addUserSchema, getUsersByAdminSchema, getUsersSchema, updateUserSchema } from './user'
 import { getVenuesByAdminSchema, getVenuesSchema } from './venue'
+import { getWorkShiftsSchema } from './work-shift'
 
+export * from './attendance-log'
 export * from './auth'
 export * from './client'
 export * from './image'
@@ -41,10 +37,9 @@ export * from './init-data'
 export * from './metadata'
 export * from './report'
 export * from './role'
-export * from './salary-rule'
-export * from './shift'
 export * from './user'
 export * from './venue'
+export * from './work-shift'
 
 export const requestSchema = z.union([
   loginSchema.request,
@@ -64,18 +59,17 @@ export const requestSchema = z.union([
   getRolesSchema.request,
   checkInByUserSchema.request,
   checkOutByUserSchema.request,
-  getShiftsSchema.request,
-  getShiftsByAdminSchema.request,
-  updateShiftSchema.request,
+  getAttendanceLogsSchema.request,
+  getAttendanceLogsByAdminSchema.request,
+  updateAttendanceLogSchema.request,
   getVenuesSchema.request,
   getVenuesByAdminSchema.request,
   getSalarySchema.request,
-  getSalaryRulesSchema.request,
+  getWorkShiftsSchema.request,
   getVersionSchema.request,
   clearDatabaseSchema.request,
   initTemplateDateSchema.request,
   initCloudCoffeeDataSchema.request,
-  initNovaWorkDataSchema.request,
   getPreSignedUrlSchema.request,
 ])
 
@@ -97,17 +91,16 @@ export const responseSchema = z.union([
   getRolesSchema.response,
   checkInByUserSchema.response,
   checkOutByUserSchema.response,
-  getShiftsSchema.response,
-  getShiftsByAdminSchema.response,
-  updateShiftSchema.response,
+  getAttendanceLogsSchema.response,
+  getAttendanceLogsByAdminSchema.response,
+  updateAttendanceLogSchema.response,
   getVenuesSchema.response,
   getVenuesByAdminSchema.response,
   getSalarySchema.response,
-  getSalaryRulesSchema.response,
+  getWorkShiftsSchema.response,
   getVersionSchema.response,
   clearDatabaseSchema.response,
   initTemplateDateSchema.response,
   initCloudCoffeeDataSchema.response,
-  initNovaWorkDataSchema.response,
   getPreSignedUrlSchema.response,
 ])

@@ -1,6 +1,5 @@
 export enum ClientName {
   CLOUD_COFFEE = 'Cloud Coffee',
-  NOVA_WORK = 'Nova Work',
 }
 
 export enum TemplateType {

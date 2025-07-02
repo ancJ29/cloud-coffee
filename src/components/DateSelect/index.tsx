@@ -120,6 +120,7 @@ export function DateSelect({ label, dateValue, onChangeDateValue, ...props }: Da
             rightSection={<IconChevronDown size={14} />}
             onClick={() => combobox.toggleDropdown()}
             rightSectionPointerEvents="none"
+            styles={{ label: { fontWeight: 600 } }}
           >
             <Input.Placeholder c="var(--text-color)">
               {value === DateRangeOption.Custom

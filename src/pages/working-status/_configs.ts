@@ -1,11 +1,11 @@
 import { User } from '@/services/domain'
 
-export enum ShiftStatus {
+export enum AttendanceStatus {
   NOT_WORKING = 'NOT_WORKING',
   WORKING = 'WORKING',
   DONE = 'DONE',
 }
 
-export type UserShiftStatus = User & {
-  shiftStatus: ShiftStatus
+export type UserAttendanceStatus = User & {
+  attendanceStatus: AttendanceStatus
 }
