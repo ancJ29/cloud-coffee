@@ -269,4 +269,5 @@ export default {
   'Minutes': 'Minutes',
   "Don't": "Don't",
   'apply break on these days': 'apply break on these days',
+  'No results found': 'No results found',
 }

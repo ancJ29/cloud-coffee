@@ -270,4 +270,5 @@ export default {
   'Minutes': 'Phút',
   "Don't": 'Không',
   'apply break on these days': 'áp dụng nghỉ giữa giờ cho những ngày này',
+  'No results found': 'Không tìm thấy kết quả',
 }
